@@ -3,7 +3,7 @@
 
 extern char biome;
 
-extern int isSwimming;
+extern int isSwimming, onFire, hasHypothermia, hasFever;
 
 extern int surroundingTemperature;
 
@@ -12,6 +12,8 @@ extern int entryX, entryY;
 extern int turn;
 
 extern int ch;
+
+extern char dir;
 
 void checkForStairway();
 

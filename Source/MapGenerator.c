@@ -11,6 +11,8 @@
 
 FastNoiseLite noise;
 
+int dungeonHasFire = 0;
+
 int returnCoastmapAt(int x, int y){
 	noise.SetFrequency(0.05);
 	noise.SetSeed(seedMain);

@@ -71,6 +71,31 @@ void drawCountries(){
 
 char seenMap[24][80];
 
+void drawWithoutFOV(){
+	init_pair(1, COLOR_WHITE , COLOR_BLACK);
+	init_pair(2, COLOR_YELLOW , COLOR_BLACK);
+	init_pair(3, COLOR_CYAN, COLOR_BLACK);
+	init_pair(10, COLOR_RED, COLOR_BLACK);
+	clear();
+	for (int i = 0 ; i < 80 ; i++){
+		for (int j = 0 ; j < 24 ; j++){
+			char currentChar = map[j][i];
+			attron(COLOR_PAIR(1));
+			if (currentChar == '.'){
+				attron(COLOR_PAIR(2));
+			} else if (currentChar == '+'){
+				attron(COLOR_PAIR(1));	
+			} else if (currentChar == '<'){
+				attron(COLOR_PAIR(1));
+			} else if (currentChar == '*'){
+				attron(COLOR_PAIR(10) | A_BOLD | A_BLINK);
+			}
+			mvaddch(j,i,map[j][i]);
+			attroff(A_BOLD | A_BLINK);
+		}
+	}
+}
+
 void drawFOV(int radius){
 	int distX0 = 0;
 	int distX1 = 0;
@@ -79,6 +104,7 @@ void drawFOV(int radius){
 	init_pair(1, COLOR_WHITE , COLOR_BLACK);
 	init_pair(2, COLOR_YELLOW , COLOR_BLACK);
 	init_pair(3, COLOR_CYAN, COLOR_BLACK);
+	init_pair(10, COLOR_RED, COLOR_BLACK);
 	clear();
 	for (int i = 0 ; i < 80 ; i++){
 		for (int j = 0 ; j < 24 ; j++){
@@ -111,8 +137,11 @@ void drawFOV(int radius){
 					attron(COLOR_PAIR(1));	
 				} else if (currentChar == '<'){
 					attron(COLOR_PAIR(1));
+				} else if (currentChar == '*'){
+					attron(COLOR_PAIR(10) | A_BOLD | A_BLINK);
 				}
 				mvaddch(j,i,map[j][i]);
+				attroff(A_BOLD | A_BLINK);
 				seenMap[j][i] = map[j][i];
 			}
 		}
@@ -128,6 +157,10 @@ void drawDungeon(){
 	init_pair(1, COLOR_WHITE, COLOR_BLACK);
 	init_pair(2, COLOR_YELLOW, COLOR_BLACK);
 	int seedMap = time(0);
-	drawFOV(3);
+	if (dungeonHasFire == 1){
+		drawWithoutFOV();
+	} else {
+		drawFOV(3);
+	}
 	updateScreen();
 }

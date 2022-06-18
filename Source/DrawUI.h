@@ -11,5 +11,7 @@ void drawSeed();
 
 void drawLog();
 
+void drawHydration();
+
 void drawUserInterface();
 #endif

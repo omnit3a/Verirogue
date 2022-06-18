@@ -15,8 +15,9 @@ void setupPlayer(int x, int y, int entID){
 
 	playerEnt.currentWeight.pounds = 175;
 	playerEnt.currentFlammability.flammabilityLevel = 50;
-	playerEnt.currentTemperature.celsius = 33;
-	playerEnt.currentTemperature.fahrenheit = 91;
+	playerEnt.currentTemperature.celsius = 37;
+	playerEnt.currentTemperature.fahrenheit = 98;
+	playerEnt.currentHydration.hydration = 60;
 
 	playerEnt.head.bpHP.currentHealth = 100;
 	playerEnt.torso.bpHP.currentHealth = 100;

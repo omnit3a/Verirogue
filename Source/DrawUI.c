@@ -10,8 +10,18 @@
 char * msgLog = "Welcome to Verirogue";
 
 void drawTemperature(){
+	init_pair(13, COLOR_CYAN, COLOR_BLACK);
 	init_pair(8, COLOR_WHITE, COLOR_BLACK);
-	attron(COLOR_PAIR(8) | A_BOLD);
+	init_pair(14, COLOR_RED, COLOR_BLACK);
+	attron(A_BOLD);
+	if (playerEnt.currentTemperature.celsius < 35){
+		attron(COLOR_PAIR(13));
+	} else if (playerEnt.currentTemperature.celsius > 39){
+		attron(COLOR_PAIR(14));
+	} else {
+		attron(COLOR_PAIR(8));
+	}
+	mvprintw(26,0,"                    ");
 	mvprintw(25,0,"Temperature: %d^C",playerEnt.currentTemperature.celsius);
 	mvprintw(26,0,"           : %d^F",playerEnt.currentTemperature.fahrenheit);
 	attroff(A_BOLD);
@@ -52,10 +62,25 @@ void drawLog(){
 	refresh();
 }
 
+void drawHydration(){
+	init_pair(11, COLOR_WHITE, COLOR_BLACK);
+	init_pair(12, COLOR_RED, COLOR_BLACK);
+	attron(A_BOLD);
+	if (playerEnt.currentHydration.hydration <= 55){
+		attron(COLOR_PAIR(12) | A_BLINK);
+	} else if (playerEnt.currentHydration.hydration > 55){
+		attron(COLOR_PAIR(11));
+	}
+	mvprintw(30,0,"Hydration: %d%", playerEnt.currentHydration.hydration);
+	attroff(A_BLINK | A_BOLD);
+	refresh();
+}
+
 void drawUserInterface(){
 	drawTemperature();
 	drawTurn();
 	drawSeeds();
 	drawLog();
+	drawHydration();
 	refresh();
 }

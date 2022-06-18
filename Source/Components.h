@@ -1,6 +1,10 @@
 #ifndef COMPONENT_H_
 #define COMPONENT_H_
 
+typedef struct ho{
+	int hydration;
+} Hydration;
+
 typedef struct hp{
 	int currentHealth;
 	int maxHealth;
@@ -36,6 +40,7 @@ typedef struct hoid{
 	Weight currentWeight;
 	Flammability currentFlammability;
 	Temperature currentTemperature;
+	Hydration currentHydration;
 
 	BodyPart head;
 	BodyPart torso;

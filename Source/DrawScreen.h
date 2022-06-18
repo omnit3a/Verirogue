@@ -15,6 +15,8 @@ void drawCountries();
 
 extern char seenMap[24][80];
 
+void drawWithoutFOV();
+
 void drawFOV(int radius);
 
 void drawDungeon();

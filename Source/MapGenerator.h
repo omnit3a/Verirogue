@@ -1,6 +1,7 @@
 #ifndef MAPGENERATOR_H_
 #define MAPGENERATOR_H_
 
+extern int dungeonHasFire;
 
 /**
  *	generate the map of the coast
