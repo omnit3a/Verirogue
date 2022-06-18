@@ -7,7 +7,7 @@ extern int isSwimming, onFire, hasHypothermia, hasFever;
 
 extern int surroundingTemperature;
 
-extern int entryX, entryY;
+extern int entryX, entryY, fires;
 
 extern int turn;
 
@@ -22,5 +22,7 @@ void drawPlayer();
 void getMovement();
 
 void updateTemperature();
+
+void updateHealth();
 
 #endif

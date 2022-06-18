@@ -27,4 +27,8 @@ char returnDungeonmapAt(int x, int y);
 
 int seedFromPosition(int x, int y);
 
+extern char fireValues[][80];
+
+void fireSpread();
+
 #endif

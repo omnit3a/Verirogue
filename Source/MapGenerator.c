@@ -186,3 +186,40 @@ int seedFromPosition(int x, int y){
 	int b = abs(y);
 	return ((a >= y) ? (a * b + a + b) : (y * y +x))+(seedMain/1000000);
 }
+
+char fireValues[24][80];
+
+void fireSpread(){
+	for (int i = 0 ; i < 80 ; i++){
+		for (int j = 0 ; j < 24 ; j++){
+			fireValues[j][i] = map[j][i];
+		}
+	}
+	for (int i = 0 ; i < 80 ; i++){
+		for (int j = 0 ; j < 24 ; j++){
+			if (returnDungeonmapAt(i,j) == '*' && turn % 15 == 0){
+				if (returnDungeonmapAt(i,j-1) != ' '){
+					fireValues[j-1][i] = '*';
+					fires++;
+				}
+				if (returnDungeonmapAt(i,j+1) != ' '){
+					fireValues[j+1][i] = '*';
+					fires++;
+				}
+				if (returnDungeonmapAt(i-1,j) != ' '){
+					fireValues[j][i-1] = '*';
+					fires++;
+				}
+				if (returnDungeonmapAt(i+1,j) != ' '){
+					fireValues[j][i+1] = '*';
+					fires++;
+				}
+			}
+		}
+	}
+	for (int i = 0 ; i < 80 ; i++){
+		for (int j = 0 ; j < 24 ; j++){
+			map[j][i] = fireValues[j][i];
+		}
+	}
+}

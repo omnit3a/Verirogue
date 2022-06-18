@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <ncurses.h>
 #include <time.h>
+#include <math.h>
 #include "Movement.h"
 #include "Player.h"
 #include "MapGenerator.h"
@@ -148,7 +149,7 @@ void updateTemperature(){
 			}
 		}
 		if (fires > 0){
-			surroundingTemperature=15+fires;
+			surroundingTemperature=15+(fires*fires);
 		} else {
 			dungeonHasFire = 0;
 		}
@@ -175,5 +176,12 @@ void updateTemperature(){
 	} else {
 		hasFever = 0;
 		hasHypothermia = 0;
+	}
+	if (playerEnt.currentHydration.hydration < 50){
+		clear();
+		mvprintw(12,40, "You died of thirst! Be more careful next time");
+		updateScreen();
+		endScreen();
+		exit(0);
 	}
 }

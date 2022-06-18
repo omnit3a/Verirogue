@@ -25,6 +25,7 @@ void updateScreen(){
 }
 
 void endScreen(){
+	getch();
 	endwin();
 }
 

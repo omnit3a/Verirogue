@@ -20,6 +20,7 @@ int main(){
 		if (biome == 'o'){
 			generateMap();
 			drawMap();
+			updateTemperature();
 			drawUserInterface();
 			drawPlayer();
 			getMovement();
@@ -29,6 +30,7 @@ int main(){
 			updateTemperature();
 			drawUserInterface();
 			drawPlayer();
+			fireSpread();
 			getMovement();
 			updateScreen();
 		}
