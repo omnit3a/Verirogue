@@ -6,8 +6,9 @@
 #include "Movement.h"
 #include "MapGenerator.h"
 #include "Main.h"
+#include <string>
 
-char * msgLog = "Welcome to Verirogue";
+std::string msgLog = "Welcome to Verirogue";
 
 void drawTemperature(){
 	init_pair(13, COLOR_CYAN, COLOR_BLACK);
@@ -30,9 +31,8 @@ void drawTemperature(){
 
 void drawTurn(){
 	init_pair(8, COLOR_WHITE, COLOR_BLACK);
-	attron(COLOR_PAIR(8) | A_BOLD);
-	mvprintw(27,0,"Turn: %d",turn);
-	attroff(A_BOLD);
+	attron(COLOR_PAIR(8));
+	mvprintw(2,81,"Turn: %d",turn);
 }
 
 void drawSeeds(){
@@ -58,10 +58,41 @@ void drawLog(){
 			mvaddch(j,i,' ');
 		}
 	}
-	mvprintw(1,81,"%s",msgLog);
+	mvprintw(1,81,"%s",msgLog.c_str());
 	attroff(A_REVERSE);
 	refresh();
 }
+
+void drawHealth(){
+	init_pair(8, COLOR_WHITE, COLOR_BLACK);
+	attroff(A_BOLD);
+	attron(COLOR_PAIR(8));
+	int headHP = playerEnt.head.bpHP.currentHealth;
+	int torsoHP = playerEnt.torso.bpHP.currentHealth;
+	int lArmHP = playerEnt.leftArm.bpHP.currentHealth;
+	int rArmHP = playerEnt.rightArm.bpHP.currentHealth;
+	int lLegHP = playerEnt.leftLeg.bpHP.currentHealth;
+	int rLegHP = playerEnt.rightLeg.bpHP.currentHealth;
+	if (headHP < 25) { attron(A_BLINK); }
+	mvprintw(3,81,"Head: %d",headHP);
+	attroff(A_BLINK);
+	if (torsoHP < 25) { attron(A_BLINK); }
+	mvprintw(4,81,"Torso: %d",torsoHP);
+	attroff(A_BLINK);
+	if (lArmHP < 25) { attron(A_BLINK); }
+       	mvprintw(5,81,"Left Arm: %d",lArmHP);
+	attroff(A_BLINK);
+	if (rArmHP < 25) { attron(A_BLINK); }
+	mvprintw(6,81,"Right Arm: %d",rArmHP);
+	attroff(A_BLINK);
+	if (lLegHP < 25) { attron(A_BLINK); }
+	mvprintw(7,81,"Left Leg: %d",lLegHP);
+	attroff(A_BLINK);
+	if (rLegHP < 25) { attron(A_BLINK); }
+	mvprintw(8,81,"Right Leg: %d",rLegHP);
+	attroff(A_BLINK);
+	refresh();
+}	
 
 void drawHydration(){
 	init_pair(11, COLOR_WHITE, COLOR_BLACK);
@@ -72,16 +103,16 @@ void drawHydration(){
 	} else if (playerEnt.currentHydration.hydration > 55){
 		attron(COLOR_PAIR(11));
 	}
-	mvprintw(30,0,"Hydration: %d%", playerEnt.currentHydration.hydration);
+	mvprintw(27,0,"Hydration: %d%", playerEnt.currentHydration.hydration);
 	attroff(A_BLINK | A_BOLD);
 	refresh();
 }
 
 void drawUserInterface(){
 	drawTemperature();
-	drawTurn();
-	drawSeeds();
 	drawLog();
+	drawTurn();
+	drawHealth();
 	drawHydration();
 	refresh();
 }
