@@ -13,7 +13,7 @@ char biome;
 
 int isSwimming, onFire, hasHypothermia, hasFever = 0;
 
-int surroundingTemperature;
+int surroundingTemperature = 37;
 
 int entryX, entryY,fires = 0;
 
@@ -78,10 +78,12 @@ void getMovement(){
 				surroundingTemperature = 37;
 				biome = 'o';
 				generateMap();
-				setupPlayer(entryX, entryY, 0);
+				playerEnt.currentPos.xPos = entryX;
+				playerEnt.currentPos.yPos = entryY;
 				updateScreen();
 				msgLog = "You left the dungeon";
 				fires = 0;
+				dungeonHasFire = 0;
 			}
 			break;
 		case '>':
@@ -91,7 +93,8 @@ void getMovement(){
 				entryY = playerEnt.currentPos.yPos;
 				biome = 'd';
 				generateDungeon(7,7);
-				setupPlayer(startX, startY,0);
+				playerEnt.currentPos.xPos = startX;
+				playerEnt.currentPos.yPos = startY;
 				updateScreen();
 				msgLog = "You found a dungeon!";
 			}

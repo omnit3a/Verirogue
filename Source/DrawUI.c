@@ -21,6 +21,7 @@ void drawTemperature(){
 	} else {
 		attron(COLOR_PAIR(8));
 	}
+	mvprintw(25,0,"                    ");
 	mvprintw(26,0,"                    ");
 	mvprintw(25,0,"Temperature: %d^C",playerEnt.currentTemperature.celsius);
 	mvprintw(26,0,"           : %d^F",playerEnt.currentTemperature.fahrenheit);
