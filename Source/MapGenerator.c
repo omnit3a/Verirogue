@@ -181,15 +181,17 @@ void generateDungeon(int maxWidth, int maxHeight){
 		srand(time(0));
 		int roomXGold;
 		int roomYGold;
-		endPartII:
+		for (int i = 0 ; i < 64 ; i++){
 			srand(time(0));
 			roomXGold = rand() % 80;
 			roomYGold = rand() % 24;
 			if (map[roomYGold][roomXGold] == ' '){
-				goto endPartII;
+				continue;
 			} else if (map[roomYGold][roomXGold] == '.'){
 				map[roomYGold][roomXGold] = '$';
+				break;
 			}
+		}
 }
 
 char returnDungeonmapAt(int x, int y){

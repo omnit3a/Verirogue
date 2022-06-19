@@ -154,7 +154,7 @@ void getMovement(){
 			if (foodCount > 0){
 				foodCount--;
 				msgLog = "You ate some food";
-				if (foodScore+5 < 150){
+				if (foodScore+5 < 155){
 					foodScore+=5;
 				} else {
 					msgLog = "You are too full to eat anything";
@@ -168,6 +168,44 @@ void getMovement(){
 				map[checkY][checkX] = '.';
 				srand(time(0));
 				goldScore += rand() % 25;
+			}
+			break;
+		case 'k':
+			if (biome == 'd'){
+				switch (dir){
+					case 'u':
+						if (returnDungeonmapAt(checkX, checkY-1) == ' ' && returnDungeonmapAt(checkX, checkY-2) != ' ' && checkY > 1){
+							map[checkY-1][checkX] = '|';
+							msgLog = "You kicked down a wall!";
+						} else {
+							msgLog = "OUCH! That hurt!";
+						}
+						break;
+					case 'd':
+						if (returnDungeonmapAt(checkX, checkY+1) == ' ' && returnDungeonmapAt(checkX, checkY+2) != ' ' && checkY < 22){
+							map[checkY+1][checkX] = '|';
+							msgLog = "You kicked down a wall!";
+						} else {
+							msgLog = "OUCH! That hurt!";
+						}
+						break;
+					case 'l':
+						if (returnDungeonmapAt(checkX-1, checkY) == ' ' && returnDungeonmapAt(checkX-2, checkY) != ' ' && checkX > 1){
+							map[checkY][checkX-1] = '-';
+							msgLog = "You kicked down a wall!";
+						} else {
+							msgLog = "OUCH! That hurt!";
+						}
+						break;
+					case 'r':
+						if (returnDungeonmapAt(checkX+1, checkY) == ' ' && returnDungeonmapAt(checkX+2, checkY) != ' ' && checkX < 78){
+							map[checkY][checkX+1] = '-';
+							msgLog = "You kicked down a wall!";
+						} else {
+							msgLog = "OUCH! That hurt!";
+						}
+						break;
+				}
 			}
 			break;
 		case 27:

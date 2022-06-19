@@ -17,10 +17,6 @@ extern char dir;
 
 void drawPlayer();
 
-int returnSwimmable(int x, int y);
-
-int returnWalkable(int x, int y);
-
 void getMovement();
 
 void updateTemperature();

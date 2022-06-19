@@ -87,7 +87,7 @@ void drawWithoutFOV(){
 			attron(COLOR_PAIR(1));
 			if (currentChar == '.'){
 				attron(COLOR_PAIR(2));
-			} else if (currentChar == '+'){
+			} else if (currentChar == '+' || currentChar == '|' || currentChar == '-'){
 				attron(COLOR_PAIR(1));	
 			} else if (currentChar == '<'){
 				attron(COLOR_PAIR(1));
@@ -137,7 +137,7 @@ void drawFOV(int radius){
 				attron(COLOR_PAIR(1));
 				if (currentChar == '.'){
 					attron(COLOR_PAIR(2));
-				} else if (currentChar == '+'){
+				} else if (currentChar == '+' || currentChar == '|' || currentChar == '-'){
 					attron(COLOR_PAIR(1));	
 				} else if (currentChar == '<'){
 					attron(COLOR_PAIR(1));
