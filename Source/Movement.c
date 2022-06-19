@@ -258,7 +258,20 @@ void updateTemperature(){
 		hasFever = 0;
 		hasHypothermia = 0;
 	}
-	if (playerEnt.currentHydration.hydration < 50){
+	if (playerEnt.currentTemperature.celsius >= 44){
+		clear();
+		mvprintw(12, 40, "You died of overheating! Be more careful next time");
+		updateScreen();
+		endScreen();
+		exit(0);
+	} else if (playerEnt.currentTemperature.celsius < 14){
+		clear();
+		mvprintw(12, 40, "You froze to death! Be more careful next time");
+		updateScreen();
+		endScreen();
+		exit(0);
+	}
+	if (playerEnt.currentHydration.hydration < 40){
 		clear();
 		mvprintw(12,40, "You died of thirst! Be more careful next time");
 		updateScreen();
