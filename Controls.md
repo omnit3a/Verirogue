@@ -2,4 +2,6 @@
 - `Arrow keys` Movement
 - `>` Enter dungeon
 - `<` Leave dungeon
-- `f` set fire
+- `f` Set fire
+- `s` Scavenge for food
+- `e` Eat food
