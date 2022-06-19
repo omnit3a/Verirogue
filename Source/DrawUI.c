@@ -124,6 +124,18 @@ void drawHunger(){
 	refresh();
 }
 
+void drawGold(){
+	init_pair(11, COLOR_WHITE, COLOR_BLACK);
+	init_pair(17, COLOR_YELLOW, COLOR_BLACK);
+	attron(COLOR_PAIR(11) | A_BOLD);
+	mvprintw(29,0,"                     ");
+	mvprintw(29,0,"Gold: ");
+	attron(COLOR_PAIR(17));
+	mvprintw(29,6,"%d",goldScore);
+	attroff(A_BOLD);
+	refresh();
+}
+
 void drawUserInterface(){
 	drawTemperature();
 	drawLog();
@@ -131,5 +143,6 @@ void drawUserInterface(){
 	drawHealth();
 	drawHydration();
 	drawHunger();
+	drawGold();
 	refresh();
 }

@@ -48,10 +48,13 @@ void drawMap(){
 				attron(COLOR_PAIR(2));
 			} else if (currentChar == 'A' || currentChar == '*'){
 				attron(COLOR_PAIR(3));
-			} else {
+			} else if (currentChar == 't'){
+				attron(COLOR_PAIR(2) | A_BOLD);
+			} else{
 				attron(COLOR_PAIR(1));
 			}
 			mvaddch(j,i,returnHeightmapAt(i,j));
+			attroff(A_BOLD);
 		}
 	}
 	updateScreen();

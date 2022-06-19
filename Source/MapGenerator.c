@@ -34,7 +34,7 @@ void generateMap(){
 	int value;
 	for (int i = 0 ; i < 80 ; i++){
 		for (int j = 0 ; j < 24 ; j++){
-			map[j][i] = '~';
+			map[j][i] = ' ';
 		}
 	}
 	for (int i = 0 ; i < 80 ; i++){
@@ -54,6 +54,10 @@ void generateMap(){
 				}
 			} else {
 				map[j][i] = '~';
+			}
+			srand(seedFromPosition(i+playerEnt.currentPos.xPos,j+playerEnt.currentPos.yPos));
+			if (rand() % 100 == 0 && map[j][i] != '~' && map[j][i] != 'A'){
+				map[j][i] = 't';
 			}
 		}
 	}
@@ -174,6 +178,18 @@ void generateDungeon(int maxWidth, int maxHeight){
 		} else {
 			map[startY][startX] = '<';
 		}
+		srand(time(0));
+		int roomXGold;
+		int roomYGold;
+		endPartII:
+			srand(time(0));
+			roomXGold = rand() % 80;
+			roomYGold = rand() % 24;
+			if (map[roomYGold][roomXGold] == ' '){
+				goto endPartII;
+			} else if (map[roomYGold][roomXGold] == '.'){
+				map[roomYGold][roomXGold] = '$';
+			}
 }
 
 char returnDungeonmapAt(int x, int y){

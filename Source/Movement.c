@@ -143,7 +143,7 @@ void getMovement(){
 			break;
 		case 's':
 			srand(time(0));
-			if (biome == 'o' && rand() % 10 == 0){
+			if (biome == 'o' && rand() % 5 == 0){
 				foodCount++;
 				msgLog = "You scavenged for food";
 			} else {
@@ -161,6 +161,13 @@ void getMovement(){
 				}
 			} else {
 				msgLog = "You don't have any food!";
+			}
+			break;
+		case '$':
+			if (biome == 'd' && returnDungeonmapAt(checkX, checkY) == '$'){
+				map[checkY][checkX] = '.';
+				srand(time(0));
+				goldScore += rand() % 25;
 			}
 			break;
 		case 27:
@@ -223,7 +230,7 @@ void updateTemperature(){
 }
 
 void updateHunger(){
-	if (turn % 25 == 0){
+	if (turn % 75 == 0){
 		foodScore-=5;
 		if (foodScore < 10){
 			clear();

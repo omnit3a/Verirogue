@@ -19,5 +19,7 @@ void drawHydration();
 
 void drawHunger();
 
+void drawGold();
+
 void drawUserInterface();
 #endif

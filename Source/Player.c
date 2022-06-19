@@ -9,6 +9,8 @@ int foodCount = 0;
 
 int foodScore = 100;
 
+int goldScore = 0;
+
 Humanoid playerEnt;
 
 void setupPlayer(int x, int y, int entID){
