@@ -15,14 +15,18 @@ extern int ch;
 
 extern char dir;
 
-void checkForStairway();
-
 void drawPlayer();
+
+int returnSwimmable(int x, int y);
+
+int returnWalkable(int x, int y);
 
 void getMovement();
 
 void updateTemperature();
 
 void updateHealth();
+
+void updateHunger();
 
 #endif

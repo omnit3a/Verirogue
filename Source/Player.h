@@ -3,6 +3,10 @@
 
 #include "Components.h"
 
+extern int foodCount;
+
+extern int foodScore;
+
 extern Humanoid playerEnt;
 
 void setupPlayer(int x, int y, int entID);

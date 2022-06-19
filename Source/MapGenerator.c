@@ -28,10 +28,9 @@ int returnCoastmapAt(int x, int y){
 char map[24][80];
 
 void generateMap(){
-	noise.SetFrequency(0.1);
+	noise.SetFrequency(0.05);
 	noise.SetSeed(seedMain);
 	noise.SetNoiseType(FastNoiseLite::NoiseType_Cellular);
-	noise.SetCellularDistanceFunction(FastNoiseLite::CellularDistanceFunction_Manhattan);
 	int value;
 	for (int i = 0 ; i < 80 ; i++){
 		for (int j = 0 ; j < 24 ; j++){
@@ -40,7 +39,7 @@ void generateMap(){
 	}
 	for (int i = 0 ; i < 80 ; i++){
 		for (int j = 0 ; j < 24 ; j++){
-			value = abs(lround((noise.GetNoise((float) playerEnt.currentPos.xPos+i, (float) playerEnt.currentPos.yPos+j)+0.5)/0.10));
+			value = abs(lround((noise.GetNoise((float) playerEnt.currentPos.xPos+i, (float) playerEnt.currentPos.yPos+j)+0.5)/0.09));
 			if (playerEnt.currentPos.xPos+i > 136 || playerEnt.currentPos.xPos+i < -56 || playerEnt.currentPos.yPos+j > 60 || playerEnt.currentPos.yPos+j < -36){
 				map[j][i] = ' ';
 				continue;
@@ -184,7 +183,7 @@ char returnDungeonmapAt(int x, int y){
 int seedFromPosition(int x, int y){
 	int a = abs(x);
 	int b = abs(y);
-	return ((a >= y) ? (a * b + a + b) : (y * y +x))+(seedMain/1000000);
+	return ((a >= y) ? (a * b + a + b) : (y * y +x))+(seedMain/1000);
 }
 
 char fireValues[24][80];

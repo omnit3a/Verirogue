@@ -17,5 +17,7 @@ void drawHealth();
 
 void drawHydration();
 
+void drawHunger();
+
 void drawUserInterface();
 #endif

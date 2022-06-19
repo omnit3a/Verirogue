@@ -21,6 +21,7 @@ int main(){
 			generateMap();
 			drawMap();
 			updateTemperature();
+			updateHunger();
 			drawUserInterface();
 			drawPlayer();
 			getMovement();
@@ -28,6 +29,7 @@ int main(){
 		} else if (biome == 'd'){
 			drawDungeon();
 			updateTemperature();
+			updateHunger();
 			drawUserInterface();
 			drawPlayer();
 			fireSpread();

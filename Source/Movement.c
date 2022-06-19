@@ -89,15 +89,20 @@ void getMovement(){
 			break;
 		case '>':
 			if (biome == 'o'){
-				surroundingTemperature = 15;
 				entryX = playerEnt.currentPos.xPos;
 				entryY = playerEnt.currentPos.yPos;
-				biome = 'd';
-				generateDungeon(7,7);
-				playerEnt.currentPos.xPos = startX;
-				playerEnt.currentPos.yPos = startY;
-				updateScreen();
-				msgLog = "You found a dungeon!";
+				srand(seedFromPosition(entryX, entryY));
+				if (rand() % 10 == 0){
+					biome = 'd';
+					surroundingTemperature = 15;
+					generateDungeon(7,7);
+					playerEnt.currentPos.xPos = startX;
+					playerEnt.currentPos.yPos = startY;
+					updateScreen();
+					msgLog = "You found a dungeon!";
+				} else {
+					msgLog = "You didn't find a dungeon";
+				}
 			}
 			break;
 		case 'f':
@@ -107,27 +112,55 @@ void getMovement(){
 						if (returnDungeonmapAt(checkX, checkY-1) != ' ' && returnDungeonmapAt(checkX, checkY-1) != '<'){
 							map[checkY-1][checkX] = '*';
 							dungeonHasFire = 1;
+							msgLog = "You lit a fire";
 						}
 						break;
 					case 'd':
 						if (returnDungeonmapAt(checkX, checkY+1) != ' ' && returnDungeonmapAt(checkX, checkY+1) != '<'){
 							map[checkY+1][checkX] = '*';
 							dungeonHasFire = 1;
+							msgLog = "You lit a fire";
 						}
 						break;
 					case 'l':
 						if (returnDungeonmapAt(checkX-1, checkY) != ' ' && returnDungeonmapAt(checkX-1, checkY) != '<'){
 							map[checkY][checkX-1] = '*';
 							dungeonHasFire = 1;
+							msgLog = "You lit a fire";
 						}
 						break;
 					case 'r':
 						if (returnDungeonmapAt(checkX+1, checkY) != ' ' && returnDungeonmapAt(checkX+1, checkY) != '<'){
 							map[checkY][checkX+1] = '*';
 							dungeonHasFire = 1;
+							msgLog = "You lit a fire";
 						}
 						break;
 				}
+			} else {
+				msgLog = "There's no need for that now!";
+			}
+			break;
+		case 's':
+			srand(time(0));
+			if (biome == 'o' && rand() % 10 == 0){
+				foodCount++;
+				msgLog = "You scavenged for food";
+			} else {
+				msgLog = "You didn't find any food";
+			}
+			break;
+		case 'e':
+			if (foodCount > 0){
+				foodCount--;
+				msgLog = "You ate some food";
+				if (foodScore+5 < 150){
+					foodScore+=5;
+				} else {
+					msgLog = "You are too full to eat anything";
+				}
+			} else {
+				msgLog = "You don't have any food!";
 			}
 			break;
 		case 27:
@@ -136,6 +169,9 @@ void getMovement(){
 	}
 	turn++;
 	drawTurn();
+	if (checkY == -48 || checkY == 48 || checkX == -96 || checkX == 96 && biome == 'o'){
+		msgLog = "You stare into the abyss...";
+	}
 	updateScreen();
 }
 
@@ -183,5 +219,18 @@ void updateTemperature(){
 		updateScreen();
 		endScreen();
 		exit(0);
+	}
+}
+
+void updateHunger(){
+	if (turn % 25 == 0){
+		foodScore-=5;
+		if (foodScore < 10){
+			clear();
+			mvprintw(12,40,"You died of Hunger! Be more careful next time");
+			updateScreen();
+			endScreen();
+			exit(0);
+		}
 	}
 }

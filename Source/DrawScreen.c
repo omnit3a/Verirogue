@@ -165,3 +165,7 @@ void drawDungeon(){
 	}
 	updateScreen();
 }
+
+char charAtCoord(int x, int y, char wantedChar){
+	return (mvwinch(stdscr, y, x) & A_CHARTEXT)-wantedChar;
+}

@@ -5,6 +5,9 @@
 #include "Player.h"
 #include "MapGenerator.h"
 
+int foodCount = 0;
+
+int foodScore = 100;
 
 Humanoid playerEnt;
 

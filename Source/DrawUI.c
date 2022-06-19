@@ -103,7 +103,23 @@ void drawHydration(){
 	} else if (playerEnt.currentHydration.hydration > 55){
 		attron(COLOR_PAIR(11));
 	}
-	mvprintw(27,0,"Hydration: %d%", playerEnt.currentHydration.hydration);
+	mvprintw(27,0,"                                                   ");
+	mvprintw(27,0,"Hydration: %d", playerEnt.currentHydration.hydration);
+	attroff(A_BLINK | A_BOLD);
+	refresh();
+}
+
+void drawHunger(){
+	init_pair(11, COLOR_WHITE, COLOR_BLACK);
+	init_pair(12, COLOR_RED, COLOR_BLACK);
+	attron(A_BOLD);
+	if (foodScore < 50){
+		attron(COLOR_PAIR(12) | A_BLINK);
+	} else {
+		attron(COLOR_PAIR(11));
+	}
+	mvprintw(28,0,"                          ");
+	mvprintw(28,0,"Nourishment: %d", foodScore);
 	attroff(A_BLINK | A_BOLD);
 	refresh();
 }
@@ -114,5 +130,6 @@ void drawUserInterface(){
 	drawTurn();
 	drawHealth();
 	drawHydration();
+	drawHunger();
 	refresh();
 }
