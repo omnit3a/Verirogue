@@ -5,4 +5,4 @@
 - `f` Set fire
 - `s` Scavenge for food
 - `e` Eat food
-- '$' Plunder gold
+- `$` Plunder gold
