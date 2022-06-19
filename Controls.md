@@ -6,4 +6,3 @@
 - `s` Scavenge for food
 - `e` Eat food
 - `$` Plunder gold
-- `k` Kick down wall
