@@ -1,5 +1,6 @@
 # Verirogue
 A roguelike/verisimulator (kinda) for Linux systems
+
 I suggest using the included font for the best results with the game
 # Bugs (In order of importance to fix)
 - [X] Issue where certain tiles on the overworld crash the game if they are the entrance for a dungeon (Fixed)
