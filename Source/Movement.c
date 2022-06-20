@@ -27,13 +27,21 @@ char dir;		//'u' = UP 'd' = DOWN 'l' = LEFT 'r' = RIGHT
 void drawPlayer(){
 	init_pair(6,COLOR_YELLOW, COLOR_BLACK);
 	attron(COLOR_PAIR(6) | A_BOLD);
-	if (biome == 'd'){
+	if (biome == 'd' || biome == 't'){
 		mvaddch(playerEnt.currentPos.yPos, playerEnt.currentPos.xPos, '@');
 	} else if (biome == 'o'){
 		mvaddch(12,40,'@');
 	}
 	attroff(A_BOLD);
 	updateScreen();
+}
+
+int townWalkable(int x, int y){
+	if (returnTownmapAt(x, y) != ' ' && returnTownmapAt(x, y) != '#'){
+		return 1;
+	} else {
+		return 0;
+	}
 }
 
 void getMovement(){
@@ -48,6 +56,8 @@ void getMovement(){
 				playerEnt.currentPos.yPos--;
 			} else if (biome == 'o' && playerEnt.currentPos.yPos > -48){
 				playerEnt.currentPos.yPos--;
+			} else if (biome == 't' && playerEnt.currentPos.yPos > 0 && townWalkable(checkX, checkY-1)){
+				playerEnt.currentPos.yPos--;
 			}
 			break;
 		case KEY_DOWN:
@@ -55,6 +65,8 @@ void getMovement(){
 			if (biome == 'd' && playerEnt.currentPos.yPos < 23 && returnDungeonmapAt(checkX, checkY+1) != ' '){
 				playerEnt.currentPos.yPos++;
 			} else if (biome == 'o' && playerEnt.currentPos.yPos < 48){
+				playerEnt.currentPos.yPos++;
+			} else if (biome == 't' && playerEnt.currentPos.yPos < 23 && townWalkable(checkX, checkY+1)){
 				playerEnt.currentPos.yPos++;
 			}
 			break;
@@ -64,6 +76,8 @@ void getMovement(){
 				playerEnt.currentPos.xPos--;
 			} else if (biome == 'o' && playerEnt.currentPos.xPos > -96){
 				playerEnt.currentPos.xPos--;
+			} else if (biome == 't' && playerEnt.currentPos.xPos > 0 && townWalkable(checkX-1, checkY)){
+				playerEnt.currentPos.xPos--;
 			}
 			break;
 		case KEY_RIGHT:
@@ -71,6 +85,8 @@ void getMovement(){
 			if (biome == 'd' && playerEnt.currentPos.xPos < 79 && returnDungeonmapAt(checkX+1, checkY) != ' '){
 				playerEnt.currentPos.xPos++;
 			} else if (biome == 'o' && playerEnt.currentPos.xPos < 96){
+				playerEnt.currentPos.xPos++;
+			} else if (biome == 't' && playerEnt.currentPos.xPos < 79 && townWalkable(checkX+1, checkY)){
 				playerEnt.currentPos.xPos++;
 			}
 			break;
@@ -85,14 +101,23 @@ void getMovement(){
 				msgLog = "You left the dungeon";
 				fires = 0;
 				dungeonHasFire = 0;
+			} else if (biome == 't'){
+				surroundingTemperature = 37;
+				biome = 'o';
+				generateMap();
+				playerEnt.currentPos.xPos = entryX;
+				playerEnt.currentPos.yPos = entryY;
+				updateScreen();
+				msgLog = "You left the town";
+				fires = 0;
 			}
 			break;
 		case '>':
+			entryX = checkX;
+			entryY = checkY;
+			srand(seedFromPosition(entryX, entryY));
 			if (biome == 'o'){
-				entryX = playerEnt.currentPos.xPos;
-				entryY = playerEnt.currentPos.yPos;
-				srand(seedFromPosition(entryX, entryY));
-				if (rand() % 10 == 0){
+				if (rand() % 3 == 0){
 					biome = 'd';
 					surroundingTemperature = 15;
 					generateDungeon(7,7);
@@ -101,7 +126,7 @@ void getMovement(){
 					updateScreen();
 					msgLog = "You found a dungeon!";
 				} else {
-					msgLog = "You didn't find a dungeon";
+					msgLog = "You didn't find anything";
 				}
 			}
 			break;
@@ -143,7 +168,7 @@ void getMovement(){
 			break;
 		case 's':
 			srand(time(0));
-			if (biome == 'o' && rand() % 5 == 0){
+			if ((biome == 'o' || biome == 't')&& rand() % 5 == 0){
 				foodCount++;
 				msgLog = "You scavenged for food";
 			} else {
@@ -207,6 +232,9 @@ void getMovement(){
 						break;
 				}
 			}
+			break;
+		case 'i':
+
 			break;
 		case 27:
 			endScreen();
@@ -274,6 +302,12 @@ void updateTemperature(){
 	if (playerEnt.currentHydration.hydration < 40){
 		clear();
 		mvprintw(12,40, "You died of thirst! Be more careful next time");
+		updateScreen();
+		endScreen();
+		exit(0);
+	} else if (playerEnt.currentHydration.hydration >= 80){
+		clear();
+		mvprintw(12,40,"You died of Hyponatremia! Be more careful next time");
 		updateScreen();
 		endScreen();
 		exit(0);

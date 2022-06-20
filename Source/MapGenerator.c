@@ -198,6 +198,75 @@ char returnDungeonmapAt(int x, int y){
 	return map[y][x];
 }
 
+int townMap[24][80];
+
+int townNPCS[9][4];
+
+void generateTown(int maxWidth, int maxHeight){
+	for (int i = 0 ; i < 80 ; i++){
+		for (int j = 0 ; j < 24 ; j++){
+			townMap[j][i] = ' ';
+			map[j][i] = '.';
+		}
+	}
+	for (int i = 0 ; i < 9 ; i++){
+		for (int j = 0 ; j < 4 ; j++){
+			townNPCS[j][i] = 0;
+		}
+	}
+	srand(seedFromPosition(entryX, entryY));
+	int xPos, yPos, roomWidth, roomHeight, buildings, buildingsDone, doorWall, buildingType;
+	buildings = (rand() % 8) + 1;
+	buildingsDone = 0;
+	int roomCenters[buildings][2];
+	int npcX, npcY;
+	for (int r = 0 ; r < buildings && buildingsDone < buildings ; r++){
+		doorWall = rand() % 4;
+		xPos = rand() % (80 - maxWidth)-2;
+		yPos = rand() % (24 - maxHeight)-2;
+		roomWidth = (rand() % maxWidth) + 2;
+		roomHeight = (rand() % maxHeight) + 2;
+		for (int i = xPos-1 ; i < roomWidth+xPos+1 ; i++){
+			for (int j = yPos-1 ; j < roomHeight+yPos+1 ; j++){
+				if (map[j+1][i+1] == '+'){
+					goto brokenRoom;
+				} else {
+					map[j][i] = '#';
+				}
+			}
+		}
+		for (int i = xPos ; i < roomWidth+xPos ; i++){
+			for (int j = yPos ; j < roomHeight+yPos ; j++){
+				if (map[j][i] == '+'){
+					goto brokenRoom;
+				} else {
+					map[j][i] = '+';
+				}
+			}
+		}
+		roomCenters[r][0] = xPos+(roomWidth/2);
+		roomCenters[r][1] = yPos+(roomHeight/2);
+		
+		if (doorWall == 0){
+			map[yPos+(roomHeight/2)][xPos-1] = 'X';
+		} else if (doorWall == 1){
+			map[yPos+(roomHeight/2)][xPos+roomWidth] = 'X';
+		} else if (doorWall == 2){
+			map[yPos-1][xPos+(roomWidth/2)] = 'X';
+		} else if (doorWall == 3){
+			map[yPos+roomHeight][xPos+(roomWidth/2)] = 'X';
+		}
+		brokenRoom:
+			continue;	
+	}
+	startX = 0;
+	startY = 0;	
+}
+
+char returnTownmapAt(int x, int y){
+	return map[y][x];
+}
+
 int seedFromPosition(int x, int y){
 	int a = abs(x);
 	int b = abs(y);

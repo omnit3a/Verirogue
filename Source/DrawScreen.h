@@ -21,6 +21,8 @@ void drawFOV(int radius);
 
 void drawDungeon();
 
+void drawTown();
+
 char charAtCoord(int x, int y, char wantedChar);
 
 #endif

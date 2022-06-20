@@ -17,6 +17,8 @@ extern char dir;
 
 void drawPlayer();
 
+int townWalkable(int x, int y);
+
 void getMovement();
 
 void updateTemperature();

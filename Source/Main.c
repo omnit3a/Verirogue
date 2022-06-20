@@ -35,6 +35,14 @@ int main(){
 			fireSpread();
 			getMovement();
 			updateScreen();
+		} else if (biome == 't'){
+			drawTown();
+			updateTemperature();
+			updateHunger();
+			drawUserInterface();
+			drawPlayer();
+			getMovement();
+			updateScreen();
 		}
 	}
 	getch();

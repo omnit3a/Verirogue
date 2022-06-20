@@ -25,6 +25,14 @@ void generateDungeon(int maxWidth, int maxHeight);
 
 char returnDungeonmapAt(int x, int y);
 
+extern int townMap[][80];
+
+extern int townNPCS[][4];
+
+void generateTown(int maxWidth, int maxHeight);
+
+char returnTownmapAt(int x, int y);
+
 int seedFromPosition(int x, int y);
 
 extern char fireValues[][80];
