@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 #include <ncurses.h>
 #include "Player.h"
 #include "PlayerCreator.h"
@@ -20,6 +21,12 @@ char getPlayerSex(){
 	}
 }
 
+char getStarSign(){
+	srand(time(0));
+	int sign = (rand() % 3)+1;
+	return (char)sign+64;
+}
+
 void playerCreatorScreen(){
 	mvprintw(0,0,"You have crashed through the universe onto a flat plane of earth.");
 	mvprintw(1,0,"You have forgotten your name!");
@@ -29,4 +36,5 @@ void playerCreatorScreen(){
 	mvprintw(0,0,"What is your sex? M | F | U");
 	updateScreen();
 	playerEnt.currentSex.sex = getPlayerSex();
+	playerEnt.currentSign.sign = getStarSign();
 }

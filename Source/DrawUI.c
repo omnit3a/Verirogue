@@ -143,8 +143,12 @@ void drawSheet(){
 	mvprintw(0,0,"### Unnamed hero ###");
 	mvprintw(1,0,"Sex: %c",playerEnt.currentSex.sex);
 	mvprintw(2,0,"Weight: %d",playerEnt.currentWeight.pounds);
-	mvprintw(3,0,"# ---------------- #");
-	mvprintw(4,0,"Gold: %d", goldScore);
+	mvprintw(3,0,"Star Sign: %c",playerEnt.currentSign.sign);
+	mvprintw(4,0,"Strength: %d",playerEnt.currentStats.strength);
+	mvprintw(5,0,"Agility: %d",playerEnt.currentStats.agility);
+	mvprintw(6,0,"Intelligence: %d",playerEnt.currentStats.intelligence);
+	mvprintw(7,0,"# ---------------- #");
+	mvprintw(8,0,"Gold: %d", goldScore);
 	attroff(A_BOLD);
 	refresh();
 	getch();

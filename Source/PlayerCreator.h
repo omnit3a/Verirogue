@@ -3,6 +3,8 @@
 
 char getPlayerSex();
 
+char getStarSign();
+
 void playerCreatorScreen();
 
 #endif

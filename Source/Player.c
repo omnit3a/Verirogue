@@ -26,7 +26,28 @@ void setupPlayer(int x, int y, int entID){
 		playerEnt.currentSex.sex = 'U';
 	}
 
-	playerEnt.currentWeight.pounds = 175;
+	switch (playerEnt.currentSign.sign){
+		case 'A':
+			srand(time(0)+10);
+			playerEnt.currentStats.strength = (rand() % 25)+75;
+			playerEnt.currentStats.agility = (rand() % 25)+25;
+			playerEnt.currentStats.intelligence = 25;
+			break;
+		case 'B':
+			srand(time(0)+20);
+			playerEnt.currentStats.strength = (rand() % 25)+25;
+			playerEnt.currentStats.agility = (rand() % 25)+75;
+			playerEnt.currentStats.intelligence = 65;
+			break;
+		case 'C':
+			srand(time(0)+30);
+			playerEnt.currentStats.strength = 25;
+			playerEnt.currentStats.agility = (rand() % 10)+40;
+			playerEnt.currentStats.intelligence = (rand() % 25)+75;
+			break;
+	}
+
+	playerEnt.currentWeight.pounds = (playerEnt.currentStats.strength*3) - lround(playerEnt.currentStats.agility/3);
 	playerEnt.currentFlammability.flammabilityLevel = 50;
 	playerEnt.currentTemperature.celsius = 37;
 	playerEnt.currentTemperature.fahrenheit = 98;

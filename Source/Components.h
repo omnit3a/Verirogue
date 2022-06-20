@@ -37,6 +37,16 @@ typedef struct temp{
 	int fahrenheit;
 } Temperature;
 
+typedef struct starsign{
+	char sign;
+} StarSign;
+
+typedef struct vitalstats{
+	int strength;
+	int agility;
+	int intelligence;
+} VitalStats;
+
 typedef struct hoid{
 	int entityID;
 	Position currentPos;
@@ -47,6 +57,8 @@ typedef struct hoid{
 	Flammability currentFlammability;
 	Temperature currentTemperature;
 	Hydration currentHydration;
+	VitalStats currentStats;
+	StarSign currentSign;
 
 	BodyPart head;
 	BodyPart torso;
