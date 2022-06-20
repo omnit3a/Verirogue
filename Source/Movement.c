@@ -175,6 +175,9 @@ void getMovement(){
 				msgLog = "You didn't find any food";
 			}
 			break;
+		case 'S':
+			drawSheet();
+			break;
 		case 'e':
 			if (foodCount > 0){
 				foodCount--;

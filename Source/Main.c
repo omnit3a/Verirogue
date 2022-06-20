@@ -7,12 +7,14 @@
 #include <time.h>
 #include "Movement.h"
 #include "DrawUI.h"
+#include "PlayerCreator.h"
 
 int seedMain = time(0);
 
 int main(){
 	setupScreen();
 	updateScreen();
+	playerCreatorScreen();
 	generateMap();
 	setupPlayer(0,0,0);
 	biome = 'o';

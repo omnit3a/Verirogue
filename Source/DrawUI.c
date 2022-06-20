@@ -136,6 +136,20 @@ void drawGold(){
 	refresh();
 }
 
+void drawSheet(){
+	init_pair(11, COLOR_WHITE, COLOR_BLACK);
+	clear();
+	attron(COLOR_PAIR(11) | A_BOLD);
+	mvprintw(0,0,"### Unnamed hero ###");
+	mvprintw(1,0,"Sex: %c",playerEnt.currentSex.sex);
+	mvprintw(2,0,"Weight: %d",playerEnt.currentWeight.pounds);
+	mvprintw(3,0,"# ---------------- #");
+	mvprintw(4,0,"Gold: %d", goldScore);
+	attroff(A_BOLD);
+	refresh();
+	getch();
+}
+
 void drawUserInterface(){
 	drawTemperature();
 	drawLog();

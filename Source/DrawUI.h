@@ -21,6 +21,8 @@ void drawHunger();
 
 void drawGold();
 
+void drawSheet();
+
 void drawUserInterface();
 
 #endif

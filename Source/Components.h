@@ -5,6 +5,10 @@ typedef struct ho{
 	int hydration;
 } Hydration;
 
+typedef struct sex{
+	char sex;
+} EntitySex;
+
 typedef struct hp{
 	int currentHealth;
 	int maxHealth;
@@ -36,6 +40,8 @@ typedef struct temp{
 typedef struct hoid{
 	int entityID;
 	Position currentPos;
+
+	EntitySex currentSex;
 
 	Weight currentWeight;
 	Flammability currentFlammability;

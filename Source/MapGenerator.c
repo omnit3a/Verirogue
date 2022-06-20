@@ -41,7 +41,12 @@ void generateMap(){
 		for (int j = 0 ; j < 24 ; j++){
 			value = abs(lround((noise.GetNoise((float) playerEnt.currentPos.xPos+i, (float) playerEnt.currentPos.yPos+j)+0.5)/0.09));
 			if (playerEnt.currentPos.xPos+i > 136 || playerEnt.currentPos.xPos+i < -56 || playerEnt.currentPos.yPos+j > 60 || playerEnt.currentPos.yPos+j < -36){
-				map[j][i] = ' ';
+				srand(seedFromPosition(playerEnt.currentPos.xPos+i, playerEnt.currentPos.yPos+j));
+				if (rand() % 10 == 0){
+					map[j][i] = '*';
+				} else {
+					map[j][i] = ' ';
+				}
 				continue;
 			}
 			if (returnCoastmapAt(i,j) != 0 && value > 3){
