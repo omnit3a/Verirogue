@@ -10,6 +10,10 @@ char skyMap[24][80];
 
 int sunX, sunY;
 
+int month, day, hour;
+
+int calender[12][30];
+
 int isDay = 1;
 
 void generatePlanetaryBodies(int maxPlanets, int maxStars){
@@ -49,6 +53,9 @@ void generatePlanetaryBodies(int maxPlanets, int maxStars){
 			continue;
 		}
 	}
+	month = 1;
+	day = 1;
+	hour = 12;
 }
 
 void scrollStars(){
@@ -64,10 +71,22 @@ void scrollStars(){
 	if (sunX < 0){
 		sunX = 79;
 	}
+	hour++;
+	if (hour > 24){
+		hour = 1;
+		day++;
+		if (day > 30){
+			day = 1;
+			month++;
+			if (month > 12){
+				month = 1;
+			}
+		}
+	}
 }
 
 void setDayNight(){
-	if (sunX > 20 && sunX < 60){
+	if (hour > 6 && hour < 20){
 		if (isDay == 0){
 			msgLog = "It is now day";
 		}

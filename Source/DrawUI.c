@@ -71,6 +71,8 @@ void drawLog(){
 		attron(COLOR_PAIR(21) | A_BOLD);
 		mvprintw(9,81,"It is the nighttime");
 	}
+	mvprintw(10,81,"                               ");
+	mvprintw(10,81,"Month %d, Day %d, Hour %d",month,day,hour);
 	attroff(A_REVERSE | A_BOLD);
 	refresh();
 }

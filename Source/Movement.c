@@ -314,7 +314,7 @@ void getMovement(){
 	 *the time of day will be effected by the star position
 	 *	
 	 */
-	if (turn % 100 == 0 && biome == 'o'){
+	if (turn % 33 == 0 && biome == 'o'){
 		scrollStars();
 		setDayNight();
 	}
