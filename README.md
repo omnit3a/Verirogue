@@ -1,3 +1,4 @@
+!()[]
 # Verirogue
 A roguelike/verisimulator (kinda) for Linux systems
 # Bugs (In order of importance to fix)
