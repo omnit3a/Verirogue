@@ -7,3 +7,6 @@ A roguelike/verisimulator (kinda) for Linux systems
 
 # Controls
 [See Controls](Controls.md)
+
+# Current Goals
+[See Goals](Goals.md)
