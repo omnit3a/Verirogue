@@ -9,3 +9,4 @@
 - `$` Plunder gold
 - `k` Kick down wall
 - `m` View starmap
+- `p` Go prone/Toggle swimming

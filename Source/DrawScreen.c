@@ -47,7 +47,7 @@ void drawMap(){
 			currentChar = returnHeightmapAt(i,j);
 			if (currentChar == '^' || currentChar == '.'){
 				attron(COLOR_PAIR(2));
-			} else if (currentChar == 'A' || currentChar == '*'){
+			} else if (currentChar == 'A' || currentChar == '*' || currentChar == '>'){
 				attron(COLOR_PAIR(3));
 			} else if (currentChar == 't'){
 				attron(COLOR_PAIR(2) | A_BOLD);

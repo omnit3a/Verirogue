@@ -1,4 +1,4 @@
-# Verirogue ![](vim.vialle.love.anim.gif)
+# Verirogue
 A roguelike/verisimulator (kinda) for Linux systems
 # Bugs (In order of importance to fix)
 - [ ] Issue where turn and nourishment values will go up by several million upon entrance of towns generated past a certain undetermines coordinate

@@ -19,6 +19,8 @@ void drawPlayer();
 
 int townWalkable(int x, int y);
 
+int mapWalkable();
+
 void getMovement();
 
 void updateTemperature();

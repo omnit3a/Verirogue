@@ -45,6 +45,41 @@ int townWalkable(int x, int y){
 	}
 }
 
+int mapWalkable(){
+	switch (dir){
+		case 'u':
+			if (surroundingChar[0] != '~'){
+				return 1;
+			} else {
+				return 0;
+			}
+			break;
+		case 'd':
+			if (surroundingChar[2] != '~'){
+				return 1;
+			} else {
+				return 0;
+			}
+			break;
+		case 'l':
+			if (surroundingChar[3] != '~'){
+				return 1;
+			} else {
+				return 0;
+			}
+			break;
+		case 'r':
+			if (surroundingChar[1] != '~'){
+				return 1;
+			} else {
+				return 0;
+			}
+			break;
+		default:
+			return 0;
+	}
+}
+
 void getMovement(){
 	ch = getch();
 	int checkX = playerEnt.currentPos.xPos;
@@ -56,7 +91,11 @@ void getMovement(){
 			if (biome == 'd' && playerEnt.currentPos.yPos > 0 && returnDungeonmapAt(checkX, checkY-1) != ' '){
 				playerEnt.currentPos.yPos--;
 			} else if (biome == 'o' && playerEnt.currentPos.yPos > -48){
-				playerEnt.currentPos.yPos--;
+				if (isSwimming && !mapWalkable()){
+					playerEnt.currentPos.yPos--;
+				} else if (!isSwimming && mapWalkable()){
+					playerEnt.currentPos.yPos--;
+				}
 			} else if (biome == 't' && playerEnt.currentPos.yPos > 0 && townWalkable(checkX, checkY-1)){
 				playerEnt.currentPos.yPos--;
 			}
@@ -66,7 +105,11 @@ void getMovement(){
 			if (biome == 'd' && playerEnt.currentPos.yPos < 23 && returnDungeonmapAt(checkX, checkY+1) != ' '){
 				playerEnt.currentPos.yPos++;
 			} else if (biome == 'o' && playerEnt.currentPos.yPos < 48){
-				playerEnt.currentPos.yPos++;
+				if (isSwimming && !mapWalkable()){
+					playerEnt.currentPos.yPos++;
+				} else if (!isSwimming && mapWalkable()){
+					playerEnt.currentPos.yPos++;
+				}
 			} else if (biome == 't' && playerEnt.currentPos.yPos < 23 && townWalkable(checkX, checkY+1)){
 				playerEnt.currentPos.yPos++;
 			}
@@ -76,7 +119,11 @@ void getMovement(){
 			if (biome == 'd' && playerEnt.currentPos.xPos > 0 && returnDungeonmapAt(checkX-1, checkY) != ' '){
 				playerEnt.currentPos.xPos--;
 			} else if (biome == 'o' && playerEnt.currentPos.xPos > -96){
-				playerEnt.currentPos.xPos--;
+				if (isSwimming && !mapWalkable()){
+					playerEnt.currentPos.xPos--;
+				} else if (!isSwimming && mapWalkable()){
+					playerEnt.currentPos.xPos--;
+				}
 			} else if (biome == 't' && playerEnt.currentPos.xPos > 0 && townWalkable(checkX-1, checkY)){
 				playerEnt.currentPos.xPos--;
 			}
@@ -86,7 +133,11 @@ void getMovement(){
 			if (biome == 'd' && playerEnt.currentPos.xPos < 79 && returnDungeonmapAt(checkX+1, checkY) != ' '){
 				playerEnt.currentPos.xPos++;
 			} else if (biome == 'o' && playerEnt.currentPos.xPos < 96){
-				playerEnt.currentPos.xPos++;
+				if (isSwimming && !mapWalkable()){
+					playerEnt.currentPos.xPos++;
+				} else if (!isSwimming && mapWalkable()){
+					playerEnt.currentPos.xPos++;
+				}
 			} else if (biome == 't' && playerEnt.currentPos.xPos < 79 && townWalkable(checkX+1, checkY)){
 				playerEnt.currentPos.xPos++;
 			}
@@ -116,19 +167,17 @@ void getMovement(){
 		case '>':
 			entryX = checkX;
 			entryY = checkY;
-			srand(seedFromPosition(entryX, entryY));
-			if (biome == 'o'){
-				if (rand() % 3 == 0){
-					biome = 'd';
-					surroundingTemperature = 15;
-					generateDungeon(7,7);
-					playerEnt.currentPos.xPos = startX;
-					playerEnt.currentPos.yPos = startY;
-					updateScreen();
-					msgLog = "You found a dungeon!";
-				} else {
-					msgLog = "You didn't find anything";
-				}
+			srand(time(0));
+			if (biome == 'o' && underPlayer == '>'){
+				biome = 'd';
+				surroundingTemperature = 15;
+				generateDungeon(7,7);
+				playerEnt.currentPos.xPos = startX;
+				playerEnt.currentPos.yPos = startY;
+				updateScreen();
+				msgLog = "You enter the dungeon!";
+			} else {
+				msgLog = "There isn't a dungeon here!";
 			}
 			break;
 		case 'f':
@@ -247,6 +296,10 @@ void getMovement(){
 				msgLog = "You can't see the sky at the moment";
 			}	
 			break;
+		case 'p':
+			msgLog = "You are now prone!";
+			isSwimming = !isSwimming;
+			break;
 		case 27:
 			endScreen();
 			exit(0);
@@ -261,7 +314,7 @@ void getMovement(){
 	 *the time of day will be effected by the star position
 	 *	
 	 */
-	if (turn % 100 == 0){
+	if (turn % 100 == 0 && biome == 'o'){
 		scrollStars();
 		setDayNight();
 	}

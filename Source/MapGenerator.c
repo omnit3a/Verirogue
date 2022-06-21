@@ -27,6 +27,10 @@ int returnCoastmapAt(int x, int y){
 
 char map[24][80];
 
+char surroundingChar[4];
+
+char underPlayer;
+
 void generateMap(){
 	noise.SetFrequency(0.05);
 	noise.SetSeed(seedMain);
@@ -64,8 +68,19 @@ void generateMap(){
 			if (rand() % 100 == 0 && map[j][i] != '~' && map[j][i] != 'A'){
 				map[j][i] = 't';
 			}
+			if (rand() % 50 == 0 && map[j][i] == 'A'){
+				map[j][i] = '>';
+			}
+
 		}
 	}
+	surroundingChar[0] = map[11][40];
+	surroundingChar[1] = map[12][41];
+	surroundingChar[2] = map[13][40];
+	surroundingChar[3] = map[12][39];
+
+	//this is the character underneath the player
+	underPlayer = map[12][40];
 }
 
 char returnHeightmapAt(int x, int y){
@@ -102,7 +117,7 @@ void generateDungeon(int maxWidth, int maxHeight){
 			map[i][j] = ' ';
 		}
 	}
-	srand(seedFromPosition(entryX, entryY));
+	srand(time(0));
 	int xPos, yPos, width, height, rooms;
 	rooms = 9;
 	int roomCenters[rooms][2];

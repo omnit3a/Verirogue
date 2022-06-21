@@ -10,6 +10,10 @@ int returnCoastmapAt(int x, int y);
 
 extern char map[][80];
 
+extern char surroundingChar[4];
+
+extern char underPlayer;
+
 void generateMap();
 
 /**

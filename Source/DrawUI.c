@@ -47,7 +47,7 @@ void drawSeeds(){
 
 void drawLog(){
 	init_pair(9, COLOR_BLACK, COLOR_WHITE);
-	init_pair(10, COLOR_BLACK, COLOR_YELLOW);
+	init_pair(22, COLOR_BLACK, COLOR_YELLOW);
 	init_pair(21, COLOR_BLACK, COLOR_BLUE);
 	attron(COLOR_PAIR(9) | A_BOLD);
 	for (int i = 80 ; i < 120 ; i++){
@@ -65,7 +65,7 @@ void drawLog(){
 	mvprintw(1,81,"%s",msgLog.c_str());
 	mvprintw(9,81,"                                     ");
 	if (isDay == 1){
-		attron(COLOR_PAIR(10) | A_BOLD);
+		attron(COLOR_PAIR(22) | A_BOLD);
 		mvprintw(9,81,"It is the daytime.");
 	} else {
 		attron(COLOR_PAIR(21) | A_BOLD);
