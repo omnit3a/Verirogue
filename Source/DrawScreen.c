@@ -6,6 +6,7 @@
 #include <time.h>
 #include "Player.h"
 #include "Movement.h"
+#include "Planets.h"
 
 #define WIDTH 80
 #define HEIGHT 24
@@ -192,6 +193,18 @@ void drawTown(){
 		}
 	}
 	updateScreen();
+}
+
+void drawStarmap(){
+	init_pair(1, COLOR_WHITE, COLOR_BLACK);
+	attron(COLOR_PAIR(1));
+	attron(A_BOLD);
+	for (int i = 0 ; i < 79 ; i++){
+		for (int j = 0 ; j < 24 ; j++){
+			mvaddch(j, i, skyMap[j][i]);
+		}
+	}
+	attroff(A_BOLD);
 }
 
 char charAtCoord(int x, int y, char wantedChar){

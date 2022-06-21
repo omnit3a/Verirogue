@@ -8,3 +8,4 @@
 - `e` Eat food
 - `$` Plunder gold
 - `k` Kick down wall
+- `m` View starmap

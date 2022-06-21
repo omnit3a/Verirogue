@@ -186,7 +186,7 @@ void generateDungeon(int maxWidth, int maxHeight){
 		srand(time(0));
 		int roomXGold;
 		int roomYGold;
-		for (int i = 0 ; i < 64 ; i++){
+		for (int i = 0 ; i < 256 ; i++){
 			srand(time(0));
 			roomXGold = rand() % 80;
 			roomYGold = rand() % 24;

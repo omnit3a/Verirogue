@@ -9,6 +9,7 @@
 #include "DrawScreen.h"
 #include "DrawUI.h"
 #include "Main.h"
+#include "Planets.h"
 
 char biome;
 
@@ -236,8 +237,15 @@ void getMovement(){
 				}
 			}
 			break;
-		case 'i':
-
+		case 'm':
+			if (biome == 'o'){
+				clear();
+				drawStarmap();
+				updateScreen();
+				getch();
+			} else {
+				msgLog = "You can't see the sky at the moment";
+			}	
 			break;
 		case 27:
 			endScreen();
@@ -247,6 +255,15 @@ void getMovement(){
 	drawTurn();
 	if (checkY == -48 || checkY == 48 || checkX == -96 || checkX == 96 && biome == 'o'){
 		msgLog = "You stare into the abyss...";
+	}
+
+	/*the star position changes every 100 turns
+	 *the time of day will be effected by the star position
+	 *	
+	 */
+	if (turn % 100 == 0){
+		scrollStars();
+		setDayNight();
 	}
 	updateScreen();
 }

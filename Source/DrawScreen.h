@@ -23,6 +23,8 @@ void drawDungeon();
 
 void drawTown();
 
+void drawStarmap();
+
 char charAtCoord(int x, int y, char wantedChar);
 
 #endif

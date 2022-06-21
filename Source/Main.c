@@ -8,6 +8,7 @@
 #include "Movement.h"
 #include "DrawUI.h"
 #include "PlayerCreator.h"
+#include "Planets.h"
 
 int seedMain = time(0);
 
@@ -16,6 +17,7 @@ int main(){
 	updateScreen();
 	playerCreatorScreen();
 	generateMap();
+	generatePlanetaryBodies(5,80);
 	setupPlayer(0,0,0);
 	biome = 'o';
 	while(1){

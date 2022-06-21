@@ -5,8 +5,10 @@
 #include "Player.h"
 #include "Movement.h"
 #include "MapGenerator.h"
+#include "Planets.h"
 #include "Main.h"
 #include <string>
+
 
 std::string msgLog = "Welcome to Verirogue";
 
@@ -45,6 +47,8 @@ void drawSeeds(){
 
 void drawLog(){
 	init_pair(9, COLOR_BLACK, COLOR_WHITE);
+	init_pair(10, COLOR_BLACK, COLOR_YELLOW);
+	init_pair(21, COLOR_BLACK, COLOR_BLUE);
 	attron(COLOR_PAIR(9) | A_BOLD);
 	for (int i = 80 ; i < 120 ; i++){
 		for (int j = 0 ; j < 12 ; j++){
@@ -59,7 +63,15 @@ void drawLog(){
 		}
 	}
 	mvprintw(1,81,"%s",msgLog.c_str());
-	attroff(A_REVERSE);
+	mvprintw(9,81,"                                     ");
+	if (isDay == 1){
+		attron(COLOR_PAIR(10) | A_BOLD);
+		mvprintw(9,81,"It is the daytime.");
+	} else {
+		attron(COLOR_PAIR(21) | A_BOLD);
+		mvprintw(9,81,"It is the nighttime");
+	}
+	attroff(A_REVERSE | A_BOLD);
 	refresh();
 }
 
