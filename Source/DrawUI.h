@@ -23,6 +23,8 @@ void drawGold();
 
 void drawSheet();
 
+void drawHelp();
+
 void drawUserInterface();
 
 #endif

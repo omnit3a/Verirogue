@@ -366,6 +366,9 @@ void getMovement(){
 				playerEnt.currentHydration.hydration += 5;
 			}
 			break;
+		case '?':
+			drawHelp();
+			break;
 		case 27:
 			endScreen();
 			exit(0);
@@ -411,8 +414,6 @@ void updateTemperature(){
 		}
 		if (hasFever == 1){
 			playerEnt.currentHydration.hydration-=2;
-		} else if (hasFever == 0 && playerEnt.currentHydration.hydration < 37){
-			playerEnt.currentHydration.hydration++;
 		}
 		playerEnt.currentTemperature.fahrenheit = (playerEnt.currentTemperature.celsius * 9 / 5) + 32;
 		drawTemperature();

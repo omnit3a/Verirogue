@@ -112,9 +112,9 @@ void drawHydration(){
 	init_pair(11, COLOR_WHITE, COLOR_BLACK);
 	init_pair(12, COLOR_RED, COLOR_BLACK);
 	attron(A_BOLD);
-	if (playerEnt.currentHydration.hydration <= 55){
+	if (playerEnt.currentHydration.hydration <= 40){
 		attron(COLOR_PAIR(12) | A_BLINK);
-	} else if (playerEnt.currentHydration.hydration > 55){
+	} else if (playerEnt.currentHydration.hydration > 40){
 		attron(COLOR_PAIR(11));
 	}
 	mvprintw(27,0,"                                                   ");
@@ -166,6 +166,29 @@ void drawSheet(){
 	attroff(A_BOLD);
 	refresh();
 	getch();
+}
+
+void drawHelp(){
+	init_pair(11, COLOR_WHITE, COLOR_BLACK);
+	clear();
+	attron(COLOR_PAIR(11) | A_BOLD);
+	mvprintw(0,0,"Arrow keys : Movement");
+	mvprintw(1,0,"> : Enter dungeon");
+	mvprintw(2,0,"< : Exit dungeon");
+	mvprintw(3,0,"f : Set fire");
+	mvprintw(4,0,"s : Scavenge for food");
+	mvprintw(5,0,"S : Check character sheet");
+	mvprintw(6,0,"e : Eat food");
+	mvprintw(7,0,"$ : Plunder gold");
+	mvprintw(8,0,"k : Kick down wall");
+	mvprintw(9,0,"m : View sky");
+	mvprintw(10,0,"p : Go prone/Start swimming");
+	mvprintw(11,0,"q : Drink/Quaff");
+	mvprintw(12,0,"? : View this screen");
+	attroff(A_BOLD);
+	refresh();
+	getch();
+	
 }
 
 void drawUserInterface(){

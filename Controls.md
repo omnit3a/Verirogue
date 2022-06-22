@@ -11,3 +11,4 @@
 - `m` View starmap
 - `p` Go prone/Toggle swimming
 - `q` Drink/quaff
+- `?` View controls
