@@ -17,6 +17,11 @@ void setupScreen(){
 	raw();
 	noecho();
 	keypad(stdscr,TRUE);
+	if (has_colors() == 0){
+		endwin();
+		printf("Your terminal does not support color\n");
+		exit(1);
+	}
 	start_color();
 	curs_set(0);
 	clear();
@@ -27,7 +32,6 @@ void updateScreen(){
 }
 
 void endScreen(){
-	getch();
 	endwin();
 }
 

@@ -10,3 +10,4 @@
 - `k` Kick down wall
 - `m` View starmap
 - `p` Go prone/Toggle swimming
+- `q` Drink/quaff

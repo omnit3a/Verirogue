@@ -88,18 +88,14 @@ void setupPlayer(int x, int y, int entID){
 void killCheck(){
 	if (playerEnt.head.bpHP.currentHealth < 25){
 		clear();
-		mvprintw(12, 40, "You died of major head trauma! Be more careful next time!");
-		updateScreen();
-		getch();
 		endScreen();
+		printf("You died of major head trauma! Be more careful next time.\n");
 		exit(0);
 	}
 	if (playerEnt.torso.bpHP.currentHealth <= 0){
 		clear();
-		mvprintw(12, 40, "You died of internal bleeding! Be more careful next time!");
-		updateScreen();
-		getch();
 		endScreen();
+		printf("You died of internal bleeding! Be more careful next time.\n");
 		exit(0);
 	}
 }

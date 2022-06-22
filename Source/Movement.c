@@ -361,6 +361,11 @@ void getMovement(){
 			msgLog = "You are now prone!";
 			isSwimming = !isSwimming;
 			break;
+		case 'q':
+			if (biome == 'o' && !mapWalkable()){
+				playerEnt.currentHydration.hydration += 5;
+			}
+			break;
 		case 27:
 			endScreen();
 			exit(0);
@@ -423,40 +428,38 @@ void updateTemperature(){
 	}
 	if (playerEnt.currentTemperature.celsius >= 44){
 		clear();
-		mvprintw(12, 40, "You died of overheating! Be more careful next time");
-		updateScreen();
 		endScreen();
+		printf("You died of overheating! Be more careful next time\n");
 		exit(0);
 	} else if (playerEnt.currentTemperature.celsius < 14){
 		clear();
-		mvprintw(12, 40, "You froze to death! Be more careful next time");
-		updateScreen();
 		endScreen();
+		printf("You froze to death! Be more careful next time\n");
 		exit(0);
 	}
-	if (playerEnt.currentHydration.hydration < 40){
+	if (turn % 150 == 0){
+		playerEnt.currentHydration.hydration -= 5;
+	}
+	if (playerEnt.currentHydration.hydration < 25){
 		clear();
-		mvprintw(12,40, "You died of thirst! Be more careful next time");
-		updateScreen();
 		endScreen();
+		printf("You died of thirst! Be more careful next time\n");
 		exit(0);
 	} else if (playerEnt.currentHydration.hydration >= 80){
 		clear();
-		mvprintw(12,40,"You died of Hyponatremia! Be more careful next time");
-		updateScreen();
 		endScreen();
+		printf("You died of Hyponatremia! Be more careful next time\n");
 		exit(0);
 	}
 }
 
 void updateHunger(){
-	if (turn % 75 == 0){
+	if (turn % 200 == 0){
 		foodScore-=5;
 		if (foodScore < 10){
 			clear();
-			mvprintw(12,40,"You died of Hunger! Be more careful next time");
-			updateScreen();
 			endScreen();
+			printf("You died of Hunger! Be more careful next time\n");
 			exit(0);
 		}
 	}
