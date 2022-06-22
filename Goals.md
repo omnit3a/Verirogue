@@ -1,6 +1,7 @@
 # Roadmap
 - [X] Day/Night Cycle
 - [X] Planets and orbits that are affected by the day/night cycle
-- [ ] Town generation and NPCs
+- [X] Enemies
+- [ ] Fighting
+- [ ] Town generation/NPCs
 - [ ] Procedural quests
-- [ ] Fighting/Enemies

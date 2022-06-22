@@ -10,6 +10,7 @@
 #include "DrawUI.h"
 #include "Main.h"
 #include "Planets.h"
+#include "Enemies.h"
 
 char biome;
 
@@ -318,6 +319,7 @@ void getMovement(){
 		scrollStars();
 		setDayNight();
 	}
+	pseudoPathfind();
 	updateScreen();
 }
 

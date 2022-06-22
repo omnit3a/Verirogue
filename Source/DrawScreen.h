@@ -25,6 +25,8 @@ void drawTown();
 
 void drawStarmap();
 
+void drawEnemies();
+
 char charAtCoord(int x, int y, char wantedChar);
 
 #endif

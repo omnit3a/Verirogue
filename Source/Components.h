@@ -11,7 +11,6 @@ typedef struct sex{
 
 typedef struct hp{
 	int currentHealth;
-	int maxHealth;
 } Health;
 
 typedef struct pos{
@@ -47,6 +46,10 @@ typedef struct vitalstats{
 	int intelligence;
 } VitalStats;
 
+typedef struct cas{
+	char caste;
+} Caste;
+
 typedef struct hoid{
 	int entityID;
 	Position currentPos;
@@ -67,5 +70,23 @@ typedef struct hoid{
 	BodyPart leftLeg;
 	BodyPart rightLeg;
 } Humanoid;
+
+typedef struct ioid{
+	int entityID;
+	Position currentPos;
+
+	Caste currentCaste;
+
+	Weight currentWeight;
+	Temperature currentTemperature;
+	StarSign currentSign;
+
+	BodyPart head;
+	BodyPart abdomen;
+	BodyPart thorax;
+	BodyPart leftLegs;
+	BodyPart rightLegs;
+
+} Insectoid;
 
 #endif

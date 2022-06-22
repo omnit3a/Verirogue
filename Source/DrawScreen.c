@@ -7,6 +7,7 @@
 #include "Player.h"
 #include "Movement.h"
 #include "Planets.h"
+#include "Enemies.h"
 
 #define WIDTH 80
 #define HEIGHT 24
@@ -81,6 +82,7 @@ void drawWithoutFOV(){
 	init_pair(2, COLOR_YELLOW , COLOR_BLACK);
 	init_pair(3, COLOR_CYAN, COLOR_BLACK);
 	init_pair(10, COLOR_RED, COLOR_BLACK);
+	init_pair(23, COLOR_MAGENTA, COLOR_BLACK);
 	clear();
 	for (int i = 0 ; i < 80 ; i++){
 		for (int j = 0 ; j < 24 ; j++){
@@ -96,6 +98,11 @@ void drawWithoutFOV(){
 				attron(COLOR_PAIR(10) | A_BOLD | A_BLINK);
 			}
 			mvaddch(j,i,map[j][i]);
+			if (enemyMap[j][i] == '&'){
+				attroff(A_BLINK);
+				attron(COLOR_PAIR(23) | A_BOLD);
+				mvaddch(j,i,'&');
+			}
 			attroff(A_BOLD | A_BLINK);
 		}
 	}
@@ -110,6 +117,7 @@ void drawFOV(int radius){
 	init_pair(2, COLOR_YELLOW , COLOR_BLACK);
 	init_pair(3, COLOR_CYAN, COLOR_BLACK);
 	init_pair(10, COLOR_RED, COLOR_BLACK);
+	init_pair(23, COLOR_MAGENTA, COLOR_BLACK);
 	clear();
 	for (int i = 0 ; i < 80 ; i++){
 		for (int j = 0 ; j < 24 ; j++){
@@ -146,6 +154,11 @@ void drawFOV(int radius){
 					attron(COLOR_PAIR(10) | A_BOLD | A_BLINK);
 				}
 				mvaddch(j,i,map[j][i]);
+				if (enemyMap[j][i] == '&'){
+					attroff(A_BLINK);
+					attron(COLOR_PAIR(23) | A_BOLD);
+					mvaddch(j,i,'&');
+				}
 				attroff(A_BOLD | A_BLINK);
 				seenMap[j][i] = map[j][i];
 			}
@@ -202,6 +215,21 @@ void drawStarmap(){
 	for (int i = 0 ; i < 79 ; i++){
 		for (int j = 0 ; j < 24 ; j++){
 			mvaddch(j, i, skyMap[j][i]);
+		}
+	}
+	attroff(A_BOLD);
+}
+
+void drawEnemies(){
+	init_pair(23, COLOR_MAGENTA, COLOR_BLACK);
+	if (biome == 'd'){
+		for (int i = 0 ; i < 80 ; i++){
+			for (int j = 0 ; j < 24 ; j++){
+				if (enemyMap[j][i] == '&'){
+					attron(COLOR_PAIR(23) | A_BOLD);
+					mvaddch(j,i,'&');
+				}
+			}
 		}
 	}
 	attroff(A_BOLD);

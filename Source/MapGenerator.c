@@ -8,6 +8,7 @@
 #include "Player.h"
 #include "Movement.h"
 #include "Main.h"
+#include "Enemies.h"
 
 FastNoiseLite noise;
 
@@ -212,6 +213,8 @@ void generateDungeon(int maxWidth, int maxHeight){
 				break;
 			}
 		}
+		placeEnemies();
+		
 }
 
 char returnDungeonmapAt(int x, int y){

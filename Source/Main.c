@@ -9,6 +9,7 @@
 #include "DrawUI.h"
 #include "PlayerCreator.h"
 #include "Planets.h"
+#include "Enemies.h"
 
 int seedMain = time(0);
 
@@ -23,6 +24,7 @@ int main(){
 	while(1){
 		if (biome == 'o'){
 			generateMap();
+			resetEnemies();				//makes sure no enemies spawn on the overworld
 			drawMap();
 			updateTemperature();
 			updateHunger();
