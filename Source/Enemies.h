@@ -12,4 +12,8 @@ void resetEnemies();			//removes all enemies from the map
 
 void pseudoPathfind();			//very basic pathfinding for the enemies
 
+void updateEnemyHealth();
+
+void targetPlayer();
+
 #endif

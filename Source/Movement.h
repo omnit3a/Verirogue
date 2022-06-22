@@ -15,11 +15,17 @@ extern int ch;
 
 extern char dir;
 
+void engageInCombat(int x, int y);
+
 void drawPlayer();
 
 int townWalkable(int x, int y);
 
 int mapWalkable();
+
+int canWalk();
+
+int canHit();
 
 void getMovement();
 

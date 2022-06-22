@@ -20,6 +20,7 @@ int main(){
 	generateMap();
 	generatePlanetaryBodies(5,80);
 	setupPlayer(0,0,0);
+	resetEnemies();
 	biome = 'o';
 	while(1){
 		if (biome == 'o'){
@@ -50,6 +51,7 @@ int main(){
 			getMovement();
 			updateScreen();
 		}
+		killCheck();
 	}
 	getch();
 	endScreen();

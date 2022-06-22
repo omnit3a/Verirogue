@@ -2,14 +2,23 @@
 #include <stdlib.h>
 #include <math.h>
 #include <time.h>
+#include <ncurses.h>
 #include "Player.h"
 #include "MapGenerator.h"
+#include "DrawScreen.h"
 
 int foodCount = 0;
 
 int foodScore = 100;
 
 int goldScore = 0;
+
+/**
+ *	5 = Fists
+ *	10 = Sword
+ *	15 = Axe
+ */
+int currentWeapon = 5;
 
 Humanoid playerEnt;
 
@@ -74,4 +83,23 @@ void setupPlayer(int x, int y, int entID){
 	playerEnt.rightLeg.currentPos.yPos = y;
 
 	map[y][x] = '<';
+}
+
+void killCheck(){
+	if (playerEnt.head.bpHP.currentHealth < 25){
+		clear();
+		mvprintw(12, 40, "You died of major head trauma! Be more careful next time!");
+		updateScreen();
+		getch();
+		endScreen();
+		exit(0);
+	}
+	if (playerEnt.torso.bpHP.currentHealth <= 0){
+		clear();
+		mvprintw(12, 40, "You died of internal bleeding! Be more careful next time!");
+		updateScreen();
+		getch();
+		endScreen();
+		exit(0);
+	}
 }

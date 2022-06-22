@@ -26,6 +26,23 @@ int ch;
 
 char dir;		//'u' = UP 'd' = DOWN 'l' = LEFT 'r' = RIGHT
 
+void engageInCombat(int x, int y){
+	switch(enemyMap[y][x]){
+		case '&':
+			srand(time(0));
+			if (rand() % 3 < 2){
+				int damage = (rand() % currentWeapon)+1;
+				enemyHealthMap[y][x] -= damage;
+				msgLog = "You hit the enemy!";
+			} else {
+				msgLog = "You missed the enemy!";
+			}
+			break;
+	}
+	targetPlayer();
+	updateEnemyHealth();
+}
+
 void drawPlayer(){
 	init_pair(6,COLOR_YELLOW, COLOR_BLACK);
 	attron(COLOR_PAIR(6) | A_BOLD);
@@ -81,6 +98,14 @@ int mapWalkable(){
 	}
 }
 
+int canWalk(){
+	return playerEnt.leftLeg.bpHP.currentHealth > 10 || playerEnt.rightLeg.bpHP.currentHealth > 10;
+}
+
+int canHit(){
+	return playerEnt.leftArm.bpHP.currentHealth > 10 || playerEnt.rightArm.bpHP.currentHealth > 10;
+}
+
 void getMovement(){
 	ch = getch();
 	int checkX = playerEnt.currentPos.xPos;
@@ -89,62 +114,79 @@ void getMovement(){
 	switch (ch){
 		case KEY_UP:
 			dir = 'u';
-			if (biome == 'd' && playerEnt.currentPos.yPos > 0 && returnDungeonmapAt(checkX, checkY-1) != ' '){
+			if (enemyMap[checkY-1][checkX] == '&' && canHit()){
+				engageInCombat(checkX, checkY-1);
+				break;
+			}
+			if (biome == 'd' && playerEnt.currentPos.yPos > 0 && returnDungeonmapAt(checkX, checkY-1) != ' ' && canWalk()){
 				playerEnt.currentPos.yPos--;
-			} else if (biome == 'o' && playerEnt.currentPos.yPos > -48){
+			} else if (biome == 'o' && playerEnt.currentPos.yPos > -48 && canWalk()){
 				if (isSwimming && !mapWalkable()){
 					playerEnt.currentPos.yPos--;
 				} else if (!isSwimming && mapWalkable()){
 					playerEnt.currentPos.yPos--;
 				}
-			} else if (biome == 't' && playerEnt.currentPos.yPos > 0 && townWalkable(checkX, checkY-1)){
+			} else if (biome == 't' && playerEnt.currentPos.yPos > 0 && townWalkable(checkX, checkY-1) && canWalk()){
 				playerEnt.currentPos.yPos--;
 			}
+
 			break;
 		case KEY_DOWN:
 			dir = 'd';
-			if (biome == 'd' && playerEnt.currentPos.yPos < 23 && returnDungeonmapAt(checkX, checkY+1) != ' '){
+			if (enemyMap[checkY+1][checkX] == '&' && canHit()){
+				engageInCombat(checkX, checkY+1);
+				break;
+			}
+			if (biome == 'd' && playerEnt.currentPos.yPos < 23 && returnDungeonmapAt(checkX, checkY+1) != ' ' && canWalk()){
 				playerEnt.currentPos.yPos++;
-			} else if (biome == 'o' && playerEnt.currentPos.yPos < 48){
+			} else if (biome == 'o' && playerEnt.currentPos.yPos < 48 && canWalk()){
 				if (isSwimming && !mapWalkable()){
 					playerEnt.currentPos.yPos++;
 				} else if (!isSwimming && mapWalkable()){
 					playerEnt.currentPos.yPos++;
 				}
-			} else if (biome == 't' && playerEnt.currentPos.yPos < 23 && townWalkable(checkX, checkY+1)){
+			} else if (biome == 't' && playerEnt.currentPos.yPos < 23 && townWalkable(checkX, checkY+1) && canWalk()){
 				playerEnt.currentPos.yPos++;
 			}
 			break;
 		case KEY_LEFT:
 			dir = 'l';
-			if (biome == 'd' && playerEnt.currentPos.xPos > 0 && returnDungeonmapAt(checkX-1, checkY) != ' '){
+			if (enemyMap[checkY][checkX-1] == '&' && canHit()){
+				engageInCombat(checkX-1, checkY);
+				break;
+			}
+			if (biome == 'd' && playerEnt.currentPos.xPos > 0 && returnDungeonmapAt(checkX-1, checkY) != ' ' && canWalk()){
 				playerEnt.currentPos.xPos--;
-			} else if (biome == 'o' && playerEnt.currentPos.xPos > -96){
+			} else if (biome == 'o' && playerEnt.currentPos.xPos > -96 && canWalk()){
 				if (isSwimming && !mapWalkable()){
 					playerEnt.currentPos.xPos--;
 				} else if (!isSwimming && mapWalkable()){
 					playerEnt.currentPos.xPos--;
 				}
-			} else if (biome == 't' && playerEnt.currentPos.xPos > 0 && townWalkable(checkX-1, checkY)){
+			} else if (biome == 't' && playerEnt.currentPos.xPos > 0 && townWalkable(checkX-1, checkY) && canWalk()){
 				playerEnt.currentPos.xPos--;
 			}
 			break;
 		case KEY_RIGHT:
 			dir = 'r';
-			if (biome == 'd' && playerEnt.currentPos.xPos < 79 && returnDungeonmapAt(checkX+1, checkY) != ' '){
+			if (enemyMap[checkY][checkX+1] == '&' && canHit()){
+				engageInCombat(checkX+1, checkY);
+				break;
+			}
+			if (biome == 'd' && playerEnt.currentPos.xPos < 79 && returnDungeonmapAt(checkX+1, checkY) != ' ' && canWalk()){
 				playerEnt.currentPos.xPos++;
-			} else if (biome == 'o' && playerEnt.currentPos.xPos < 96){
+			} else if (biome == 'o' && playerEnt.currentPos.xPos < 96 && canWalk()){
 				if (isSwimming && !mapWalkable()){
 					playerEnt.currentPos.xPos++;
 				} else if (!isSwimming && mapWalkable()){
 					playerEnt.currentPos.xPos++;
 				}
-			} else if (biome == 't' && playerEnt.currentPos.xPos < 79 && townWalkable(checkX+1, checkY)){
+			} else if (biome == 't' && playerEnt.currentPos.xPos < 79 && townWalkable(checkX+1, checkY) && canWalk()){
 				playerEnt.currentPos.xPos++;
 			}
 			break;
 		case '<':
-			if (biome == 'd' && map[playerEnt.currentPos.yPos][playerEnt.currentPos.xPos] == '<'){
+			if (biome == 'd' && map[playerEnt.currentPos.yPos][playerEnt.currentPos.xPos] == '<' && canWalk()){
 				surroundingTemperature = 37;
 				biome = 'o';
 				generateMap();
@@ -154,7 +196,7 @@ void getMovement(){
 				msgLog = "You left the dungeon";
 				fires = 0;
 				dungeonHasFire = 0;
-			} else if (biome == 't'){
+			} else if (biome == 't' && canWalk()){
 				surroundingTemperature = 37;
 				biome = 'o';
 				generateMap();
@@ -169,7 +211,7 @@ void getMovement(){
 			entryX = checkX;
 			entryY = checkY;
 			srand(time(0));
-			if (biome == 'o' && underPlayer == '>'){
+			if (biome == 'o' && underPlayer == '>' && canWalk()){
 				biome = 'd';
 				surroundingTemperature = 15;
 				generateDungeon(7,7);
@@ -182,7 +224,7 @@ void getMovement(){
 			}
 			break;
 		case 'f':
-			if (biome == 'd'){
+			if (biome == 'd' && canHit()){
 				switch(dir){
 					case 'u':
 						if (returnDungeonmapAt(checkX, checkY-1) != ' ' && returnDungeonmapAt(checkX, checkY-1) != '<'){
@@ -235,6 +277,24 @@ void getMovement(){
 				msgLog = "You ate some food";
 				if (foodScore+5 < 155){
 					foodScore+=5;
+					if (playerEnt.head.bpHP.currentHealth+5 < 100){
+						playerEnt.head.bpHP.currentHealth += 5;
+					}
+					if (playerEnt.torso.bpHP.currentHealth+5 < 100){
+						playerEnt.torso.bpHP.currentHealth += 5;
+					}
+					if (playerEnt.leftLeg.bpHP.currentHealth+5 < 100){
+						playerEnt.leftLeg.bpHP.currentHealth += 5;
+					}
+					if (playerEnt.rightLeg.bpHP.currentHealth+5 < 100){
+						playerEnt.rightLeg.bpHP.currentHealth += 5;
+					}
+					if (playerEnt.leftArm.bpHP.currentHealth+5 < 100){
+						playerEnt.leftArm.bpHP.currentHealth += 5;
+					}
+					if (playerEnt.rightArm.bpHP.currentHealth+5 < 100){
+						playerEnt.rightArm.bpHP.currentHealth += 5;
+					}
 				} else {
 					msgLog = "You are too full to eat anything";
 				}
@@ -250,7 +310,7 @@ void getMovement(){
 			}
 			break;
 		case 'k':
-			if (biome == 'd'){
+			if (biome == 'd' && canWalk()){
 				switch (dir){
 					case 'u':
 						if (returnDungeonmapAt(checkX, checkY-1) == ' ' && returnDungeonmapAt(checkX, checkY-2) != ' ' && checkY > 1){

@@ -9,9 +9,13 @@ extern int foodScore;
 
 extern int goldScore;
 
+extern int currentWeapon;
+
 extern Humanoid playerEnt;
 
 void setupPlayer(int x, int y, int entID);
+
+void killCheck();
 
 #endif
 
