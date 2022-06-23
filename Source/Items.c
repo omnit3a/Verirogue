@@ -14,7 +14,6 @@ void quaffPotion(){
 		srand(time(0)+itemCount);
 		playerEnt.currentHydration.hydration += 5;
 		int effect = rand() % 1000;
-		// insert code for potion effects here
 		if (effect <= 250){
 			msgLog = "Your appendages are restored!";
 			playerEnt.leftLeg.bpHP.currentHealth = 100;
@@ -42,5 +41,20 @@ void quaffPotion(){
 			msgLog = "Nothing happens!";
 		}
 
+	} else {
+		msgLog = "You don't have a potion";
+	}
+}
+
+void readScroll(){
+	if (hasScroll() && playerEnt.currentStats.intelligence >= 50){
+		consumeScroll();
+		msgLog = "You read a scroll";
+		srand(time(0)+itemCount);
+		//insert code for scroll reading here
+	} else if (playerEnt.currentStats.intelligence < 50){
+		msgLog = "You aren't able to read the scroll";
+	} else {
+		msgLog = "You don't have a scroll";
 	}
 }

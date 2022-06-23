@@ -444,6 +444,9 @@ void getMovement(){
 			drawDropScreen();
 			drawDungeon();
 			break;
+		case 'r':
+			readScroll();
+			break;
 		case 27:
 			endScreen();
 			exit(0);

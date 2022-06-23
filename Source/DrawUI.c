@@ -187,7 +187,8 @@ void drawHelp(){
 	mvprintw(12,0,"i : View inventory");
 	mvprintw(13,0,", : Pickup item");
 	mvprintw(14,0,"d : Drop item");
-	mvprintw(15,0,"? : View this screen");
+	mvprintw(15,0,"r : Read scroll");
+	mvprintw(16,0,"? : View this screen");
 	attroff(A_BOLD);
 	refresh();
 	getch();

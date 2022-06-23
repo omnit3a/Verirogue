@@ -35,6 +35,10 @@ int hasPotion();
 
 void consumePotion();
 
+int hasScroll();
+
+void consumeScroll();
+
 char itemAt(int x, int y);
 
 void placeItems();

@@ -98,6 +98,22 @@ void consumePotion(){
 	}
 }
 
+int hasScroll(){
+	if (itemCount-1 != -1 && inventory[itemCount-1] == "Scroll"){
+		return 1;
+	}
+	return 0;
+}
+
+void consumeScroll(){
+	if (representation(inventory[itemCount]) == ' ' && itemCount-1 != -1){
+		itemCount--;
+	}
+	if (inventory[itemCount] == "Scroll"){
+		inventory[itemCount] = "";
+	}
+}
+
 char itemAt(int x, int y){
 	return itemMap[y][x];
 }
@@ -113,10 +129,13 @@ void placeItems(){
 		for (int j = 0 ; j < 24 ; j++){
 			if (biome == 'd' && map[j][i] != ' '){
 				if (rand() % 228 == 0){
-					if (rand() % 2 == 0){
+					int item = rand() % 3;
+					if (item == 0){
 						itemMap[j][i] = SCROLLSYM;
-					} else {
+					} else if (item == 1){
 						itemMap[j][i] = POTIONSYM;
+					} else if (item == 2){
+						itemMap[j][i] = FOODSYM;
 					}
 				}
 			}

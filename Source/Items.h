@@ -3,4 +3,6 @@
 
 void quaffPotion();
 
+void readScroll();
+
 #endif

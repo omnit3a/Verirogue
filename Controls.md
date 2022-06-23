@@ -14,4 +14,5 @@
 - `i` View inventory
 - `,` Pickup item
 - `d` Drop item
+- `r` Read scroll
 - `?` View controls

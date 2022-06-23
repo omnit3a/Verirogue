@@ -8,6 +8,6 @@
 	- [X] Dropping Items
 	- [X] Item usability
 		- [X] Potion effects
-		- [ ] Scroll effects
+- [ ] Different Enemy Types
 - [ ] Town generation/NPCs
 - [ ] Procedural quests
