@@ -6,5 +6,6 @@
 - [X] Inventory
 - [X] Items
 	- [X] Dropping Items
+	- [ ] Items usability
 - [ ] Town generation/NPCs
 - [ ] Procedural quests
