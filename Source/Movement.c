@@ -31,7 +31,7 @@ void engageInCombat(int x, int y){
 		case '&':
 			srand(time(0));
 			if (rand() % 3 < 2){
-				int damage = (rand() % currentWeapon)+1;
+				int damage = ((rand() % currentWeapon)*2)+1;
 				enemyHealthMap[y][x] -= damage;
 				msgLog = "You hit the enemy!";
 			} else {
@@ -99,7 +99,11 @@ int mapWalkable(){
 }
 
 int canWalk(){
-	return playerEnt.leftLeg.bpHP.currentHealth > 10 || playerEnt.rightLeg.bpHP.currentHealth > 10;
+	int returnValue = playerEnt.leftLeg.bpHP.currentHealth > 10 || playerEnt.rightLeg.bpHP.currentHealth > 10;
+	if (returnValue == 0){
+		msgLog = "You are incapable of walking!";
+	}
+	return returnValue;
 }
 
 int canHit(){

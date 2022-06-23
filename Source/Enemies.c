@@ -99,31 +99,49 @@ void updateEnemyHealth(){
 void targetPlayer(){
 	srand(time(0));
 	int target = rand() % 6;
-	int damage = rand() % 3;
-	if (rand() % 3 == 0){
+	int damage = (rand() % 7)+1;
+	if (rand() % 3 < 2){
 		switch (target){
 			case 0:
 				playerEnt.head.bpHP.currentHealth -= damage;
+				if (playerEnt.head.bpHP.currentHealth <=0){
+					playerEnt.head.bpHP.currentHealth = 0;
+				}
 				msgLog = "You were hit in the head!";
 				break;
 			case 1:
 				playerEnt.torso.bpHP.currentHealth -= damage;
+				if (playerEnt.torso.bpHP.currentHealth <= 0){
+					playerEnt.torso.bpHP.currentHealth = 0;
+				}
 				msgLog = "You were hit in the torso!";
 				break;
 			case 2:
 				playerEnt.leftArm.bpHP.currentHealth -= damage;
+				if (playerEnt.leftArm.bpHP.currentHealth <= 0){
+					playerEnt.leftArm.bpHP.currentHealth = 0;
+				}
 				msgLog = "Your left arm was hit!";
 				break;
 			case 3:
 				playerEnt.rightArm.bpHP.currentHealth -= damage;
+				if (playerEnt.rightArm.bpHP.currentHealth <= 0){
+					playerEnt.rightArm.bpHP.currentHealth = 0;
+				}
 				msgLog = "Your right arm was hit!";
 				break;
 			case 4:
 				playerEnt.leftLeg.bpHP.currentHealth -= damage;
+				if (playerEnt.leftLeg.bpHP.currentHealth <= 0){
+					playerEnt.leftLeg.bpHP.currentHealth = 0;
+				}
 				msgLog = "Your left leg was hit!";
 				break;
 			case 5:
 				playerEnt.rightLeg.bpHP.currentHealth -= damage;
+				if (playerEnt.rightLeg.bpHP.currentHealth <= 0){
+					playerEnt.rightLeg.bpHP.currentHealth = 0;
+				}
 				msgLog = "Your right leg was hit!";
 				break;
 		}

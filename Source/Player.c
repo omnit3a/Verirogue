@@ -57,6 +57,9 @@ void setupPlayer(int x, int y, int entID){
 	}
 
 	playerEnt.currentWeight.pounds = (playerEnt.currentStats.strength*3) - lround(playerEnt.currentStats.agility/3);
+	if (playerEnt.currentWeight.pounds < 100){
+		playerEnt.currentWeight.pounds += 100;
+	}
 	playerEnt.currentFlammability.flammabilityLevel = 50;
 	playerEnt.currentTemperature.celsius = 37;
 	playerEnt.currentTemperature.fahrenheit = 98;
@@ -86,7 +89,7 @@ void setupPlayer(int x, int y, int entID){
 }
 
 void killCheck(){
-	if (playerEnt.head.bpHP.currentHealth < 25){
+	if (playerEnt.head.bpHP.currentHealth <= 0){
 		clear();
 		endScreen();
 		printf("You died of major head trauma! Be more careful next time.\n");
