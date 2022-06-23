@@ -18,11 +18,11 @@ int foodScore = 100;
 int goldScore = 0;
 
 /**
- *	5 = Fists
- *	10 = Sword
- *	15 = Axe
+ *	10 = Fists
+ *	15 = Sword
+ *	20 = Axe
  */
-int currentWeapon = 5;
+int currentWeapon = 10;
 
 Humanoid playerEnt;
 
