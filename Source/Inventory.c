@@ -3,8 +3,12 @@
 #include <ncurses.h>
 #include "Player.h"
 #include "Inventory.h"
+#include "MapGenerator.h"
+#include "Movement.h"
 #include <string>
 #include <cstring>
+
+char itemMap[24][80];
 
 std::string inventory[16];
 
@@ -29,5 +33,28 @@ void addItem(char * item, int index){
 void removeItem(int index){
 	if (index >= 0){
 		inventory[index] = "";
+	}
+}
+
+char * getItem(int index){
+	return convertToChars(inventory[index]);
+}
+
+char itemAt(int x, int y){
+	return itemMap[y][x];
+}
+
+void placeItems(){
+	for (int i = 0 ; i < 80 ; i++){
+		for (int j = 0 ; j < 24 ; j++){
+			itemMap[j][i] = ' ';
+		}
+	}
+	for (int i = 0 ; i < 80 ; i++){
+		for (int j = 0 ; j < 24 ; j++){
+			if (biome == 'd' && map[j][i] != ' '){
+				//insert item placement code here
+			}
+		}
 	}
 }

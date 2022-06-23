@@ -11,6 +11,7 @@
 #include "Main.h"
 #include "Planets.h"
 #include "Enemies.h"
+#include "Inventory.h"
 
 char biome;
 
@@ -99,7 +100,7 @@ int mapWalkable(){
 }
 
 int canWalk(){
-	int returnValue = playerEnt.leftLeg.bpHP.currentHealth > 10 || playerEnt.rightLeg.bpHP.currentHealth > 10;
+	int returnValue = playerEnt.leftLeg.bpHP.currentHealth > 10 || playerEnt.rightLeg.bpHP.currentHealth > 10 || ((playerEnt.leftArm.bpHP.currentHealth > 10 || playerEnt.rightArm.bpHP.currentHealth > 10) && isSwimming);
 	if (returnValue == 0){
 		msgLog = "You are incapable of walking!";
 	}
@@ -375,6 +376,20 @@ void getMovement(){
 			break;
 		case 'i':
 			drawInventory();
+			break;
+		case ',':
+			if (itemAt(checkX, checkY) != ' '){
+				switch (itemAt(checkX, checkY)){
+					case SWORDSYM:
+						break;
+					case AXESYM:
+						break;
+					case SCROLLSYM:
+						break;
+					default:
+						break;
+				}
+			}
 			break;
 		case 27:
 			endScreen();
