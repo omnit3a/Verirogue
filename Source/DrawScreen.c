@@ -8,6 +8,7 @@
 #include "Movement.h"
 #include "Planets.h"
 #include "Enemies.h"
+#include "Inventory.h"
 
 #define WIDTH 80
 #define HEIGHT 24
@@ -107,6 +108,11 @@ void drawWithoutFOV(){
 				attron(COLOR_PAIR(23) | A_BOLD);
 				mvaddch(j,i,'&');
 			}
+			if (itemMap[j][i] != ' '){
+				attroff(A_BLINK);
+				attron(COLOR_PAIR(1) | A_BOLD);
+				mvaddch(j,i,itemMap[j][i]);
+			}
 			attroff(A_BOLD | A_BLINK);
 		}
 	}
@@ -162,6 +168,11 @@ void drawFOV(int radius){
 					attroff(A_BLINK);
 					attron(COLOR_PAIR(23) | A_BOLD);
 					mvaddch(j,i,'&');
+				}
+				if (itemMap[j][i] != ' '){
+					attroff(A_BLINK);
+					attron(COLOR_PAIR(1) | A_BOLD);
+					mvaddch(j,i,itemMap[j][i]);
 				}
 				attroff(A_BOLD | A_BLINK);
 				seenMap[j][i] = map[j][i];
@@ -233,6 +244,19 @@ void drawEnemies(){
 					attron(COLOR_PAIR(23) | A_BOLD);
 					mvaddch(j,i,'&');
 				}
+			}
+		}
+	}
+	attroff(A_BOLD);
+}
+
+void drawItems(){
+	init_pair(11, COLOR_WHITE, COLOR_BLACK);
+	attron(COLOR_PAIR(11) | A_BOLD);
+	if (biome == 'd'){
+		for (int i = 0 ; i < 80 ; i++){
+			for (int j = 0 ; j < 24 ; j++){
+				mvaddch(j,i,itemMap[j][i]);
 			}
 		}
 	}

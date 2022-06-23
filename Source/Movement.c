@@ -108,7 +108,11 @@ int canWalk(){
 }
 
 int canHit(){
-	return playerEnt.leftArm.bpHP.currentHealth > 10 || playerEnt.rightArm.bpHP.currentHealth > 10;
+	int returnValue = playerEnt.leftArm.bpHP.currentHealth > 10 ||playerEnt.rightArm.bpHP.currentHealth > 10;
+	if (returnValue == 0){
+		msgLog = "You are incapable of attacking!";
+	}
+	return returnValue;
 }
 
 void getMovement(){
@@ -119,8 +123,10 @@ void getMovement(){
 	switch (ch){
 		case KEY_UP:
 			dir = 'u';
-			if (enemyMap[checkY-1][checkX] == '&' && canHit()){
-				engageInCombat(checkX, checkY-1);
+			if (enemyMap[checkY-1][checkX] == '&'){
+				if (canHit()){
+					engageInCombat(checkX, checkY-1);
+				}
 				break;
 			}
 			if (biome == 'd' && playerEnt.currentPos.yPos > 0 && returnDungeonmapAt(checkX, checkY-1) != ' ' && canWalk()){
@@ -138,8 +144,10 @@ void getMovement(){
 			break;
 		case KEY_DOWN:
 			dir = 'd';
-			if (enemyMap[checkY+1][checkX] == '&' && canHit()){
-				engageInCombat(checkX, checkY+1);
+			if (enemyMap[checkY+1][checkX] == '&'){
+				if (canHit()){
+					engageInCombat(checkX, checkY+1);
+				}
 				break;
 			}
 			if (biome == 'd' && playerEnt.currentPos.yPos < 23 && returnDungeonmapAt(checkX, checkY+1) != ' ' && canWalk()){
@@ -156,8 +164,10 @@ void getMovement(){
 			break;
 		case KEY_LEFT:
 			dir = 'l';
-			if (enemyMap[checkY][checkX-1] == '&' && canHit()){
-				engageInCombat(checkX-1, checkY);
+			if (enemyMap[checkY][checkX-1] == '&'){
+				if (canHit()){
+					engageInCombat(checkX-1, checkY);
+				}
 				break;
 			}
 			if (biome == 'd' && playerEnt.currentPos.xPos > 0 && returnDungeonmapAt(checkX-1, checkY) != ' ' && canWalk()){
@@ -174,8 +184,10 @@ void getMovement(){
 			break;
 		case KEY_RIGHT:
 			dir = 'r';
-			if (enemyMap[checkY][checkX+1] == '&' && canHit()){
-				engageInCombat(checkX+1, checkY);
+			if (enemyMap[checkY][checkX+1] == '&'){
+				if (canHit()){
+					engageInCombat(checkX+1, checkY);
+				}
 				break;
 			}
 			if (biome == 'd' && playerEnt.currentPos.xPos < 79 && returnDungeonmapAt(checkX+1, checkY) != ' ' && canWalk()){
@@ -378,18 +390,44 @@ void getMovement(){
 			drawInventory();
 			break;
 		case ',':
-			if (itemAt(checkX, checkY) != ' '){
+			if (itemAt(checkX, checkY) != ' ' && itemCount < 16){
 				switch (itemAt(checkX, checkY)){
 					case SWORDSYM:
+						msgLog = "You found a sword";
+						inventory[itemCount] = "Sword";
+						itemMap[checkY][checkX] = ' ';
+						itemCount++;
 						break;
 					case AXESYM:
+						msgLog = "You found an axe";
+						inventory[itemCount] = "Axe";
+						itemMap[checkY][checkX] = ' ';
+						itemCount++;
 						break;
 					case SCROLLSYM:
+						msgLog = "You found a scroll!";
+						inventory[itemCount] = "Scroll";
+						itemMap[checkY][checkX] = ' ';
+						itemCount++;
+						break;
+					case POTIONSYM:
+						msgLog = "You found a potion!";
+						inventory[itemCount] = "Potion";
+						itemMap[checkY][checkX] = ' ';
+						itemCount++;
 						break;
 					default:
+						msgLog = "You're not sure what this is";
 						break;
 				}
+			} else if (itemCount >= 16){
+				msgLog = "You can't carry anything else!";
+			} else {
+				msgLog = "There isn't anything to pickup!";
 			}
+			break;
+		case 'd':
+			//insert code to drop stuff here
 			break;
 		case 27:
 			endScreen();

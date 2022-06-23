@@ -4,6 +4,7 @@
 - [X] Enemies
 - [X] Fighting
 - [X] Inventory
-- [ ] Items
+- [X] Items
+	- [ ] Dropping Items
 - [ ] Town generation/NPCs
 - [ ] Procedural quests

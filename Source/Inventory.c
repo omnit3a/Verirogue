@@ -10,6 +10,8 @@
 
 char itemMap[24][80];
 
+int itemCount = 0;
+
 std::string inventory[16];
 
 std::string convertToString(char * text){
@@ -50,10 +52,17 @@ void placeItems(){
 			itemMap[j][i] = ' ';
 		}
 	}
+	srand(time(0));
 	for (int i = 0 ; i < 80 ; i++){
 		for (int j = 0 ; j < 24 ; j++){
 			if (biome == 'd' && map[j][i] != ' '){
-				//insert item placement code here
+				if (rand() % 228 == 0){
+					if (rand() % 2 == 0){
+						itemMap[j][i] = SCROLLSYM;
+					} else {
+						itemMap[j][i] = POTIONSYM;
+					}
+				}
 			}
 		}
 	}

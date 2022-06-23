@@ -51,14 +51,14 @@ void drawLog(){
 	init_pair(21, COLOR_BLACK, COLOR_BLUE);
 	attron(COLOR_PAIR(9) | A_BOLD);
 	for (int i = 80 ; i < 120 ; i++){
-		for (int j = 0 ; j < 12 ; j++){
+		for (int j = 0 ; j < 24 ; j++){
 			mvaddch(j,i,' ');
 		}
 	}
 	attroff(A_BOLD);
 	attron(A_REVERSE);
 	for (int i = 81 ; i < 119 ; i++){
-		for (int j = 1 ; j < 11 ; j++){
+		for (int j = 1 ; j < 23 ; j++){
 			mvaddch(j,i,' ');
 		}
 	}
@@ -185,6 +185,8 @@ void drawHelp(){
 	mvprintw(10,0,"p : Go prone/Start swimming");
 	mvprintw(11,0,"q : Drink/Quaff");
 	mvprintw(12,0,"i : View inventory");
+	mvprintw(13,0,", : Pickup item");
+	mvprintw(14,0,"d : Drop item");
 	mvprintw(13,0,"? : View this screen");
 	attroff(A_BOLD);
 	refresh();
@@ -198,7 +200,7 @@ void drawInventory(){
 	attron(COLOR_PAIR(11) | A_BOLD);
 	mvprintw(0,0,"Inventory:");
 	for (int i = 0 ; i < 16 ; i++){
-		mvprintw(i+1,0," - %s",convertToChars(inventory[16]));
+		mvprintw(i+1,0," - %s",inventory[i].c_str());
 	}
 	attroff(A_BOLD);
 	refresh();

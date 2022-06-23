@@ -12,4 +12,6 @@
 - `p` Go prone/Toggle swimming
 - `q` Drink/quaff
 - `i` View inventory
+- `,` Pickup item
+- `d` Drop item
 - `?` View controls

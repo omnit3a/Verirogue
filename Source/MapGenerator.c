@@ -9,6 +9,7 @@
 #include "Movement.h"
 #include "Main.h"
 #include "Enemies.h"
+#include "Inventory.h"
 
 FastNoiseLite noise;
 
@@ -214,6 +215,7 @@ void generateDungeon(int maxWidth, int maxHeight){
 			}
 		}
 		placeEnemies();
+		placeItems();
 		
 }
 
