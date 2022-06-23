@@ -8,6 +8,7 @@
 	- [X] Dropping Items
 	- [X] Item usability
 		- [X] Potion effects
-- [ ] Different Enemy Types
+- [X] Different Enemy Types
+- [X] Temperature changes depending on the time of day
 - [ ] Town generation/NPCs
 - [ ] Procedural quests

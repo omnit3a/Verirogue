@@ -20,7 +20,7 @@ void placeEnemies(){
 				if (map[j][i] == '.'){
 					if (rand() % 45 == 0){
 						enemyMap[j][i] = '&';
-						enemyHealthMap[j][i] = 25;
+						enemyHealthMap[j][i] = (rand() % 10)+10;
 					}
 				}
 			}

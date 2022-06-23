@@ -5,6 +5,7 @@
 #include <math.h>
 #include "Player.h"
 #include "DrawUI.h"
+#include "Movement.h"
 
 char skyMap[24][80];
 
@@ -15,6 +16,18 @@ int month, day, hour;
 int calender[12][30];
 
 int isDay = 1;
+
+void updateTimeTemperature(){
+	if (biome == 'o'){
+		if (hour == 12) {
+			surroundingTemperature = 39;
+		} else if (hour < 6 || hour > 20){
+			surroundingTemperature = 34;
+		} else {
+			surroundingTemperature = 37;
+		}
+	}
+}
 
 void generatePlanetaryBodies(int maxPlanets, int maxStars){
 	
@@ -86,6 +99,9 @@ void scrollStars(){
 }
 
 void setDayNight(){
+	if (hour == 12){
+		msgLog = "It is now noon";
+	}
 	if (hour > 6 && hour < 20){
 		if (isDay == 0){
 			msgLog = "It is now day";
@@ -98,4 +114,5 @@ void setDayNight(){
 		}
 		isDay = 0;
 	}
+	updateTimeTemperature();
 }

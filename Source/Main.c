@@ -29,6 +29,7 @@ int main(){
 			drawMap();
 			updateTemperature();
 			updateHunger();
+			setDayNight();
 			drawUserInterface();
 			drawPlayer();
 			getMovement();

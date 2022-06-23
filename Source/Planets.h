@@ -15,6 +15,8 @@ extern int isDay;
 
 extern int sunX, sunY;
 
+void updateTimeTemperature();
+
 /**
  *	Generate map of the sky, this includes stars and planets
  *
