@@ -7,6 +7,10 @@
 #include "MapGenerator.h"
 #include "DrawScreen.h"
 
+int bloodCount = 511;		//this is the amount of blood in the human body in litres * 10i0
+
+int bloodLossRate = 0;
+
 int foodCount = 0;
 
 int foodScore = 100;
@@ -101,4 +105,28 @@ void killCheck(){
 		printf("You died of internal bleeding! Be more careful next time.\n");
 		exit(0);
 	}
+	if (bloodCount < DEADLYBLOODLOSS){
+		clear();
+		endScreen();
+		printf("You died of external bleeding! Be more careful next time.\n");
+		exit(0);
+	}
+	
+}
+
+void bleedCheck(){
+	bloodLossRate = 0;
+	if (playerEnt.head.bpHP.currentHealth < 25){
+		bloodLossRate += 10;
+	}
+	if (playerEnt.torso.bpHP.currentHealth < 15){
+		bloodLossRate += 10;
+	}
+	if (playerEnt.leftArm.bpHP.currentHealth < 25){
+		bloodLossRate += 10;
+	}
+	if (playerEnt.rightArm.bpHP.currentHealth < 25){
+		bloodLossRate += 10;
+	}
+	bloodCount -= bloodLossRate/10;
 }

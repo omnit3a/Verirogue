@@ -47,7 +47,12 @@ void engageInCombat(int x, int y){
 
 void drawPlayer(){
 	init_pair(6,COLOR_YELLOW, COLOR_BLACK);
-	attron(COLOR_PAIR(6) | A_BOLD);
+	init_pair(28, COLOR_RED, COLOR_BLACK);
+	if (bloodCount < 384){
+		attron(COLOR_PAIR(28) | A_BOLD);
+	} else {
+		attron(COLOR_PAIR(6) | A_BOLD);
+	}
 	if (biome == 'd' || biome == 't'){
 		mvaddch(playerEnt.currentPos.yPos, playerEnt.currentPos.xPos, '@');
 	} else if (biome == 'o'){
@@ -316,6 +321,16 @@ void getMovement(){
 					if (playerEnt.rightArm.bpHP.currentHealth+5 < 100){
 						playerEnt.rightArm.bpHP.currentHealth += 5;
 					}
+					for (int i = 0 ; i < 50 ; i++){
+						if (bloodLossRate-1 > -1){
+							bloodLossRate--;
+						} else {
+							break;
+						}	
+					}
+					if (bloodCount+25 < 511){
+						bloodCount += 25;
+					}
 				} else {
 					msgLog = "You are too full to eat anything";
 				}
@@ -466,6 +481,7 @@ void getMovement(){
 		setDayNight();
 	}
 	pseudoPathfind();
+	bleedCheck();
 	updateScreen();
 }
 

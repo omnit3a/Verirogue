@@ -237,6 +237,21 @@ void drawDropScreen(){
 	refresh();
 }
 
+void drawBlood(){
+	init_pair(11,COLOR_WHITE,COLOR_BLACK);
+	init_pair(28,COLOR_RED,COLOR_BLACK);
+	attroff(A_BLINK);
+	if (bloodCount < 384){
+		attron(COLOR_PAIR(28) | A_BOLD | A_BLINK);
+	} else {
+		attron(COLOR_PAIR(11) | A_BOLD);
+	}
+	mvprintw(30,0,"Blood: %d",bloodCount);
+	attroff(A_BOLD | A_BLINK);
+	refresh();
+
+}
+
 void drawUserInterface(){
 	drawTemperature();
 	drawLog();
@@ -245,5 +260,6 @@ void drawUserInterface(){
 	drawHydration();
 	drawHunger();
 	drawGold();
+	drawBlood();
 	refresh();
 }

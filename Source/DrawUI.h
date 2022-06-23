@@ -29,6 +29,8 @@ void drawInventory();
 
 void drawDropScreen();
 
+void drawBlood();
+
 void drawUserInterface();
 
 #endif
