@@ -10,5 +10,6 @@
 		- [X] Potion effects
 - [X] Different Enemy Types
 - [X] Temperature changes depending on the time of day
+- [ ] Bleeding
 - [ ] Town generation/NPCs
 - [ ] Procedural quests
