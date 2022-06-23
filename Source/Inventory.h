@@ -2,6 +2,7 @@
 #define AXESYM 'A'
 #define SCROLLSYM 'S'
 #define POTIONSYM 'p'
+#define FOODSYM '%'
 
 #ifndef INVENTORY_H_
 #define INVENTORY_H_
@@ -25,6 +26,14 @@ void addItem(char * item);
 char * getItem(int index);
 
 void dropItem(int index);
+
+int hasFood();
+
+void consumeFood();
+
+int hasPotion();
+
+void consumePotion();
 
 char itemAt(int x, int y);
 

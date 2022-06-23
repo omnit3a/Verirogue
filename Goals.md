@@ -6,6 +6,7 @@
 - [X] Inventory
 - [X] Items
 	- [X] Dropping Items
-	- [ ] Items usability
+	- [X] Item usability
+		- [ ] Potion effects
 - [ ] Town generation/NPCs
 - [ ] Procedural quests

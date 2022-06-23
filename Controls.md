@@ -9,7 +9,8 @@
 - `k` Kick down wall
 - `m` View starmap
 - `p` Go prone/Toggle swimming
-- `q` Drink/quaff
+- `q` Drink from lake
+- `Q` Drink potion
 - `i` View inventory
 - `,` Pickup item
 - `d` Drop item

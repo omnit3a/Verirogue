@@ -12,6 +12,7 @@
 #include "Planets.h"
 #include "Enemies.h"
 #include "Inventory.h"
+#include "Items.h"
 
 char biome;
 
@@ -278,9 +279,12 @@ void getMovement(){
 			break;
 		case 's':
 			srand(time(0));
-			if ((biome == 'o' || biome == 't')&& rand() % 5 == 0){
-				foodCount++;
+			if ((biome == 'o' || biome == 't')&& rand() % 2 == 0 && itemCount < 16){
 				msgLog = "You scavenged for food";
+				inventory[itemCount] = "Food";
+				itemCount++;
+			} else if (itemCount >= 16){
+				msgLog = "Your can't carry anything else!";
 			} else {
 				msgLog = "You didn't find any food";
 			}
@@ -289,8 +293,8 @@ void getMovement(){
 			drawSheet();
 			break;
 		case 'e':
-			if (foodCount > 0){
-				foodCount--;
+			if (hasFood() && foodScore+5 < 155){
+				consumeFood();
 				msgLog = "You ate some food";
 				if (foodScore+5 < 155){
 					foodScore+=5;
@@ -315,8 +319,10 @@ void getMovement(){
 				} else {
 					msgLog = "You are too full to eat anything";
 				}
+			} else if (foodScore+5 >= 155){
+				msgLog = "You are too full to eat anything";
 			} else {
-				msgLog = "You don't have any food!";
+				msgLog = "You don't have any food";
 			}
 			break;
 		case 'k':
@@ -376,6 +382,9 @@ void getMovement(){
 				playerEnt.currentHydration.hydration += 5;
 			}
 			break;
+		case 'Q':
+			quaffPotion();
+			break;
 		case '?':
 			drawHelp();
 			break;
@@ -409,7 +418,13 @@ void getMovement(){
 						itemMap[checkY][checkX] = ' ';
 						itemCount++;
 						break;
-					default:
+					case FOODSYM:
+						msgLog = "You found food!";
+						inventory[itemCount] = "Food";
+						itemMap[checkY][checkX] = ' ';
+						itemCount++;
+						break;
+					default: 
 						msgLog = "You're not sure what this is";
 						break;
 				}

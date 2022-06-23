@@ -37,6 +37,8 @@ char representation(std::string text){
 		return SCROLLSYM;
 	} else if (text == "Potion"){
 		return POTIONSYM;
+	} else if (text == "Food"){
+		return FOODSYM;
 	} else {
 		return ' ';
 	}
@@ -61,6 +63,39 @@ void dropItem(int index){
 		itemMap[playerEnt.currentPos.yPos][playerEnt.currentPos.xPos] = representation(inventory[index]);
 	}
 	inventory[index] = "";
+}
+
+int hasFood(){
+	if (itemCount-1 != -1 && inventory[itemCount-1] == "Food"){
+		return 1;
+	}
+	return 0;
+}
+
+void consumeFood(){
+	if (representation(inventory[itemCount]) == ' ' && itemCount-1 != -1){
+		itemCount--;
+	}
+	if (inventory[itemCount] == "Food"){
+		inventory[itemCount] = "";
+
+	}
+}
+
+int hasPotion(){
+	if (itemCount-1 != -1 && inventory[itemCount-1] == "Potion"){
+		return 1;
+	}
+	return 0;
+}
+
+void consumePotion(){
+	if (representation(inventory[itemCount]) == ' ' && itemCount-1 != -1){
+		itemCount--;
+	}
+	if (inventory[itemCount] == "Potion"){
+		inventory[itemCount] = "";
+	}
 }
 
 char itemAt(int x, int y){
