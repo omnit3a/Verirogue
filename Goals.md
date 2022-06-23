@@ -7,6 +7,7 @@
 - [X] Items
 	- [X] Dropping Items
 	- [X] Item usability
-		- [ ] Potion effects
+		- [X] Potion effects
+		- [ ] Scroll effects
 - [ ] Town generation/NPCs
 - [ ] Procedural quests
