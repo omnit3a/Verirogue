@@ -25,6 +25,8 @@ void drawSheet();
 
 void drawHelp();
 
+void drawInventory();
+
 void drawUserInterface();
 
 #endif

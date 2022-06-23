@@ -373,6 +373,9 @@ void getMovement(){
 		case '?':
 			drawHelp();
 			break;
+		case 'i':
+			drawInventory();
+			break;
 		case 27:
 			endScreen();
 			exit(0);

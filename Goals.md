@@ -3,7 +3,7 @@
 - [X] Planets and orbits that are affected by the day/night cycle
 - [X] Enemies
 - [X] Fighting
-- [ ] Inventory
+- [X] Inventory
 - [ ] Items
 - [ ] Town generation/NPCs
 - [ ] Procedural quests

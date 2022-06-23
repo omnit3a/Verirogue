@@ -11,4 +11,5 @@
 - `m` View starmap
 - `p` Go prone/Toggle swimming
 - `q` Drink/quaff
+- `i` View inventory
 - `?` View controls
