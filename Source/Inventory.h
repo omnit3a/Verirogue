@@ -18,9 +18,13 @@ std::string convertToString(char * text);
 
 char * convertToChars(std::string text);
 
+char representation(std::string text);
+
 void addItem(char * item);
 
 char * getItem(int index);
+
+void dropItem(int index);
 
 char itemAt(int x, int y);
 

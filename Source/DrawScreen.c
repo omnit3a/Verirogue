@@ -108,10 +108,13 @@ void drawWithoutFOV(){
 				attron(COLOR_PAIR(23) | A_BOLD);
 				mvaddch(j,i,'&');
 			}
-			if (itemMap[j][i] != ' '){
+			if (itemMap[j][i] != ' ' || returnDungeonmapAt(i,j) == '$'){
 				attroff(A_BLINK);
 				attron(COLOR_PAIR(1) | A_BOLD);
 				mvaddch(j,i,itemMap[j][i]);
+				if (returnDungeonmapAt(i,j) == '$'){
+					mvaddch(j,i,'$');
+				}
 			}
 			attroff(A_BOLD | A_BLINK);
 		}
@@ -169,10 +172,13 @@ void drawFOV(int radius){
 					attron(COLOR_PAIR(23) | A_BOLD);
 					mvaddch(j,i,'&');
 				}
-				if (itemMap[j][i] != ' '){
+				if (itemMap[j][i] != ' ' || returnDungeonmapAt(i,j) == '$'){
 					attroff(A_BLINK);
 					attron(COLOR_PAIR(1) | A_BOLD);
 					mvaddch(j,i,itemMap[j][i]);
+					if (returnDungeonmapAt(i,j) == '$'){
+						mvaddch(j,i,'$');
+					}
 				}
 				attroff(A_BOLD | A_BLINK);
 				seenMap[j][i] = map[j][i];

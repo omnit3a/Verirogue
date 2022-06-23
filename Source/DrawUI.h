@@ -27,6 +27,8 @@ void drawHelp();
 
 void drawInventory();
 
+void drawDropScreen();
+
 void drawUserInterface();
 
 #endif

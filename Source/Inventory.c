@@ -28,6 +28,20 @@ char * convertToChars(std::string text){
 	return strcpy(arr, text.c_str());
 }
 
+char representation(std::string text){
+	if (text == "Sword"){
+		return SWORDSYM;
+	} else if (text == "Axe"){
+		return AXESYM;
+	} else if (text == "Scroll"){
+		return SCROLLSYM;
+	} else if (text == "Potion"){
+		return POTIONSYM;
+	} else {
+		return ' ';
+	}
+}
+
 void addItem(char * item, int index){
 	inventory[index] = convertToString(item);
 }
@@ -40,6 +54,13 @@ void removeItem(int index){
 
 char * getItem(int index){
 	return convertToChars(inventory[index]);
+}
+
+void dropItem(int index){
+	if (biome == 'd'){
+		itemMap[playerEnt.currentPos.yPos][playerEnt.currentPos.xPos] = representation(inventory[index]);
+	}
+	inventory[index] = "";
 }
 
 char itemAt(int x, int y){

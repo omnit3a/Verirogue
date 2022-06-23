@@ -179,15 +179,14 @@ void drawHelp(){
 	mvprintw(4,0,"s : Scavenge for food");
 	mvprintw(5,0,"S : Check character sheet");
 	mvprintw(6,0,"e : Eat food");
-	mvprintw(7,0,"$ : Plunder gold");
-	mvprintw(8,0,"k : Kick down wall");
-	mvprintw(9,0,"m : View sky");
-	mvprintw(10,0,"p : Go prone/Start swimming");
-	mvprintw(11,0,"q : Drink/Quaff");
-	mvprintw(12,0,"i : View inventory");
-	mvprintw(13,0,", : Pickup item");
-	mvprintw(14,0,"d : Drop item");
-	mvprintw(13,0,"? : View this screen");
+	mvprintw(7,0,"k : Kick down wall");
+	mvprintw(8,0,"m : View sky");
+	mvprintw(9,0,"p : Go prone/Start swimming");
+	mvprintw(10,0,"q : Drink/Quaff");
+	mvprintw(11,0,"i : View inventory");
+	mvprintw(12,0,", : Pickup item");
+	mvprintw(13,0,"d : Drop item");
+	mvprintw(14,0,"? : View this screen");
 	attroff(A_BOLD);
 	refresh();
 	getch();
@@ -205,6 +204,35 @@ void drawInventory(){
 	attroff(A_BOLD);
 	refresh();
 	getch();
+}
+
+void drawDropScreen(){
+	init_pair(11, COLOR_WHITE, COLOR_BLACK);
+	clear();
+	attron(COLOR_PAIR(11) | A_BOLD);
+	if (representation(inventory[itemCount]) == ' ' && itemCount-1 != -1){
+		itemCount--;
+	}
+	if (representation(inventory[itemCount]) != ' '){
+		mvprintw(0,0,"Drop the top item in your bag?");
+		mvprintw(1,0,"Y/N");
+		for (int i = 0 ; i < 16 ; i++){
+			mvprintw(i+2,0," - %s ",inventory[i].c_str());
+		}
+		attroff(A_BOLD);
+		int confirm = getch();
+		if (confirm == 'Y' || confirm == 'y'){
+			dropItem(itemCount);
+			itemCount--;
+		}
+		if (itemCount < 0){
+			itemCount++;
+		}
+	} else {
+		mvprintw(0,0,"You don't have any items to drop");
+		getch();
+	}
+	refresh();
 }
 
 void drawUserInterface(){

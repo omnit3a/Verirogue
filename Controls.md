@@ -6,7 +6,6 @@
 - `s` Scavenge for food
 - `S` Check character sheet
 - `e` Eat food
-- `$` Plunder gold
 - `k` Kick down wall
 - `m` View starmap
 - `p` Go prone/Toggle swimming

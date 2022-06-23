@@ -203,15 +203,15 @@ void generateDungeon(int maxWidth, int maxHeight){
 		srand(time(0));
 		int roomXGold;
 		int roomYGold;
-		for (int i = 0 ; i < 256 ; i++){
-			srand(time(0));
+		for (int i = 0 ; i < 16 ; i++){
+			srand(time(0)+i);
 			roomXGold = rand() % 80;
 			roomYGold = rand() % 24;
 			if (map[roomYGold][roomXGold] == ' '){
 				continue;
 			} else if (map[roomYGold][roomXGold] == '.'){
 				map[roomYGold][roomXGold] = '$';
-				break;
+				continue;
 			}
 		}
 		placeEnemies();

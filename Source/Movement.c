@@ -319,13 +319,6 @@ void getMovement(){
 				msgLog = "You don't have any food!";
 			}
 			break;
-		case '$':
-			if (biome == 'd' && returnDungeonmapAt(checkX, checkY) == '$'){
-				map[checkY][checkX] = '.';
-				srand(time(0));
-				goldScore += rand() % 25;
-			}
-			break;
 		case 'k':
 			if (biome == 'd' && canWalk()){
 				switch (dir){
@@ -425,9 +418,16 @@ void getMovement(){
 			} else {
 				msgLog = "There isn't anything to pickup!";
 			}
+			if (biome == 'd' && returnDungeonmapAt(checkX, checkY) == '$'){
+				map[checkY][checkX] = '.';
+				srand(time(0));
+				goldScore += rand() % 25;
+				msgLog = "You found some gold!";
+			}
 			break;
 		case 'd':
-			//insert code to drop stuff here
+			drawDropScreen();
+			drawDungeon();
 			break;
 		case 27:
 			endScreen();
