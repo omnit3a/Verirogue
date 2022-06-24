@@ -15,6 +15,8 @@ extern int foodScore;
 
 extern int goldScore;
 
+extern int isInfected, hasDiarrhea, isCongested, hasRash;
+
 extern int currentWeapon;
 
 extern Humanoid playerEnt;
@@ -24,6 +26,8 @@ void setupPlayer(int x, int y, int entID);
 void killCheck();
 
 void bleedCheck();
+
+void infectionCheck();
 
 #endif
 

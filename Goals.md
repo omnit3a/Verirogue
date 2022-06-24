@@ -12,5 +12,5 @@
 - [X] Temperature changes depending on the time of day
 - [X] Bleeding
 - [ ] Cauterization of wounds
-- [ ] Town generation/NPCs
-- [ ] Procedural quests
+- [ ] Diseases
+- [X] Infections

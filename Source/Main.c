@@ -53,6 +53,7 @@ int main(){
 			updateScreen();
 		}
 		killCheck();
+		infectionCheck();
 	}
 	getch();
 	endScreen();

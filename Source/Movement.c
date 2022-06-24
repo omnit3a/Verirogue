@@ -321,6 +321,9 @@ void getMovement(){
 					if (playerEnt.rightArm.bpHP.currentHealth+5 < 100){
 						playerEnt.rightArm.bpHP.currentHealth += 5;
 					}
+					if (playerEnt.skin.bpHP.currentHealth+15 < 115){
+						playerEnt.skin.bpHP.currentHealth += 15;
+					}
 					for (int i = 0 ; i < 50 ; i++){
 						if (bloodLossRate-1 > -1){
 							bloodLossRate--;

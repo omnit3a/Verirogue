@@ -37,6 +37,8 @@ void quaffPotion(){
 			msgLog = "Your arms vanish!";
 			playerEnt.leftArm.bpHP.currentHealth = 0;
 			playerEnt.rightArm.bpHP.currentHealth = 0;
+		} else if (effect == 999){
+			playerEnt.skin.bpHP.currentHealth = 0;
 		} else {
 			msgLog = "Nothing happens!";
 		}
@@ -53,6 +55,7 @@ void readScroll(){
 		srand(time(0)+itemCount);
 		//insert code for scroll reading here
 	} else if (playerEnt.currentStats.intelligence < 50){
+		consumeScroll();
 		msgLog = "You aren't able to read the scroll";
 	} else {
 		msgLog = "You don't have a scroll";

@@ -6,6 +6,8 @@
 #include "Player.h"
 #include "MapGenerator.h"
 #include "DrawScreen.h"
+#include "Movement.h"
+#include "DrawUI.h"
 
 int bloodCount = 511;		//this is the amount of blood in the human body in litres * 10i0
 
@@ -16,6 +18,8 @@ int foodCount = 0;
 int foodScore = 100;
 
 int goldScore = 0;
+
+int isInfected, hasDiarrhea, isCongested, hasRash, infectionStart = 0;
 
 /**
  *	10 = Fists
@@ -69,6 +73,7 @@ void setupPlayer(int x, int y, int entID){
 	playerEnt.currentTemperature.fahrenheit = 98;
 	playerEnt.currentHydration.hydration = 60;
 
+	playerEnt.skin.bpHP.currentHealth = 100;
 	playerEnt.head.bpHP.currentHealth = 100;
 	playerEnt.torso.bpHP.currentHealth = 100;
 	playerEnt.leftArm.bpHP.currentHealth = 100;
@@ -76,6 +81,8 @@ void setupPlayer(int x, int y, int entID){
 	playerEnt.leftLeg.bpHP.currentHealth = 100;
 	playerEnt.rightLeg.bpHP.currentHealth = 100;
 
+	playerEnt.skin.currentPos.xPos = x;
+	playerEnt.skin.currentPos.yPos = y;
 	playerEnt.head.currentPos.xPos = x;
 	playerEnt.head.currentPos.yPos = y;
 	playerEnt.torso.currentPos.xPos = x;
@@ -105,6 +112,12 @@ void killCheck(){
 		printf("You died of internal bleeding! Be more careful next time.\n");
 		exit(0);
 	}
+	if (playerEnt.skin.bpHP.currentHealth <= 0){
+		clear();
+		endScreen();
+		printf("You were skinned alive! Be more careful next time.\n");
+		exit(0);
+	}
 	if (bloodCount < DEADLYBLOODLOSS){
 		clear();
 		endScreen();
@@ -128,5 +141,42 @@ void bleedCheck(){
 	if (playerEnt.rightArm.bpHP.currentHealth < 25){
 		bloodLossRate += 10;
 	}
+	if (playerEnt.skin.bpHP.currentHealth < 20){
+		bloodLossRate += 20;
+	}
 	bloodCount -= bloodLossRate/10;
+}
+
+void infectionCheck(){
+	if (playerEnt.skin.bpHP.currentHealth < 50 && isInfected == 0){
+		msgLog = "You are develop an infection!";
+		isInfected = 1;
+		infectionStart = turn;
+		srand(time(0));	
+	
+		/**
+		*	0 = Common Cold			most common viral infection
+	 	*	1 = Impetigo			one of the most common bacterial infections
+		*	2 = Giardia intestinalis	one of the most common parasitic infections
+	 	*	
+	 	*/
+		int infectionType = rand() % 3;
+		switch (infectionType){
+			case 0:
+				isCongested = 1;
+				break;
+			case 1:
+				hasRash = 1;
+				break;
+			case 2:
+				hasDiarrhea = 1;
+				break;	
+		}
+	}
+	if (turn-infectionStart > 500){
+		isInfected = 0;
+		isCongested = 0;
+		hasRash = 0;
+		hasDiarrhea = 0;
+	}
 }

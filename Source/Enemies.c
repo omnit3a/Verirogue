@@ -145,5 +145,7 @@ void targetPlayer(){
 				msgLog = "Your right leg was hit!";
 				break;
 		}
+		playerEnt.skin.bpHP.currentHealth--;
 	}
+	
 }

@@ -31,6 +31,8 @@ void drawDropScreen();
 
 void drawBlood();
 
+void drawIsInfected();
+
 void drawUserInterface();
 
 #endif

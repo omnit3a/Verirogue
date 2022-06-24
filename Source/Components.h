@@ -63,6 +63,7 @@ typedef struct hoid{
 	VitalStats currentStats;
 	StarSign currentSign;
 
+	BodyPart skin;
 	BodyPart head;
 	BodyPart torso;
 	BodyPart leftArm;
