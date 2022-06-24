@@ -15,7 +15,7 @@ extern int foodScore;
 
 extern int goldScore;
 
-extern int isInfected, hasDiarrhea, isCongested, hasRash;
+extern int isInfected, hasDiarrhea, isCongested, hasRash, infectionStart, isDiseased;
 
 extern int currentWeapon;
 

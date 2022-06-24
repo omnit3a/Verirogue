@@ -256,10 +256,15 @@ void drawIsInfected(){
 	init_pair(29,COLOR_GREEN,COLOR_BLACK);
 	init_pair(28,COLOR_RED,COLOR_BLACK);
 	attroff(A_BLINK);
+	if (isDiseased){
+		attron(COLOR_PAIR(28) | A_BOLD);
+		mvprintw(11,81,"You are diseased!");
+	}
 	if (isInfected){
 		attron(COLOR_PAIR(28) | A_BOLD);
 		mvprintw(11,81,"You are infected!");
-	} else {
+	}
+	if (!isDiseased && !isInfected){
 		attron(COLOR_PAIR(29) | A_BOLD);
 		mvprintw(11,81,"You are healthy  ");
 	}

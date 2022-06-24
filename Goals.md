@@ -12,5 +12,5 @@
 - [X] Temperature changes depending on the time of day
 - [X] Bleeding
 - [ ] Cauterization of wounds
-- [ ] Diseases
+- [X] Diseases
 - [X] Infections

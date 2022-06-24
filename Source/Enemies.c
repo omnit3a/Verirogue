@@ -8,6 +8,7 @@
 #include "Player.h"
 #include "DrawUI.h"
 
+int enemyDiseaseMap[24][80];
 char enemyMap[24][80];
 int enemyHealthMap[24][80];
 
@@ -21,6 +22,9 @@ void placeEnemies(){
 					if (rand() % 45 == 0){
 						enemyMap[j][i] = '&';
 						enemyHealthMap[j][i] = (rand() % 10)+10;
+						if (rand() % 10 == 0){
+							enemyDiseaseMap[j][i] = 1;
+						}
 					}
 				}
 			}
@@ -33,6 +37,7 @@ void resetEnemies(){
 		for (int j = 0 ; j < 24 ; j++){
 			enemyMap[j][i] = ' ';
 			enemyHealthMap[j][i] = 0;
+			enemyDiseaseMap[j][i] = 0;
 		}
 	}
 }
@@ -42,10 +47,12 @@ void pseudoPathfind(){
 	int checkY = playerEnt.currentPos.yPos;
 	char tempMap[24][80];
 	int tempHealth[24][80];
+	int tempDisease[24][80];
 	for (int i = 0 ; i < 80 ; i++){
 		for (int j = 0 ; j < 24 ; j++){
 			tempMap[j][i] = enemyMap[j][i];
 			tempHealth[j][i] = enemyHealthMap[j][i];
+			tempDisease[j][i] = enemyDiseaseMap[j][i];
 		}
 	}
 	for (int i = 0 ; i < 80 ; i++){
@@ -56,21 +63,29 @@ void pseudoPathfind(){
 					tempMap[j+1][i] = '&';
 					tempHealth[j+1][i] = tempHealth[j][i];
 					tempHealth[j][i] = 0;
+					tempDisease[j+1][i] = tempDisease[j][i];
+					tempDisease[j][i] = 0;
 				} else if (map[j-1][i] != ' ' && j > checkY+1 && enemyMap[j-1][i] != '&'){
 					tempMap[j][i] = ' ';
 					tempMap[j-1][i] = '&';
 					tempHealth[j-1][i] = tempHealth[j][i];
 					tempHealth[j][i] = 0;
+					tempDisease[j-1][i] = tempDisease[j][i];
+					tempDisease[j][i] = 0;
 				} else if (map[j][i+1] != ' ' && i < checkX-1 && enemyMap[j][i+1] != '&'){
 					tempMap[j][i] = ' ';
 					tempMap[j][i+1] = '&';
 					tempHealth[j][i+1] = tempHealth[j][i];
 					tempHealth[j][i] = 0;
+					tempDisease[j][i+1] = tempDisease[j][i];
+					tempDisease[j][i] = 0;
 				} else if (map[j][i-1] != ' ' && i > checkX+1 && enemyMap[j][i-1] != '&'){
 					tempMap[j][i] = ' ';
 					tempMap[j][i-1] = '&';
 					tempHealth[j][i-1] = tempHealth[j][i];
 					tempHealth[j][i] = 0;
+					tempDisease[j][i-1] = tempDisease[j][i];
+					tempDisease[j][i] = 0;
 				}
 			}
 		}
@@ -79,6 +94,7 @@ void pseudoPathfind(){
 		for (int j = 0 ; j < 24 ; j++){
 			enemyMap[j][i] = tempMap[j][i];
 			enemyHealthMap[j][i] = tempHealth[j][i];
+			enemyDiseaseMap[j][i] = tempDisease[j][i];
 		}
 	}
 }
@@ -146,6 +162,11 @@ void targetPlayer(){
 				break;
 		}
 		playerEnt.skin.bpHP.currentHealth--;
+		srand(time(0)+playerEnt.skin.bpHP.currentHealth);
+		if (rand() % 10 == 0){
+			msgLog = "You contract a disease!";
+			isDiseased = 1;
+		}
 	}
 	
 }

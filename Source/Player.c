@@ -19,7 +19,7 @@ int foodScore = 100;
 
 int goldScore = 0;
 
-int isInfected, hasDiarrhea, isCongested, hasRash, infectionStart = 0;
+int isInfected, hasDiarrhea, isCongested, hasRash, infectionStart, isDiseased = 0;
 
 /**
  *	10 = Fists
