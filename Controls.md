@@ -8,6 +8,7 @@
 - `e` Eat food
 - `k` Kick down wall
 - `m` View starmap
+- `M` Medical
 - `p` Go prone/Toggle swimming
 - `q` Drink from lake
 - `Q` Drink potion
