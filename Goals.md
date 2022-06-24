@@ -11,6 +11,7 @@
 - [X] Different Enemy Types
 - [X] Temperature changes depending on the time of day
 - [X] Bleeding
+	- [ ] Blood trails
 - [ ] Cauterization of wounds
 - [ ] Diseases
 - [X] Infections
