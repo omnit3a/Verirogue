@@ -1,4 +1,6 @@
 #define DEADLYBLOODLOSS 255
+#include <string>
+
 
 #ifndef PLAYER_H_
 #define PLAYER_H_
@@ -23,11 +25,15 @@ extern Humanoid playerEnt;
 
 void setupPlayer(int x, int y, int entID);
 
+void killPlayer(std::string text);
+
 void killCheck();
 
 void bleedCheck();
 
 void infectionCheck();
+
+void cauterizeWound();
 
 #endif
 

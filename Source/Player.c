@@ -8,8 +8,9 @@
 #include "DrawScreen.h"
 #include "Movement.h"
 #include "DrawUI.h"
+#include <string>
 
-int bloodCount = 511;		//this is the amount of blood in the human body in litres * 10i0
+int bloodCount = 511;		//this is the amount of blood in the human body in litres * 100
 
 int bloodLossRate = 0;
 
@@ -99,30 +100,25 @@ void setupPlayer(int x, int y, int entID){
 	map[y][x] = '<';
 }
 
+void killPlayer(std::string text){
+	clear();
+	endScreen();
+	printf("%s\n",text.c_str());
+	exit(0);
+}
+
 void killCheck(){
 	if (playerEnt.head.bpHP.currentHealth <= 0){
-		clear();
-		endScreen();
-		printf("You died of major head trauma! Be more careful next time.\n");
-		exit(0);
+		killPlayer("You died of major head trauma! Be more careful next time.");
 	}
 	if (playerEnt.torso.bpHP.currentHealth <= 0){
-		clear();
-		endScreen();
-		printf("You died of internal bleeding! Be more careful next time.\n");
-		exit(0);
+		killPlayer("You died of internal bleeding! Be more careful next time.");
 	}
 	if (playerEnt.skin.bpHP.currentHealth <= 0){
-		clear();
-		endScreen();
-		printf("You were skinned alive! Be more careful next time.\n");
-		exit(0);
+		killPlayer("You were skinned alive! Be more careful next time.");
 	}
 	if (bloodCount < DEADLYBLOODLOSS){
-		clear();
-		endScreen();
-		printf("You died of external bleeding! Be more careful next time.\n");
-		exit(0);
+		killPlayer("You died of external bleeding! Be more careful next time.");
 	}
 	
 }
@@ -154,7 +150,7 @@ void infectionCheck(){
 		infectionStart = turn;
 		srand(time(0));	
 	
-		/**
+               /**
 		*	0 = Common Cold			most common viral infection
 	 	*	1 = Impetigo			one of the most common bacterial infections
 		*	2 = Giardia intestinalis	one of the most common parasitic infections
@@ -178,5 +174,25 @@ void infectionCheck(){
 		isCongested = 0;
 		hasRash = 0;
 		hasDiarrhea = 0;
+	}
+	if (hasDiarrhea == 1 && turn % 150 == 0){
+		playerEnt.currentHydration.hydration -= 5;
+	}
+	if (hasRash == 1 && turn % 75 == 0){
+		msgLog = "You itch your face";
+	}
+	if (isCongested == 1 && turn % 75 == 0){
+		msgLog = "Your nose is running";
+	}
+	drawUserInterface();
+} 
+
+void cauterizeWound(){
+	for (int i = 0 ; i < 64 ; i++){
+		if (bloodCount+1 <= 511){
+			bloodCount++;
+		} else {
+			break;
+		}
 	}
 }

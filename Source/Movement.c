@@ -28,6 +28,35 @@ int ch;
 
 char dir;		//'u' = UP 'd' = DOWN 'l' = LEFT 'r' = RIGHT
 
+void updateCauterize(int x, int y){
+	switch (dir){
+		case 'u':
+			if (fireValues[y-1][x] == '*'){
+				cauterizeWound();
+				msgLog = "You cauterize your wounds";
+			}
+			break;
+		case 'd':
+			if (fireValues[y+1][x] == '*'){
+				cauterizeWound();
+				msgLog = "You cauterize your wounds";
+			}
+			break;
+		case 'l':
+			if (fireValues[y][x-1] == '*'){
+				cauterizeWound();
+				msgLog = "You cauterize your wounds";
+			}
+			break;
+		case 'r':
+			if (fireValues[y][x+1] == '*'){
+				cauterizeWound();
+				msgLog = "You cauterize your wounds";
+			}
+			break;
+	}
+}
+
 void engageInCombat(int x, int y){
 	switch(enemyMap[y][x]){
 		case '&':
@@ -331,8 +360,12 @@ void getMovement(){
 							break;
 						}	
 					}
-					if (bloodCount+25 < 511){
-						bloodCount += 25;
+					for (int i = 0 ; i < 50 ; i++){
+						if (bloodCount+1 <= 511){
+							bloodCount++;
+						} else {
+							break;
+						}
 					}
 				} else {
 					msgLog = "You are too full to eat anything";
@@ -465,6 +498,9 @@ void getMovement(){
 		case 'r':
 			readScroll();
 			break;
+		case 'M':
+			updateCauterize(checkX, checkY);
+			break;
 		case 27:
 			endScreen();
 			exit(0);
@@ -525,29 +561,23 @@ void updateTemperature(){
 		hasHypothermia = 0;
 	}
 	if (playerEnt.currentTemperature.celsius >= 44){
-		clear();
-		endScreen();
-		printf("You died of overheating! Be more careful next time\n");
-		exit(0);
+		killPlayer("You died of overheating! Be more careful next time.");
 	} else if (playerEnt.currentTemperature.celsius < 14){
-		clear();
-		endScreen();
-		printf("You froze to death! Be more careful next time\n");
-		exit(0);
+		killPlayer("You froze to death! Be more careful next time.");
 	}
 	if (turn % 150 == 0){
 		playerEnt.currentHydration.hydration -= 5;
 	}
 	if (playerEnt.currentHydration.hydration < 25){
-		clear();
-		endScreen();
-		printf("You died of thirst! Be more careful next time\n");
-		exit(0);
+		killPlayer("You died of thirst! Be more careful next time.");
 	} else if (playerEnt.currentHydration.hydration >= 80){
-		clear();
-		endScreen();
-		printf("You died of Hyponatremia! Be more careful next time\n");
-		exit(0);
+		killPlayer("You died of Hyponatremia! Be more careful next time.");
+	}
+	if (fireValues[playerEnt.currentPos.yPos][playerEnt.currentPos.xPos] == '*'){
+		playerEnt.skin.bpHP.currentHealth -= 10;
+	}
+	if (playerEnt.skin.bpHp.currentHealth <= 0){
+		killPlayer("Your skin melted off! Be more careful next time.");
 	}
 }
 
@@ -555,10 +585,7 @@ void updateHunger(){
 	if (turn % 200 == 0){
 		foodScore-=5;
 		if (foodScore < 10){
-			clear();
-			endScreen();
-			printf("You died of Hunger! Be more careful next time\n");
-			exit(0);
+			killPlayer("You died of Hunger! Be more careful next time.");
 		}
 	}
 }

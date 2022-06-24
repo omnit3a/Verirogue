@@ -12,4 +12,10 @@
 - [X] Temperature changes depending on the time of day
 - [X] Bleeding
 - [X] Diseases
+	- [ ] Disease effects
 - [X] Infections
+	- [X] Infection effects
+- [X] Skin properties
+	- [X] Melting skin
+	- [X] Cauterization
+

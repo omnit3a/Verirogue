@@ -15,6 +15,8 @@ extern int isDay;
 
 extern int sunX, sunY;
 
+extern int isNoon;
+
 void updateTimeTemperature();
 
 /**

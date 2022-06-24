@@ -17,6 +17,8 @@ int calender[12][30];
 
 int isDay = 1;
 
+int isNoon = 0;
+
 void updateTimeTemperature(){
 	if (biome == 'o'){
 		if (hour == 12) {
@@ -99,8 +101,11 @@ void scrollStars(){
 }
 
 void setDayNight(){
-	if (hour == 12){
+	if (hour == 12 && isNoon == 0){
 		msgLog = "It is now noon";
+		isNoon = 1;
+	} else if (hour != 12){
+		isNoon = 1;
 	}
 	if (hour > 6 && hour < 20){
 		if (isDay == 0){
