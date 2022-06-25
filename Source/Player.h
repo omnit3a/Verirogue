@@ -19,6 +19,8 @@ extern int goldScore;
 
 extern int isInfected, hasDiarrhea, isCongested, hasRash, infectionStart, isDiseased;
 
+extern int diseaseStart;
+
 extern int currentWeapon;
 
 extern Humanoid playerEnt;

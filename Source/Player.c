@@ -22,6 +22,7 @@ int goldScore = 0;
 
 int isInfected, hasDiarrhea, isCongested, hasRash, infectionStart, isDiseased = 0;
 
+int diseaseStart = 0;
 /**
  *	10 = Fists
  *	15 = Sword
@@ -176,6 +177,10 @@ void infectionCheck(){
 		hasDiarrhea = 0;
 		msgLog = "You are rid of your infection";
 	}
+	if (turn-diseaseStart > 500 && turn-infectionStart < 525){
+		isDiseased = 0;
+		msgLog = "You are rid of your disease";
+	}
 	if (hasDiarrhea == 1 && turn % 150 == 0){
 		playerEnt.currentHydration.hydration -= 5;
 	}
@@ -184,6 +189,9 @@ void infectionCheck(){
 	}
 	if (isCongested == 1 && turn % 75 == 0){
 		msgLog = "Your nose is running";
+	}
+	if (isDiseased == 1 && turn % 75 == 0){
+		foodScore -= 5;
 	}
 	drawUserInterface();
 } 

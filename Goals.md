@@ -12,7 +12,7 @@
 - [X] Temperature changes depending on the time of day
 - [X] Bleeding
 - [X] Diseases
-	- [ ] Disease effects
+	- [X] Disease effects
 - [X] Infections
 	- [X] Infection effects
 - [X] Skin properties
@@ -20,4 +20,7 @@
 	- [X] Cauterization
 - [X] Medical screen
 	- [X] Cauterization option
-	- [ ] Cure disease screen
+	- [X] Cure disease option
+- [X] Enemy descriptions
+- [X] Tile descriptions
+- [ ] Item description

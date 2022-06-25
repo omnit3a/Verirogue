@@ -166,6 +166,7 @@ void targetPlayer(){
 		if (rand() % 10 == 0){
 			msgLog = "You contract a disease!";
 			isDiseased = 1;
+			diseaseStart = turn;
 		}
 	}
 	

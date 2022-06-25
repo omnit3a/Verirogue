@@ -28,7 +28,7 @@ int ch;
 
 char dir;		//'u' = UP 'd' = DOWN 'l' = LEFT 'r' = RIGHT
 
-int chM;
+int chM, dungeonType;
 
 void updateCauterize(int x, int y){
 	switch (dir){
@@ -265,6 +265,7 @@ void getMovement(){
 			entryX = checkX;
 			entryY = checkY;
 			srand(time(0));
+			dungeonType = rand() % 2;	
 			if (biome == 'o' && underPlayer == '>' && canWalk()){
 				biome = 'd';
 				surroundingTemperature = 15;
@@ -272,7 +273,7 @@ void getMovement(){
 				playerEnt.currentPos.xPos = startX;
 				playerEnt.currentPos.yPos = startY;
 				updateScreen();
-				msgLog = "You enter the dungeon!";
+				msgLog = "You enter the dungeon";
 			} else {
 				msgLog = "There isn't a dungeon here!";
 			}
@@ -514,8 +515,79 @@ void getMovement(){
 				case 'c':
 					updateCauterize(checkX, checkY);
 					break;
+				case 'd':
+					if (turn-diseaseStart < 50 && isDiseased == 1){
+						srand(time(0));	
+						if (rand() % 3 == 0){
+							isDiseased = 0;
+							msgLog = "You cured your disease";
+						} else {
+							msgLog = "You failed to cure your disease";
+						}
+					} else if (isDiseased == 0){
+						msgLog = "You don't have a disease";
+					}
+					break;
 				default:
 					msgLog = "You do nothing";
+					break;
+			}
+			break;
+		case 'D':
+			switch (returnDungeonmapAt(checkX, checkY)){
+				case '+':
+					msgLog = "It's a stone floor";
+					break;
+				case '.':
+					msgLog = "It's a wooden plank floor";
+					break;
+				case '<':
+					msgLog = "It's an upward staircase";
+					break;
+			}
+			if (biome == 'o'){
+				switch (underPlayer){
+					case '.':
+						msgLog = "It's an open field";
+						break;
+					case '~':
+						msgLog = "It's a lake";
+						break;
+					case '>':
+						msgLog = "It's a downard staircase";
+						break;
+					case '^':
+						msgLog = "It's some hilly terrain";
+						break;
+					case 'A':
+						msgLog = "It's some mountainous terrain";
+						break;
+					case 't':
+						msgLog = "It's a small patch of trees";
+						break;
+				}
+			}
+			if (enemyMap[checkY-1][checkX] == '&' || enemyMap[checkY+1][checkX] == '&' || enemyMap[checkY][checkX-1] == '&' || enemyMap[checkY][checkX+1] == '&'){
+				msgLog = "It's a goblin";
+			}	
+			if (enemyDiseaseMap[checkY-1][checkX] == 1 || enemyDiseaseMap[checkY+1][checkX] == 1 || enemyDiseaseMap[checkY][checkX-1] == 1 || enemyDiseaseMap[checkY][checkX+1] == 1){
+				msgLog = "It's a diseased goblin";
+			}
+			switch(itemMap[checkY][checkX]){
+				case SWORDSYM:
+					msgLog = "It's a shiny new sword!";
+					break;
+				case AXESYM:
+					msgLog = "It's a shiny new axe!";
+					break;
+				case SCROLLSYM:
+					msgLog = "It's a scroll";
+					break;
+				case POTIONSYM:
+					msgLog = "It's a magical potion!";
+					break;
+				case FOODSYM:
+					msgLog = "It's a pile of food";
 					break;
 			}
 			break;
