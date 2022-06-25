@@ -10,6 +10,7 @@
 - `m` View starmap
 - `M` Medical
 	- `c` Cauterize
+	- `d` Cure disease
 - `p` Go prone/Toggle swimming
 - `q` Drink from lake
 - `Q` Drink potion
