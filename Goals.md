@@ -23,4 +23,4 @@
 	- [X] Cure disease option
 - [X] Enemy descriptions
 - [X] Tile descriptions
-- [ ] Item description
+- [X] Item description
