@@ -196,11 +196,7 @@ void drawDungeon(){
 	init_pair(1, COLOR_WHITE, COLOR_BLACK);
 	init_pair(2, COLOR_YELLOW, COLOR_BLACK);
 	int seedMap = time(0);
-	if (dungeonHasFire == 1){
-		drawWithoutFOV();
-	} else {
-		drawFOV(3);
-	}
+	drawFOV(3);
 	updateScreen();
 }
 

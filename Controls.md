@@ -9,6 +9,7 @@
 - `k` Kick down wall
 - `m` View starmap
 - `M` Medical
+	- `c` Cauterize
 - `p` Go prone/Toggle swimming
 - `q` Drink from lake
 - `Q` Drink potion

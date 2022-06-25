@@ -169,11 +169,12 @@ void infectionCheck(){
 				break;	
 		}
 	}
-	if (turn-infectionStart > 500){
+	if (turn-infectionStart > 500 && turn-infectionStart < 525){
 		isInfected = 0;
 		isCongested = 0;
 		hasRash = 0;
 		hasDiarrhea = 0;
+		msgLog = "You are rid of your infection";
 	}
 	if (hasDiarrhea == 1 && turn % 150 == 0){
 		playerEnt.currentHydration.hydration -= 5;

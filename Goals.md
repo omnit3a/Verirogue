@@ -18,4 +18,6 @@
 - [X] Skin properties
 	- [X] Melting skin
 	- [X] Cauterization
-
+- [X] Medical screen
+	- [X] Cauterization option
+	- [ ] Cure disease screen

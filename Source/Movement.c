@@ -28,6 +28,8 @@ int ch;
 
 char dir;		//'u' = UP 'd' = DOWN 'l' = LEFT 'r' = RIGHT
 
+int chM;
+
 void updateCauterize(int x, int y){
 	switch (dir){
 		case 'u':
@@ -499,7 +501,23 @@ void getMovement(){
 			readScroll();
 			break;
 		case 'M':
-			updateCauterize(checkX, checkY);
+			init_pair(30, COLOR_WHITE, COLOR_BLACK);
+			clear();
+			attron(COLOR_PAIR(30) | A_BOLD);
+			mvprintw(0,0,"Do what?");
+			attron(A_BLINK);
+			mvaddch(1,0,'>');
+			attroff(A_BOLD | A_BLINK);
+			refresh();
+			chM = getch();
+			switch (chM){
+				case 'c':
+					updateCauterize(checkX, checkY);
+					break;
+				default:
+					msgLog = "You do nothing";
+					break;
+			}
 			break;
 		case 27:
 			endScreen();
@@ -575,8 +593,9 @@ void updateTemperature(){
 	}
 	if (fireValues[playerEnt.currentPos.yPos][playerEnt.currentPos.xPos] == '*'){
 		playerEnt.skin.bpHP.currentHealth -= 10;
+		msgLog = "Your skin melts!";
 	}
-	if (playerEnt.skin.bpHp.currentHealth <= 0){
+	if (playerEnt.skin.bpHP.currentHealth <= 0){
 		killPlayer("Your skin melted off! Be more careful next time.");
 	}
 }
