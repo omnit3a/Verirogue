@@ -23,6 +23,13 @@ void initFileRead(){
 					grossStuff = 0;
 				}	
 				break;
+			case 1:
+				if (str[0] == 'Y'){
+					noFov = 1;
+				} else {
+					noFov = 0;
+				}
+				break;
 			default:
 				continue;
 		}

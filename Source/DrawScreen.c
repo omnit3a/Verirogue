@@ -14,6 +14,8 @@
 #define WIDTH 80
 #define HEIGHT 24
 
+int noFov = 0;
+
 void setupScreen(){
 	initscr();
 	raw();
@@ -117,6 +119,17 @@ void drawWithoutFOV(){
 					mvaddch(j,i,'$');
 				}
 			}
+			if (grossStuff){
+					if (bloodMap[j][i] == 1){
+						attroff(A_BLINK | A_BOLD);
+						attron(COLOR_PAIR(10));
+						mvaddch(j,i,currentChar);
+					} else if (bloodMap[j][i] == 2){
+						attroff(A_BLINK | A_BOLD);
+						attron(COLOR_PAIR(32));
+						mvaddch(j,i,currentChar);
+					}
+				}
 			attroff(A_BOLD | A_BLINK);
 		}
 	}
@@ -211,7 +224,11 @@ void drawDungeon(){
 	init_pair(1, COLOR_WHITE, COLOR_BLACK);
 	init_pair(2, COLOR_YELLOW, COLOR_BLACK);
 	int seedMap = time(0);
-	drawFOV(3);
+	if (!noFov){
+		drawFOV(3);
+	} else {
+		drawWithoutFOV();
+	}
 	updateScreen();
 }
 

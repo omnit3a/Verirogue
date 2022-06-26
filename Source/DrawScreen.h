@@ -3,6 +3,8 @@
 
 extern int row, col;
 
+extern int noFov;
+
 void setupScreen();
 
 void updateScreen();
