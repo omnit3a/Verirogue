@@ -11,6 +11,7 @@
 #include "Planets.h"
 #include "Enemies.h"
 #include "FileRead.h"
+#include "Inventory.h"
 
 int seedMain = time(0);
 
@@ -56,6 +57,7 @@ int main(){
 		}
 		killCheck();
 		infectionCheck();
+		rotItems();
 	}
 	getch();
 	endScreen();

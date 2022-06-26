@@ -32,3 +32,10 @@
 	- [X] Infection from unclean floor while cauterizing
 	- [X] Option to disable gross stuff
 - [X] Config file
+- [X] Crying/Tears
+- [ ] Different types of food
+	- [ ] Food rot
+	- [ ] Shellfish
+	- [ ] Game
+	- [ ] Fowl
+- [X] Custom player name

@@ -3,6 +3,7 @@
 #define SCROLLSYM 'S'
 #define POTIONSYM 'p'
 #define FOODSYM '%'
+#define ROTTENSYM ';'
 
 #ifndef INVENTORY_H_
 #define INVENTORY_H_
@@ -14,6 +15,8 @@ extern char itemMap[][80];
 extern int itemCount;
 
 extern std::string inventory[16];
+
+extern int itemTurn[16];
 
 std::string convertToString(char * text);
 
@@ -42,5 +45,7 @@ void consumeScroll();
 char itemAt(int x, int y);
 
 void placeItems();
+
+void rotItems();
 #endif
 

@@ -5,6 +5,7 @@
 #include "Player.h"
 #include "PlayerCreator.h"
 #include "DrawScreen.h"
+#include <string>
 
 char getPlayerSex(){
 	attron(A_BLINK);
@@ -27,9 +28,19 @@ char getStarSign(){
 	return (char)sign+64;
 }
 
+std::string getPlayerName(){
+	int ch;
+	char name[1024];
+	attron(A_BLINK);
+	mvaddch(1,0,'>');
+	attroff(A_BLINK);
+	updateScreen();
+	getstr(name);
+	return name;
+ }
+
 void playerCreatorScreen(){
 	mvprintw(0,0,"You have crashed through the universe onto a flat plane of earth.");
-	mvprintw(1,0,"You have forgotten your name!");
 	updateScreen();
 	getch();
 	clear();
@@ -37,4 +48,8 @@ void playerCreatorScreen(){
 	updateScreen();
 	playerEnt.currentSex.sex = getPlayerSex();
 	playerEnt.currentSign.sign = getStarSign();
+	clear();
+	mvprintw(0,0,"What is your name?");
+	updateScreen();
+	playerName = getPlayerName();
 }

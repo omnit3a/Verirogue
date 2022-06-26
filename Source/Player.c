@@ -20,7 +20,7 @@ int foodScore = 100;
 
 int goldScore = 0;
 
-int isInfected, hasDiarrhea, isCongested, hasRash, infectionStart, isDiseased = 0;
+int isInfected, hasDiarrhea, isCongested, hasRash, infectionStart, isDiseased, isCrying = 0;
 
 int diseaseStart = 0;
 /**
@@ -42,6 +42,8 @@ int isSneaking = 0;
 int bloodMap[24][80];
 
 int grossStuff = 1;
+
+std::string playerName;
 
 void setupPlayer(int x, int y, int entID){
 	playerEnt.entityID = entID;
@@ -124,6 +126,14 @@ void killPlayer(std::string text){
 	exit(0);
 }
 
+void cryCheck(){
+	if (playerEnt.skin.bpHP.currentHealth < 100 && playerEnt.skin.bpHP.currentHealth > 75){
+		isCrying = 2;	
+	} else {
+		isCrying = 0;
+	}
+}
+
 void killCheck(){
 	if (playerEnt.head.bpHP.currentHealth <= 0){
 		killPlayer("You died of major head trauma! Be more careful next time.");
@@ -137,6 +147,7 @@ void killCheck(){
 	if (bloodCount < DEADLYBLOODLOSS){
 		killPlayer("You died of external bleeding! Be more careful next time.");
 	}
+	cryCheck();
 	
 }
 

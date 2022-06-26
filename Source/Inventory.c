@@ -14,6 +14,8 @@ int itemCount = 0;
 
 std::string inventory[16];
 
+int itemTurn[16];
+
 std::string convertToString(char * text){
 	int length = sizeof(text) / sizeof(char);
 	std::string s = "";
@@ -39,6 +41,8 @@ char representation(std::string text){
 		return POTIONSYM;
 	} else if (text == "Food"){
 		return FOODSYM;
+	} else if (text == "Rotten food"){
+		return ROTTENSYM;
 	} else {
 		return ' ';
 	}
@@ -46,6 +50,7 @@ char representation(std::string text){
 
 void addItem(char * item, int index){
 	inventory[index] = convertToString(item);
+	itemTurn[index] = turn;
 }
 
 void removeItem(int index){
@@ -141,4 +146,8 @@ void placeItems(){
 			}
 		}
 	}
+}
+
+void rotItems(){
+	//insert code for rotting food here
 }
