@@ -9,6 +9,7 @@
 #include "Planets.h"
 #include "Enemies.h"
 #include "Inventory.h"
+#include "DrawUI.h"
 
 #define WIDTH 80
 #define HEIGHT 24
@@ -131,6 +132,7 @@ void drawFOV(int radius){
 	init_pair(3, COLOR_CYAN, COLOR_BLACK);
 	init_pair(10, COLOR_RED, COLOR_BLACK);
 	init_pair(23, COLOR_MAGENTA, COLOR_BLACK);
+	init_pair(32, COLOR_GREEN, COLOR_BLACK);
 	clear();
 	for (int i = 0 ; i < 80 ; i++){
 		for (int j = 0 ; j < 24 ; j++){
@@ -171,6 +173,8 @@ void drawFOV(int radius){
 					attroff(A_BLINK);
 					attron(COLOR_PAIR(23) | A_BOLD);
 					mvaddch(j,i,'&');
+					isSneaking = 0;
+					msgLog = "You have been found!";
 				}
 				if (itemMap[j][i] != ' ' || returnDungeonmapAt(i,j) == '$'){
 					attroff(A_BLINK);
@@ -178,6 +182,17 @@ void drawFOV(int radius){
 					mvaddch(j,i,itemMap[j][i]);
 					if (returnDungeonmapAt(i,j) == '$'){
 						mvaddch(j,i,'$');
+					}
+				}
+				if (grossStuff){
+					if (bloodMap[j][i] == 1){
+						attroff(A_BLINK | A_BOLD);
+						attron(COLOR_PAIR(10));
+						mvaddch(j,i,currentChar);
+					} else if (bloodMap[j][i] == 2){
+						attroff(A_BLINK | A_BOLD);
+						attron(COLOR_PAIR(32));
+						mvaddch(j,i,currentChar);
 					}
 				}
 				attroff(A_BOLD | A_BLINK);

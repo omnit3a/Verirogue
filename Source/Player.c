@@ -32,6 +32,17 @@ int currentWeapon = 10;
 
 Humanoid playerEnt;
 
+int isSneaking = 0;
+
+/**
+ * 	0 = clean floor
+ *	1 = blood
+ *	2 = vomit
+ */
+int bloodMap[24][80];
+
+int grossStuff = 1;
+
 void setupPlayer(int x, int y, int entID){
 	playerEnt.entityID = entID;
 	playerEnt.currentPos.xPos = x;
@@ -69,6 +80,11 @@ void setupPlayer(int x, int y, int entID){
 	playerEnt.currentWeight.pounds = (playerEnt.currentStats.strength*3) - lround(playerEnt.currentStats.agility/3);
 	if (playerEnt.currentWeight.pounds < 100){
 		playerEnt.currentWeight.pounds += 100;
+	}
+	for (int i = 0 ; i < 80 ; i++){
+		for (int j = 0 ; j < 24 ; j++){
+			bloodMap[j][i] = 0;
+		}
 	}
 	playerEnt.currentFlammability.flammabilityLevel = 50;
 	playerEnt.currentTemperature.celsius = 37;
@@ -124,6 +140,18 @@ void killCheck(){
 	
 }
 
+void bloodTrail(){
+	if (bloodCount < 485 && biome == 'd'){
+		bloodMap[playerEnt.currentPos.yPos][playerEnt.currentPos.xPos] = 1;
+	} else {
+		for (int i = 0 ; i < 80 ; i++){
+			for (int j = 0 ; j < 24 ; j++){
+				bloodMap[j][i] = 0;
+			}
+		}
+	}
+}
+
 void bleedCheck(){
 	bloodLossRate = 0;
 	if (playerEnt.head.bpHP.currentHealth < 25){
@@ -142,6 +170,7 @@ void bleedCheck(){
 		bloodLossRate += 20;
 	}
 	bloodCount -= bloodLossRate/10;
+	bloodTrail();
 }
 
 void infectionCheck(){
@@ -192,6 +221,8 @@ void infectionCheck(){
 	}
 	if (isDiseased == 1 && turn % 75 == 0){
 		foodScore -= 5;
+		msgLog = "You throw up";
+		bloodMap[playerEnt.currentPos.yPos][playerEnt.currentPos.xPos] = 2;
 	}
 	drawUserInterface();
 } 
@@ -202,6 +233,26 @@ void cauterizeWound(){
 			bloodCount++;
 		} else {
 			break;
+		}
+	}
+	if (bloodMap[playerEnt.currentPos.yPos][playerEnt.currentPos.xPos] != 0){
+		if (rand() % 3 == 0){
+			srand(time(0)+bloodMap[playerEnt.currentPos.yPos][playerEnt.currentPos.xPos]);
+			int infectionType = rand() % 3;
+			switch (infectionType){
+				case 0:
+					isCongested = 1;
+					break;
+				case 1:
+					hasRash = 1;
+					break;
+				case 2:
+					hasDiarrhea = 1;
+					break;
+			}
+			isInfected = 1;
+			infectionStart = turn;
+			msgLog = "You develop an infection!";
 		}
 	}
 }

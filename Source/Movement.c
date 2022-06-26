@@ -528,6 +528,10 @@ void getMovement(){
 						msgLog = "You don't have a disease";
 					}
 					break;
+				case 'C':
+					//clean floor
+					bloodMap[checkY][checkX] = 0;
+					break;
 				default:
 					msgLog = "You do nothing";
 					break;
@@ -590,6 +594,10 @@ void getMovement(){
 					msgLog = "It's a pile of food";
 					break;
 			}
+			break;
+		case 'C':
+			isSneaking = !isSneaking;
+			msgLog = "You are now sneaking";
 			break;
 		case 27:
 			endScreen();

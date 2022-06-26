@@ -10,10 +10,12 @@
 #include "PlayerCreator.h"
 #include "Planets.h"
 #include "Enemies.h"
+#include "FileRead.h"
 
 int seedMain = time(0);
 
 int main(){
+	initFileRead();
 	setupScreen();
 	updateScreen();
 	playerCreatorScreen();

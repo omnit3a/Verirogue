@@ -21,6 +21,14 @@
 - [X] Medical screen
 	- [X] Cauterization option
 	- [X] Cure disease option
+	- [X] Clean floor
 - [X] Enemy descriptions
 - [X] Tile descriptions
 - [X] Item description
+- [X] Sneaking
+- [X] Gross stuff
+	- [X] Blood trails
+	- [X] Vomit
+	- [X] Infection from unclean floor while cauterizing
+	- [X] Option to disable gross stuff
+- [X] Config file

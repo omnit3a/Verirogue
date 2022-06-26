@@ -10,6 +10,7 @@
 - `m` View starmap
 - `M` Medical
 	- `c` Cauterize
+	- `C` Clean floor
 	- `d` Cure disease
 - `p` Go prone/Toggle swimming
 - `q` Drink from lake
@@ -19,4 +20,5 @@
 - `d` Drop item
 - `D` Describe
 - `r` Read scroll
+- `C` Sneak
 - `?` View controls

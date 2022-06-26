@@ -25,11 +25,19 @@ extern int currentWeapon;
 
 extern Humanoid playerEnt;
 
+extern int isSneaking;
+
+extern int bloodMap[][80];
+
+extern int grossStuff;
+
 void setupPlayer(int x, int y, int entID);
 
 void killPlayer(std::string text);
 
 void killCheck();
+
+void bloodTrail();
 
 void bleedCheck();
 
