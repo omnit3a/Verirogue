@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <string>
 #include "Player.h"
 #include "DrawScreen.h"
 #include "Enemies.h"
@@ -9,6 +10,7 @@
 #include "Movement.h"
 #include "Main.h"
 #include "Inventory.h"
+#include "PlayerCreator.h"
 
 void initFileRead(){
 	FILE *ptr;
@@ -41,6 +43,19 @@ void initFileRead(){
 				} else {
 					inDebugMode = 0;
 				}
+				break;
+			case 3:
+				if (str[0] == 'Y'){
+					disabledCreator = 1;
+				} else {
+					disabledCreator = 0;
+				}
+				break;
+			case 4:
+				defaultName = str;
+				break;
+			case 5:
+				defaultSex = str[0];
 				break;
 			default:
 				continue;

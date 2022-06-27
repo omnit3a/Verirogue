@@ -7,6 +7,12 @@
 #include "DrawScreen.h"
 #include <string>
 
+int disabledCreator;
+
+std::string defaultName;
+
+char defaultSex;
+
 char getPlayerSex(){
 	attron(A_BLINK);
 	mvaddch(1,0,'>');
@@ -40,16 +46,21 @@ std::string getPlayerName(){
  }
 
 void playerCreatorScreen(){
-	mvprintw(0,0,"You have crashed through the universe onto a flat plane of earth.");
-	updateScreen();
-	getch();
-	clear();
-	mvprintw(0,0,"What is your sex? M | F | U");
-	updateScreen();
-	playerEnt.currentSex.sex = getPlayerSex();
-	playerEnt.currentSign.sign = getStarSign();
-	clear();
-	mvprintw(0,0,"What is your name?");
-	updateScreen();
-	playerName = getPlayerName();
+	if (!disabledCreator){
+		mvprintw(0,0,"You have crashed through the universe onto a flat plane of earth.");
+		updateScreen();
+		getch();
+		clear();
+		mvprintw(0,0,"What is your sex? M | F | U");
+		updateScreen();
+		playerEnt.currentSex.sex = getPlayerSex();
+		playerEnt.currentSign.sign = getStarSign();
+		clear();
+		mvprintw(0,0,"What is your name?");
+		updateScreen();
+		playerName = getPlayerName();
+	} else {
+		playerName = defaultName;
+		playerEnt.currentSex.sex = defaultSex;
+	}
 }
