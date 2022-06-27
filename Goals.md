@@ -33,12 +33,8 @@
 	- [X] Option to disable gross stuff
 - [X] Config file
 - [X] Crying/Tears
-- [ ] Different types of food
-	- [ ] Food rot
-	- [ ] Shellfish
-	- [ ] Game
-	- [ ] Fowl
 - [X] Custom player name
-- [ ] Chopping off limbs
 - [X] Gas / Gas diffusion
 - [X] Player data files
+- [X] Option in config files to skip character creation
+`BETA 1.0 HAS RELEASED`
