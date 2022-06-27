@@ -42,6 +42,8 @@ int isSneaking = 0;
 int bloodMap[24][80];
 
 int grossStuff = 1;
+int bloodTrailThreshold = 485;
+int DEADLYBLOODLOSS = 255;
 
 std::string playerName;
 
@@ -152,7 +154,7 @@ void killCheck(){
 }
 
 void bloodTrail(){
-	if (bloodCount < 485 && biome == 'd'){
+	if (bloodCount < bloodTrailThreshold && biome == 'd'){
 		bloodMap[playerEnt.currentPos.yPos][playerEnt.currentPos.xPos] = 1;
 	} else {
 		for (int i = 0 ; i < 80 ; i++){
@@ -210,7 +212,7 @@ void infectionCheck(){
 				break;	
 		}
 	}
-	if (turn-infectionStart > 500 && turn-infectionStart < 525){
+	if (turn % (500+infectionStart) == 0 && isInfected == 1){
 		isInfected = 0;
 		isCongested = 0;
 		hasRash = 0;
@@ -234,6 +236,10 @@ void infectionCheck(){
 		foodScore -= 5;
 		msgLog = "You throw up";
 		bloodMap[playerEnt.currentPos.yPos][playerEnt.currentPos.xPos] = 2;
+	}
+	if (turn % (500+diseaseStart) == 0 && isDiseased == 1){
+		isDiseased = 0;
+		msgLog = "You are rid of your disease";
 	}
 	drawUserInterface();
 } 

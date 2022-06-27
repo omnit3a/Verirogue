@@ -3,6 +3,8 @@
 #include <string.h>
 #include "Player.h"
 #include "DrawScreen.h"
+#include "Enemies.h"
+#include "MapGenerator.h"
 #include <ncurses.h>
 
 void initFileRead(){
@@ -37,4 +39,54 @@ void initFileRead(){
 	}
 
 	fclose(ptr);
+}
+
+void worldFileRead(){
+	FILE *ptr;
+	char str[50];
+	ptr = fopen("../Init/world_parameters.txt","r");
+
+	if (NULL==ptr){
+		killPlayer("Unable to read world parameter file\n");
+	}
+	int index = 0;
+	while(fgets(str,50,ptr) != NULL){
+		switch(index){
+			case 0:
+				spawnRate = atoi(str);
+				break;
+			case 1:
+				baseEnemyHealth = atoi(str);
+				break;
+			case 2:
+				baseEnemyDamage = atoi(str);
+				break;
+			case 3:
+				diseaseRate = atoi(str);
+				break;
+			case 4:
+				diseaseSpreadRate = atoi(str);
+				break;
+			case 5:
+			      	treeSpawnRate = atoi(str);
+				break;	
+			case 6:
+				dungeonSpawnRate = atoi(str);
+				break;
+			case 7:
+				if (str[0] == 'Y'){
+					canFireSpread = 1;
+				} else {
+					canFireSpread = 0;
+				}
+				break;
+			case 8:
+				bloodTrailThreshold = atoi(str);
+				break;
+			case 9:
+				DEADLYBLOODLOSS = atoi(str);
+				break;
+		}
+		index++;
+	}
 }

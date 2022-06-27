@@ -106,6 +106,17 @@ void drawWithoutFOV(){
 				attron(COLOR_PAIR(10) | A_BOLD | A_BLINK);
 			}
 			mvaddch(j,i,map[j][i]);
+			if (grossStuff){
+					if (bloodMap[j][i] == 1){
+						attroff(A_BLINK | A_BOLD);
+						attron(COLOR_PAIR(10));
+						mvaddch(j,i,currentChar);
+					} else if (bloodMap[j][i] == 2){
+						attroff(A_BLINK | A_BOLD);
+						attron(COLOR_PAIR(32));
+						mvaddch(j,i,currentChar);
+					}
+				}
 			if (enemyMap[j][i] == '&'){
 				attroff(A_BLINK);
 				attron(COLOR_PAIR(23) | A_BOLD);
@@ -119,17 +130,6 @@ void drawWithoutFOV(){
 					mvaddch(j,i,'$');
 				}
 			}
-			if (grossStuff){
-					if (bloodMap[j][i] == 1){
-						attroff(A_BLINK | A_BOLD);
-						attron(COLOR_PAIR(10));
-						mvaddch(j,i,currentChar);
-					} else if (bloodMap[j][i] == 2){
-						attroff(A_BLINK | A_BOLD);
-						attron(COLOR_PAIR(32));
-						mvaddch(j,i,currentChar);
-					}
-				}
 			attroff(A_BOLD | A_BLINK);
 		}
 	}
@@ -182,6 +182,18 @@ void drawFOV(int radius){
 					attron(COLOR_PAIR(10) | A_BOLD | A_BLINK);
 				}
 				mvaddch(j,i,map[j][i]);
+				// it's important that the grossStuff is drawn first, otherwise enemies wont be visible under blood/vomit
+				if (grossStuff){
+					if (bloodMap[j][i] == 1){
+						attroff(A_BLINK | A_BOLD);
+						attron(COLOR_PAIR(10));
+						mvaddch(j,i,currentChar);
+					} else if (bloodMap[j][i] == 2){
+						attroff(A_BLINK | A_BOLD);
+						attron(COLOR_PAIR(32));
+						mvaddch(j,i,currentChar);
+					}
+				}
 				if (enemyMap[j][i] == '&'){
 					attroff(A_BLINK);
 					attron(COLOR_PAIR(23) | A_BOLD);
@@ -195,17 +207,6 @@ void drawFOV(int radius){
 					mvaddch(j,i,itemMap[j][i]);
 					if (returnDungeonmapAt(i,j) == '$'){
 						mvaddch(j,i,'$');
-					}
-				}
-				if (grossStuff){
-					if (bloodMap[j][i] == 1){
-						attroff(A_BLINK | A_BOLD);
-						attron(COLOR_PAIR(10));
-						mvaddch(j,i,currentChar);
-					} else if (bloodMap[j][i] == 2){
-						attroff(A_BLINK | A_BOLD);
-						attron(COLOR_PAIR(32));
-						mvaddch(j,i,currentChar);
 					}
 				}
 				attroff(A_BOLD | A_BLINK);

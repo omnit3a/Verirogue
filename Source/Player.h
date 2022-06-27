@@ -1,4 +1,3 @@
-#define DEADLYBLOODLOSS 255
 #include <string>
 
 
@@ -29,7 +28,7 @@ extern int isSneaking;
 
 extern int bloodMap[][80];
 
-extern int grossStuff;
+extern int grossStuff, bloodTrailThreshold, DEADLYBLOODLOSS;
 
 extern std::string playerName;
 

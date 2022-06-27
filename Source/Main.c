@@ -17,6 +17,7 @@ int seedMain = time(0);
 
 int main(){
 	initFileRead();
+	worldFileRead();
 	setupScreen();
 	updateScreen();
 	playerCreatorScreen();

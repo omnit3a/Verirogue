@@ -12,19 +12,23 @@ int enemyDiseaseMap[24][80];
 char enemyMap[24][80];
 int enemyHealthMap[24][80];
 
+int spawnRate = 45;
+int baseEnemyHealth = 10;
+int baseEnemyDamage = 1;
+int diseaseRate = 10;
+int diseaseSpreadRate = 10;
+
 void placeEnemies(){
 	if (biome == 'd'){
 		for (int i = 0 ; i < 80 ; i++){
 			for (int j = 0 ; j < 24 ; j++){
 				enemyMap[j][i] = ' ';
 				enemyHealthMap[j][i] = 0;
-				if (map[j][i] == '.'){
-					if (rand() % 45 == 0){
-						enemyMap[j][i] = '&';
-						enemyHealthMap[j][i] = (rand() % 10)+10;
-						if (rand() % 10 == 0){
-							enemyDiseaseMap[j][i] = 1;
-						}
+				if (map[j][i] == '.' && rand() % spawnRate == 0){
+					enemyMap[j][i] = '&';
+					enemyHealthMap[j][i] = (rand() % 10)+baseEnemyHealth;
+					if (rand() % diseaseRate == 0){
+						enemyDiseaseMap[j][i] = 1;
 					}
 				}
 			}
@@ -117,7 +121,7 @@ void updateEnemyHealth(){
 void targetPlayer(){
 	srand(time(0));
 	int target = rand() % 6;
-	int damage = (rand() % 7)+1;
+	int damage = (rand() % 7)+baseEnemyDamage;
 	if (rand() % 3 < 2){
 		switch (target){
 			case 0:
@@ -165,7 +169,7 @@ void targetPlayer(){
 		}
 		playerEnt.skin.bpHP.currentHealth--;
 		srand(time(0)+playerEnt.skin.bpHP.currentHealth);
-		if (rand() % 10 == 0){
+		if (rand() % diseaseSpreadRate == 0){
 			msgLog = "You contract a disease!";
 			isDiseased = 1;
 			diseaseStart = turn;

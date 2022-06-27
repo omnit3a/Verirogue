@@ -39,3 +39,4 @@
 	- [ ] Game
 	- [ ] Fowl
 - [X] Custom player name
+- [ ] Chopping off limbs

@@ -14,6 +14,8 @@ extern char surroundingChar[4];
 
 extern char underPlayer;
 
+extern int treeSpawnRate,dungeonSpawnRate,canFireSpread;
+
 void generateMap();
 
 /**

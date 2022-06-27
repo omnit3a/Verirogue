@@ -33,6 +33,10 @@ char surroundingChar[4];
 
 char underPlayer;
 
+int treeSpawnRate = 100;
+int dungeonSpawnRate = 50;
+int canFireSpread = 1;
+
 void generateMap(){
 	noise.SetFrequency(0.05);
 	noise.SetSeed(seedMain);
@@ -67,10 +71,10 @@ void generateMap(){
 				map[j][i] = '~';
 			}
 			srand(seedFromPosition(i+playerEnt.currentPos.xPos,j+playerEnt.currentPos.yPos));
-			if (rand() % 100 == 0 && map[j][i] != '~' && map[j][i] != 'A'){
+			if (rand() % treeSpawnRate == 0 && map[j][i] != '~' && map[j][i] != 'A'){
 				map[j][i] = 't';
 			}
-			if (rand() % 50 == 0 && map[j][i] == 'A'){
+			if (rand() % dungeonSpawnRate == 0 && map[j][i] == 'A'){
 				map[j][i] = '>';
 			}
 
@@ -301,36 +305,38 @@ int seedFromPosition(int x, int y){
 char fireValues[24][80];
 
 void fireSpread(){
-	for (int i = 0 ; i < 80 ; i++){
-		for (int j = 0 ; j < 24 ; j++){
-			fireValues[j][i] = map[j][i];
+	if (canFireSpread){
+		for (int i = 0 ; i < 80 ; i++){
+			for (int j = 0 ; j < 24 ; j++){
+				fireValues[j][i] = map[j][i];
+			}
 		}
-	}
-	for (int i = 0 ; i < 80 ; i++){
-		for (int j = 0 ; j < 24 ; j++){
-			if (returnDungeonmapAt(i,j) == '*' && turn % 15 == 0){
-				if (returnDungeonmapAt(i,j-1) != ' '){
-					fireValues[j-1][i] = '*';
-					fires++;
-				}
-				if (returnDungeonmapAt(i,j+1) != ' '){
-					fireValues[j+1][i] = '*';
-					fires++;
-				}
-				if (returnDungeonmapAt(i-1,j) != ' '){
-					fireValues[j][i-1] = '*';
-					fires++;
-				}
-				if (returnDungeonmapAt(i+1,j) != ' '){
-					fireValues[j][i+1] = '*';
-					fires++;
+		for (int i = 0 ; i < 80 ; i++){
+			for (int j = 0 ; j < 24 ; j++){
+				if (returnDungeonmapAt(i,j) == '*' && turn % 15 == 0){
+					if (returnDungeonmapAt(i,j-1) != ' '){
+						fireValues[j-1][i] = '*';
+						fires++;
+					}
+					if (returnDungeonmapAt(i,j+1) != ' '){
+						fireValues[j+1][i] = '*';
+						fires++;
+					}
+					if (returnDungeonmapAt(i-1,j) != ' '){
+						fireValues[j][i-1] = '*';
+						fires++;
+					}
+					if (returnDungeonmapAt(i+1,j) != ' '){
+						fireValues[j][i+1] = '*';
+						fires++;
+					}
 				}
 			}
 		}
-	}
-	for (int i = 0 ; i < 80 ; i++){
-		for (int j = 0 ; j < 24 ; j++){
-			map[j][i] = fireValues[j][i];
+		for (int i = 0 ; i < 80 ; i++){
+			for (int j = 0 ; j < 24 ; j++){
+				map[j][i] = fireValues[j][i];
+			}
 		}
 	}
 }

@@ -3,4 +3,6 @@
 
 void initFileRead();
 
+void worldFileRead();
+
 #endif

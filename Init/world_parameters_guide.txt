@@ -1,0 +1,10 @@
+integer : enemy spawn rate DEFAULT = 45
+integer : base enemy health DEFAULT = 10
+integer : base enemy damage DEFAULT = 1
+integer : rate of diseased enemies (higher numbers mean a lower chance) DEFAULT = 10
+integer : rate of disease spread from enemies to player (higher numbers mean a lower chance) DEFAULT = 10
+integer : tree spawn rate (higher numbers means a lower chance) DEFAULT = 100
+integer : dungeon entrance spawn rate (higher number means a lower chance) DEFAULT = 50
+Y/N	: can fire spread in dungeons DEFAULT = Y
+integer : at what point the player leaves a blood trail DEFAULT = 485;
+integer : at what point the player dies of blood loss DEFAULT = 255;
