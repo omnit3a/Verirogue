@@ -3,6 +3,10 @@
 
 extern int dungeonHasFire;
 
+extern int coastmap[][80];
+
+void generateCoastmap();
+
 /**
  *	generate the map of the coast
  */
@@ -20,7 +24,7 @@ void generateMap();
 
 /**
  *	generate the heightmap
-*/
+ */
 char returnHeightmapAt(int x, int y);
 
 char returnCountryAt(int x, int y);

@@ -61,6 +61,8 @@ void drawMap(){
 				attron(COLOR_PAIR(3));
 			} else if (currentChar == 't'){
 				attron(COLOR_PAIR(2) | A_BOLD);
+			} else if (currentChar == ','){
+				attron(COLOR_PAIR(6) | A_BOLD);
 			} else{
 				attron(COLOR_PAIR(1));
 			}

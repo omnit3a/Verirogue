@@ -16,16 +16,33 @@ FastNoiseLite noise;
 
 int dungeonHasFire = 0;
 
-int returnCoastmapAt(int x, int y){
+int coastmap[24][80];
+
+void generateCoastmap(){
 	noise.SetFrequency(0.05);
 	noise.SetSeed(seedMain);
-	noise.SetNoiseType(FastNoiseLite::NoiseType_OpenSimplex2S);
-	int value = abs(lround((noise.GetNoise((float) playerEnt.currentPos.xPos+x, (float) playerEnt.currentPos.yPos+y)+0.5)/0.10));
-	if (value < 1){
-		return 0;
-	} else {
-		return value;
+	noise.SetNoiseType(FastNoiseLite::NoiseType_Cellular);
+	noise.SetFractalType(FastNoiseLite::FractalType_None);
+	int value;
+       	for (int i = 0 ; i < 80 ; i++){
+		for (int j = 0 ; j < 24 ; j++){
+			coastmap[j][i] = 0;
+		}
 	}
+	for (int i = 0 ; i < 80 ; i++){
+		for (int j = 0 ; j < 24 ; j++){
+			value = abs(lround((noise.GetNoise((float) playerEnt.currentPos.xPos+i, (float) playerEnt.currentPos.yPos+j)+0.40)/0.10));
+			if (value <= 1){
+				coastmap[j][i] = 1;
+			} else {
+				coastmap[j][i] = 0;
+			}
+		}
+	}
+}
+
+int returnCoastmapAt(int x, int y){
+	return coastmap[y][x];
 }
 
 char map[24][80];
@@ -39,9 +56,11 @@ int dungeonSpawnRate = 50;
 int canFireSpread = 1;
 
 void generateMap(){
-	noise.SetFrequency(0.05);
+	generateCoastmap();
+	noise.SetFrequency(0.04);
 	noise.SetSeed(seedMain);
-	noise.SetNoiseType(FastNoiseLite::NoiseType_Cellular);
+	noise.SetNoiseType(FastNoiseLite::NoiseType_Perlin);
+	noise.SetFractalType(FastNoiseLite::FractalType_Ridged);
 	int value;
 	for (int i = 0 ; i < 80 ; i++){
 		for (int j = 0 ; j < 24 ; j++){
@@ -60,10 +79,10 @@ void generateMap(){
 				}
 				continue;
 			}
-			if (returnCoastmapAt(i,j) != 0 && value > 3){
-				if (value == 11 || value == 12){
+			if (returnCoastmapAt(i,j) == 0 && value > 3){
+				if (value >= 11 && value <= 13){
 					map[j][i] = '^';
-				} else if (value > 12){
+				} else if (value > 13){
 					map[j][i] = 'A';
 				} else {
 					map[j][i] = '.';
@@ -72,13 +91,9 @@ void generateMap(){
 				map[j][i] = '~';
 			}
 			srand(seedFromPosition(i+playerEnt.currentPos.xPos,j+playerEnt.currentPos.yPos));
-			if (rand() % treeSpawnRate == 0 && map[j][i] != '~' && map[j][i] != 'A'){
-				map[j][i] = 't';
-			}
 			if (rand() % dungeonSpawnRate == 0 && map[j][i] == 'A'){
 				map[j][i] = '>';
 			}
-
 		}
 	}
 	surroundingChar[0] = map[11][40];

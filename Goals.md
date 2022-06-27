@@ -37,4 +37,7 @@
 - [X] Gas / Gas diffusion
 - [X] Player data files
 - [X] Option in config files to skip character creation<br>
+
 `BETA 1.0 HAS RELEASED`
+
+- [X] Improve terrain generation
