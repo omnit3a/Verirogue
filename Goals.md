@@ -40,3 +40,5 @@
 	- [ ] Fowl
 - [X] Custom player name
 - [ ] Chopping off limbs
+- [X] Gas / Gas diffusion
+- [X] Player data files

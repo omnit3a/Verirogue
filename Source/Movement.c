@@ -13,6 +13,8 @@
 #include "Enemies.h"
 #include "Inventory.h"
 #include "Items.h"
+#include "Gas.h"
+#include "FileRead.h"
 
 char biome;
 
@@ -29,6 +31,8 @@ int ch;
 char dir;		//'u' = UP 'd' = DOWN 'l' = LEFT 'r' = RIGHT
 
 int chM, dungeonType;
+
+int inDebugMode;
 
 void updateCauterize(int x, int y){
 	switch (dir){
@@ -603,6 +607,7 @@ void getMovement(){
 			msgLog = "You are now sneaking";
 			break;
 		case 27:
+			savePlayerData();
 			endScreen();
 			exit(0);
 	}

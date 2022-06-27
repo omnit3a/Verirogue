@@ -10,6 +10,7 @@
 #include "Main.h"
 #include "Enemies.h"
 #include "Inventory.h"
+#include "Gas.h"
 
 FastNoiseLite noise;
 
@@ -313,6 +314,9 @@ void fireSpread(){
 		}
 		for (int i = 0 ; i < 80 ; i++){
 			for (int j = 0 ; j < 24 ; j++){
+				if (returnDungeonmapAt(i,j) == '*'){
+					fireValues[j][i] = '*';
+				}
 				if (returnDungeonmapAt(i,j) == '*' && turn % 15 == 0){
 					if (returnDungeonmapAt(i,j-1) != ' '){
 						fireValues[j-1][i] = '*';
@@ -329,6 +333,28 @@ void fireSpread(){
 					if (returnDungeonmapAt(i+1,j) != ' '){
 						fireValues[j][i+1] = '*';
 						fires++;
+					}
+				}
+				if (turn % 5 == 0){
+					if (j-1 > 0){
+						if (fireValues[j-1][i] == '*'){
+							placeGas(i,j,SMOKESYM);
+						}
+					}
+					if (j+1 < 23){
+						if (fireValues[j+1][i] == '*'){
+							placeGas(i,j,SMOKESYM);
+						}
+					}
+					if (i-1 > 0){
+						if (fireValues[j][i-1] == '*'){
+							placeGas(i,j,SMOKESYM);
+						}
+					}
+					if (i+1 < 79){
+						if (fireValues[j][i+1] == '*'){
+							placeGas(i,j,SMOKESYM);
+						}
 					}
 				}
 			}

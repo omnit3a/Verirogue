@@ -12,12 +12,14 @@
 #include "Enemies.h"
 #include "FileRead.h"
 #include "Inventory.h"
+#include "Gas.h"
 
 int seedMain = time(0);
 
 int main(){
 	initFileRead();
 	worldFileRead();
+	initGas();
 	setupScreen();
 	updateScreen();
 	playerCreatorScreen();
@@ -45,6 +47,11 @@ int main(){
 			drawUserInterface();
 			drawPlayer();
 			fireSpread();
+			for (int i = 0 ; i < 80 ; i++){
+				for (int j = 0 ; j < 24 ; j++){
+					diffuseGas(i,j);
+				}
+			}
 			getMovement();
 			updateScreen();
 		} else if (biome == 't'){

@@ -5,4 +5,6 @@ void initFileRead();
 
 void worldFileRead();
 
+void savePlayerData();
+
 #endif

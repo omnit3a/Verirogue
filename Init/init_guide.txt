@@ -1,2 +1,3 @@
 Y/N : Gross stuff (vomit/blood trails) DEFAULT = Y
 Y/N : No FOV in dungeons DEFAULT = N
+Y/N : Debug mode? DEFAULT = N

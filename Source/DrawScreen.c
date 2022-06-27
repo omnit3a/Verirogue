@@ -10,6 +10,7 @@
 #include "Enemies.h"
 #include "Inventory.h"
 #include "DrawUI.h"
+#include "Gas.h"
 
 #define WIDTH 80
 #define HEIGHT 24
@@ -130,6 +131,18 @@ void drawWithoutFOV(){
 					mvaddch(j,i,'$');
 				}
 			}
+			if (gasMap[j][i] != ' '){
+				switch (gasMap[j][i]){
+					case SMOKESYM:
+						attroff(A_BOLD);
+						attron(COLOR_PAIR(1));
+						break;
+					case STEAMSYM:
+						attron(COLOR_PAIR(1) | A_BOLD);
+						break;
+				}
+				mvaddch(j,i,gasMap[j][i]);
+			}
 			attroff(A_BOLD | A_BLINK);
 		}
 	}
@@ -208,6 +221,18 @@ void drawFOV(int radius){
 					if (returnDungeonmapAt(i,j) == '$'){
 						mvaddch(j,i,'$');
 					}
+				}
+				if (gasMap[j][i] != ' '){
+					switch (gasMap[j][i]){
+						case SMOKESYM:
+							attroff(A_BOLD);
+							attron(COLOR_PAIR(1));
+							break;
+						case STEAMSYM:
+							attron(COLOR_PAIR(1) | A_BOLD);
+							break;
+					}
+					mvaddch(j,i,gasMap[j][i]);
 				}
 				attroff(A_BOLD | A_BLINK);
 				seenMap[j][i] = map[j][i];

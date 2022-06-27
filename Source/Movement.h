@@ -15,6 +15,8 @@ extern int ch;
 
 extern char dir;
 
+extern int inDebugMode;
+
 void updateCauterize(int x, int y);
 
 void engageInCombat(int x, int y);
