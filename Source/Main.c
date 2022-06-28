@@ -47,11 +47,6 @@ int main(){
 			drawUserInterface();
 			drawPlayer();
 			fireSpread();
-			for (int i = 0 ; i < 80 ; i++){
-				for (int j = 0 ; j < 24 ; j++){
-					diffuseGas(i,j);
-				}
-			}
 			getMovement();
 			updateScreen();
 		} else if (biome == 't'){

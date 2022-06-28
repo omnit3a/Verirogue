@@ -41,3 +41,4 @@
 `BETA 1.0 HAS RELEASED`
 
 - [X] Improve terrain generation
+- [X] Improve combat feel

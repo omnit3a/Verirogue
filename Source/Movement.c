@@ -66,17 +66,9 @@ void updateCauterize(int x, int y){
 void engageInCombat(int x, int y){
 	switch(enemyMap[y][x]){
 		case '&':
-			srand(time(0));
-			if (rand() % (3+isCrying) < 2){
-				int damage = ((rand() % currentWeapon)*2)+1;
-				enemyHealthMap[y][x] -= damage;
-				msgLog = "You hit the enemy!";
-			} else {
-				msgLog = "You missed the enemy";
-				if (isCrying != 0){
-					msgLog = "Your tears hinder your aim";
-				}
-			}
+			int damage = ((rand() % currentWeapon)*2)+1;
+			enemyHealthMap[y][x] -= damage;
+			msgLog = "You hit the enemy!";
 			break;
 	}
 	targetPlayer();

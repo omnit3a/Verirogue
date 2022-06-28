@@ -9,6 +9,7 @@
 #include "Movement.h"
 #include "DrawUI.h"
 #include <string>
+#include "FileRead.h"
 
 int bloodCount = 511;		//this is the amount of blood in the human body in litres * 100
 
@@ -122,6 +123,7 @@ void setupPlayer(int x, int y, int entID){
 }
 
 void killPlayer(std::string text){
+	savePlayerData();
 	clear();
 	endScreen();
 	printf("%s\n",text.c_str());
@@ -218,10 +220,6 @@ void infectionCheck(){
 		hasRash = 0;
 		hasDiarrhea = 0;
 		msgLog = "You are rid of your infection";
-	}
-	if (turn-diseaseStart > 500 && turn-infectionStart < 525){
-		isDiseased = 0;
-		msgLog = "You are rid of your disease";
 	}
 	if (hasDiarrhea == 1 && turn % 150 == 0){
 		playerEnt.currentHydration.hydration -= 5;
