@@ -42,13 +42,21 @@ void diffuseGas(int x, int y){
 	char diffusionType;
 	count = 0;
 	diffusionType = tempGasMap[y][x];
-	for (int i = x-1 ; i < x+2 ; i++){
-		for (int j = y-1 ; j < y+2 ; j++){
-			if (i > 0 && i < 79 && j > 0 && j < 23){
-				count += tempGasValues[j][i];
+	if (tempGasValues[y][x] != 0){
+		for (int i = x-1 ; i < x+2 ; i++){
+			for (int j = y-1 ; j < y+2 ; j++){
+
+				//check 8 surrounding tiles
+				if (i == x && j == y){
+					continue;
+				}
+				if (i > 0 && i < 79 && j > 0 && j < 23){
+					count += tempGasValues[j][i];
+				}
 			}
 		}
 	}
+	//average the 8 surrounding tiles
 	average = lround(count/8);
 	tempGasValues[y][x] = average;
 	if (average <= 0){

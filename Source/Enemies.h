@@ -11,7 +11,7 @@ extern int spawnRate, baseEnemyHealth, baseEnemyDamage, diseaseRate, diseaseSpre
 
 void placeEnemies();			//generates and places enemies for use in a dungeon
 
-void resetEnemies();			//removes all enemies from the map
+void resetEnemies(int resetCode);	//removes all enemies from the map
 
 void pseudoPathfind();			//very basic pathfinding for the enemies
 

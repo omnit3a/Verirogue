@@ -63,7 +63,7 @@ void drawMap(){
 				attron(COLOR_PAIR(2) | A_BOLD);
 			} else if (currentChar == ','){
 				attron(COLOR_PAIR(6) | A_BOLD);
-			} else{
+			} else {
 				attron(COLOR_PAIR(1));
 			}
 			mvaddch(j,i,returnHeightmapAt(i,j));
@@ -107,8 +107,12 @@ void drawWithoutFOV(){
 				attron(COLOR_PAIR(1));
 			} else if (currentChar == '*'){
 				attron(COLOR_PAIR(10) | A_BOLD | A_BLINK);
+			} else if (currentChar != ' ' || currentChar == '#'){
+				attroff(A_BOLD);
+				attron(COLOR_PAIR(1) | A_REVERSE);
 			}
 			mvaddch(j,i,map[j][i]);
+			attroff(A_REVERSE);
 			if (grossStuff){
 					if (bloodMap[j][i] == 1){
 						attroff(A_BLINK | A_BOLD);
@@ -164,12 +168,12 @@ void drawFOV(int radius){
 	clear();
 	for (int i = 0 ; i < 80 ; i++){
 		for (int j = 0 ; j < 24 ; j++){
-			if (seenMap[j][i] != ' '){
-				attron(COLOR_PAIR(3));
-				mvaddch(j,i,'#');
-			} else {
-				mvaddch(j,i,' ');
-			}	
+			attroff(A_BOLD | A_REVERSE);
+			attron(COLOR_PAIR(3));
+			if (seenMap[j][i] == '#' || (seenMap[j][i] >= 65 && seenMap[j][i] <= 90)){
+				attron(A_REVERSE);
+			}
+			mvaddch(j,i,seenMap[j][i]);
 		}
 	}
 	if (playerEnt.currentPos.xPos < radius){
@@ -195,8 +199,12 @@ void drawFOV(int radius){
 					attron(COLOR_PAIR(1));
 				} else if (currentChar == '*'){
 					attron(COLOR_PAIR(10) | A_BOLD | A_BLINK);
+				} else if (currentChar != ' ' || currentChar == '#'){
+					attroff(A_BOLD);
+					attron(COLOR_PAIR(1) | A_REVERSE);
 				}
 				mvaddch(j,i,map[j][i]);
+				attroff(A_REVERSE);
 				// it's important that the grossStuff is drawn first, otherwise enemies wont be visible under blood/vomit
 				if (grossStuff){
 					if (bloodMap[j][i] == 1){
@@ -238,6 +246,9 @@ void drawFOV(int radius){
 				}
 				attroff(A_BOLD | A_BLINK);
 				seenMap[j][i] = map[j][i];
+				if (itemMap[j][i] != ' '){
+					seenMap[j][i] = itemMap[j][i];
+				}
 			}
 		}
 	}

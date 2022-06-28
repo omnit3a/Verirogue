@@ -31,6 +31,10 @@ char returnCountryAt(int x, int y);
 
 extern int startX, startY;
 
+void generateEngraving(int x, int y);
+
+void generateWall();
+
 void generateDungeon(int maxWidth, int maxHeight);
 
 char returnDungeonmapAt(int x, int y);

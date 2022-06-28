@@ -132,7 +132,7 @@ void placeItems(){
 	srand(time(0));
 	for (int i = 0 ; i < 80 ; i++){
 		for (int j = 0 ; j < 24 ; j++){
-			if (biome == 'd' && map[j][i] != ' '){
+			if (biome == 'd' && dungeonWalkable(i,j)){
 				if (rand() % 228 == 0){
 					int item = rand() % 3;
 					if (item == 0){

@@ -135,6 +135,10 @@ int mapWalkable(){
 	}
 }
 
+int dungeonWalkable(int x, int y){
+	return (map[y][x] == '.' || map[y][x] == '+' || map[y][x] == '<' || map[y][x] == '$' || map[y][x] == '*');
+}
+
 int canWalk(){
 	int returnValue = playerEnt.leftLeg.bpHP.currentHealth > 10 || playerEnt.rightLeg.bpHP.currentHealth > 10 || ((playerEnt.leftArm.bpHP.currentHealth > 10 || playerEnt.rightArm.bpHP.currentHealth > 10) && isSwimming);
 	if (returnValue == 0){
@@ -165,7 +169,7 @@ void getMovement(){
 				}
 				break;
 			}
-			if (biome == 'd' && playerEnt.currentPos.yPos > 0 && returnDungeonmapAt(checkX, checkY-1) != ' ' && canWalk()){
+			if (biome == 'd' && playerEnt.currentPos.yPos > 0 && dungeonWalkable(checkX, checkY-1) && canWalk()){
 				playerEnt.currentPos.yPos--;
 			} else if (biome == 'o' && playerEnt.currentPos.yPos > -48 && canWalk()){
 				if (isSwimming && !mapWalkable()){
@@ -186,7 +190,7 @@ void getMovement(){
 				}
 				break;
 			}
-			if (biome == 'd' && playerEnt.currentPos.yPos < 23 && returnDungeonmapAt(checkX, checkY+1) != ' ' && canWalk()){
+			if (biome == 'd' && playerEnt.currentPos.yPos < 23 && dungeonWalkable(checkX, checkY+1) && canWalk()){
 				playerEnt.currentPos.yPos++;
 			} else if (biome == 'o' && playerEnt.currentPos.yPos < 48 && canWalk()){
 				if (isSwimming && !mapWalkable()){
@@ -206,7 +210,7 @@ void getMovement(){
 				}
 				break;
 			}
-			if (biome == 'd' && playerEnt.currentPos.xPos > 0 && returnDungeonmapAt(checkX-1, checkY) != ' ' && canWalk()){
+			if (biome == 'd' && playerEnt.currentPos.xPos > 0 && dungeonWalkable(checkX-1, checkY) && canWalk()){
 				playerEnt.currentPos.xPos--;
 			} else if (biome == 'o' && playerEnt.currentPos.xPos > -96 && canWalk()){
 				if (isSwimming && !mapWalkable()){
@@ -226,7 +230,7 @@ void getMovement(){
 				}
 				break;
 			}
-			if (biome == 'd' && playerEnt.currentPos.xPos < 79 && returnDungeonmapAt(checkX+1, checkY) != ' ' && canWalk()){
+			if (biome == 'd' && playerEnt.currentPos.xPos < 79 && dungeonWalkable(checkX+1, checkY) && canWalk()){
 				playerEnt.currentPos.xPos++;
 			} else if (biome == 'o' && playerEnt.currentPos.xPos < 96 && canWalk()){
 				if (isSwimming && !mapWalkable()){
@@ -281,28 +285,28 @@ void getMovement(){
 			if (biome == 'd' && canHit()){
 				switch(dir){
 					case 'u':
-						if (returnDungeonmapAt(checkX, checkY-1) != ' ' && returnDungeonmapAt(checkX, checkY-1) != '<'){
+						if (dungeonWalkable(checkX,checkY-1) && returnDungeonmapAt(checkX, checkY-1) != '<'){
 							map[checkY-1][checkX] = '*';
 							dungeonHasFire = 1;
 							msgLog = "You lit a fire";
 						}
 						break;
 					case 'd':
-						if (returnDungeonmapAt(checkX, checkY+1) != ' ' && returnDungeonmapAt(checkX, checkY+1) != '<'){
+						if (dungeonWalkable(checkX, checkY+1) && returnDungeonmapAt(checkX, checkY+1) != '<'){
 							map[checkY+1][checkX] = '*';
 							dungeonHasFire = 1;
 							msgLog = "You lit a fire";
 						}
 						break;
 					case 'l':
-						if (returnDungeonmapAt(checkX-1, checkY) != ' ' && returnDungeonmapAt(checkX-1, checkY) != '<'){
+						if (dungeonWalkable(checkX-1, checkY) && returnDungeonmapAt(checkX-1, checkY) != '<'){
 							map[checkY][checkX-1] = '*';
 							dungeonHasFire = 1;
 							msgLog = "You lit a fire";
 						}
 						break;
 					case 'r':
-						if (returnDungeonmapAt(checkX+1, checkY) != ' ' && returnDungeonmapAt(checkX+1, checkY) != '<'){
+						if (dungeonWalkable(checkX+1, checkY) && returnDungeonmapAt(checkX+1, checkY) != '<'){
 							map[checkY][checkX+1] = '*';
 							dungeonHasFire = 1;
 							msgLog = "You lit a fire";
@@ -636,6 +640,9 @@ void updateTemperature(){
 		} else {
 			dungeonHasFire = 0;
 		}
+	}
+	if (underPlayer == '~'){
+		surroundingTemperature = 8;
 	}
 	if (turn % 25 == 0){
 		if (surroundingTemperature < playerEnt.currentTemperature.celsius){

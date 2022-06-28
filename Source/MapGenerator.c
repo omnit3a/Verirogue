@@ -128,6 +128,30 @@ int startX, startY;
 char roomF = '.';
 char hallway = '+';
 
+void generateEngraving(int x, int y){
+	if ((map[y-1][x] != ' ' || map[y+1][x] != ' ' || map[y][x-1] != ' ' || map[y][x+1] != ' ')&&map[y][x] == '#'){
+		map[y][x] = (rand() % 26)+65;
+	}
+}
+
+void generateWall(){
+	char tempMap[24][80];
+	for (int i = 0 ; i < 80 ; i++){
+		for (int j = 0 ; j < 24 ; j++){
+			if (((map[j-1][i] != ' ' || map[j+1][i] != ' ' || map[j][i-1] != ' ' || map[j][i+1] != ' ' || map[j-1][i-1] != ' ' || map[j-1][i+1] != ' ' || map[j+1][i-1] != ' ' || map[j+1][i+1] != ' ') && map[j][i] == ' ')||(j==0 || i==0 || j==23 || i==79)){
+				tempMap[j][i] = '#';
+			} else {
+				tempMap[j][i] = map[j][i];
+			}
+		}
+	}
+	for (int i = 0 ; i < 80 ; i++){
+		for (int j = 0 ; j < 24 ; j++){
+			map[j][i] = tempMap[j][i];
+		}
+	}
+}
+
 void generateDungeon(int maxWidth, int maxHeight){
 	for (int i = 0 ; i < 80 ; i++){
 		for (int j = 0 ; j < 24 ; j++){
@@ -221,16 +245,28 @@ void generateDungeon(int maxWidth, int maxHeight){
 			map[startY][startX] = '<';
 		}
 		srand(time(0));
-		int roomXGold;
-		int roomYGold;
+		int roomXGold, engravingX;
+		int roomYGold, engravingY;
 		for (int i = 0 ; i < 16 ; i++){
 			srand(time(0)+i);
 			roomXGold = rand() % 80;
 			roomYGold = rand() % 24;
-			if (map[roomYGold][roomXGold] == ' '){
+			if (!dungeonWalkable(roomXGold, roomYGold)){
 				continue;
-			} else if (map[roomYGold][roomXGold] == '.'){
+			} else if (dungeonWalkable(roomXGold, roomYGold) && map[roomYGold][roomXGold] != '<'){
 				map[roomYGold][roomXGold] = '$';
+				continue;
+			}
+		}
+		generateWall();
+		for (int i = 0 ; i < 64 ; i++){
+			srand(time(0)+i-1);
+			engravingX = rand() % 80;
+			engravingY = rand() % 24;
+		       	if (map[engravingY][engravingX]	== ' '){
+				continue;
+			} else {
+				generateEngraving(engravingX, engravingY);
 				continue;
 			}
 		}
@@ -333,43 +369,21 @@ void fireSpread(){
 					fireValues[j][i] = '*';
 				}
 				if (returnDungeonmapAt(i,j) == '*' && turn % 15 == 0){
-					if (returnDungeonmapAt(i,j-1) != ' '){
+					if (dungeonWalkable(i,j-1)){
 						fireValues[j-1][i] = '*';
 						fires++;
 					}
-					if (returnDungeonmapAt(i,j+1) != ' '){
+					if (dungeonWalkable(i,j+1)){
 						fireValues[j+1][i] = '*';
 						fires++;
 					}
-					if (returnDungeonmapAt(i-1,j) != ' '){
+					if (dungeonWalkable(i-1,j)){
 						fireValues[j][i-1] = '*';
 						fires++;
 					}
-					if (returnDungeonmapAt(i+1,j) != ' '){
+					if (dungeonWalkable(i+1,j)){
 						fireValues[j][i+1] = '*';
 						fires++;
-					}
-				}
-				if (turn % 5 == 0){
-					if (j-1 > 0){
-						if (fireValues[j-1][i] == '*'){
-							placeGas(i,j,SMOKESYM);
-						}
-					}
-					if (j+1 < 23){
-						if (fireValues[j+1][i] == '*'){
-							placeGas(i,j,SMOKESYM);
-						}
-					}
-					if (i-1 > 0){
-						if (fireValues[j][i-1] == '*'){
-							placeGas(i,j,SMOKESYM);
-						}
-					}
-					if (i+1 < 79){
-						if (fireValues[j][i+1] == '*'){
-							placeGas(i,j,SMOKESYM);
-						}
 					}
 				}
 			}

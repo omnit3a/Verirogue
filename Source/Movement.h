@@ -27,6 +27,8 @@ int townWalkable(int x, int y);
 
 int mapWalkable();
 
+int dungeonWalkable(int x, int y);
+
 int canWalk();
 
 int canHit();

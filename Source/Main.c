@@ -26,12 +26,12 @@ int main(){
 	generateMap();
 	generatePlanetaryBodies(5,80);
 	setupPlayer(0,0,0);
-	resetEnemies();
+	resetEnemies(0);
 	biome = 'o';
 	while(1){
 		if (biome == 'o'){
 			generateMap();
-			resetEnemies();				//makes sure no enemies spawn on the overworld
+			resetEnemies(0);				//makes sure no enemies spawn on the overworld
 			drawMap();
 			updateTemperature();
 			updateHunger();
@@ -41,6 +41,7 @@ int main(){
 			getMovement();
 			updateScreen();
 		} else if (biome == 'd'){
+			resetEnemies(1);
 			drawDungeon();
 			updateTemperature();
 			updateHunger();

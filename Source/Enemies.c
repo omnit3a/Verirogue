@@ -24,7 +24,7 @@ void placeEnemies(){
 			for (int j = 0 ; j < 24 ; j++){
 				enemyMap[j][i] = ' ';
 				enemyHealthMap[j][i] = 0;
-				if (map[j][i] == '.' && rand() % spawnRate == 0){
+				if ((dungeonWalkable(i,j) && map[j][i] != '<') && rand() % spawnRate == 0){
 					enemyMap[j][i] = '&';
 					enemyHealthMap[j][i] = (rand() % 10)+baseEnemyHealth;
 					if (rand() % diseaseRate == 0){
@@ -36,12 +36,28 @@ void placeEnemies(){
 	}
 }
 
-void resetEnemies(){
-	for (int i = 0 ; i < 80 ; i++){
-		for (int j = 0 ; j < 24 ; j++){
-			enemyMap[j][i] = ' ';
-			enemyHealthMap[j][i] = 0;
-			enemyDiseaseMap[j][i] = 0;
+/**
+ *	Reset code 0: delete all enemies
+ *	Reset code 1: cull enemies
+ */
+void resetEnemies(int resetCode){
+	if (resetCode == 0){
+		for (int i = 0 ; i < 80 ; i++){
+			for (int j = 0 ; j < 24 ; j++){
+				enemyMap[j][i] = ' ';
+				enemyHealthMap[j][i] = 0;
+				enemyDiseaseMap[j][i] = 0;
+			}
+		}
+	} else if (resetCode == 1){
+		for (int i = 0 ; i < 80 ; i++){
+			for (int j = 0 ; j < 24 ; j++){
+				if (!dungeonWalkable(i,j) && enemyMap[j][i] != ' '){
+					enemyMap[j][i] = ' ';
+					enemyHealthMap[j][i] = 0;
+					enemyDiseaseMap[j][i] = 0;
+				}
+			}
 		}
 	}
 }
@@ -63,28 +79,28 @@ void pseudoPathfind(){
 		for (int i = 0 ; i < 80 ; i++){
 			for (int j = 0 ; j < 24 ; j++){
 				if (enemyMap[j][i] == '&'){
-					if (map[j+1][i] != ' ' && j < checkY-1 && enemyMap[j+1][i] != '&'){
+					if (dungeonWalkable(i,j-1) && j < checkY-1 && enemyMap[j+1][i] != '&'){
 						tempMap[j][i] = ' ';
 						tempMap[j+1][i] = '&';
 						tempHealth[j+1][i] = tempHealth[j][i];
 						tempHealth[j][i] = 0;
 						tempDisease[j+1][i] = tempDisease[j][i];
 						tempDisease[j][i] = 0;
-					} else if (map[j-1][i] != ' ' && j > checkY+1 && enemyMap[j-1][i] != '&'){
+					} else if (dungeonWalkable(i,j+1) && j > checkY+1 && enemyMap[j-1][i] != '&'){
 						tempMap[j][i] = ' ';
 						tempMap[j-1][i] = '&';
 						tempHealth[j-1][i] = tempHealth[j][i];
 						tempHealth[j][i] = 0;
 						tempDisease[j-1][i] = tempDisease[j][i];
 						tempDisease[j][i] = 0;
-					} else if (map[j][i+1] != ' ' && i < checkX-1 && enemyMap[j][i+1] != '&'){
+					} else if (dungeonWalkable(i+1,j) && i < checkX-1 && enemyMap[j][i+1] != '&'){
 						tempMap[j][i] = ' ';
 						tempMap[j][i+1] = '&';
 						tempHealth[j][i+1] = tempHealth[j][i];
 						tempHealth[j][i] = 0;
 						tempDisease[j][i+1] = tempDisease[j][i];
 						tempDisease[j][i] = 0;
-					} else if (map[j][i-1] != ' ' && i > checkX+1 && enemyMap[j][i-1] != '&'){
+					} else if (dungeonWalkable(i-1,j) && i > checkX+1 && enemyMap[j][i-1] != '&'){
 						tempMap[j][i] = ' ';
 						tempMap[j][i-1] = '&';
 						tempHealth[j][i-1] = tempHealth[j][i];

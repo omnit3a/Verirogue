@@ -42,3 +42,7 @@
 
 - [X] Improve terrain generation
 - [X] Improve combat feel
+- [X] Improve dungeon generation
+	- [X] Add engravings
+	- [X] Add dungeon walls
+- [ ] Procedural text generation
