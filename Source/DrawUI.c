@@ -173,8 +173,8 @@ void drawHelp(){
 	clear();
 	attron(COLOR_PAIR(11) | A_BOLD);
 	mvprintw(0,0,"Arrow keys : Movement");
-	mvprintw(1,0,"> : Enter dungeon");
-	mvprintw(2,0,"< : Exit dungeon");
+	mvprintw(1,0,"> : Enter tile");
+	mvprintw(2,0,"< : Exit tile");
 	mvprintw(3,0,"f : Set fire");
 	mvprintw(4,0,"s : Scavenge for food");
 	mvprintw(5,0,"S : Check character sheet");

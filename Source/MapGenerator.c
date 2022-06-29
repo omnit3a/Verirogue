@@ -11,6 +11,7 @@
 #include "Enemies.h"
 #include "Inventory.h"
 #include "Gas.h"
+#include "DrawUI.h"
 
 FastNoiseLite noise;
 
@@ -23,6 +24,7 @@ void generateCoastmap(){
 	noise.SetSeed(seedMain);
 	noise.SetNoiseType(FastNoiseLite::NoiseType_Cellular);
 	noise.SetFractalType(FastNoiseLite::FractalType_None);
+	noise.SetCellularDistanceFunction(FastNoiseLite::CellularDistanceFunction_EuclideanSq);
 	int value;
        	for (int i = 0 ; i < 80 ; i++){
 		for (int j = 0 ; j < 24 ; j++){
@@ -237,8 +239,8 @@ void generateDungeon(int maxWidth, int maxHeight){
 		connectedRooms[i][1] = roomB;
 	}
 	end:
-		startX = rand() % 80;
-		startY = rand() % 24;
+		startX = (rand() % 78) + 1;
+		startY = (rand() % 22) + 1;
 		if (map[startY][startX] == ' '){
 			goto end;
 		} else {
@@ -278,6 +280,183 @@ void generateDungeon(int maxWidth, int maxHeight){
 char returnDungeonmapAt(int x, int y){
 	return map[y][x];
 }
+
+
+/**
+ *	zoomed in stuff starts here...
+ *
+ */
+void generateCloseField(){
+	msgLog = "You explore the field";
+	for (int i = 0 ; i < 80 ; i++){
+		for (int j = 0 ; j < 24 ; j++){
+			map[j][i] = '.';
+		}
+	}
+}
+
+void generateCloseHill(){
+	msgLog = "You explore the forest";
+	for (int i = 0 ; i < 80 ; i++){
+		for (int j = 0 ; j < 24 ; j++){
+			map[j][i] = '.';
+		}
+	}
+	for (int i = 0 ; i < 80 ; i++){
+		for (int j = 0 ; j < 24 ; j++){
+			if (rand() % 2 == 0){
+				map[j][i] = '^';
+			}
+		}
+	}
+	int treeCount;
+	int grassCount;
+	char tempHills[24][80];
+	int adjEmpty;
+	for (int r = 0 ; r < 16 ; r++){
+		for (int x = 0 ; x < 80 ; x++){
+			for (int y = 0 ; y < 24 ; y++){
+				treeCount = 0;
+				grassCount = 0;
+				if (map[y-1][x] == '^'){
+					treeCount++;
+				} else {
+					grassCount++;
+				}
+				if (map[y+1][x] == '^'){
+					treeCount++;
+				} else {
+					grassCount++;
+				}
+				if (map[y][x-1] == '^'){
+					treeCount++;
+				} else {
+					grassCount++;
+				}
+				if (map[y][x+1] == '^'){
+					treeCount++;
+				} else {
+					grassCount++;
+				}
+				if (grassCount <= treeCount){
+					tempHills[y][x] = '.';
+				} else {
+					tempHills[y][x] = '^';
+				}
+				if (tempHills[y-1][x] == '.' && tempHills[y+1][x] == '.' && tempHills[y][x-1] == '.' && tempHills[y][x+1] == '.'){
+					tempHills[y][x] = '.';
+				}	
+			}
+		}
+	}
+	for (int i = 0 ; i < 80 ; i++){
+		for (int j = 0 ; j < 24 ; j++){
+			map[j][i] = tempHills[j][i];
+		}
+	}
+}
+
+void generateCloseMountain(){
+	msgLog = "You explore the mountains";
+	//add code for mountain generation here
+	for (int i = 0 ; i < 80 ; i++){
+		for (int j = 0 ; j < 24 ; j++){
+			map[j][i] = '.';
+		}
+	}
+	for (int i = 0 ; i < 80 ; i++){
+		for (int j = 0 ; j < 24 ; j++){
+			if (rand() % 3 == 0){
+				map[j][i] = 'A';
+			}
+		}
+	}
+	int mountCount;
+	int grassCount;
+	char tempMountain[24][80];
+	int adjEmpty;
+	for (int r = 0 ; r < 16 ; r++){
+		for (int x = 0 ; x < 80 ; x++){
+			for (int y = 0 ; y < 24 ; y++){
+				mountCount = 0;
+				grassCount = 0;
+				if (map[y-1][x] == 'A'){
+					mountCount++;
+				} else {
+					grassCount++;
+				}
+				if (map[y+1][x] == 'A'){
+					mountCount++;
+				} else {
+					grassCount++;
+				}
+				if (map[y][x-1] == 'A'){
+					mountCount++;
+				} else {
+					grassCount++;
+				}
+				if (map[y][x+1] == 'A'){
+					mountCount++;
+				} else {
+					grassCount++;
+				}
+				if (grassCount <= mountCount){
+					tempMountain[y][x] = 'A';
+				} else {
+					tempMountain[y][x] = '.';
+				}
+				if (tempMountain[y-1][x] == 'A' && tempMountain[y+1][x] == 'A' && tempMountain[y][x-1] == 'A' && tempMountain[y][x+1] == 'A'){
+					tempMountain[y][x] = 'A';
+				}	
+			}
+		}
+	}
+	for (int i = 0 ; i < 80 ; i++){
+		for (int j = 0 ; j < 24 ; j++){
+			map[j][i] = tempMountain[j][i];
+		}
+	}
+}
+
+void generateCloseUp(){
+	switch (biome){
+		case 'f':
+			generateCloseField();
+			break;
+		case 'h':
+			generateCloseHill();
+			break;
+		case 'm':
+			generateCloseMountain();
+			break;
+	}
+	switch (underPlayer){
+		case '.':
+			biome = 'f';
+			generateCloseField();
+			break;
+		case '^':
+			biome = 'h';
+			generateCloseHill();
+			break;
+		case 'A':
+			biome = 'm';
+			generateCloseMountain();
+			break;
+	}
+	
+	surroundingChar[0] = map[11][40];
+	surroundingChar[1] = map[12][41];
+	surroundingChar[2] = map[13][40];
+	surroundingChar[3] = map[12][39];
+
+	//this is the character underneath the player
+	underPlayer = map[12][40];
+}
+
+/**
+ *	...and ends here
+ */
 
 int townMap[24][80];
 

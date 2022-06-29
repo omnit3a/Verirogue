@@ -41,7 +41,6 @@ void endScreen(){
 }
 
 void drawMap(){
-	biome = 'o';
 	init_pair(1, COLOR_CYAN, COLOR_BLACK);
 	init_pair(2, COLOR_GREEN, COLOR_BLACK);
 	init_pair(3, COLOR_WHITE, COLOR_BLACK);
@@ -65,6 +64,9 @@ void drawMap(){
 				attron(COLOR_PAIR(6) | A_BOLD);
 			} else {
 				attron(COLOR_PAIR(1));
+			}
+			if (biome == 'h' && currentChar == '^'){
+				attron(A_BOLD);
 			}
 			mvaddch(j,i,returnHeightmapAt(i,j));
 			attroff(A_BOLD);
@@ -246,9 +248,6 @@ void drawFOV(int radius){
 				}
 				attroff(A_BOLD | A_BLINK);
 				seenMap[j][i] = map[j][i];
-				if (itemMap[j][i] != ' '){
-					seenMap[j][i] = itemMap[j][i];
-				}
 			}
 		}
 	}

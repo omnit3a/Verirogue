@@ -39,6 +39,26 @@ void generateDungeon(int maxWidth, int maxHeight);
 
 char returnDungeonmapAt(int x, int y);
 
+/**
+ *	Generate a zoomed in field
+ */
+void generateCloseField();
+
+/**
+ *	Generate a zoomed in hilly area
+ */
+void generateCloseHill();
+
+/**
+ *	Generate a zoomed in mountain
+ */
+void generateCloseMountain();
+
+/**
+ *	Generate the section of the map that the player is currently on, zoomed in
+ */
+void generateCloseUp();
+
 extern int townMap[][80];
 
 extern int townNPCS[][4];

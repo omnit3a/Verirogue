@@ -40,6 +40,15 @@ int main(){
 			drawPlayer();
 			getMovement();
 			updateScreen();
+		} else if (biome == 'f' || biome == 'h' || biome == 'm'){
+			drawMap();
+			updateTemperature();
+			updateHunger();	
+			setDayNight();
+			drawUserInterface();
+			drawPlayer();
+			getMovement();
+			updateScreen();
 		} else if (biome == 'd'){
 			resetEnemies(1);
 			drawDungeon();

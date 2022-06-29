@@ -83,7 +83,7 @@ void drawPlayer(){
 	} else {
 		attron(COLOR_PAIR(6) | A_BOLD);
 	}
-	if (biome == 'd' || biome == 't'){
+	if (biome == 'd' || biome == 't' || biome == 'f' || biome == 'h' || biome == 'm'){
 		mvaddch(playerEnt.currentPos.yPos, playerEnt.currentPos.xPos, '@');
 	} else if (biome == 'o'){
 		mvaddch(12,40,'@');
@@ -101,37 +101,72 @@ int townWalkable(int x, int y){
 }
 
 int mapWalkable(){
-	switch (dir){
-		case 'u':
-			if (surroundingChar[0] != '~'){
-				return 1;
-			} else {
+	if (biome == 'f' || biome == 'h' || biome == 'm'){
+		switch (dir){
+			case 'u':
+				if (playerEnt.currentPos.yPos > 0 && surroundingChar[0] != '~'){
+					return 1;
+				} else {
+					return 0;
+				}
+				break;
+			case 'd':
+				if (playerEnt.currentPos.yPos < 23 && surroundingChar[2] != '~'){
+					return 1;
+				} else {
+					return 0;
+				}
+				break;
+			case 'l':
+				if (playerEnt.currentPos.xPos > 0 && surroundingChar[3] != '~'){
+					return 1;
+				} else {
+					return 0;
+				}
+				break;
+			case 'r':
+				if (playerEnt.currentPos.xPos < 79 && surroundingChar[1] != '~'){
+					return 1;
+				} else {
+					return 0;
+				}
+				break;
+			default:
 				return 0;
-			}
-			break;
-		case 'd':
-			if (surroundingChar[2] != '~'){
-				return 1;
-			} else {
+		}
+	} else {
+		switch (dir){
+			case 'u':
+				if (surroundingChar[0] != '~'){
+					return 1;
+				} else {
+					return 0;
+				}
+				break;
+			case 'd':
+				if (surroundingChar[2] != '~'){
+					return 1;
+				} else {
+					return 0;
+				}
+				break;
+			case 'l':
+				if (surroundingChar[3] != '~'){
+					return 1;
+				} else {
+					return 0;
+				}
+				break;
+			case 'r':
+				if (surroundingChar[1] != '~'){
+					return 1;
+				} else {
+					return 0;
+				}
+				break;
+			default:
 				return 0;
-			}
-			break;
-		case 'l':
-			if (surroundingChar[3] != '~'){
-				return 1;
-			} else {
-				return 0;
-			}
-			break;
-		case 'r':
-			if (surroundingChar[1] != '~'){
-				return 1;
-			} else {
-				return 0;
-			}
-			break;
-		default:
-			return 0;
+		}
 	}
 }
 
@@ -155,6 +190,10 @@ int canHit(){
 	return returnValue;
 }
 
+int inOverworld(){
+	return (biome == 'o' || biome == 'f' || biome == 'h' || biome == 'm');
+}
+
 void getMovement(){
 	ch = getch();
 	int checkX = playerEnt.currentPos.xPos;
@@ -171,7 +210,7 @@ void getMovement(){
 			}
 			if (biome == 'd' && playerEnt.currentPos.yPos > 0 && dungeonWalkable(checkX, checkY-1) && canWalk()){
 				playerEnt.currentPos.yPos--;
-			} else if (biome == 'o' && playerEnt.currentPos.yPos > -48 && canWalk()){
+			} else if (inOverworld() && playerEnt.currentPos.yPos > -48 && canWalk()){
 				if (isSwimming && !mapWalkable()){
 					playerEnt.currentPos.yPos--;
 				} else if (!isSwimming && mapWalkable()){
@@ -192,7 +231,7 @@ void getMovement(){
 			}
 			if (biome == 'd' && playerEnt.currentPos.yPos < 23 && dungeonWalkable(checkX, checkY+1) && canWalk()){
 				playerEnt.currentPos.yPos++;
-			} else if (biome == 'o' && playerEnt.currentPos.yPos < 48 && canWalk()){
+			} else if (inOverworld() && playerEnt.currentPos.yPos < 48 && canWalk()){
 				if (isSwimming && !mapWalkable()){
 					playerEnt.currentPos.yPos++;
 				} else if (!isSwimming && mapWalkable()){
@@ -212,7 +251,7 @@ void getMovement(){
 			}
 			if (biome == 'd' && playerEnt.currentPos.xPos > 0 && dungeonWalkable(checkX-1, checkY) && canWalk()){
 				playerEnt.currentPos.xPos--;
-			} else if (biome == 'o' && playerEnt.currentPos.xPos > -96 && canWalk()){
+			} else if (inOverworld() && playerEnt.currentPos.xPos > -96 && canWalk()){
 				if (isSwimming && !mapWalkable()){
 					playerEnt.currentPos.xPos--;
 				} else if (!isSwimming && mapWalkable()){
@@ -232,7 +271,7 @@ void getMovement(){
 			}
 			if (biome == 'd' && playerEnt.currentPos.xPos < 79 && dungeonWalkable(checkX+1, checkY) && canWalk()){
 				playerEnt.currentPos.xPos++;
-			} else if (biome == 'o' && playerEnt.currentPos.xPos < 96 && canWalk()){
+			} else if (inOverworld() && playerEnt.currentPos.xPos < 96 && canWalk()){
 				if (isSwimming && !mapWalkable()){
 					playerEnt.currentPos.xPos++;
 				} else if (!isSwimming && mapWalkable()){
@@ -253,6 +292,15 @@ void getMovement(){
 				msgLog = "You left the dungeon";
 				fires = 0;
 				dungeonHasFire = 0;
+			} else if (biome != 'o' && inOverworld() && canWalk){
+				surroundingTemperature = 37;
+				biome = 'o';
+				generateMap();
+				playerEnt.currentPos.xPos = entryX;
+				playerEnt.currentPos.yPos = entryY;
+				updateScreen();
+				msgLog = "You return to travelling";
+				fires = 0;
 			} else if (biome == 't' && canWalk()){
 				surroundingTemperature = 37;
 				biome = 'o';
@@ -277,6 +325,11 @@ void getMovement(){
 				playerEnt.currentPos.yPos = startY;
 				updateScreen();
 				msgLog = "You enter the dungeon";
+			} else if (biome == 'o' && canWalk() && underPlayer != '>'){
+				generateCloseUp();
+				playerEnt.currentPos.xPos = 40;
+				playerEnt.currentPos.yPos = 12;
+				updateScreen();
 			} else {
 				msgLog = "There isn't a dungeon here!";
 			}
@@ -421,14 +474,16 @@ void getMovement(){
 			}
 			break;
 		case 'm':
-			if (biome == 'o'){
+			if (inOverworld() && (hour < 6 || hour >= 20)){
 				clear();
 				drawStarmap();
 				updateScreen();
 				getch();
-			} else {
+			} else if (!inOverworld()){
 				msgLog = "You can't see the sky at the moment";
-			}	
+			} else {
+				msgLog = "The stars aren't out right now";
+			}
 			break;
 		case 'p':
 			msgLog = "You are now prone!";
@@ -564,7 +619,7 @@ void getMovement(){
 						msgLog = "It's a downard staircase";
 						break;
 					case '^':
-						msgLog = "It's some hilly terrain";
+						msgLog = "It's some forested terrain";
 						break;
 					case 'A':
 						msgLog = "It's some mountainous terrain";

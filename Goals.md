@@ -46,3 +46,4 @@
 	- [X] Add engravings
 	- [X] Add dungeon walls
 - [ ] Procedural text generation
+- [X] Exploration of every kind of tile

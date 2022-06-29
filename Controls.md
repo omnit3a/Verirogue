@@ -1,7 +1,7 @@
 # Controls
 - `Arrow keys` Movement
-- `>` Enter dungeon
-- `<` Leave dungeon
+- `>` Enter tile
+- `<` Leave tile
 - `f` Set fire
 - `s` Scavenge for food
 - `S` Check character sheet

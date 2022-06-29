@@ -33,6 +33,8 @@ int canWalk();
 
 int canHit();
 
+int inOverworld();
+
 void getMovement();
 
 void updateTemperature();
