@@ -192,6 +192,7 @@ void targetPlayer(){
 			msgLog = "You contract a disease!";
 			isDiseased = 1;
 			diseaseStart = turn;
+			medicalFailures++;
 		}
 	}
 	

@@ -269,4 +269,6 @@ void savePlayerData(){
 	fputs("\n## Legacy ##\n", ptr);
 	fputs(generateLegacy().c_str(), ptr);
 	fclose(ptr);
+
+	saveLegacy();
 }

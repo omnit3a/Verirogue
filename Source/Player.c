@@ -197,7 +197,7 @@ void infectionCheck(){
 		isInfected = 1;
 		infectionStart = turn;
 		srand(time(0));	
-	
+		medicalFailures++;	
                /**
 		*	0 = Common Cold			most common viral infection
 	 	*	1 = Impetigo			one of the most common bacterial infections
@@ -223,17 +223,18 @@ void infectionCheck(){
 		hasRash = 0;
 		hasDiarrhea = 0;
 		msgLog = "You are rid of your infection";
+		medicalSuccesses++;
 	}
-	if (hasDiarrhea == 1 && turn % 150 == 0){
+	if (hasDiarrhea == 1 && turn % (150+infectionStart) == 0){
 		playerEnt.currentHydration.hydration -= 5;
 	}
-	if (hasRash == 1 && turn % 75 == 0){
+	if (hasRash == 1 && turn % (75+infectionStart) == 0){
 		msgLog = "You itch your face";
 	}
-	if (isCongested == 1 && turn % 75 == 0){
+	if (isCongested == 1 && turn % (75+infectionStart) == 0){
 		msgLog = "Your nose is running";
 	}
-	if (isDiseased == 1 && turn % 75 == 0){
+	if (isDiseased == 1 && turn % (75+diseaseStart) == 0){
 		foodScore -= 5;
 		msgLog = "You throw up";
 		bloodMap[playerEnt.currentPos.yPos][playerEnt.currentPos.xPos] = 2;
@@ -241,6 +242,7 @@ void infectionCheck(){
 	if (turn % (500+diseaseStart) == 0 && isDiseased == 1){
 		isDiseased = 0;
 		msgLog = "You are rid of your disease";
+		medicalSuccesses++;
 	}
 	drawUserInterface();
 } 
@@ -253,6 +255,7 @@ void cauterizeWound(){
 			break;
 		}
 	}
+	medicalSuccesses++;
 	if (bloodMap[playerEnt.currentPos.yPos][playerEnt.currentPos.xPos] != 0){
 		if (rand() % 3 == 0){
 			srand(time(0)+bloodMap[playerEnt.currentPos.yPos][playerEnt.currentPos.xPos]);
@@ -271,6 +274,7 @@ void cauterizeWound(){
 			isInfected = 1;
 			infectionStart = turn;
 			msgLog = "You develop an infection!";
+			medicalFailures++;
 		}
 	}
 }

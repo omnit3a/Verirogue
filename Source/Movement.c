@@ -442,7 +442,12 @@ void getMovement(){
 			if (biome == 'd' && canWalk()){
 				switch (dir){
 					case 'u':
-						if (returnDungeonmapAt(checkX, checkY-1) == ' ' && returnDungeonmapAt(checkX, checkY-2) != ' ' && checkY > 1){
+						if (enemyMap[checkY-1][checkX] != ' '){
+							engageInCombat(checkX, checkY-1);
+							msgLog = "You kick the enemy!";
+							break;
+						}
+						if (!dungeonWalkable(checkX, checkY-1) && dungeonWalkable(checkX, checkY-2) && checkY > 1){
 							map[checkY-1][checkX] = '|';
 							msgLog = "You kicked down a wall!";
 						} else {
@@ -450,7 +455,12 @@ void getMovement(){
 						}
 						break;
 					case 'd':
-						if (returnDungeonmapAt(checkX, checkY+1) == ' ' && returnDungeonmapAt(checkX, checkY+2) != ' ' && checkY < 22){
+						if (enemyMap[checkY+1][checkX] != ' '){
+							engageInCombat(checkX, checkY+1);
+							msgLog = "You kick the enemy!";
+							break;
+						}
+						if (!dungeonWalkable(checkX, checkY+1) && dungeonWalkable(checkX, checkY+2) && checkY < 22){
 							map[checkY+1][checkX] = '|';
 							msgLog = "You kicked down a wall!";
 						} else {
@@ -458,7 +468,12 @@ void getMovement(){
 						}
 						break;
 					case 'l':
-						if (returnDungeonmapAt(checkX-1, checkY) == ' ' && returnDungeonmapAt(checkX-2, checkY) != ' ' && checkX > 1){
+						if (enemyMap[checkY][checkX-1] != ' '){
+							engageInCombat(checkX-1, checkY);
+							msgLog = "You kick the enemy!";
+							break;
+						}
+						if (!dungeonWalkable(checkX-1, checkY) && dungeonWalkable(checkX-2, checkY) && checkX > 1){
 							map[checkY][checkX-1] = '-';
 							msgLog = "You kicked down a wall!";
 						} else {
@@ -466,7 +481,12 @@ void getMovement(){
 						}
 						break;
 					case 'r':
-						if (returnDungeonmapAt(checkX+1, checkY) == ' ' && returnDungeonmapAt(checkX+2, checkY) != ' ' && checkX < 78){
+						if (enemyMap[checkY][checkX+1] != ' '){
+							engageInCombat(checkX+1, checkY);
+							msgLog = "You kick the enemy!";
+							break;
+						}
+						if (!dungeonWalkable(checkX+1, checkY) && dungeonWalkable(checkX+2, checkY) && checkX < 78){
 							map[checkY][checkX+1] = '-';
 							msgLog = "You kicked down a wall!";
 						} else {
@@ -474,6 +494,18 @@ void getMovement(){
 						}
 						break;
 				}
+			}
+			if (msgLog == "OUCH! That hurt!"){
+				if (rand() % 2 == 0){
+					if (playerEnt.leftLeg.bpHP.currentHealth-15 > 0){
+						playerEnt.leftLeg.bpHP.currentHealth -= 15;
+					}
+				} else {
+					if (playerEnt.rightLeg.bpHP.currentHealth-15 > 0){
+						playerEnt.rightLeg.bpHP.currentHealth -= 15;
+					}
+				}
+				medicalFailures++;	
 			}
 			break;
 		case 'm':
@@ -509,6 +541,7 @@ void getMovement(){
 			break;
 		case ',':
 			if (itemAt(checkX, checkY) != ' ' && itemCount < 16){
+				itemsFound++;
 				switch (itemAt(checkX, checkY)){
 					case SWORDSYM:
 						msgLog = "You found a sword";
@@ -585,8 +618,10 @@ void getMovement(){
 						if (rand() % 3 == 0){
 							isDiseased = 0;
 							msgLog = "You cured your disease";
+							medicalSuccesses++;
 						} else {
 							msgLog = "You failed to cure your disease";
+							medicalFailures--;
 						}
 					} else if (isDiseased == 0){
 						msgLog = "You don't have a disease";

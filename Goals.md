@@ -49,3 +49,5 @@
 - [X] Exploration of every kind of tile
 - [ ] Enemy morale
 - [X] Legacy generation
+	- [X] History file
+- [X] Kicking enemies

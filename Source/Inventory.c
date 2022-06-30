@@ -5,6 +5,7 @@
 #include "Inventory.h"
 #include "MapGenerator.h"
 #include "Movement.h"
+#include "Legacy.h"
 #include <string>
 #include <cstring>
 
@@ -66,6 +67,7 @@ char * getItem(int index){
 void dropItem(int index){
 	if (biome == 'd'){
 		itemMap[playerEnt.currentPos.yPos][playerEnt.currentPos.xPos] = representation(inventory[index]);
+		itemsLost++;
 	}
 	inventory[index] = "";
 }

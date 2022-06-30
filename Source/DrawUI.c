@@ -179,7 +179,7 @@ void drawHelp(){
 	mvprintw(4,0,"s : Scavenge for food");
 	mvprintw(5,0,"S : Check character sheet");
 	mvprintw(6,0,"e : Eat food");
-	mvprintw(7,0,"k : Kick down wall");
+	mvprintw(7,0,"k : Kick");
 	mvprintw(8,0,"m : View sky");
 	mvprintw(9,0,"M : Medical");
 	mvprintw(10,0,"  c : Cauterize");
