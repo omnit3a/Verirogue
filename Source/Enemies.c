@@ -7,6 +7,7 @@
 #include "Movement.h"
 #include "Player.h"
 #include "DrawUI.h"
+#include "Legacy.h"
 
 int enemyDiseaseMap[24][80];
 char enemyMap[24][80];
@@ -69,6 +70,7 @@ void pseudoPathfind(){
 		char tempMap[24][80];
 		int tempHealth[24][80];
 		int tempDisease[24][80];
+		int antiMoraleCount;
 		for (int i = 0 ; i < 80 ; i++){
 			for (int j = 0 ; j < 24 ; j++){
 				tempMap[j][i] = enemyMap[j][i];
@@ -128,6 +130,7 @@ void updateEnemyHealth(){
 			if (enemyHealthMap[j][i] <= 0 && enemyMap[j][i] != ' '){
 				enemyMap[j][i] = ' ';
 				goldScore += (rand() % 10) + 1;
+				enemiesSlain++;
 				msgLog = "The enemy died!";
 			}
 		}

@@ -11,6 +11,7 @@
 #include "Main.h"
 #include "Inventory.h"
 #include "PlayerCreator.h"
+#include "Legacy.h"
 
 void initFileRead(){
 	FILE *ptr;
@@ -138,7 +139,7 @@ void savePlayerData(){
 	 */
 	char tempString[80];
 	FILE *ptr;
-	ptr = fopen("../Save/PlayerData.txt", "r+");
+	ptr = fopen("../Save/PlayerData.txt", "w");
 	if (NULL==ptr){
 		killPlayer("Could not open save file");
 	}
@@ -150,7 +151,7 @@ void savePlayerData(){
 	fputs(tempString,ptr);
 	
 	
-	fputs("## Player Data ##\n\n", ptr);
+	fputs("\n## Player Data ##\n", ptr);
 
 	//save player position
 	sprintf(tempString, "xPos: %d\n",playerEnt.currentPos.xPos);
@@ -238,7 +239,7 @@ void savePlayerData(){
 	fputs(tempString, ptr);
 
 	//save infection status
-	fputs("## Disease/Infection Data ##\n\n", ptr);
+	fputs("\n## Disease/Infection Data ##\n", ptr);
 	sprintf(tempString, "isInfected: %d\n",isInfected);
 	fputs(tempString, ptr);
 	sprintf(tempString, "isDiseased: %d\n",isDiseased);
@@ -253,7 +254,7 @@ void savePlayerData(){
 	fputs(tempString, ptr);
 
 	//save world data
-	fputs("## World Data ##\n\n", ptr);
+	fputs("\n## World Data ##\n", ptr);
 	sprintf(tempString, "Biome: %c\n", biome);
 	fputs(tempString, ptr);
 	fputs("End Screen:\n", ptr);
@@ -264,5 +265,8 @@ void savePlayerData(){
 		fputc('\n', ptr);	
 	}
 
+	//save legacy
+	fputs("\n## Legacy ##\n", ptr);
+	fputs(generateLegacy().c_str(), ptr);
 	fclose(ptr);
 }

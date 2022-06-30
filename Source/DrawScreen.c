@@ -45,23 +45,52 @@ void drawMap(){
 	init_pair(2, COLOR_GREEN, COLOR_BLACK);
 	init_pair(3, COLOR_WHITE, COLOR_BLACK);
 	init_pair(6, COLOR_YELLOW, COLOR_BLACK);
+	init_pair(33, COLOR_RED, COLOR_BLACK);
+	init_pair(34, COLOR_MAGENTA, COLOR_BLACK);
 	char currentChar;
 	for (int i = 0 ; i < WIDTH ; i++){
 		for (int j = 0 ; j < HEIGHT ; j++){
 			mvaddch(j,i,' ');
 		}
 	}
+	int flowerColor;
 	for (int i = 0 ; i < WIDTH ; i++){
 		for (int j = 0 ; j < HEIGHT ; j++){
 			currentChar = returnHeightmapAt(i,j);
 			if (currentChar == '^' || currentChar == '.'){
 				attron(COLOR_PAIR(2));
-			} else if (currentChar == 'A' || currentChar == '*' || currentChar == '>'){
+			} else if (currentChar == 'A' || currentChar == '>' || currentChar == '#'){
 				attron(COLOR_PAIR(3));
+				if (currentChar == '#'){
+					attron(A_REVERSE);
+				}
 			} else if (currentChar == 't'){
 				attron(COLOR_PAIR(2) | A_BOLD);
-			} else if (currentChar == ','){
-				attron(COLOR_PAIR(6) | A_BOLD);
+			} else if (currentChar == ',' || currentChar == '+'){
+				attron(COLOR_PAIR(6));
+			} else if (currentChar == '*' && (biome == 'f' || biome == 'h')){
+				srand(seedFromPosition(i,j));
+				flowerColor = rand() % 5;
+				attron(A_BOLD);
+				switch (flowerColor){
+					case 0:
+						attron(COLOR_PAIR(2));
+						break;
+					case 1:
+						attron(COLOR_PAIR(3));
+						break;
+					case 2:
+						attron(COLOR_PAIR(6));
+						break;
+					case 3:
+						attron(COLOR_PAIR(33));
+						break;
+					case 4:
+						attron(COLOR_PAIR(34));
+						break;
+				}	
+			} else if (currentChar == '*' && !(biome == 'f' || biome == 'h')){
+				attron(COLOR_PAIR(3) | A_BOLD);
 			} else {
 				attron(COLOR_PAIR(1));
 			}
@@ -246,7 +275,7 @@ void drawFOV(int radius){
 					}
 					mvaddch(j,i,gasMap[j][i]);
 				}
-				attroff(A_BOLD | A_BLINK);
+				attroff(A_BOLD | A_BLINK | A_REVERSE);
 				seenMap[j][i] = map[j][i];
 			}
 		}

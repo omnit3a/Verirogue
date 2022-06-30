@@ -255,7 +255,7 @@ void generateDungeon(int maxWidth, int maxHeight){
 			roomYGold = rand() % 24;
 			if (!dungeonWalkable(roomXGold, roomYGold)){
 				continue;
-			} else if (dungeonWalkable(roomXGold, roomYGold) && map[roomYGold][roomXGold] != '<'){
+			} else if (dungeonWalkable(roomXGold, roomYGold) && map[roomYGold][roomXGold] == '.'){
 				map[roomYGold][roomXGold] = '$';
 				continue;
 			}
@@ -291,6 +291,9 @@ void generateCloseField(){
 	for (int i = 0 ; i < 80 ; i++){
 		for (int j = 0 ; j < 24 ; j++){
 			map[j][i] = '.';
+			if (rand() % 8 == 0){
+				map[j][i] = '*';
+			}
 		}
 	}
 }
@@ -352,6 +355,9 @@ void generateCloseHill(){
 	for (int i = 0 ; i < 80 ; i++){
 		for (int j = 0 ; j < 24 ; j++){
 			map[j][i] = tempHills[j][i];
+			if (rand() % 16 == 0 && map[j][i] == '.'){
+				map[j][i] = '*';
+			}
 		}
 	}
 }

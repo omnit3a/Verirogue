@@ -10,6 +10,7 @@
 #include "DrawUI.h"
 #include <string>
 #include "FileRead.h"
+#include "Legacy.h"
 
 int bloodCount = 511;		//this is the amount of blood in the human body in litres * 100
 
@@ -127,6 +128,7 @@ void killPlayer(std::string text){
 	clear();
 	endScreen();
 	printf("%s\n",text.c_str());
+	printf("%s",generateLegacy().c_str());
 	exit(0);
 }
 
@@ -185,6 +187,7 @@ void bleedCheck(){
 		bloodLossRate += 20;
 	}
 	bloodCount -= bloodLossRate/10;
+	bloodLost += bloodLossRate/10;
 	bloodTrail();
 }
 

@@ -15,6 +15,7 @@
 #include "Items.h"
 #include "Gas.h"
 #include "FileRead.h"
+#include "Legacy.h"
 
 char biome;
 
@@ -171,7 +172,7 @@ int mapWalkable(){
 }
 
 int dungeonWalkable(int x, int y){
-	return (map[y][x] == '.' || map[y][x] == '+' || map[y][x] == '<' || map[y][x] == '$' || map[y][x] == '*');
+	return (map[y][x] == '.' || map[y][x] == '+' || map[y][x] == '<' || map[y][x] == '$' || map[y][x] == '*' || map[y][x] == '|' || map[y][x] == '-');
 }
 
 int canWalk(){
@@ -389,6 +390,7 @@ void getMovement(){
 			if (hasFood() && foodScore+5 < 155){
 				consumeFood();
 				msgLog = "You ate some food";
+				foodEaten++;
 				if (foodScore+5 < 155){
 					foodScore+=5;
 					if (playerEnt.head.bpHP.currentHealth+5 < 100){
@@ -431,6 +433,7 @@ void getMovement(){
 				}
 			} else if (foodScore+5 >= 155){
 				msgLog = "You are too full to eat anything";
+				gluttonCount++;
 			} else {
 				msgLog = "You don't have any food";
 			}
@@ -496,6 +499,7 @@ void getMovement(){
 			break;
 		case 'Q':
 			quaffPotion();
+			potionsQuaffed++;
 			break;
 		case '?':
 			drawHelp();
@@ -548,7 +552,9 @@ void getMovement(){
 			if (biome == 'd' && returnDungeonmapAt(checkX, checkY) == '$'){
 				map[checkY][checkX] = '.';
 				srand(time(0));
-				goldScore += rand() % 25;
+				int randVal = rand() % 25;
+				goldScore += randVal;
+				goldFound += randVal;
 				msgLog = "You found some gold!";
 			}
 			break;
@@ -660,6 +666,7 @@ void getMovement(){
 		case 27:
 			savePlayerData();
 			endScreen();
+			printf("%s",generateLegacy().c_str());
 			exit(0);
 	}
 	turn++;
