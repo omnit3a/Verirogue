@@ -12,6 +12,7 @@
 int enemyDiseaseMap[24][80];
 char enemyMap[24][80];
 int enemyHealthMap[24][80];
+int enemyFleeingMap[24][80];
 
 int spawnRate = 45;
 int baseEnemyHealth = 10;
@@ -25,6 +26,7 @@ void placeEnemies(){
 			for (int j = 0 ; j < 24 ; j++){
 				enemyMap[j][i] = ' ';
 				enemyHealthMap[j][i] = 0;
+				enemyFleeingMap[j][i] = 0;
 				if ((dungeonWalkable(i,j) && map[j][i] != '<') && rand() % spawnRate == 0){
 					enemyMap[j][i] = '&';
 					enemyHealthMap[j][i] = (rand() % 10)+baseEnemyHealth;
@@ -48,6 +50,7 @@ void resetEnemies(int resetCode){
 				enemyMap[j][i] = ' ';
 				enemyHealthMap[j][i] = 0;
 				enemyDiseaseMap[j][i] = 0;
+				enemyFleeingMap[j][i] = 0;
 			}
 		}
 	} else if (resetCode == 1){
@@ -57,10 +60,31 @@ void resetEnemies(int resetCode){
 					enemyMap[j][i] = ' ';
 					enemyHealthMap[j][i] = 0;
 					enemyDiseaseMap[j][i] = 0;
+					enemyFleeingMap[j][i] = 0;
 				}
 			}
 		}
 	}
+}
+
+/**
+ *	Determine whether or not an enemy should flee from the player
+ */
+int shouldFlee(int checkX, int checkY){
+	int tempFlee = 0;
+	if (enemyHealthMap[checkY-1][checkX] == -1){
+		tempFlee++;
+	}
+	if (enemyHealthMap[checkY+1][checkX] == -1){
+		tempFlee++;
+	}
+	if (enemyHealthMap[checkY][checkX-1] == -1){
+		tempFlee++;
+	}
+	if (enemyHealthMap[checkY][checkX+1] == -1){
+		tempFlee++;
+	}
+	return tempFlee >= 1;
 }
 
 void pseudoPathfind(){
@@ -70,16 +94,36 @@ void pseudoPathfind(){
 		char tempMap[24][80];
 		int tempHealth[24][80];
 		int tempDisease[24][80];
-		int antiMoraleCount;
+		int tempFlee[24][80];
+		int randCornerX, randCornerY;
 		for (int i = 0 ; i < 80 ; i++){
 			for (int j = 0 ; j < 24 ; j++){
 				tempMap[j][i] = enemyMap[j][i];
 				tempHealth[j][i] = enemyHealthMap[j][i];
 				tempDisease[j][i] = enemyDiseaseMap[j][i];
+				tempFlee[j][i] = enemyFleeingMap[j][i];
 			}
 		}
+		randCornerX = rand() % 2;
+		randCornerY = rand() % 2;
 		for (int i = 0 ; i < 80 ; i++){
 			for (int j = 0 ; j < 24 ; j++){
+				if (shouldFlee(i,j) || tempFlee[j][i] == 1){
+					tempFlee[j][i] = 1;
+					if (randCornerX){
+						checkX = 0;	
+					} else {
+						checkX = 79;
+					}
+					if (randCornerY){
+						checkY = 0;	
+					} else {
+						checkY = 23;
+					}
+				} else {
+					checkX = playerEnt.currentPos.xPos;
+					checkY = playerEnt.currentPos.yPos;
+				}
 				if (enemyMap[j][i] == '&'){
 					if (dungeonWalkable(i,j-1) && j < checkY-1 && enemyMap[j+1][i] != '&'){
 						tempMap[j][i] = ' ';
@@ -88,6 +132,8 @@ void pseudoPathfind(){
 						tempHealth[j][i] = 0;
 						tempDisease[j+1][i] = tempDisease[j][i];
 						tempDisease[j][i] = 0;
+						tempFlee[j+1][i] = tempFlee[j][i];
+						tempFlee[j][i] = 0;
 					} else if (dungeonWalkable(i,j+1) && j > checkY+1 && enemyMap[j-1][i] != '&'){
 						tempMap[j][i] = ' ';
 						tempMap[j-1][i] = '&';
@@ -95,6 +141,8 @@ void pseudoPathfind(){
 						tempHealth[j][i] = 0;
 						tempDisease[j-1][i] = tempDisease[j][i];
 						tempDisease[j][i] = 0;
+						tempFlee[j-1][i] = tempFlee[j][i];
+						tempFlee[j][i] = 0;
 					} else if (dungeonWalkable(i+1,j) && i < checkX-1 && enemyMap[j][i+1] != '&'){
 						tempMap[j][i] = ' ';
 						tempMap[j][i+1] = '&';
@@ -102,6 +150,8 @@ void pseudoPathfind(){
 						tempHealth[j][i] = 0;
 						tempDisease[j][i+1] = tempDisease[j][i];
 						tempDisease[j][i] = 0;
+						tempFlee[j][i+1] = tempFlee[j][i];
+						tempFlee[j][i] = 0;
 					} else if (dungeonWalkable(i-1,j) && i > checkX+1 && enemyMap[j][i-1] != '&'){
 						tempMap[j][i] = ' ';
 						tempMap[j][i-1] = '&';
@@ -109,6 +159,8 @@ void pseudoPathfind(){
 						tempHealth[j][i] = 0;
 						tempDisease[j][i-1] = tempDisease[j][i];
 						tempDisease[j][i] = 0;
+						tempFlee[j][i-1] = tempFlee[j][i];
+						tempFlee[j][i] = 0;
 					}
 				}
 			}
@@ -118,6 +170,7 @@ void pseudoPathfind(){
 				enemyMap[j][i] = tempMap[j][i];
 				enemyHealthMap[j][i] = tempHealth[j][i];
 				enemyDiseaseMap[j][i] = tempDisease[j][i];
+				enemyFleeingMap[j][i] = tempFlee[j][i];
 			}
 		}	
 	}
@@ -131,7 +184,11 @@ void updateEnemyHealth(){
 				enemyMap[j][i] = ' ';
 				goldScore += (rand() % 10) + 1;
 				enemiesSlain++;
+				enemyHealthMap[j][i] = -1;
 				msgLog = "The enemy died!";
+			}
+			if (enemyHealthMap[j][i] > 0 && enemyMap[j][i] != ' '){
+				enemyFleeingMap[j][i] = shouldFlee(i,j);
 			}
 		}
 	}

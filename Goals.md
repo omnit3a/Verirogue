@@ -47,7 +47,7 @@
 	- [X] Add dungeon walls
 - [ ] Procedural text generation
 - [X] Exploration of every kind of tile
-- [ ] Enemy morale
+- [X] Enemy morale
 - [X] Legacy generation
 	- [X] History file
 - [X] Kicking enemies

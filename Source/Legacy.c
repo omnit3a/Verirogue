@@ -41,7 +41,7 @@ std::string generateLegacy(){
 	}
 
 	if (enemiesSlain <= 10){
-		tempString = tempString+"You were helpless against the weakest enemy.\n";
+		tempString = tempString+"You were helpless against the weakest enemies.\n";
 	} else if (enemiesSlain > 10 && enemiesSlain <= 100){
 		tempString = tempString+"You killed a few enemies.\n";
 	} else if (enemiesSlain > 100){
