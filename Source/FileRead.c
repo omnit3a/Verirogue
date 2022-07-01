@@ -58,6 +58,9 @@ void initFileRead(){
 			case 5:
 				defaultSex = str[0];
 				break;
+			case 6:
+				defaultRace = str;
+				break;
 			default:
 				continue;
 		}
@@ -173,6 +176,9 @@ void savePlayerData(){
 	//save player name
 	sprintf(tempString, "Name: %s\n", playerName.c_str());
 	fputs(tempString,ptr);
+
+	sprintf(tempString, "Race: %s\n", playerRace.c_str());
+	fputs(tempString, ptr);
 
 	//save player star sign
 	sprintf(tempString, "Star sign: %c\n", playerEnt.currentSign.sign);

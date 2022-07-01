@@ -47,7 +47,7 @@ int grossStuff = 1;
 int bloodTrailThreshold = 485;
 int DEADLYBLOODLOSS = 255;
 
-std::string playerName;
+std::string playerName, playerRace;
 
 void setupPlayer(int x, int y, int entID){
 	playerEnt.entityID = entID;

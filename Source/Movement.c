@@ -16,6 +16,7 @@
 #include "Gas.h"
 #include "FileRead.h"
 #include "Legacy.h"
+#include "PlayerCreator.h"
 
 char biome;
 
@@ -77,6 +78,16 @@ void engageInCombat(int x, int y){
 }
 
 void drawPlayer(){
+	char playerChar;
+	if (playerRace == "Human"){
+		playerChar = HUMANSYM;
+	} else if (playerRace == "Goblin"){
+		playerChar = GOBLINSYM;
+	} else if (playerRace == "Kobold"){
+		playerChar = KOBOLDSYM;
+	} else {
+		playerChar = HUMANSYM;
+	}
 	init_pair(6,COLOR_YELLOW, COLOR_BLACK);
 	init_pair(28, COLOR_RED, COLOR_BLACK);
 	if (bloodCount < 384){
@@ -85,9 +96,9 @@ void drawPlayer(){
 		attron(COLOR_PAIR(6) | A_BOLD);
 	}
 	if (biome == 'd' || biome == 't' || biome == 'f' || biome == 'h' || biome == 'm'){
-		mvaddch(playerEnt.currentPos.yPos, playerEnt.currentPos.xPos, '@');
+		mvaddch(playerEnt.currentPos.yPos, playerEnt.currentPos.xPos, playerChar);
 	} else if (biome == 'o'){
-		mvaddch(12,40,'@');
+		mvaddch(12,40,playerChar);
 	}
 	attroff(A_BOLD);
 	updateScreen();

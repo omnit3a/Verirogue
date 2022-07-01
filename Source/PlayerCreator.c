@@ -10,8 +10,8 @@
 int disabledCreator;
 
 std::string defaultName;
-
 char defaultSex;
+std::string defaultRace;
 
 char getPlayerSex(){
 	attron(A_BLINK);
@@ -43,7 +43,26 @@ std::string getPlayerName(){
 	updateScreen();
 	getstr(name);
 	return name;
- }
+}
+
+std::string getPlayerRace(){
+	attron(A_BLINK);
+	mvaddch(1,0,'>');
+	attroff(A_BLINK);
+	updateScreen();
+	char ch;
+	getRace:
+		ch = getch();
+	if (ch == 'h' || ch == 'H'){
+		return "Human";
+	} else if (ch == 'g' || ch == 'G'){
+		return "Goblin";
+	} else if (ch == 'k' || ch == 'K'){
+		return "Kobold";
+	} else {
+		goto getRace;
+	}
+}
 
 void playerCreatorScreen(){
 	if (!disabledCreator){
@@ -59,8 +78,13 @@ void playerCreatorScreen(){
 		mvprintw(0,0,"What is your name?");
 		updateScreen();
 		playerName = getPlayerName();
+		clear();
+		mvprintw(0,0,"What is your race? Human | Goblin | Kobold");
+		updateScreen();
+		playerRace = getPlayerRace();
 	} else {
 		playerName = defaultName;
 		playerEnt.currentSex.sex = defaultSex;
+		playerRace = defaultRace;
 	}
 }

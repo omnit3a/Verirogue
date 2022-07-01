@@ -2,5 +2,6 @@ Y/N : Gross stuff (vomit/blood trails) DEFAULT = Y
 Y/N : No FOV in dungeons DEFAULT = N
 Y/N : Debug mode? DEFAULT = N
 Y/N : Disable character creator and use defaults DEFAULT = N
-String: Default character name
-Char : Default character sex
+String: Default character name DEFAULT = Unnamed Hero
+Char : Default character sex DEFAULT = U
+String: Default character race DEFAULT = Human (Options = "Human" | "Goblin" | "Kobold")

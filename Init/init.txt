@@ -4,3 +4,4 @@ N
 N
 Unnamed Hero
 U
+Human

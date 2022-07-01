@@ -51,3 +51,5 @@
 - [X] Legacy generation
 	- [X] History file
 - [X] Kicking enemies
+- [X] Player race
+	- [ ] Difference in stats between races

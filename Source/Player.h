@@ -30,7 +30,7 @@ extern int bloodMap[][80];
 
 extern int grossStuff, bloodTrailThreshold, DEADLYBLOODLOSS;
 
-extern std::string playerName;
+extern std::string playerName, playerRace;
 
 void setupPlayer(int x, int y, int entID);
 
