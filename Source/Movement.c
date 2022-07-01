@@ -300,6 +300,7 @@ void getMovement(){
 				generateMap();
 				playerEnt.currentPos.xPos = entryX;
 				playerEnt.currentPos.yPos = entryY;
+				resetEnemies(0);
 				updateScreen();
 				msgLog = "You left the dungeon";
 				fires = 0;
@@ -713,6 +714,13 @@ void getMovement(){
 			savePlayerData();
 			endScreen();
 			printf("%s",generateLegacy().c_str());
+			printf(" ## Enemies Slain ##\n");
+			for (int i = 0 ; i < 512 ; i++){
+				if (enemyNamesList[i] != ""){
+					printf(" - %s\n",enemyNamesList[i].c_str());
+					continue;
+				}
+			}					
 			exit(0);
 	}
 	turn++;

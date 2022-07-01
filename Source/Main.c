@@ -31,7 +31,6 @@ int main(){
 	while(1){
 		if (biome == 'o'){
 			generateMap();
-			resetEnemies(0);				//makes sure no enemies spawn on the overworld
 			drawMap();
 			updateTemperature();
 			updateHunger();

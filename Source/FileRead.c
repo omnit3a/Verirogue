@@ -274,6 +274,15 @@ void savePlayerData(){
 	//save legacy
 	fputs("\n## Legacy ##\n", ptr);
 	fputs(generateLegacy().c_str(), ptr);
+	
+	fputs("\n ## Enemies Slain ## \n", ptr);
+	for (int i = 0 ; i < 512 ; i++){
+		if (enemyNamesList[i] != ""){
+			sprintf(tempString," - %s\n",enemyNamesList[i].c_str());
+			fputs(tempString, ptr);
+			continue;
+		}
+	}
 	fclose(ptr);
 
 	saveLegacy();

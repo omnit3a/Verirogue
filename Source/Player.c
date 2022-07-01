@@ -48,6 +48,8 @@ int bloodTrailThreshold = 485;
 int DEADLYBLOODLOSS = 255;
 
 std::string playerName, playerRace;
+std::string enemyNamesList[512];
+std::string killedByEnemy;
 
 void setupPlayer(int x, int y, int entID){
 	playerEnt.entityID = entID;
@@ -82,10 +84,22 @@ void setupPlayer(int x, int y, int entID){
 			playerEnt.currentStats.intelligence = (rand() % 25)+75;
 			break;
 	}
+	if (playerRace == "Human"){
+		playerEnt.currentStats.strength+=15;
+	} else if (playerRace == "Goblin"){
+		playerEnt.currentStats.agility+=15;
+	} else if (playerRace == "Kobold"){
+		playerEnt.currentStats.intelligence+=15;
+	} else {
+		//default to human
+		playerEnt.currentStats.strength+=15;
+	}
 
 	playerEnt.currentWeight.pounds = (playerEnt.currentStats.strength*3) - lround(playerEnt.currentStats.agility/3);
 	if (playerEnt.currentWeight.pounds < 100){
-		playerEnt.currentWeight.pounds += 100;
+		playerEnt.currentWeight.pounds += 125;
+	} else if (playerEnt.currentWeight.pounds > 275){
+		playerEnt.currentWeight.pounds -= 25;
 	}
 	for (int i = 0 ; i < 80 ; i++){
 		for (int j = 0 ; j < 24 ; j++){
@@ -129,6 +143,13 @@ void killPlayer(std::string text){
 	endScreen();
 	printf("%s\n",text.c_str());
 	printf("%s",generateLegacy().c_str());
+	printf("## Enemies Slain ##\n");
+	for (int i = 0 ; i < 512 ; i++){
+		if (enemyNamesList[i] != ""){
+			printf(" - %s\n",enemyNamesList[i].c_str());
+			continue;
+		}
+	}	
 	exit(0);
 }
 

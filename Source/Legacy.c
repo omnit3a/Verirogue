@@ -78,5 +78,14 @@ void saveLegacy(){
 	sprintf(tempString, "%s",generateLegacy().c_str());
 	fputs(tempString, ptr);
 
+	fputs("\n ## Enemies Slain ## \n", ptr);
+	for (int i = 0 ; i < 512 ; i++){
+		if (enemyNamesList[i] != ""){
+			sprintf(tempString," - %s\n",enemyNamesList[i].c_str());
+			fputs(tempString, ptr);
+			continue;
+		}
+	}
+
 	fclose(ptr);
 }

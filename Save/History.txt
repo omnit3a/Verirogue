@@ -1,1 +1,11 @@
 
+ ## Gamedev ## 
+You died pennyless.
+You were helpless against the weakest enemies.
+You lived a minimal life.
+You were of neutral health.
+
+ ## Enemies Slain ## 
+ - Haqo the Goblin
+ - Hezo the Goblin
+ - Woqeqe the Goblin

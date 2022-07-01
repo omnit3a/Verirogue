@@ -50,6 +50,11 @@
 - [X] Enemy morale
 - [X] Legacy generation
 	- [X] History file
+	- [X] Names of enemies the player has killed
+	- [ ] Name of enemy that killed the player (if any)
 - [X] Kicking enemies
 - [X] Player race
-	- [ ] Difference in stats between races
+	- [X] Difference in stats between races
+- [ ] Persistent world
+	- [ ] Persistent enemies
+	- [ ] Persistent scroll text
