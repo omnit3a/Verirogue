@@ -56,11 +56,11 @@ void setupPlayer(int x, int y, int entID){
 	playerEnt.currentPos.xPos = x;
 	playerEnt.currentPos.yPos = y;
 
-	if (playerEnt.currentSex.sex == 'M' || playerEnt.currentSex.sex == 'm'){
+	if (playerEnt.currentSex.sex == 'm'){
 		playerEnt.currentSex.sex = 'M';
-	} else if (playerEnt.currentSex.sex == 'F' || playerEnt.currentSex.sex == 'f'){
+	} else if (playerEnt.currentSex.sex == 'f'){
 		playerEnt.currentSex.sex = 'F';
-	} else if (playerEnt.currentSex.sex == 'U' || playerEnt.currentSex.sex == 'u'){
+	} else if (playerEnt.currentSex.sex == 'u'){
 		playerEnt.currentSex.sex = 'U';
 	}
 

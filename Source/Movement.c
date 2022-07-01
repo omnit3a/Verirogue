@@ -450,76 +450,6 @@ void getMovement(){
 				msgLog = "You don't have any food";
 			}
 			break;
-		case 'k':
-			if (biome == 'd' && canWalk()){
-				switch (dir){
-					case 'u':
-						if (enemyMap[checkY-1][checkX] != ' '){
-							engageInCombat(checkX, checkY-1);
-							msgLog = "You kick the enemy!";
-							break;
-						}
-						if (!dungeonWalkable(checkX, checkY-1) && dungeonWalkable(checkX, checkY-2) && checkY > 1){
-							map[checkY-1][checkX] = '|';
-							msgLog = "You kicked down a wall!";
-						} else {
-							msgLog = "OUCH! That hurt!";
-						}
-						break;
-					case 'd':
-						if (enemyMap[checkY+1][checkX] != ' '){
-							engageInCombat(checkX, checkY+1);
-							msgLog = "You kick the enemy!";
-							break;
-						}
-						if (!dungeonWalkable(checkX, checkY+1) && dungeonWalkable(checkX, checkY+2) && checkY < 22){
-							map[checkY+1][checkX] = '|';
-							msgLog = "You kicked down a wall!";
-						} else {
-							msgLog = "OUCH! That hurt!";
-						}
-						break;
-					case 'l':
-						if (enemyMap[checkY][checkX-1] != ' '){
-							engageInCombat(checkX-1, checkY);
-							msgLog = "You kick the enemy!";
-							break;
-						}
-						if (!dungeonWalkable(checkX-1, checkY) && dungeonWalkable(checkX-2, checkY) && checkX > 1){
-							map[checkY][checkX-1] = '-';
-							msgLog = "You kicked down a wall!";
-						} else {
-							msgLog = "OUCH! That hurt!";
-						}
-						break;
-					case 'r':
-						if (enemyMap[checkY][checkX+1] != ' '){
-							engageInCombat(checkX+1, checkY);
-							msgLog = "You kick the enemy!";
-							break;
-						}
-						if (!dungeonWalkable(checkX+1, checkY) && dungeonWalkable(checkX+2, checkY) && checkX < 78){
-							map[checkY][checkX+1] = '-';
-							msgLog = "You kicked down a wall!";
-						} else {
-							msgLog = "OUCH! That hurt!";
-						}
-						break;
-				}
-			}
-			if (msgLog == "OUCH! That hurt!"){
-				if (rand() % 2 == 0){
-					if (playerEnt.leftLeg.bpHP.currentHealth-15 > 0){
-						playerEnt.leftLeg.bpHP.currentHealth -= 15;
-					}
-				} else {
-					if (playerEnt.rightLeg.bpHP.currentHealth-15 > 0){
-						playerEnt.rightLeg.bpHP.currentHealth -= 15;
-					}
-				}
-				medicalFailures++;	
-			}
-			break;
 		case 'm':
 			if (inOverworld() && (hour < 6 || hour >= 20)){
 				clear();
@@ -711,17 +641,8 @@ void getMovement(){
 			msgLog = "You are now sneaking";
 			break;
 		case 27:
-			savePlayerData();
-			endScreen();
-			printf("%s",generateLegacy().c_str());
-			printf(" ## Enemies Slain ##\n");
-			for (int i = 0 ; i < 512 ; i++){
-				if (enemyNamesList[i] != ""){
-					printf(" - %s\n",enemyNamesList[i].c_str());
-					continue;
-				}
-			}					
-			exit(0);
+			killPlayer("Thank you for playing!");
+			break;
 	}
 	turn++;
 	drawTurn();

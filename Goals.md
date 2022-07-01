@@ -58,3 +58,4 @@
 - [ ] Persistent world
 	- [ ] Persistent enemies
 	- [ ] Persistent scroll text
+- [X] Optimize/cleanup code

@@ -6,7 +6,6 @@
 - `s` Scavenge for food
 - `S` Check character sheet
 - `e` Eat food
-- `k` Kick 
 - `m` View starmap
 - `M` Medical
 	- `c` Cauterize

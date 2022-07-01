@@ -26,13 +26,9 @@ void generateCoastmap(){
 	noise.SetFractalType(FastNoiseLite::FractalType_None);
 	noise.SetCellularDistanceFunction(FastNoiseLite::CellularDistanceFunction_EuclideanSq);
 	int value;
-       	for (int i = 0 ; i < 80 ; i++){
-		for (int j = 0 ; j < 24 ; j++){
-			coastmap[j][i] = 0;
-		}
-	}
 	for (int i = 0 ; i < 80 ; i++){
 		for (int j = 0 ; j < 24 ; j++){
+			coastmap[j][i] = 0;
 			value = abs(lround((noise.GetNoise((float) playerEnt.currentPos.xPos+i, (float) playerEnt.currentPos.yPos+j)+0.40)/0.10));
 			if (value <= 1){
 				coastmap[j][i] = 1;
@@ -64,11 +60,6 @@ void generateMap(){
 	noise.SetNoiseType(FastNoiseLite::NoiseType_Perlin);
 	noise.SetFractalType(FastNoiseLite::FractalType_Ridged);
 	int value;
-	for (int i = 0 ; i < 80 ; i++){
-		for (int j = 0 ; j < 24 ; j++){
-			map[j][i] = ' ';
-		}
-	}
 	for (int i = 0 ; i < 80 ; i++){
 		for (int j = 0 ; j < 24 ; j++){
 			value = abs(lround((noise.GetNoise((float) playerEnt.currentPos.xPos+i, (float) playerEnt.currentPos.yPos+j)+0.5)/0.09));
@@ -157,12 +148,8 @@ void generateWall(){
 void generateDungeon(int maxWidth, int maxHeight){
 	for (int i = 0 ; i < 80 ; i++){
 		for (int j = 0 ; j < 24 ; j++){
+			map[j][i] = ' ';
 			seenMap[j][i] = ' ';
-		}
-	}
-	for (int i = 0 ; i < 24 ; i++){
-		for (int j = 0 ; j < 80 ; j++){
-			map[i][j] = ' ';
 		}
 	}
 	srand(time(0));
@@ -253,24 +240,20 @@ void generateDungeon(int maxWidth, int maxHeight){
 			srand(time(0)+i);
 			roomXGold = rand() % 80;
 			roomYGold = rand() % 24;
-			if (!dungeonWalkable(roomXGold, roomYGold)){
-				continue;
-			} else if (dungeonWalkable(roomXGold, roomYGold) && map[roomYGold][roomXGold] == '.'){
+			if (dungeonWalkable(roomXGold, roomYGold) && map[roomYGold][roomXGold] == '.'){
 				map[roomYGold][roomXGold] = '$';
-				continue;
 			}
+			continue;
 		}
 		generateWall();
 		for (int i = 0 ; i < 64 ; i++){
 			srand(time(0)+i-1);
 			engravingX = rand() % 80;
 			engravingY = rand() % 24;
-		       	if (map[engravingY][engravingX]	== ' '){
-				continue;
-			} else {
+		       	if (map[engravingY][engravingX]	!= ' '){
 				generateEngraving(engravingX, engravingY);
-				continue;
 			}
+			continue;
 		}
 		placeEnemies();
 		placeItems();
@@ -290,9 +273,10 @@ void generateCloseField(){
 	msgLog = "You explore the field";
 	for (int i = 0 ; i < 80 ; i++){
 		for (int j = 0 ; j < 24 ; j++){
-			map[j][i] = '.';
 			if (rand() % 8 == 0){
 				map[j][i] = '*';
+			} else {
+				map[j][i] = '.';
 			}
 		}
 	}
@@ -302,13 +286,10 @@ void generateCloseHill(){
 	msgLog = "You explore the forest";
 	for (int i = 0 ; i < 80 ; i++){
 		for (int j = 0 ; j < 24 ; j++){
-			map[j][i] = '.';
-		}
-	}
-	for (int i = 0 ; i < 80 ; i++){
-		for (int j = 0 ; j < 24 ; j++){
 			if (rand() % 2 == 0){
 				map[j][i] = '^';
+			} else {
+				map[j][i] = '.';
 			}
 		}
 	}
@@ -316,7 +297,7 @@ void generateCloseHill(){
 	int grassCount;
 	char tempHills[24][80];
 	int adjEmpty;
-	for (int r = 0 ; r < 16 ; r++){
+	for (int r = 0 ; r < 8 ; r++){
 		for (int x = 0 ; x < 80 ; x++){
 			for (int y = 0 ; y < 24 ; y++){
 				treeCount = 0;
@@ -354,9 +335,10 @@ void generateCloseHill(){
 	}
 	for (int i = 0 ; i < 80 ; i++){
 		for (int j = 0 ; j < 24 ; j++){
-			map[j][i] = tempHills[j][i];
-			if (rand() % 16 == 0 && map[j][i] == '.'){
+			if (rand() % 16 == 0 && tempHills[j][i] == '.'){
 				map[j][i] = '*';
+			} else {
+				map[j][i] = tempHills[j][i];
 			}
 		}
 	}
@@ -364,16 +346,12 @@ void generateCloseHill(){
 
 void generateCloseMountain(){
 	msgLog = "You explore the mountains";
-	//add code for mountain generation here
-	for (int i = 0 ; i < 80 ; i++){
-		for (int j = 0 ; j < 24 ; j++){
-			map[j][i] = '.';
-		}
-	}
 	for (int i = 0 ; i < 80 ; i++){
 		for (int j = 0 ; j < 24 ; j++){
 			if (rand() % 3 == 0){
 				map[j][i] = 'A';
+			} else {
+				map[j][i] = '.';
 			}
 		}
 	}
@@ -381,7 +359,7 @@ void generateCloseMountain(){
 	int grassCount;
 	char tempMountain[24][80];
 	int adjEmpty;
-	for (int r = 0 ; r < 16 ; r++){
+	for (int r = 0 ; r < 8 ; r++){
 		for (int x = 0 ; x < 80 ; x++){
 			for (int y = 0 ; y < 24 ; y++){
 				mountCount = 0;
@@ -550,9 +528,6 @@ void fireSpread(){
 		}
 		for (int i = 0 ; i < 80 ; i++){
 			for (int j = 0 ; j < 24 ; j++){
-				if (returnDungeonmapAt(i,j) == '*'){
-					fireValues[j][i] = '*';
-				}
 				if (returnDungeonmapAt(i,j) == '*' && turn % 15 == 0){
 					if (dungeonWalkable(i,j-1)){
 						fireValues[j-1][i] = '*';

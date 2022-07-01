@@ -48,14 +48,10 @@ void drawMap(){
 	init_pair(33, COLOR_RED, COLOR_BLACK);
 	init_pair(34, COLOR_MAGENTA, COLOR_BLACK);
 	char currentChar;
-	for (int i = 0 ; i < WIDTH ; i++){
-		for (int j = 0 ; j < HEIGHT ; j++){
-			mvaddch(j,i,' ');
-		}
-	}
 	int flowerColor;
 	for (int i = 0 ; i < WIDTH ; i++){
 		for (int j = 0 ; j < HEIGHT ; j++){
+			mvaddch(j,i,' ');
 			currentChar = returnHeightmapAt(i,j);
 			if (currentChar == '^' || currentChar == '.'){
 				attron(COLOR_PAIR(2));
@@ -283,11 +279,6 @@ void drawFOV(int radius){
 }
 
 void drawDungeon(){
-	for (int i = 0 ; i < WIDTH ; i++){
-		for (int j = 0 ; j < HEIGHT ; j++){
-			mvaddch(j,i,' ');
-		}
-	}
 	init_pair(1, COLOR_WHITE, COLOR_BLACK);
 	init_pair(2, COLOR_YELLOW, COLOR_BLACK);
 	int seedMap = time(0);

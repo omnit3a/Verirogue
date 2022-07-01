@@ -159,9 +159,6 @@ void pseudoPathfind(){
 					} else {
 						checkY = 23;
 					}
-				} else {
-					checkX = playerEnt.currentPos.xPos;
-					checkY = playerEnt.currentPos.yPos;
 				}
 				if (enemyMap[j][i] == '&'){
 					if (dungeonWalkable(i,j-1) && j < checkY-1 && enemyMap[j+1][i] != '&'){

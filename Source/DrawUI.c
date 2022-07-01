@@ -52,16 +52,18 @@ void drawLog(){
 	attron(COLOR_PAIR(9) | A_BOLD);
 	for (int i = 80 ; i < 120 ; i++){
 		for (int j = 0 ; j < 24 ; j++){
+			if ((i == 80 || i == 119) || (j == 0 || j == 23)){
+				attron(A_BOLD);		//draw border of log
+				attroff(A_REVERSE);
+			} else {
+				attroff(A_BOLD);	//draw inside of log
+				attron(A_REVERSE);
+			}
 			mvaddch(j,i,' ');
 		}
 	}
 	attroff(A_BOLD);
 	attron(A_REVERSE);
-	for (int i = 81 ; i < 119 ; i++){
-		for (int j = 1 ; j < 23 ; j++){
-			mvaddch(j,i,' ');
-		}
-	}
 	mvprintw(1,81,"%s",msgLog.c_str());
 	mvprintw(9,81,"                                     ");
 	if (isDay == 1){
@@ -180,22 +182,21 @@ void drawHelp(){
 	mvprintw(4,0,"s : Scavenge for food");
 	mvprintw(5,0,"S : Check character sheet");
 	mvprintw(6,0,"e : Eat food");
-	mvprintw(7,0,"k : Kick");
-	mvprintw(8,0,"m : View sky");
-	mvprintw(9,0,"M : Medical");
-	mvprintw(10,0,"  c : Cauterize");
-	mvprintw(11,0,"  C : Clean floor");
-	mvprintw(12,0,"  d : Cure disease");
-	mvprintw(13,0,"p : Go prone/Start swimming");
-	mvprintw(14,0,"q : Drink from lake");
-	mvprintw(15,0,"Q : Drink potion");
-	mvprintw(16,0,"i : View inventory");
-	mvprintw(17,0,", : Pickup item");
-	mvprintw(18,0,"d : Drop item");
-	mvprintw(19,0,"D : Describe");
-	mvprintw(20,0,"r : Read scroll");
-	mvprintw(21,0,"C : Sneak");
-	mvprintw(22,0,"? : View this screen");
+	mvprintw(7,0,"m : View sky");
+	mvprintw(8,0,"M : Medical");
+	mvprintw(9,0,"  c : Cauterize");
+	mvprintw(10,0,"  C : Clean floor");
+	mvprintw(11,0,"  d : Cure disease");
+	mvprintw(12,0,"p : Go prone/Start swimming");
+	mvprintw(13,0,"q : Drink from lake");
+	mvprintw(14,0,"Q : Drink potion");
+	mvprintw(15,0,"i : View inventory");
+	mvprintw(16,0,", : Pickup item");
+	mvprintw(17,0,"d : Drop item");
+	mvprintw(18,0,"D : Describe");
+	mvprintw(19,0,"r : Read scroll");
+	mvprintw(20,0,"C : Sneak");
+	mvprintw(21,0,"? : View this screen");
 	attroff(A_BOLD);
 	refresh();
 	getch();
