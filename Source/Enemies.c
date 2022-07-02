@@ -240,6 +240,7 @@ void pseudoPathfind(){
 
 void updateEnemyHealth(){
 	srand(time(0));
+	int currentCiv;
 	for (int i = 0 ; i < 80 ; i++){
 		for (int j = 0 ; j < 24 ; j++){
 			if (enemyHealthMap[j][i] <= 0 && enemyMap[j][i] != ' '){
@@ -248,10 +249,17 @@ void updateEnemyHealth(){
 				enemyNamesList[enemiesSlain] = enemyNamesMap[j][i];
 				enemiesSlain++;
 				enemyHealthMap[j][i] = -1;
+				currentCiv = enemyCivilizationMap[j][i];
+				if (enemyNamesMap[j][i] == leaders[currentCiv]){
+					//this handles killing civilization leaders
+					msgLog = "You killed a great leader!";
+					leaders[currentCiv] = returnGoblinName(3);
+				} else {
+					msgLog = "The enemy died!";
+				}
 				enemyNamesMap[j][i] = "";
 				targetingPlayerMap[j][i] = 0;
 				enemyCivilizationMap[j][i] = -1;
-				msgLog = "The enemy died!";
 			}
 			if (enemyHealthMap[j][i] > 0 && enemyMap[j][i] != ' '){
 				enemyFleeingMap[j][i] = shouldFlee(i,j);
