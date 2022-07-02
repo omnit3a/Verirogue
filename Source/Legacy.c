@@ -3,6 +3,7 @@
 #include <string>
 #include <math.h>
 #include "Player.h"
+#include "History.h"
 
 int enemiesSlain;
 int goldFound;
@@ -72,13 +73,16 @@ void saveLegacy(){
 	if (NULL==ptr){
 		killPlayer("Could not open history file");
 	}
-	sprintf(tempString, "\n ## %s ## \n", playerName.c_str());
+	sprintf(tempString, "%s",generateCivData().c_str());
+	fputs(tempString, ptr);
+
+	sprintf(tempString, "## %s ## \n", playerName.c_str());
 	fputs(tempString, ptr);
 	
 	sprintf(tempString, "%s",generateLegacy().c_str());
 	fputs(tempString, ptr);
 
-	fputs("\n## Enemies Slain ## \n", ptr);
+	fputs("\n## Enemies Slain ## \n\n", ptr);
 	for (int i = 0 ; i < 512 ; i++){
 		if (enemyNamesList[i] != ""){
 			sprintf(tempString," - %s\n",enemyNamesList[i].c_str());

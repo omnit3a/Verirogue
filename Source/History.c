@@ -7,6 +7,7 @@
 #include "Main.h"
 
 std::string civilizations[4];
+std::string leaders[4];
 int civilizationPeaceful[4];
 int civilizationRacist[4];
 int civilizationSmart[4];
@@ -17,7 +18,6 @@ std::string returnGoblinName(int pairs){
 	int vowelValue;
 	char syllablePair[2];
 	for (int i = 0 ; i < pairs ; i++){
-		srand(time(0)+pairs+i);
 		consonantValue = rand() % 8;
 		vowelValue = rand() % 3;
 		if (i == 0){
@@ -41,10 +41,34 @@ std::string returnGoblinName(int pairs){
 void generateCivilizations(){
 	srand(seedMain);
 	for (int i = 0 ; i < 4 ; i++){
+		srand(seedMain+i);
 		civilizations[i] = returnGoblinName((rand() % 6)+2);
-		civilizationPeaceful[i] = rand() % 4 != 0;
-		civilizationRacist[i] = rand() % 2;
-		civilizationSmart[i] = rand() % 2;
+		civilizationPeaceful[i] = rand() % 4 == 0;
+		civilizationRacist[i] = rand() % 2 == 0;
+		civilizationSmart[i] = rand() % 4 == 0;
+		srand(seedMain+(i*2));
+		leaders[i] = returnGoblinName(3);
 	}
+}
+
+std::string generateCivData(){
+	std::string tempString;
+	tempString = tempString+"## Civilizations ##\n";
+	for (int i = 0 ; i < 4 ; i++){
+		tempString = tempString+" - The goblin civilization "+civilizations[i]+"\n";
+		tempString = tempString+"   - Leader: "+leaders[i]+"\n";
+		if (civilizationPeaceful[i]){
+			tempString = tempString+"   - They are a peaceful civilization.\n";
+		} else {
+			tempString = tempString+"   - They are a engaging in constant war.\n";
+		}
+		if (civilizationRacist[i]){
+			tempString = tempString+"   - They have a deep hatred for the kobold race.\n";
+		}
+		if (civilizationSmart[i]){
+			tempString = tempString+"   - They are exceptionally advanced.\n";
+		}
+	}
+	return tempString;
 }
 
