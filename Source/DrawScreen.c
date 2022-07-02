@@ -249,7 +249,6 @@ void drawFOV(int radius){
 					attron(COLOR_PAIR(23) | A_BOLD);
 					mvaddch(j,i,'&');
 					isSneaking = 0;
-					msgLog = "You have been found!";
 				}
 				if (itemMap[j][i] != ' ' || returnDungeonmapAt(i,j) == '$'){
 					attroff(A_BLINK);

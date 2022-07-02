@@ -73,7 +73,7 @@ void engageInCombat(int x, int y){
 			msgLog = "You hit the enemy!";
 			break;
 	}
-	targetPlayer();
+	targetPlayer(x, y);
 	updateEnemyHealth();
 }
 

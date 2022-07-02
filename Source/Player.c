@@ -11,6 +11,7 @@
 #include <string>
 #include "FileRead.h"
 #include "Legacy.h"
+#include "Utils.h"
 
 int bloodCount = 511;		//this is the amount of blood in the human body in litres * 100
 
@@ -155,7 +156,7 @@ void killPlayer(std::string text){
 
 void cryCheck(){
 	if (playerEnt.skin.bpHP.currentHealth < 100 && playerEnt.skin.bpHP.currentHealth > 75){
-		isCrying = 2;	
+		isCrying = 1;	
 	} else {
 		isCrying = 0;
 	}
@@ -238,7 +239,7 @@ void infectionCheck(){
 				break;	
 		}
 	}
-	if (turn % (500+infectionStart) == 0 && isInfected == 1){
+	if (timeSinceTurn(infectionStart, 500) && isInfected == 1){
 		isInfected = 0;
 		isCongested = 0;
 		hasRash = 0;
@@ -260,7 +261,7 @@ void infectionCheck(){
 		msgLog = "You throw up";
 		bloodMap[playerEnt.currentPos.yPos][playerEnt.currentPos.xPos] = 2;
 	}
-	if (turn % (500+diseaseStart) == 0 && isDiseased == 1){
+	if (timeSinceTurn(diseaseStart, 500) && isDiseased == 1){
 		isDiseased = 0;
 		msgLog = "You are rid of your disease";
 		medicalSuccesses++;

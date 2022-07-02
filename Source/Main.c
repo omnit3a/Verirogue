@@ -13,6 +13,7 @@
 #include "FileRead.h"
 #include "Inventory.h"
 #include "Gas.h"
+#include "History.h"
 
 int seedMain = time(0);
 
@@ -20,6 +21,7 @@ int main(){
 	initFileRead();
 	worldFileRead();
 	initGas();
+	generateCivilizations();
 	setupScreen();
 	updateScreen();
 	playerCreatorScreen();

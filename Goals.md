@@ -57,5 +57,11 @@
 	- [X] Difference in stats between races
 - [ ] Persistent world
 	- [ ] Persistent enemies
+	- [ ] Persistent civilizations
 	- [ ] Persistent scroll text
 - [X] Optimize/cleanup code
+- [ ] Civilizations
+	- [X] Civilization properties
+	- [ ] Territory
+	- [ ] Leaders
+	- [ ] Inter-civilization relations

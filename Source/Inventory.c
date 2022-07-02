@@ -8,6 +8,7 @@
 #include "Legacy.h"
 #include <string>
 #include <cstring>
+#include "Utils.h"
 
 char itemMap[24][80];
 

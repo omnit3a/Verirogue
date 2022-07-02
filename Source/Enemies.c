@@ -10,6 +10,7 @@
 #include "DrawUI.h"
 #include "Legacy.h"
 #include "Main.h"
+#include "History.h"
 
 int enemyDiseaseMap[24][80];
 char enemyMap[24][80];
@@ -17,6 +18,7 @@ int enemyHealthMap[24][80];
 int enemyFleeingMap[24][80];
 std::string enemyNamesMap[24][80];
 int targetingPlayerMap[24][80];
+int enemyCivilizationMap[24][80];
 
 int spawnRate = 45;
 int baseEnemyHealth = 10;
@@ -27,12 +29,13 @@ int diseaseSpreadRate = 10;
 char goblinConsonants[8] = {'x','h','g','z','t','k','q','w'};
 char goblinVowels[3] = {'a','o','e'};
 
-std::string generateGoblinName(){
+std::string generateGoblinName(int xPos, int yPos){
 	std::string tempString = "";
 	int pairs = (rand() % 4)+1;
 	int consonantValue;
 	int vowelValue;
 	char syllablePair[2];
+	int currentCiv = enemyCivilizationMap[yPos][xPos];
 	for (int i = 0 ; i < pairs ; i++){
 		consonantValue = rand() % 8;
 		vowelValue = rand() % 3;
@@ -43,8 +46,15 @@ std::string generateGoblinName(){
 		}
 		syllablePair[1] = goblinVowels[vowelValue];
 		tempString = tempString+syllablePair;
+		if (rand() % 4 == 0){
+			if (rand() % 2 == 0){
+				tempString = tempString+"m";
+			} else {
+				tempString = tempString+"n";
+			}
+		}
 	}
-	tempString = tempString+" the Goblin";
+	tempString = tempString+" the Goblin of "+civilizations[currentCiv];
 	return tempString;
 	
 }
@@ -62,7 +72,8 @@ void placeEnemies(){
 					if (rand() % diseaseRate == 0){
 						enemyDiseaseMap[j][i] = 1;
 					}
-					enemyNamesMap[j][i] = generateGoblinName();
+					enemyCivilizationMap[j][i] = rand() % 4;
+					enemyNamesMap[j][i] = generateGoblinName(i,j);
 					targetingPlayerMap[j][i] = 1;
 				}
 			}
@@ -84,7 +95,8 @@ void resetEnemies(int resetCode){
 				enemyFleeingMap[j][i] = 0;
 				enemyNamesMap[j][i] = "";
 				targetingPlayerMap[j][i] = 0;
-			}
+				enemyCivilizationMap[j][i] = -1;
+			}	
 		}
 	} else if (resetCode == 1){
 		for (int i = 0 ; i < 80 ; i++){
@@ -96,6 +108,7 @@ void resetEnemies(int resetCode){
 					enemyFleeingMap[j][i] = 0;
 					enemyNamesMap[j][i] = "";
 					targetingPlayerMap[j][i] = 0;
+					enemyCivilizationMap[j][i] = -1;
 				}
 			}
 		}
@@ -119,7 +132,7 @@ int shouldFlee(int checkX, int checkY){
 	if (enemyHealthMap[checkY][checkX+1] == -1){
 		tempFlee++;
 	}
-	return tempFlee >= 1;
+	return tempFlee >= 2;
 }
 
 void pseudoPathfind(){
@@ -132,6 +145,7 @@ void pseudoPathfind(){
 		int tempFlee[24][80];
 		int tempTarget[24][80];
 		std::string tempNames[24][80];
+		int tempCiv[24][80];
 		int randCornerX, randCornerY;
 		for (int i = 0 ; i < 80 ; i++){
 			for (int j = 0 ; j < 24 ; j++){
@@ -141,25 +155,11 @@ void pseudoPathfind(){
 				tempFlee[j][i] = enemyFleeingMap[j][i];
 				tempNames[j][i] = enemyNamesMap[j][i];
 				tempTarget[j][i] = targetingPlayerMap[j][i];
+				tempCiv[j][i] = enemyCivilizationMap[j][i];
 			}
 		}
-		randCornerX = rand() % 2;
-		randCornerY = rand() % 2;
 		for (int i = 0 ; i < 80 ; i++){
 			for (int j = 0 ; j < 24 ; j++){
-				if (shouldFlee(i,j) || tempFlee[j][i] == 1){
-					tempFlee[j][i] = 1;
-					if (randCornerX){
-						checkX = 0;	
-					} else {
-						checkX = 79;
-					}
-					if (randCornerY){
-						checkY = 0;	
-					} else {
-						checkY = 23;
-					}
-				}
 				if (enemyMap[j][i] == '&'){
 					if (dungeonWalkable(i,j-1) && j < checkY-1 && enemyMap[j+1][i] != '&'){
 						tempMap[j][i] = ' ';
@@ -174,6 +174,8 @@ void pseudoPathfind(){
 						tempNames[j][i] = "";
 						tempTarget[j+1][i] = tempTarget[j+1][i];
 						tempTarget[j][i] = 0;
+						tempCiv[j+1][i] = tempCiv[j][i];
+						tempCiv[j][i] = -1;
 					} else if (dungeonWalkable(i,j+1) && j > checkY+1 && enemyMap[j-1][i] != '&'){
 						tempMap[j][i] = ' ';
 						tempMap[j-1][i] = '&';
@@ -187,6 +189,8 @@ void pseudoPathfind(){
 						tempNames[j][i] = "";
 						tempTarget[j-1][i] = tempTarget[j][i];
 						tempTarget[j][i] = 0;
+						tempCiv[j-1][j] = tempCiv[j][i];
+						tempCiv[j][i] = -1;
 					} else if (dungeonWalkable(i+1,j) && i < checkX-1 && enemyMap[j][i+1] != '&'){
 						tempMap[j][i] = ' ';
 						tempMap[j][i+1] = '&';
@@ -200,6 +204,8 @@ void pseudoPathfind(){
 						tempNames[j][i] = "";
 						tempTarget[j][i+1] = tempTarget[j][i];
 						tempTarget[j][i] = 0;
+						tempCiv[j][i+1] = tempCiv[j][i];
+						tempCiv[j][i] = -1;
 					} else if (dungeonWalkable(i-1,j) && i > checkX+1 && enemyMap[j][i-1] != '&'){
 						tempMap[j][i] = ' ';
 						tempMap[j][i-1] = '&';
@@ -213,6 +219,8 @@ void pseudoPathfind(){
 						tempNames[j][i] = "";
 						tempTarget[j][i-1] = tempTarget[j][i];
 						tempTarget[j][i] = 0;
+						tempCiv[j][i-1] = tempCiv[j][i];
+						tempCiv[j][i] = -1;
 					}
 				}
 			}
@@ -242,6 +250,7 @@ void updateEnemyHealth(){
 				enemyHealthMap[j][i] = -1;
 				enemyNamesMap[j][i] = "";
 				targetingPlayerMap[j][i] = 0;
+				enemyCivilizationMap[j][i] = -1;
 				msgLog = "The enemy died!";
 			}
 			if (enemyHealthMap[j][i] > 0 && enemyMap[j][i] != ' '){
@@ -252,63 +261,82 @@ void updateEnemyHealth(){
 	}
 }
 
-void targetPlayer(){
+void targetPlayer(int xPos, int yPos){
 	srand(time(0));
+	int enemyStrength = 0;
+	int enemyIntelligence = 0;
+	int enemyCoward = 0;
+	int currentCiv = enemyCivilizationMap[yPos][xPos];
+	for (int i = 0 ; i < 4 ; i++){
+		if (i == currentCiv){
+			enemyCoward = civilizationPeaceful[currentCiv];
+			if ((playerRace == "Kobold") && civilizationRacist[currentCiv]){
+				enemyStrength = 5;
+			} else {
+				enemyStrength = -5;
+			}
+			enemyIntelligence = civilizationSmart[currentCiv];
+		}	
+	}
 	int target = rand() % 6;
-	int damage = (rand() % 7)+baseEnemyDamage;
-	if (rand() % 3 < 2){
-		switch (target){
-			case 0:
-				playerEnt.head.bpHP.currentHealth -= damage;
-				if (playerEnt.head.bpHP.currentHealth <=0){
-					playerEnt.head.bpHP.currentHealth = 0;
-				}
-				msgLog = "You were hit in the head!";
-				break;
-			case 1:
-				playerEnt.torso.bpHP.currentHealth -= damage;
-				if (playerEnt.torso.bpHP.currentHealth <= 0){
-					playerEnt.torso.bpHP.currentHealth = 0;
-				}
-				msgLog = "You were hit in the torso!";
-				break;
-			case 2:
-				playerEnt.leftArm.bpHP.currentHealth -= damage;
-				if (playerEnt.leftArm.bpHP.currentHealth <= 0){
-					playerEnt.leftArm.bpHP.currentHealth = 0;
-				}
-				msgLog = "Your left arm was hit!";
-				break;
-			case 3:
-				playerEnt.rightArm.bpHP.currentHealth -= damage;
-				if (playerEnt.rightArm.bpHP.currentHealth <= 0){
-					playerEnt.rightArm.bpHP.currentHealth = 0;
-				}
-				msgLog = "Your right arm was hit!";
-				break;
-			case 4:
-				playerEnt.leftLeg.bpHP.currentHealth -= damage;
-				if (playerEnt.leftLeg.bpHP.currentHealth <= 0){
-					playerEnt.leftLeg.bpHP.currentHealth = 0;
-				}
-				msgLog = "Your left leg was hit!";
-				break;
-			case 5:
-				playerEnt.rightLeg.bpHP.currentHealth -= damage;
-				if (playerEnt.rightLeg.bpHP.currentHealth <= 0){
-					playerEnt.rightLeg.bpHP.currentHealth = 0;
-				}
-				msgLog = "Your right leg was hit!";
-				break;
+	int damage = (rand() % 7)+baseEnemyDamage+enemyStrength;
+	if (!enemyCoward){
+		if (rand() % 3 < 2){
+			switch (target){
+				case 0:
+					playerEnt.head.bpHP.currentHealth -= damage;
+					if (playerEnt.head.bpHP.currentHealth <=0){
+						playerEnt.head.bpHP.currentHealth = 0;
+					}
+					msgLog = "You were hit in the head!";
+					break;
+				case 1:
+					playerEnt.torso.bpHP.currentHealth -= damage;
+					if (playerEnt.torso.bpHP.currentHealth <= 0){
+						playerEnt.torso.bpHP.currentHealth = 0;
+					}
+					msgLog = "You were hit in the torso!";
+					break;
+				case 2:
+					playerEnt.leftArm.bpHP.currentHealth -= damage;
+					if (playerEnt.leftArm.bpHP.currentHealth <= 0){
+						playerEnt.leftArm.bpHP.currentHealth = 0;
+					}
+					msgLog = "Your left arm was hit!";
+					break;
+				case 3:
+					playerEnt.rightArm.bpHP.currentHealth -= damage;
+					if (playerEnt.rightArm.bpHP.currentHealth <= 0){
+						playerEnt.rightArm.bpHP.currentHealth = 0;
+					}
+					msgLog = "Your right arm was hit!";
+					break;
+				case 4:
+					playerEnt.leftLeg.bpHP.currentHealth -= damage;
+					if (playerEnt.leftLeg.bpHP.currentHealth <= 0){
+						playerEnt.leftLeg.bpHP.currentHealth = 0;
+					}
+					msgLog = "Your left leg was hit!";
+					break;
+				case 5:
+					playerEnt.rightLeg.bpHP.currentHealth -= damage;
+					if (playerEnt.rightLeg.bpHP.currentHealth <= 0){
+						playerEnt.rightLeg.bpHP.currentHealth = 0;
+					}
+					msgLog = "Your right leg was hit!";
+					break;
+			}
+			playerEnt.skin.bpHP.currentHealth--;
+			srand(time(0)+playerEnt.skin.bpHP.currentHealth);
+			if (rand() % diseaseSpreadRate == 0){
+				msgLog = "You contract a disease!";
+				isDiseased = 1;
+				diseaseStart = turn;
+				medicalFailures++;
+			}
 		}
-		playerEnt.skin.bpHP.currentHealth--;
-		srand(time(0)+playerEnt.skin.bpHP.currentHealth);
-		if (rand() % diseaseSpreadRate == 0){
-			msgLog = "You contract a disease!";
-			isDiseased = 1;
-			diseaseStart = turn;
-			medicalFailures++;
-		}
+	} else {
+		msgLog = "The enemy is a coward";
 	}
 	
 }
