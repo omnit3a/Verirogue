@@ -1,5 +1,5 @@
 # Verirogue ![](vim.vialle.love.anim.gif)
-A roguelike for Linux systems
+A roguelike for Unix-based systems
 
 To compile on linux and mac, run `sudo bash build.sh`
 
