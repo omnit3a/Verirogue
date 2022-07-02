@@ -76,6 +76,10 @@ void saveLegacy(){
 	sprintf(tempString, "%s",generateCivData().c_str());
 	fputs(tempString, ptr);
 
+	fputs("## History ##\n",ptr);
+	sprintf(tempString, "%s\n",worldHistory.c_str());
+	fputs(tempString, ptr);
+
 	sprintf(tempString, "## %s ## \n", playerName.c_str());
 	fputs(tempString, ptr);
 	

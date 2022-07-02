@@ -11,6 +11,8 @@
 #include "Legacy.h"
 #include "Main.h"
 #include "History.h"
+#include "Planets.h"
+#include "DrawScreen.h"
 
 int enemyDiseaseMap[24][80];
 char enemyMap[24][80];
@@ -61,6 +63,7 @@ std::string generateGoblinName(int xPos, int yPos){
 
 void placeEnemies(){
 	if (biome == 'd'){
+		int currentCiv;
 		for (int i = 0 ; i < 80 ; i++){
 			for (int j = 0 ; j < 24 ; j++){
 				enemyMap[j][i] = ' ';
@@ -73,6 +76,7 @@ void placeEnemies(){
 						enemyDiseaseMap[j][i] = 1;
 					}
 					enemyCivilizationMap[j][i] = rand() % 4;
+					
 					enemyNamesMap[j][i] = generateGoblinName(i,j);
 					targetingPlayerMap[j][i] = 1;
 				}
@@ -161,7 +165,7 @@ void pseudoPathfind(){
 		for (int i = 0 ; i < 80 ; i++){
 			for (int j = 0 ; j < 24 ; j++){
 				if (enemyMap[j][i] == '&'){
-					if (dungeonWalkable(i,j-1) && j < checkY-1 && enemyMap[j+1][i] != '&'){
+					if (dungeonWalkable(i,j+1) && j < checkY-1 && enemyMap[j+1][i] != '&'){
 						tempMap[j][i] = ' ';
 						tempMap[j+1][i] = '&';
 						tempHealth[j+1][i] = tempHealth[j][i];
@@ -176,7 +180,7 @@ void pseudoPathfind(){
 						tempTarget[j][i] = 0;
 						tempCiv[j+1][i] = tempCiv[j][i];
 						tempCiv[j][i] = -1;
-					} else if (dungeonWalkable(i,j+1) && j > checkY+1 && enemyMap[j-1][i] != '&'){
+					} else if (dungeonWalkable(i,j-1) && j > checkY+1 && enemyMap[j-1][i] != '&'){
 						tempMap[j][i] = ' ';
 						tempMap[j-1][i] = '&';
 						tempHealth[j-1][i] = tempHealth[j][i];
@@ -233,6 +237,7 @@ void pseudoPathfind(){
 				enemyFleeingMap[j][i] = tempFlee[j][i];
 				enemyNamesMap[j][i] = tempNames[j][i];
 				targetingPlayerMap[j][i] = tempTarget[j][i];
+				enemyCivilizationMap[j][i] = tempCiv[j][i];
 			}
 		}	
 	}
@@ -241,22 +246,27 @@ void pseudoPathfind(){
 void updateEnemyHealth(){
 	srand(time(0));
 	int currentCiv;
+	char tempTime[80];
+	sprintf(tempTime, "Month %d Day %d",month, day);
 	for (int i = 0 ; i < 80 ; i++){
 		for (int j = 0 ; j < 24 ; j++){
 			if (enemyHealthMap[j][i] <= 0 && enemyMap[j][i] != ' '){
 				enemyMap[j][i] = ' ';
 				goldScore += (rand() % 10) + 1;
 				enemyNamesList[enemiesSlain] = enemyNamesMap[j][i];
-				enemiesSlain++;
 				enemyHealthMap[j][i] = -1;
 				currentCiv = enemyCivilizationMap[j][i];
-				if (enemyNamesMap[j][i] == leaders[currentCiv]){
+				if (enemyNamesList[enemiesSlain] == leaders[currentCiv]){
 					//this handles killing civilization leaders
 					msgLog = "You killed a great leader!";
+					worldHistory = worldHistory+"On "+tempTime+", The great leader of "+civilizations[currentCiv]+" ("+leaders[currentCiv]+") was killed by "+playerName+"\n";
 					leaders[currentCiv] = returnGoblinName(3);
+					worldHistory = worldHistory+"On "+tempTime+", "+leaders[currentCiv]+" the Goblin rose to power in "+civilizations[currentCiv]+"\n";
 				} else {
+					worldHistory = worldHistory+"On "+tempTime+", "+playerName+" struck down "+enemyNamesMap[j][i]+"\n";
 					msgLog = "The enemy died!";
 				}
+				enemiesSlain++;
 				enemyNamesMap[j][i] = "";
 				targetingPlayerMap[j][i] = 0;
 				enemyCivilizationMap[j][i] = -1;

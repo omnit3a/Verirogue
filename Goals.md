@@ -59,9 +59,11 @@
 	- [ ] Persistent enemies
 	- [ ] Persistent civilizations
 	- [ ] Persistent scroll text
+	- [ ] Persistent history
 - [X] Optimize/cleanup code
 - [ ] Civilizations
 	- [X] Civilization properties
 	- [ ] Territory
 	- [X] Leaders
 	- [ ] Inter-civilization relations
+- [X] History

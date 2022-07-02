@@ -12,6 +12,8 @@
 #include "FileRead.h"
 #include "Legacy.h"
 #include "Utils.h"
+#include "History.h"
+#include "Planets.h"
 
 int bloodCount = 511;		//this is the amount of blood in the human body in litres * 100
 
@@ -139,6 +141,9 @@ void setupPlayer(int x, int y, int entID){
 }
 
 void killPlayer(std::string text){
+	char tempTime[80];
+	sprintf(tempTime, "Month %d Day %d",month,day);
+	worldHistory = worldHistory+"On "+tempTime+", "+playerName+" died.\n";
 	savePlayerData();
 	clear();
 	endScreen();

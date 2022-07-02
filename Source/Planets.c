@@ -92,10 +92,6 @@ void scrollStars(){
 		day++;
 		if (day > 30){
 			day = 1;
-			month++;
-			if (month > 12){
-				month = 1;
-			}
 		}
 	}
 }

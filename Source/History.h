@@ -9,6 +9,8 @@ extern int civilizationPeaceful[4];
 extern int civilizationRacist[4];
 extern int civilizationSmart[4];
 
+extern std::string worldHistory;
+
 std::string returnGoblinName(int pairs);
 
 void generateCivilizations();

@@ -13,6 +13,7 @@ int civilizationPeaceful[4];
 int civilizationRacist[4];
 int civilizationSmart[4];
 
+std::string worldHistory;
 
 std::string returnGoblinName(int pairs){
 	std::string tempString = "";
@@ -85,7 +86,7 @@ std::string generateCivData(){
 				tempString = tempString+"   - They have an oppresive style.\n";
 				break;
 			case 4:
-				tempString = tempString+"   - They have an revivalist style.\n";
+				tempString = tempString+"   - They have a revivalist style.\n";
 				break;
 			case 5:
 				tempString = tempString+"   - They have a classical style.\n";
