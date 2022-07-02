@@ -63,5 +63,5 @@
 - [ ] Civilizations
 	- [X] Civilization properties
 	- [ ] Territory
-	- [ ] Leaders
+	- [X] Leaders
 	- [ ] Inter-civilization relations
