@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <ncurses.h>
+#include <string>
 #include <time.h>
 #include <math.h>
 #include "Movement.h"
@@ -35,6 +36,8 @@ char dir;		//'u' = UP 'd' = DOWN 'l' = LEFT 'r' = RIGHT
 int chM, dungeonType;
 
 int inDebugMode;
+
+std::string foodVariant;
 
 void updateCauterize(int x, int y){
 	switch (dir){
@@ -385,9 +388,26 @@ void getMovement(){
 			break;
 		case 's':
 			srand(time(0));
+			if ((surroundingChar[0] == '~' || surroundingChar[1] == '~' || surroundingChar[2] == '~' || surroundingChar[3] == '~') && underPlayer != 'A'){
+				foodVariant = "Shellfish";
+			} else if (underPlayer == 'A'){
+				foodVariant = "Wintergreen";
+			} else {
+				foodVariant = "Berries";
+			}
 			if ((biome == 'o' || biome == 't')&& rand() % 2 == 0 && itemCount < 16){
-				msgLog = "You scavenged for food";
-				inventory[itemCount] = "Food";
+				msgLog = "You scavenged for "+foodVariant;
+				inventory[itemCount] = foodVariant;
+
+				//set the starting rot level of food
+				if (foodVariant == "Wintergreen"){
+					itemTurn[itemCount] = 0;
+				} else if (foodVariant == "Berries"){
+					itemTurn[itemCount] = 50;
+				} else if (foodVariant == "Shellfish"){
+					itemTurn[itemCount] = 100;
+				}
+				
 				itemCount++;
 			} else if (itemCount >= 16){
 				msgLog = "Your can't carry anything else!";
@@ -509,9 +529,27 @@ void getMovement(){
 						itemMap[checkY][checkX] = ' ';
 						itemCount++;
 						break;
-					case FOODSYM:
-						msgLog = "You found food!";
-						inventory[itemCount] = "Food";
+					case BERRYSYM:
+						msgLog = "You found berries!";
+						inventory[itemCount] = "Berries";
+						itemMap[checkY][checkX] = ' ';
+						itemCount++;
+						break;
+					case WINTERSYM:
+						msgLog = "You found wintergreen!";
+						inventory[itemCount] = "Wintergreen";
+						itemMap[checkY][checkX] = ' ';
+						itemCount++;
+						break;
+					case SHELLFISHSYM:
+						msgLog = "You found shellfish!";
+						inventory[itemCount] = "Shellfish";
+						itemMap[checkY][checkX] = ' ';
+						itemCount++;
+						break;
+					case ROTTENSYM:
+						msgLog = "You found rotten food";
+						inventory[itemCount] = "Rotten food";
 						itemMap[checkY][checkX] = ' ';
 						itemCount++;
 						break;
@@ -631,8 +669,17 @@ void getMovement(){
 				case POTIONSYM:
 					msgLog = "It's a magical potion!";
 					break;
-				case FOODSYM:
-					msgLog = "It's a pile of food";
+				case BERRYSYM:
+					msgLog = "It's a pile of berries";
+					break;
+				case WINTERSYM:
+					msgLog = "It's a pile of wintergreen leaves";
+					break;
+				case SHELLFISHSYM:
+					msgLog = "It's a pile of shellfish";
+					break;
+				case ROTTENSYM:
+					msgLog = "It's a pile of rotten food";
 					break;
 			}
 			break;

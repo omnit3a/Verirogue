@@ -51,19 +51,14 @@
 - [X] Legacy generation
 	- [X] History file
 	- [X] Names of enemies the player has killed
-	- [ ] Name of enemy that killed the player (if any)
 - [X] Kicking enemies
 - [X] Player race
 	- [X] Difference in stats between races
-- [ ] Persistent world
-	- [ ] Persistent enemies
-	- [ ] Persistent civilizations
-	- [ ] Persistent scroll text
-	- [ ] Persistent history
 - [X] Optimize/cleanup code
-- [ ] Civilizations
+- [X] Civilizations
 	- [X] Civilization properties
-	- [ ] Territory
 	- [X] Leaders
-	- [ ] Inter-civilization relations
+	- [X] Inter-civilization relations
 - [X] History
+- [X] Different types of food
+	- [ ] Food rot

@@ -41,8 +41,12 @@ char representation(std::string text){
 		return SCROLLSYM;
 	} else if (text == "Potion"){
 		return POTIONSYM;
-	} else if (text == "Food"){
-		return FOODSYM;
+	} else if (text == "Berries"){
+		return BERRYSYM;
+	} else if (text == "Wintergreen"){
+		return WINTERSYM;
+	} else if (text == "Shellfish"){
+		return SHELLFISHSYM;
 	} else if (text == "Rotten food"){
 		return ROTTENSYM;
 	} else {
@@ -73,8 +77,8 @@ void dropItem(int index){
 	inventory[index] = "";
 }
 
-int hasFood(){
-	if (itemCount-1 != -1 && inventory[itemCount-1] == "Food"){
+int hasFood(){ 
+	if (itemCount-1 != -1 && (inventory[itemCount-1] == "Berries" || inventory[itemCount-1] == "Shellfish" || inventory[itemCount-1] == "Wintergreen")){
 		return 1;
 	}
 	return 0;
@@ -84,7 +88,7 @@ void consumeFood(){
 	if (representation(inventory[itemCount]) == ' ' && itemCount-1 != -1){
 		itemCount--;
 	}
-	if (inventory[itemCount] == "Food"){
+	if (inventory[itemCount] == "Berries" || inventory[itemCount] == "Shellfish" || inventory[itemCount] == "Wintergreen"){
 		inventory[itemCount] = "";
 
 	}
@@ -142,8 +146,6 @@ void placeItems(){
 						itemMap[j][i] = SCROLLSYM;
 					} else if (item == 1){
 						itemMap[j][i] = POTIONSYM;
-					} else if (item == 2){
-						itemMap[j][i] = FOODSYM;
 					}
 				}
 			}
@@ -152,5 +154,13 @@ void placeItems(){
 }
 
 void rotItems(){
-	//insert code for rotting food here
+	for (int i = 0 ; i < 16 ; i++){
+		if (inventory[i] == "Berries" || inventory[i] == "Shellfish" || inventory[i] == "Wintergreen"){
+			itemTurn[i]++;
+			if(itemTurn[i] == 400){
+				inventory[i] = "Rotten food";
+				itemTurn[i] = 0;
+			}
+		}
+	}
 }

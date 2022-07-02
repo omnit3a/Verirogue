@@ -2,7 +2,9 @@
 #define AXESYM 'A'
 #define SCROLLSYM 'S'
 #define POTIONSYM 'p'
-#define FOODSYM '%'
+#define BERRYSYM '%'
+#define WINTERSYM 'W'
+#define SHELLFISHSYM 'c'
 #define ROTTENSYM ';'
 
 #ifndef INVENTORY_H_

@@ -12,6 +12,7 @@ int civilizationStyle[4];
 int civilizationPeaceful[4];
 int civilizationRacist[4];
 int civilizationSmart[4];
+int civilizationWars[4][4];
 
 std::string worldHistory;
 
@@ -45,20 +46,34 @@ void generateCivilizations(){
 	srand(seedMain);
 	for (int i = 0 ; i < 4 ; i++){
 		srand(seedMain+i);
-		civilizations[i] = returnGoblinName((rand() % 6)+2);
+		civilizations[i] = returnGoblinName((rand() % 3)+2);
 		civilizationStyle[i] = rand() % 6;
 		civilizationPeaceful[i] = rand() % 4 == 0;
 		civilizationRacist[i] = rand() % 2 == 0;
 		civilizationSmart[i] = rand() % 4 == 0;
 		srand(seedMain+(i*2));
-		leaders[i] = returnGoblinName(3);
+		leaders[i] = returnGoblinName(3)+" the Goblin of "+civilizations[i];
+	}
+}
+
+void generateWarData(int civNumber){
+	if (!civilizationPeaceful[civNumber]){
+		for (int i = 0 ; i < 4 ; i++){
+			if (rand() % 2 == 0){
+				civilizationWars[civNumber][i] = 1;	
+			} else {
+				civilizationWars[civNumber][i] = 0;
+			}
+		}
 	}
 }
 
 std::string generateCivData(){
 	std::string tempString;
 	tempString = tempString+"## Civilizations ##\n";
+	int tempCivWar;
 	for (int i = 0 ; i < 4 ; i++){
+		generateWarData(i);
 		tempString = tempString+" - The goblin civilization "+civilizations[i]+"\n";
 		tempString = tempString+"   - Leader: "+leaders[i]+"\n";
 		if (civilizationPeaceful[i]){
@@ -92,8 +107,18 @@ std::string generateCivData(){
 				tempString = tempString+"   - They have a classical style.\n";
 				break;
 		}	
+		tempCivWar = 0;
+		for (int c = 0 ; c < 4 ; c++){
+			if (c == i){
+				continue;
+			}
+			if (civilizationWars[i][c] == 1){
+				tempString = tempString+"   - They are at war with "+civilizations[c]+"\n";
+			} else {
+				tempString = tempString+"   - They are at peace with "+civilizations[c]+"\n";
+			}
+		}
 		tempString = tempString+"\n";
 	}
 	return tempString;
 }
-
