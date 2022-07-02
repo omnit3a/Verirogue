@@ -4,6 +4,7 @@
 #include <time.h>
 #include "History.h"
 #include "Enemies.h"
+#include "Main.h"
 
 std::string civilizations[4];
 int civilizationPeaceful[4];
@@ -15,8 +16,8 @@ std::string returnGoblinName(int pairs){
 	int consonantValue;
 	int vowelValue;
 	char syllablePair[2];
-	srand(time(0));
 	for (int i = 0 ; i < pairs ; i++){
+		srand(time(0)+pairs+i);
 		consonantValue = rand() % 8;
 		vowelValue = rand() % 3;
 		if (i == 0){
@@ -38,6 +39,7 @@ std::string returnGoblinName(int pairs){
 }
 
 void generateCivilizations(){
+	srand(seedMain);
 	for (int i = 0 ; i < 4 ; i++){
 		civilizations[i] = returnGoblinName((rand() % 6)+2);
 		civilizationPeaceful[i] = rand() % 4 != 0;
