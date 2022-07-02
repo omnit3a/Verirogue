@@ -8,9 +8,11 @@
 
 std::string civilizations[4];
 std::string leaders[4];
+int civilizationStyle[4];
 int civilizationPeaceful[4];
 int civilizationRacist[4];
 int civilizationSmart[4];
+
 
 std::string returnGoblinName(int pairs){
 	std::string tempString = "";
@@ -43,6 +45,7 @@ void generateCivilizations(){
 	for (int i = 0 ; i < 4 ; i++){
 		srand(seedMain+i);
 		civilizations[i] = returnGoblinName((rand() % 6)+2);
+		civilizationStyle[i] = rand() % 6;
 		civilizationPeaceful[i] = rand() % 4 == 0;
 		civilizationRacist[i] = rand() % 2 == 0;
 		civilizationSmart[i] = rand() % 4 == 0;
@@ -68,6 +71,27 @@ std::string generateCivData(){
 		if (civilizationSmart[i]){
 			tempString = tempString+"   - They are exceptionally advanced.\n";
 		}
+		switch (civilizationStyle[i]){
+			case 0:
+				tempString = tempString+"   - They have a gaudy style.\n";
+				break;
+			case 1:
+				tempString = tempString+"   - They have an eclectic style.\n";
+				break;
+			case 2:
+				tempString = tempString+"   - They have a monolithic style.\n";
+				break;
+			case 3:
+				tempString = tempString+"   - They have an oppresive style.\n";
+				break;
+			case 4:
+				tempString = tempString+"   - They have an revivalist style.\n";
+				break;
+			case 5:
+				tempString = tempString+"   - They have a classical style.\n";
+				break;
+		}	
+		tempString = tempString+"\n";
 	}
 	return tempString;
 }
