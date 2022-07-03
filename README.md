@@ -1,7 +1,8 @@
 # Verirogue ![](vim.vialle.love.anim.gif)
-A roguelike for Linux systems
+A roguelike for Linux systems<br>
+Included with the files is the font I suggest using for the game (`Perfect DOS VGA 437.ttf`) 
 
-Note: It could most likely be compiled for macOSX
+It could most likely be compiled for macOSX
 
 # Controls
 [See Controls](Controls.md)
