@@ -69,11 +69,17 @@ void updateCauterize(int x, int y){
 }
 
 void engageInCombat(int x, int y){
+	int damage;
 	switch(enemyMap[y][x]){
 		case '&':
-			int damage = ((rand() % currentWeapon)*2)+1;
+			damage = ((rand() % currentWeapon)*2)+1;
 			enemyHealthMap[y][x] -= damage;
-			msgLog = "You hit the enemy!";
+			msgLog = "You hit the goblin!";
+			break;
+		case 'k':
+			damage = ((rand() % currentWeapon)*2)+1;
+			enemyHealthMap[y][x] -= damage;
+			msgLog = "You hit the kobold!";
 			break;
 	}
 	targetPlayer(x, y);
@@ -217,7 +223,7 @@ void getMovement(){
 	switch (ch){
 		case KEY_UP:
 			dir = 'u';
-			if (enemyMap[checkY-1][checkX] == '&'){
+			if (isEnemyAt(checkX, checkY-1)){
 				if (canHit()){
 					engageInCombat(checkX, checkY-1);
 				}
@@ -238,7 +244,7 @@ void getMovement(){
 			break;
 		case KEY_DOWN:
 			dir = 'd';
-			if (enemyMap[checkY+1][checkX] == '&'){
+			if (isEnemyAt(checkX, checkY+1)){
 				if (canHit()){
 					engageInCombat(checkX, checkY+1);
 				}
@@ -258,7 +264,7 @@ void getMovement(){
 			break;
 		case KEY_LEFT:
 			dir = 'l';
-			if (enemyMap[checkY][checkX-1] == '&'){
+			if (isEnemyAt(checkX-1, checkY)){
 				if (canHit()){
 					engageInCombat(checkX-1, checkY);
 				}
@@ -278,7 +284,7 @@ void getMovement(){
 			break;
 		case KEY_RIGHT:
 			dir = 'r';
-			if (enemyMap[checkY][checkX+1] == '&'){
+			if (isEnemyAt(checkX+1, checkY)){
 				if (canHit()){
 					engageInCombat(checkX+1, checkY);
 				}
@@ -652,9 +658,16 @@ void getMovement(){
 			}
 			if (enemyMap[checkY-1][checkX] == '&' || enemyMap[checkY+1][checkX] == '&' || enemyMap[checkY][checkX-1] == '&' || enemyMap[checkY][checkX+1] == '&'){
 				msgLog = "It's a goblin";
-			}	
+			} else if (enemyMap[checkY-1][checkX] == 'k' || enemyMap[checkY+1][checkX] == 'k' || enemyMap[checkY][checkX-1] == 'k' || enemyMap[checkY][checkX+1] == 'k'){
+				msgLog = "It's a kobold";
+			}
+
 			if (enemyDiseaseMap[checkY-1][checkX] == 1 || enemyDiseaseMap[checkY+1][checkX] == 1 || enemyDiseaseMap[checkY][checkX-1] == 1 || enemyDiseaseMap[checkY][checkX+1] == 1){
-				msgLog = "It's a diseased goblin";
+				if (enemyMap[checkY-1][checkX] == '&' || enemyMap[checkY+1][checkX] == '&' || enemyMap[checkY][checkX-1] == '&' || enemyMap[checkY][checkX+1] == '&'){
+					msgLog = "It's a diseased goblin";
+				} else if (enemyMap[checkY-1][checkX] == 'k' || enemyMap[checkY+1][checkX] == 'k' || enemyMap[checkY][checkX-1] == 'k' || enemyMap[checkY][checkX+1] == 'k'){
+					msgLog = "It's a diseased kobold";
+				}
 			}
 			switch(itemMap[checkY][checkX]){
 				case SWORDSYM:

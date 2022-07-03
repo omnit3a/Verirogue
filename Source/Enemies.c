@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <string>
+#include <cctype>
 #include "Components.h"
 #include "Enemies.h"
 #include "MapGenerator.h"
@@ -29,7 +30,11 @@ int diseaseRate = 10;
 int diseaseSpreadRate = 10;
 
 char goblinConsonants[8] = {'x','h','g','z','t','k','q','w'};
-char goblinVowels[3] = {'a','o','e'};
+char goblinVowels[5] = {'a','o','e','u','i'};
+
+char koboldOnset[5] = {'t','l','h','n','j'};
+char koboldNucleas[8] = {'y','i','l','u','e','a','*','`'};
+char koboldCoda[5] = {'r','n','v','d','s'};
 
 std::string generateGoblinName(int xPos, int yPos){
 	std::string tempString = "";
@@ -40,7 +45,7 @@ std::string generateGoblinName(int xPos, int yPos){
 	int currentCiv = enemyCivilizationMap[yPos][xPos];
 	for (int i = 0 ; i < pairs ; i++){
 		consonantValue = rand() % 8;
-		vowelValue = rand() % 3;
+		vowelValue = rand() % 5;
 		if (i == 0){
 			syllablePair[0] = goblinConsonants[consonantValue] - 32;
 		} else {
@@ -61,24 +66,84 @@ std::string generateGoblinName(int xPos, int yPos){
 	
 }
 
+std::string generateKoboldName(){
+	std::string tempString = "";
+	int pairs = (rand() % 4)+1;
+	int onsetValue;
+	int onsetAmount;
+	int nucleasValue;
+	int codaValue;
+	int codaAmount;
+	for (int i = 0 ; i < pairs ; i++){
+		onsetAmount = (rand() % 2)+1;
+		codaAmount = (rand() % 2)+1;
+		for (int o = 0 ; o < onsetAmount ; o++){
+			onsetValue = rand() % 5;
+			if (i == 0 && o == 0){
+				tempString = tempString + koboldOnset[onsetValue];
+			} else {
+				tempString = tempString + koboldOnset[onsetValue];
+			}
+		}
+		nucleasValue = rand() % 8;
+		tempString = tempString + koboldNucleas[nucleasValue];
+		for (int c = 0 ; c < codaAmount ; c++){
+			codaValue = rand() % 5;
+			tempString = tempString + koboldCoda[codaValue];
+		}
+	}
+	tempString = tempString + " the Kobold";
+	tempString[0] = std::toupper(tempString[0]);
+	return tempString;
+	
+}
+
+std::string whichEnemy(char enemy){
+	switch (enemy){
+		case GOBLINCHAR:
+			return "Goblin";
+			break;
+		case KOBOLDCHAR:
+			return "Kobold";
+			break;
+		default:
+			return "Nothing";
+			break;
+	}
+}
+
 void placeEnemies(){
 	if (biome == 'd'){
 		int currentCiv;
+		int tempSeed = 0;
 		for (int i = 0 ; i < 80 ; i++){
 			for (int j = 0 ; j < 24 ; j++){
 				enemyMap[j][i] = ' ';
 				enemyHealthMap[j][i] = 0;
 				enemyFleeingMap[j][i] = 0;
 				if ((dungeonWalkable(i,j) && map[j][i] != '<') && rand() % spawnRate == 0){
-					enemyMap[j][i] = '&';
+					srand(time(0)+tempSeed);
+					if (rand() % 2 == 0){
+						enemyMap[j][i] = GOBLINCHAR;
+					} else {
+						enemyMap[j][i] = KOBOLDCHAR;
+					}
 					enemyHealthMap[j][i] = (rand() % 10)+baseEnemyHealth;
 					if (rand() % diseaseRate == 0){
 						enemyDiseaseMap[j][i] = 1;
 					}
-					enemyCivilizationMap[j][i] = rand() % 4;
-					
-					enemyNamesMap[j][i] = generateGoblinName(i,j);
+					if (whichEnemy(enemyMap[j][i]) == "Goblin"){
+						enemyCivilizationMap[j][i] = rand() % 4;
+					} else {
+						enemyCivilizationMap[j][i] = -1;
+					}
+					if (whichEnemy(enemyMap[j][i]) == "Goblin"){
+						enemyNamesMap[j][i] = generateGoblinName(i,j);
+					} else if (whichEnemy(enemyMap[j][i]) == "Kobold"){
+						enemyNamesMap[j][i] = generateKoboldName();
+					}
 					targetingPlayerMap[j][i] = 1;
+					tempSeed++;
 				}
 			}
 		}
@@ -164,10 +229,10 @@ void pseudoPathfind(){
 		}
 		for (int i = 0 ; i < 80 ; i++){
 			for (int j = 0 ; j < 24 ; j++){
-				if (enemyMap[j][i] == '&'){
-					if (dungeonWalkable(i,j+1) && j < checkY-1 && enemyMap[j+1][i] != '&'){
+				if (enemyMap[j][i] == GOBLINCHAR || enemyMap[j][i] == KOBOLDCHAR){
+					if (dungeonWalkable(i,j+1) && j < checkY-1 && enemyMap[j+1][i] != enemyMap[j][i]){
 						tempMap[j][i] = ' ';
-						tempMap[j+1][i] = '&';
+						tempMap[j+1][i] = enemyMap[j][i];
 						tempHealth[j+1][i] = tempHealth[j][i];
 						tempHealth[j][i] = 0;
 						tempDisease[j+1][i] = tempDisease[j][i];
@@ -180,9 +245,9 @@ void pseudoPathfind(){
 						tempTarget[j][i] = 0;
 						tempCiv[j+1][i] = tempCiv[j][i];
 						tempCiv[j][i] = -1;
-					} else if (dungeonWalkable(i,j-1) && j > checkY+1 && enemyMap[j-1][i] != '&'){
+					} else if (dungeonWalkable(i,j-1) && j > checkY+1 && enemyMap[j-1][i] != enemyMap[j][i]){
 						tempMap[j][i] = ' ';
-						tempMap[j-1][i] = '&';
+						tempMap[j-1][i] = enemyMap[j][i];
 						tempHealth[j-1][i] = tempHealth[j][i];
 						tempHealth[j][i] = 0;
 						tempDisease[j-1][i] = tempDisease[j][i];
@@ -195,9 +260,9 @@ void pseudoPathfind(){
 						tempTarget[j][i] = 0;
 						tempCiv[j-1][j] = tempCiv[j][i];
 						tempCiv[j][i] = -1;
-					} else if (dungeonWalkable(i+1,j) && i < checkX-1 && enemyMap[j][i+1] != '&'){
+					} else if (dungeonWalkable(i+1,j) && i < checkX-1 && enemyMap[j][i+1] != enemyMap[j][i]){
 						tempMap[j][i] = ' ';
-						tempMap[j][i+1] = '&';
+						tempMap[j][i+1] = enemyMap[j][i];
 						tempHealth[j][i+1] = tempHealth[j][i];
 						tempHealth[j][i] = 0;
 						tempDisease[j][i+1] = tempDisease[j][i];
@@ -210,9 +275,9 @@ void pseudoPathfind(){
 						tempTarget[j][i] = 0;
 						tempCiv[j][i+1] = tempCiv[j][i];
 						tempCiv[j][i] = -1;
-					} else if (dungeonWalkable(i-1,j) && i > checkX+1 && enemyMap[j][i-1] != '&'){
+					} else if (dungeonWalkable(i-1,j) && i > checkX+1 && enemyMap[j][i-1] != enemyMap[j][i]){
 						tempMap[j][i] = ' ';
-						tempMap[j][i-1] = '&';
+						tempMap[j][i-1] = enemyMap[j][i];
 						tempHealth[j][i-1] = tempHealth[j][i];
 						tempHealth[j][i] = 0;
 						tempDisease[j][i-1] = tempDisease[j][i];
@@ -286,12 +351,10 @@ void targetPlayer(int xPos, int yPos){
 	int enemyCoward = 0;
 	int currentCiv = enemyCivilizationMap[yPos][xPos];
 	for (int i = 0 ; i < 4 ; i++){
-		if (i == currentCiv){
+		if (i == currentCiv && whichEnemy(enemyMap[yPos][xPos]) == "Goblin"){
 			enemyCoward = civilizationPeaceful[currentCiv];
 			if ((playerRace == "Kobold") && civilizationRacist[currentCiv]){
 				enemyStrength = 5;
-			} else {
-				enemyStrength = -5;
 			}
 			enemyIntelligence = civilizationSmart[currentCiv];
 		}	
@@ -357,4 +420,12 @@ void targetPlayer(int xPos, int yPos){
 		msgLog = "The enemy is a coward";
 	}
 	
+}
+
+int isEnemyAt(int xPos, int yPos){
+	if (whichEnemy(enemyMap[yPos][xPos]) != "Nothing"){
+		return 1;
+	} else {
+		return 0;	
+	}
 }

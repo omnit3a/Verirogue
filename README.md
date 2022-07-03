@@ -1,7 +1,5 @@
 # Verirogue ![](vim.vialle.love.anim.gif)
-A roguelike for Linux systems
-
-It could most likely be compiled for mac
+A roguelike for Linux/Mac systems
 
 # Controls
 [See Controls](Controls.md)

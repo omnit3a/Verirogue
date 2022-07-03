@@ -151,10 +151,10 @@ void drawWithoutFOV(){
 						mvaddch(j,i,currentChar);
 					}
 				}
-			if (enemyMap[j][i] == '&'){
+			if (enemyMap[j][i] != ' '){
 				attroff(A_BLINK);
 				attron(COLOR_PAIR(23) | A_BOLD);
-				mvaddch(j,i,'&');
+				mvaddch(j,i,enemyMap[j][i]);
 			}
 			if (itemMap[j][i] != ' ' || returnDungeonmapAt(i,j) == '$'){
 				attroff(A_BLINK);
@@ -244,10 +244,10 @@ void drawFOV(int radius){
 						mvaddch(j,i,currentChar);
 					}
 				}
-				if (enemyMap[j][i] == '&'){
+				if (enemyMap[j][i] != ' '){
 					attroff(A_BLINK);
 					attron(COLOR_PAIR(23) | A_BOLD);
-					mvaddch(j,i,'&');
+					mvaddch(j,i,enemyMap[j][i]);
 					isSneaking = 0;
 				}
 				if (itemMap[j][i] != ' ' || returnDungeonmapAt(i,j) == '$'){
@@ -331,9 +331,9 @@ void drawEnemies(){
 	if (biome == 'd'){
 		for (int i = 0 ; i < 80 ; i++){
 			for (int j = 0 ; j < 24 ; j++){
-				if (enemyMap[j][i] == '&'){
+				if (isEnemyAt(i,j)){
 					attron(COLOR_PAIR(23) | A_BOLD);
-					mvaddch(j,i,'&');
+					mvaddch(j,i,enemyMap[j][i]);
 				}
 			}
 		}

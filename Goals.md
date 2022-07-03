@@ -61,4 +61,5 @@
 	- [X] Inter-civilization relations
 - [X] History
 - [X] Different types of food
-	- [ ] Food rot
+	- [X] Food rot
+- [X] Refactor enemy code for multiple enemy races

@@ -1,6 +1,9 @@
 #include "Components.h"
 #include <string>
 
+#define GOBLINCHAR '&'
+#define KOBOLDCHAR 'k'
+
 #ifndef ENEMIES_H_
 #define ENEMIES_H_
 
@@ -15,9 +18,17 @@ extern int enemyCivlizationMap[][80];	//contains the civilization that an enemy 
 extern int spawnRate, baseEnemyHealth, baseEnemyDamage, diseaseRate, diseaseSpreadRate;
 
 extern char goblinConsonants[8];
-extern char goblinVowels[3];
+extern char goblinVowels[5];
+
+extern char koboldOnset[5];
+extern char koboldNucleas[8];
+extern char koboldCoda[5];
 
 std::string generateGoblinName(int xPos, int yPos);
+
+std::string generateKoboldName();
+
+std::string whichEnemy(char enemy);	//returns the species name of the enemy at a coordinate
 
 void placeEnemies();			//generates and places enemies for use in a dungeon
 
@@ -30,5 +41,7 @@ void pseudoPathfind();			//very basic pathfinding for the enemies
 void updateEnemyHealth();
 
 void targetPlayer(int xPos, int yPos);
+
+int isEnemyAt(int xPos, int yPos);
 
 #endif

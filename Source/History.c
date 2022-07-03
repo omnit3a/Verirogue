@@ -23,7 +23,7 @@ std::string returnGoblinName(int pairs){
 	char syllablePair[2];
 	for (int i = 0 ; i < pairs ; i++){
 		consonantValue = rand() % 8;
-		vowelValue = rand() % 3;
+		vowelValue = rand() % 5;
 		if (i == 0){
 			syllablePair[0] = goblinConsonants[consonantValue] - 32;
 		} else {

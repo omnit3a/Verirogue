@@ -90,9 +90,9 @@ void setupPlayer(int x, int y, int entID){
 	if (playerRace == "Human"){
 		playerEnt.currentStats.strength+=15;
 	} else if (playerRace == "Goblin"){
-		playerEnt.currentStats.agility+=15;
-	} else if (playerRace == "Kobold"){
 		playerEnt.currentStats.intelligence+=15;
+	} else if (playerRace == "Kobold"){
+		playerEnt.currentStats.agility+=15;
 	} else {
 		//default to human
 		playerEnt.currentStats.strength+=15;
