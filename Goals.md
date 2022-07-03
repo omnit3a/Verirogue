@@ -59,6 +59,7 @@
 	- [X] Civilization properties
 	- [X] Leaders
 	- [X] Inter-civilization relations
+	- [ ] Kobold civilizations
 - [X] History
 - [X] Different types of food
 	- [X] Food rot
