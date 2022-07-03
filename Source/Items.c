@@ -21,7 +21,7 @@ void quaffPotion(){
 			playerEnt.leftArm.bpHP.currentHealth = 100;
 			playerEnt.rightArm.bpHP.currentHealth = 100;
 		} else if (effect > 250 && effect <= 300){
-			msgLog = "You now have a headache!";
+			msgLog = "Your head is affected";
 			playerEnt.head.bpHP.currentHealth = 50;
 		} else if (effect > 300 && effect <= 400){
 			msgLog = "You are maximally hydrated!";
@@ -30,15 +30,13 @@ void quaffPotion(){
 			msgLog = "You are granted 25 gold!";
 			goldScore += 25;
 		} else if (effect > 600 && effect <= 750){
-			msgLog = "Your legs vanish!";
-			playerEnt.leftLeg.bpHP.currentHealth = 0;
-			playerEnt.rightLeg.bpHP.currentHealth = 0;
+			msgLog = "Your legs are affected";
+			playerEnt.leftLeg.bpHP.currentHealth = 35;
+			playerEnt.rightLeg.bpHP.currentHealth = 35;
 		} else if (effect > 750 && effect <= 800){
-			msgLog = "Your arms vanish!";
-			playerEnt.leftArm.bpHP.currentHealth = 0;
-			playerEnt.rightArm.bpHP.currentHealth = 0;
-		} else if (effect == 999){
-			playerEnt.skin.bpHP.currentHealth = 0;
+			msgLog = "Your arms are affected";
+			playerEnt.leftArm.bpHP.currentHealth = 35;
+			playerEnt.rightArm.bpHP.currentHealth = 35;
 		} else {
 			msgLog = "Nothing happens!";
 		}

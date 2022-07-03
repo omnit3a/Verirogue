@@ -11,7 +11,6 @@
 #include <string>
 #include "FileRead.h"
 #include "Legacy.h"
-#include "Utils.h"
 #include "History.h"
 #include "Planets.h"
 
@@ -222,7 +221,7 @@ void infectionCheck(){
 	if (playerEnt.skin.bpHP.currentHealth < 50 && isInfected == 0){
 		msgLog = "You are develop an infection!";
 		isInfected = 1;
-		infectionStart = turn;
+		infectionStart = 0;
 		srand(time(0));	
 		medicalFailures++;	
                /**
@@ -244,13 +243,15 @@ void infectionCheck(){
 				break;	
 		}
 	}
-	if (timeSinceTurn(infectionStart, 500) && isInfected == 1){
+	if (infectionStart == 500 && isInfected == 1){
 		isInfected = 0;
 		isCongested = 0;
 		hasRash = 0;
 		hasDiarrhea = 0;
 		msgLog = "You are rid of your infection";
 		medicalSuccesses++;
+	} else if (infectionStart != 500 && isInfected == 1){
+		infectionStart++;
 	}
 	if (hasDiarrhea == 1 && turn % (150+infectionStart) == 0){
 		playerEnt.currentHydration.hydration -= 5;
@@ -266,10 +267,12 @@ void infectionCheck(){
 		msgLog = "You throw up";
 		bloodMap[playerEnt.currentPos.yPos][playerEnt.currentPos.xPos] = 2;
 	}
-	if (timeSinceTurn(diseaseStart, 500) && isDiseased == 1){
+	if (diseaseStart == 500 && isDiseased == 1){
 		isDiseased = 0;
 		msgLog = "You are rid of your disease";
 		medicalSuccesses++;
+	} else if (diseaseStart != 500 && isDiseased == 1){
+		diseaseStart++;
 	}
 	drawUserInterface();
 } 
@@ -299,7 +302,7 @@ void cauterizeWound(){
 					break;
 			}
 			isInfected = 1;
-			infectionStart = turn;
+			infectionStart = 0;
 			msgLog = "You develop an infection!";
 			medicalFailures++;
 		}

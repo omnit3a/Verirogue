@@ -151,9 +151,13 @@ void drawWithoutFOV(){
 						mvaddch(j,i,currentChar);
 					}
 				}
-			if (enemyMap[j][i] != ' '){
+			if (whichEnemy(enemyMap[j][i]) != "Nothing"){
 				attroff(A_BLINK);
-				attron(COLOR_PAIR(23) | A_BOLD);
+				if (whichEnemy(enemyMap[j][i]) == "Kobold"){
+					attron(COLOR_PAIR(23) | A_BOLD);
+				} else if (whichEnemy(enemyMap[j][i]) == "Goblin"){
+					attron(COLOR_PAIR(32) | A_BOLD);
+				}
 				mvaddch(j,i,enemyMap[j][i]);
 			}
 			if (itemMap[j][i] != ' ' || returnDungeonmapAt(i,j) == '$'){
@@ -244,9 +248,13 @@ void drawFOV(int radius){
 						mvaddch(j,i,currentChar);
 					}
 				}
-				if (enemyMap[j][i] != ' '){
+				if (whichEnemy(enemyMap[j][i]) != "Nothing"){
 					attroff(A_BLINK);
-					attron(COLOR_PAIR(23) | A_BOLD);
+					if (whichEnemy(enemyMap[j][i]) == "Kobold"){
+						attron(COLOR_PAIR(23) | A_BOLD);
+					} else if (whichEnemy(enemyMap[j][i]) == "Goblin"){
+						attron(COLOR_PAIR(32) | A_BOLD);
+					}
 					mvaddch(j,i,enemyMap[j][i]);
 					isSneaking = 0;
 				}
@@ -318,9 +326,13 @@ void drawStarmap(){
 	init_pair(1, COLOR_WHITE, COLOR_BLACK);
 	attron(COLOR_PAIR(1));
 	attron(A_BOLD);
-	for (int i = 0 ; i < 79 ; i++){
-		for (int j = 0 ; j < 24 ; j++){
-			mvaddch(j, i, skyMap[j][i]);
+	for (int i = 1 ; i < 80 ; i++){
+		for (int j = 1 ; j < 23 ; j++){
+			if (i == 79){
+				mvaddch(j,i,' ');
+			} else {
+				mvaddch(j, i, skyMap[j][i]);
+			}
 		}
 	}
 	attroff(A_BOLD);

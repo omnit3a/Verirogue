@@ -478,7 +478,6 @@ void getMovement(){
 			break;
 		case 'm':
 			if (inOverworld() && (hour < 6 || hour >= 20)){
-				clear();
 				drawStarmap();
 				updateScreen();
 				getch();

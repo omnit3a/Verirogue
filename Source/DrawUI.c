@@ -62,8 +62,18 @@ void drawLog(){
 			mvaddch(j,i,' ');
 		}
 	}
+	for (int i = 0 ; i < 81 ; i++){
+		for (int j = 0 ; j < 24 ; j++){
+			if ((i == 0 || i == 80) || (j == 0 || j == 23)){
+				mvaddch(j,i,' ');
+			} else {
+				continue;
+			}
+		}
+	}
 	attroff(A_BOLD);
 	attron(A_REVERSE);
+	mvprintw(0,2," Verirogue ");
 	mvprintw(1,81,"%s",msgLog.c_str());
 	mvprintw(9,81,"                                     ");
 	if (isDay == 1){

@@ -1,0 +1,15 @@
+Guide to the goblin language:
+	Syllable structure: CV(C)
+	Each syllable can have up to three letters, and a minimum of 2 letters
+	The syllables can start with X, H, G, Z, T, K, Q and W
+	The syllables can use the vowels A, E, I, O and U. Vowels must always be after a consonant
+	The syllables can end with M and N if the word is referring to a regular goblin, and J and R if referring to a place or important person
+	The first letter in a word is always capitalized
+
+Guide to the kobold language:
+	Syllable structure: (C)CVC(C)
+	Each syllable can have up to 5 letters, and a minimum of 3 letters.
+	Syllables can start with T, L, H, N and J. There may be 1 to 2 of these letters to start
+	Syllables can use the vowels Y, I, L, U, E, A, * and `. There must be a vowel, and it must follow the starting letters
+	Syllables can end with R, N, V, D and S. There may be 1 to 2 of these letters to end
+	The first letter in a word is always capitalized

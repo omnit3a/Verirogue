@@ -36,11 +36,11 @@ void resetEnemies(int resetCode);	//removes all enemies from the map
 
 int shouldFlee(int checkX, int checkY);
 
+void targetPlayer(int xPos, int yPos);
+
 void pseudoPathfind();			//very basic pathfinding for the enemies
 
 void updateEnemyHealth();
-
-void targetPlayer(int xPos, int yPos);
 
 int isEnemyAt(int xPos, int yPos);
 
