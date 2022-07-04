@@ -87,6 +87,9 @@ void generateMap(){
 			if (rand() % dungeonSpawnRate == 0 && map[j][i] == 'A'){
 				map[j][i] = '>';
 			}
+			if (rand() % 100 == 0 && map[j][i] == '.'){
+				map[j][i] = 'H';
+			}
 		}
 	}
 	surroundingChar[0] = map[11][40];
@@ -446,65 +449,156 @@ int townMap[24][80];
 
 int townNPCS[9][4];
 
-void generateTown(int maxWidth, int maxHeight){
+/**
+ *	Code to generate town. I might replace this with Wave function collapse.
+ *	For now though, I'm gonna use a technique similar to the dungeon generator
+ */
+void generateTown(int maxWidth, int maxHeight, int amountOfBuildings){
+	biome = 't';
+	msgLog = "You enter the village";
 	for (int i = 0 ; i < 80 ; i++){
 		for (int j = 0 ; j < 24 ; j++){
-			townMap[j][i] = ' ';
 			map[j][i] = '.';
 		}
 	}
-	for (int i = 0 ; i < 9 ; i++){
-		for (int j = 0 ; j < 4 ; j++){
-			townNPCS[j][i] = 0;
+	int width, height, xPos, yPos, doorX, doorY;
+	char floorChar = '+';
+	char wallChar = '#';
+	int doorWallPos;
+	for (int r = 0 ; r < amountOfBuildings ; r++){
+		xPos = (rand() % (79-(maxWidth+5)))+2;
+		yPos = (rand() % (23-(maxHeight+5)))+2;
+		width = (rand() % maxWidth)+5;
+		height = (rand() % maxHeight)+5;
+		doorWallPos = rand() % 4;
+		if (map[yPos-1][xPos-1] != '.' || map[yPos+height+1][xPos+width+1] != '.' || map[yPos-1][xPos+width+1] != '.' || map[yPos+height+1][xPos-1] != '.'){ //prevent overlapping houses
+			continue;
 		}
-	}
-	srand(seedFromPosition(entryX, entryY));
-	int xPos, yPos, roomWidth, roomHeight, buildings, buildingsDone, doorWall, buildingType;
-	buildings = (rand() % 8) + 1;
-	buildingsDone = 0;
-	int roomCenters[buildings][2];
-	int npcX, npcY;
-	for (int r = 0 ; r < buildings && buildingsDone < buildings ; r++){
-		doorWall = rand() % 4;
-		xPos = rand() % (80 - maxWidth)-2;
-		yPos = rand() % (24 - maxHeight)-2;
-		roomWidth = (rand() % maxWidth) + 2;
-		roomHeight = (rand() % maxHeight) + 2;
-		for (int i = xPos-1 ; i < roomWidth+xPos+1 ; i++){
-			for (int j = yPos-1 ; j < roomHeight+yPos+1 ; j++){
-				if (map[j+1][i+1] == '+'){
-					goto brokenRoom;
-				} else {
-					map[j][i] = '#';
+		if (map[yPos-1][lround(xPos+(width/2))] != '.' || map[yPos+height+1][lround(xPos+(width/2))] != '.' || map[lround(yPos+(height/2))][xPos-1] != '.' || map[lround(yPos+(height/2))][xPos+width+1] != '.'){	//makes sure houses don't overlap (again)
+			continue;
+		}
+		for (int i = xPos-1 ; i < xPos+width+1 ; i++){							//generate gap around houses
+			for (int j = yPos-1 ; j < yPos+height+1 ; j++){
+				if (i == xPos-1 || j == yPos-1 || i == xPos+width+1 || j == yPos+height+1){
+					map[j][i] = 'X';							//we will replace 'X' with grass when done generating houses
 				}
 			}
 		}
-		for (int i = xPos ; i < roomWidth+xPos ; i++){
-			for (int j = yPos ; j < roomHeight+yPos ; j++){
-				if (map[j][i] == '+'){
-					goto brokenRoom;
-				} else {
-					map[j][i] = '+';
+		for (int i = xPos ; i < xPos+width ; i++){
+			for (int j = yPos ; j < yPos+height ; j++){
+				if (i == xPos || j == yPos || i == (xPos+width)-1 || j == (yPos+height)-1){	//draw houses walls if on border
+					map[j][i] = wallChar;							
+				} else {									//otherwise, draw floor
+					map[j][i] = floorChar;
 				}
 			}
 		}
-		roomCenters[r][0] = xPos+(roomWidth/2);
-		roomCenters[r][1] = yPos+(roomHeight/2);
-		
-		if (doorWall == 0){
-			map[yPos+(roomHeight/2)][xPos-1] = 'X';
-		} else if (doorWall == 1){
-			map[yPos+(roomHeight/2)][xPos+roomWidth] = 'X';
-		} else if (doorWall == 2){
-			map[yPos-1][xPos+(roomWidth/2)] = 'X';
-		} else if (doorWall == 3){
-			map[yPos+roomHeight][xPos+(roomWidth/2)] = 'X';
+		switch (doorWallPos){
+			case 0:
+				/*	#D#
+				 *	#+#
+				 *	###
+				 */
+				doorX = lround(xPos+(width/2));
+				doorY = yPos;
+				break;
+			case 1:
+				/*	###
+				 *	#+#
+				 *	#D#
+				 */
+				doorX = lround(xPos+(width/2));
+				doorY = (yPos+height)-1;
+				break;
+			case 2:
+				/*	###
+				 *	D+#
+				 *	###
+				 */
+				doorX = xPos;
+				doorY = lround(yPos+(height/2));
+				break;
+			case 3:
+				/*	###
+				 *	#+D
+				 *	###
+				 */
+				doorX = (xPos+width)-1;
+				doorY = lround(yPos+(height/2));
+				break;
 		}
-		brokenRoom:
-			continue;	
+		map[doorY][doorX] = floorChar;
 	}
-	startX = 0;
-	startY = 0;	
+	for (int i = 0 ; i < 80 ; i++){
+		for (int j = 0 ; j < 24 ; j++){
+			if (i == 0 || j == 0 || i == 80 || j == 23){	//place invisible border around town so player doesnt leave the bounds of the screen
+				map[j][i] = wallChar;
+			}
+			if (map[j][i] == 'X'){
+				map[j][i] = '.';
+			}
+		}
+	}
+	startX = (rand() % 79)+1;
+	startY = (rand() % 23)+1;
+	while (map[startY][startX] != '.'){				//choose random starting player positions until an empty space is found
+		startX = (rand() % 79)+1;
+		startY = (rand() % 23)+1;
+	}
+	char tempGarden[23][80];
+	int tallGrassCount = 0;
+	int grassCount = 0;
+	for (int i = 1 ; i < 80 ; i ++){				//randomly place thick grass (1/3 non-house tiles will be grass)
+		for (int j = 1 ; j < 23 ; j++){
+			if (rand() % 4 == 0 && map[j][i] == '.'){
+				map[j][i] = '"';
+			}
+		}
+	}
+	for (int r = 0 ; r < 8 ; r++){					//basic cellular automata to make gardens look more natural
+		for (int i = 1 ; i < 80 ; i++){
+			for (int j = 1 ; j < 23 ; j++){
+				tallGrassCount = 0;
+				grassCount = 0;
+				if (map[j-1][i] == '"'){
+					tallGrassCount++;
+				} else if (map[j-1][i] == '.'){
+					grassCount++;
+				}
+				if (map[j+1][i] == '"'){
+					tallGrassCount++;
+				} else if (map[j+1][i] == '.'){
+					grassCount++;
+				}
+				if (map[j][i-1] == '"'){
+					tallGrassCount++;
+				} else if (map[j][i-1] == '.'){
+					grassCount++;
+				}
+				if (map[j][i+1] == '"'){
+					tallGrassCount++;
+				} else if (map[j][i+1] == '.'){
+					grassCount++;
+				}
+				if (grassCount <= tallGrassCount){
+					tempGarden[j][i] = '"';
+				} else {
+					tempGarden[j][i] = '.';
+				}
+				
+				if (tempGarden[j-1][i] == '"' && tempGarden[j+1][i] == '"' && tempGarden[j][i-1] == '"' && tempGarden[j][i+1] == '"'){
+					tempGarden[j][i] = '"';
+				}
+			}
+		}
+	}
+	for (int i = 0 ; i < 80 ; i++){
+		for (int j = 0 ; j < 24 ; j++){
+			if (map[j][i] == '.'){
+				map[j][i] = tempGarden[j][i];
+			}
+		}
+	}
 }
 
 char returnTownmapAt(int x, int y){

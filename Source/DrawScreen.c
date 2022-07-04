@@ -55,7 +55,7 @@ void drawMap(){
 			currentChar = returnHeightmapAt(i,j);
 			if (currentChar == '^' || currentChar == '.'){
 				attron(COLOR_PAIR(2));
-			} else if (currentChar == 'A' || currentChar == '>' || currentChar == '#'){
+			} else if (currentChar == 'A' || currentChar == '>' || currentChar == '#' || currentChar == 'H'){
 				attron(COLOR_PAIR(3));
 				if (currentChar == '#'){
 					attron(A_REVERSE);
@@ -299,27 +299,25 @@ void drawDungeon(){
 }
 
 void drawTown(){
-	for (int i = 0 ; i < WIDTH ; i++){
-		for (int j = 0 ; j < HEIGHT ; j++){
-			mvaddch(j,i,' ');
-		}
-	}
 	init_pair(1, COLOR_GREEN, COLOR_BLACK);
 	init_pair(2, COLOR_YELLOW, COLOR_BLACK);
 	init_pair(3, COLOR_WHITE, COLOR_BLACK);
 	attroff(A_BOLD);
 	for (int i = 0 ; i < 80 ; i++){
 		for (int j = 0 ; j < 24 ; j++){
-			if (returnTownmapAt(i,j) == '.'){
+			mvaddch(j,i,' ');
+			attroff(A_REVERSE);
+			if (returnTownmapAt(i,j) == '.' || returnTownmapAt(i,j) == '"'){
 				attron(COLOR_PAIR(1));
 			} else if (returnTownmapAt(i,j) == '+'){
 				attron(COLOR_PAIR(2));
-			} else if (returnTownmapAt(i,j) == '#' || returnTownmapAt(i,j) == 'X'){
-				attron(COLOR_PAIR(3));
+			} else if (returnTownmapAt(i,j) == '#'){
+				attron(COLOR_PAIR(3) | A_REVERSE);
 			}
 			mvaddch(j,i,returnTownmapAt(i,j));
 		}
 	}
+	attroff(A_REVERSE);
 	updateScreen();
 }
 

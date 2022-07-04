@@ -63,7 +63,7 @@ extern int townMap[][80];
 
 extern int townNPCS[][4];
 
-void generateTown(int maxWidth, int maxHeight);
+void generateTown(int maxWidth, int maxHeight, int amountOfBuildings);
 
 char returnTownmapAt(int x, int y);
 

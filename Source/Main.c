@@ -61,6 +61,7 @@ int main(){
 			getMovement();
 			updateScreen();
 		} else if (biome == 't'){
+			resetEnemies(0);
 			drawTown();
 			updateTemperature();
 			updateHunger();

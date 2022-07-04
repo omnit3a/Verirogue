@@ -359,13 +359,24 @@ void getMovement(){
 				playerEnt.currentPos.yPos = startY;
 				updateScreen();
 				msgLog = "You enter the dungeon";
-			} else if (biome == 'o' && canWalk() && underPlayer != '>'){
+			} else if (biome == 'o' && canWalk() && underPlayer != '>' && underPlayer != 'H'){
 				entryX = checkX;
 				entryY = checkY;
 				generateCloseUp();
 				playerEnt.currentPos.xPos = 40;
 				playerEnt.currentPos.yPos = 12;
 				updateScreen();
+			/*
+			 *	"H" Represents a town
+			 */
+			} else if (biome == 'o' && canWalk() && underPlayer == 'H'){
+				entryX = checkX;
+				entryY = checkY;
+				biome = 't';
+				generateTown(5,5,5);
+				playerEnt.currentPos.xPos = startX;
+				playerEnt.currentPos.yPos = startY;
+				updateScreen();	
 			} else {
 				msgLog = "There isn't a dungeon here!";
 			}
