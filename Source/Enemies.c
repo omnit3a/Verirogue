@@ -22,6 +22,7 @@ int enemyFleeingMap[24][80];
 std::string enemyNamesMap[24][80];
 int targetingPlayerMap[24][80];
 int enemyCivilizationMap[24][80];
+char enemyHandednessMap[24][80];
 
 int spawnRate = 45;
 int baseEnemyHealth = 10;
@@ -117,8 +118,15 @@ void placeEnemies(){
 		int currentCiv;
 		int tempSeed = 0;
 		int tempCiv;
+		int handedness;
 		for (int i = 0 ; i < 80 ; i++){
 			for (int j = 0 ; j < 24 ; j++){
+				handedness = rand() % 100;
+				if (handedness > 10){
+					enemyHandednessMap[j][i] = 'L';
+				} else {
+					enemyHandednessMap[j][i] = 'R';
+				}
 				enemyMap[j][i] = ' ';
 				enemyHealthMap[j][i] = 0;
 				enemyFleeingMap[j][i] = 0;
@@ -230,6 +238,9 @@ void targetPlayer(int xPos, int yPos){
 			enemyIntelligence = civilizationSmart[currentCiv];
 		}	
 	}
+	if (enemyHandednessMap[yPos][xPos] == 'R' && playerHandedness == "Left handed"){
+		enemyStrength += 3;
+	}
 	int target = rand() % 6;
 	int damage = (rand() % 7)+baseEnemyDamage+enemyStrength;
 	if (!enemyCoward){
@@ -304,6 +315,7 @@ void pseudoPathfind(){
 		int tempTarget[24][80];
 		std::string tempNames[24][80];
 		int tempCiv[24][80];
+		char tempHand[24][80];
 		int randCornerX, randCornerY;
 		for (int i = 0 ; i < 80 ; i++){
 			for (int j = 0 ; j < 24 ; j++){
@@ -314,6 +326,7 @@ void pseudoPathfind(){
 				tempNames[j][i] = enemyNamesMap[j][i];
 				tempTarget[j][i] = targetingPlayerMap[j][i];
 				tempCiv[j][i] = enemyCivilizationMap[j][i];
+				tempHand[j][i] = enemyHandednessMap[j][i];
 			}
 		}
 		for (int i = 0 ; i < 80 ; i++){
@@ -334,6 +347,8 @@ void pseudoPathfind(){
 						tempTarget[j][i] = 0;
 						tempCiv[j+1][i] = tempCiv[j][i];
 						tempCiv[j][i] = -1;
+						tempHand[j+1][i] = tempHand[j][i];
+						tempHand[j][i] = ' ';
 					} else if (dungeonWalkable(i,j-1) && j > checkY+1 && whichEnemy(enemyMap[j-1][i]) == "Nothing"){
 						tempMap[j][i] = ' ';
 						tempMap[j-1][i] = enemyMap[j][i];
@@ -349,6 +364,8 @@ void pseudoPathfind(){
 						tempTarget[j][i] = 0;
 						tempCiv[j-1][j] = tempCiv[j][i];
 						tempCiv[j][i] = -1;
+						tempHand[j-1][i] = tempHand[j][i];
+						tempHand[j][i] = ' ';
 					} else if (dungeonWalkable(i+1,j) && i < checkX-1 && whichEnemy(enemyMap[j][i+1]) == "Nothing"){
 						tempMap[j][i] = ' ';
 						tempMap[j][i+1] = enemyMap[j][i];
@@ -364,6 +381,8 @@ void pseudoPathfind(){
 						tempTarget[j][i] = 0;
 						tempCiv[j][i+1] = tempCiv[j][i];
 						tempCiv[j][i] = -1;
+						tempHand[j][i+1] = tempHand[j][i];
+						tempHand[j][i] = ' ';
 					} else if (dungeonWalkable(i-1,j) && i > checkX+1 && whichEnemy(enemyMap[j][i-1]) == "Nothing"){
 						tempMap[j][i] = ' ';
 						tempMap[j][i-1] = enemyMap[j][i];
@@ -379,6 +398,8 @@ void pseudoPathfind(){
 						tempTarget[j][i] = 0;
 						tempCiv[j][i-1] = tempCiv[j][i];
 						tempCiv[j][i] = -1;
+						tempHand[j][i-1] = tempHand[j][i];
+						tempHand[j][i] = ' ';
 					}
 				}
 			}
@@ -392,6 +413,7 @@ void pseudoPathfind(){
 				enemyNamesMap[j][i] = tempNames[j][i];
 				targetingPlayerMap[j][i] = tempTarget[j][i];
 				enemyCivilizationMap[j][i] = tempCiv[j][i];
+				enemyHandednessMap[j][i] = tempHand[j][i];
 			}
 		}	
 	}

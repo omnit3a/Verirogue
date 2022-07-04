@@ -33,6 +33,7 @@ extern int grossStuff, bloodTrailThreshold, DEADLYBLOODLOSS;
 extern std::string playerName, playerRace;
 extern std::string enemyNamesList[512];
 extern std::string killedByEnemy;
+extern std::string playerHandedness;
 
 void setupPlayer(int x, int y, int entID);
 

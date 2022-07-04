@@ -19,5 +19,5 @@
 - `d` Drop item
 - `D` Describe
 - `r` Read scroll
-- `C` Sneak
+- `x` Swap hands
 - `?` View controls

@@ -45,7 +45,6 @@
 - [X] Improve dungeon generation
 	- [X] Add engravings
 	- [X] Add dungeon walls
-- [ ] Procedural text generation
 - [X] Exploration of every kind of tile
 - [X] Enemy morale
 - [X] Legacy generation
@@ -63,4 +62,8 @@
 - [X] Different types of food
 	- [X] Food rot
 - [X] Refactor enemy code for multiple enemy races
-- [ ] Improve graphics and UI
+- [X] Improve graphics and UI
+- [X] Handedness
+	- [X] Allow the user to specify which hand the player is attacking with
+	- [X] Difference in combat depending what handedness the player is vs what handedness enemy is
+	- [X] Specifying which hand the enemy is attacking with

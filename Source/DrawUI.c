@@ -174,8 +174,9 @@ void drawSheet(){
 	mvprintw(5,0,"Strength: %d",playerEnt.currentStats.strength);
 	mvprintw(6,0,"Agility: %d",playerEnt.currentStats.agility);
 	mvprintw(7,0,"Intelligence: %d",playerEnt.currentStats.intelligence);
-	mvprintw(8,0,"# ---------------- #");
-	mvprintw(9,0,"Gold: %d", goldScore);
+	mvprintw(8,0,"Handedness: %s",playerHandedness.c_str());
+	mvprintw(9,0,"# ---------------- #");
+	mvprintw(10,0,"Gold: %d", goldScore);
 	attroff(A_BOLD);
 	refresh();
 	getch();
@@ -205,7 +206,7 @@ void drawHelp(){
 	mvprintw(17,0,"d : Drop item");
 	mvprintw(18,0,"D : Describe");
 	mvprintw(19,0,"r : Read scroll");
-	mvprintw(20,0,"C : Sneak");
+	mvprintw(20,0,"x : Swap hand");
 	mvprintw(21,0,"? : View this screen");
 	attroff(A_BOLD);
 	refresh();

@@ -52,6 +52,7 @@ int DEADLYBLOODLOSS = 255;
 std::string playerName, playerRace;
 std::string enemyNamesList[512];
 std::string killedByEnemy;
+std::string playerHandedness;
 
 void setupPlayer(int x, int y, int entID){
 	playerEnt.entityID = entID;
@@ -64,6 +65,13 @@ void setupPlayer(int x, int y, int entID){
 		playerEnt.currentSex.sex = 'F';
 	} else if (playerEnt.currentSex.sex == 'u'){
 		playerEnt.currentSex.sex = 'U';
+	}
+	
+	int handedness = rand() % 100;
+	if (handedness < 10){
+		playerHandedness = "Left handed";
+	} else {
+		playerHandedness = "Right handed";
 	}
 
 	switch (playerEnt.currentSign.sign){

@@ -337,3 +337,791 @@ You lived a minimal life.
 You were of neutral health.
 
 ## Enemies Slain ## 
+## Civilizations ##
+ - The goblin civilization Hojguwoge
+   - Leader: Qejtigu the Goblin of Hojguwoge
+   - They are a engaging in constant war.
+   - They have a deep hatred for the kobold race.
+   - They have an eclectic style.
+   - They are at peace with Kozixij
+   - They are at peace with Tizito
+   - They are at peace with Gekato
+
+ - The goblin civilization Kozixij
+   - Leader: Qozike the Goblin of Kozixij
+   - They are a peaceful civilization.
+   - They have a deep hatred for the kobold race.
+   - They have an eclectic style.
+   - They are at peace with Hojguwoge
+   - They are at peace with Tizito
+   - They are at peace with Gekato
+
+ - The goblin civilization Tizito
+   - Leader: Horheqi the Goblin of Tizito
+   - They are a peaceful civilization.
+   - They have a deep hatred for the kobold race.
+   - They have a revivalist style.
+   - They are at peace with Hojguwoge
+   - They are at peace with Kozixij
+   - They are at peace with Gekato
+
+ - The goblin civilization Gekato
+   - Leader: Gogexe the Goblin of Gekato
+   - They are a engaging in constant war.
+   - They have a deep hatred for the kobold race.
+   - They have a revivalist style.
+   - They are at peace with Hojguwoge
+   - They are at peace with Kozixij
+   - They are at war with Tizito
+
+## History ##
+On Month 1 Day 1,  died.
+
+##  ## 
+You died pennyless.
+You were helpless against the weakest enemies.
+You lived a minimal life.
+You were of neutral health.
+
+## Enemies Slain ## 
+## Civilizations ##
+ - The goblin civilization Qirzu
+   - Leader: Qitogi the Goblin of Qirzu
+   - They are a engaging in constant war.
+   - They have a monolithic style.
+   - They are at peace with Zokukurzuj
+   - They are at war with Zozezur
+   - They are at peace with Tijwitigi
+
+ - The goblin civilization Zokukurzuj
+   - Leader: Qowigej the Goblin of Zokukurzuj
+   - They are a peaceful civilization.
+   - They have a deep hatred for the kobold race.
+   - They have a gaudy style.
+   - They are at peace with Qirzu
+   - They are at peace with Zozezur
+   - They are at peace with Tijwitigi
+
+ - The goblin civilization Zozezur
+   - Leader: Zojwote the Goblin of Zozezur
+   - They are a peaceful civilization.
+   - They have a revivalist style.
+   - They are at peace with Qirzu
+   - They are at peace with Zokukurzuj
+   - They are at peace with Tijwitigi
+
+ - The goblin civilization Tijwitigi
+   - Leader: Quzito the Goblin of Tijwitigi
+   - They are a engaging in constant war.
+   - They have a monolithic style.
+   - They are at war with Qirzu
+   - They are at war with Zokukurzuj
+   - They are at war with Zozezur
+
+## History ##
+On Month 1 Day 1,  struck down Ljavshnun the Kobold of Tijwitigi
+On Month 1 Day 1,  struck down Jjysvhlyr the Kobold of Qirzu
+On Month 1 Day 1,  struck down Wixegiqa the Goblin of Tijwitigi
+On Month 1 Day 1,  struck down N*vr the Kobold
+On Month 1 Day 1,  struck down Tllrv the Kobold of Tijwitigi
+On Month 1 Day 1,  struck down Guga the Goblin of Zozezur
+On Month 1 Day 1,  died.
+
+##  ## 
+You died pennyless.
+You were helpless against the weakest enemies.
+You lived a minimal life.
+You were of neutral health.
+
+## Enemies Slain ## 
+ - Ljavshnun the Kobold of Tijwitigi
+ - Jjysvhlyr the Kobold of Qirzu
+ - Wixegiqa the Goblin of Tijwitigi
+ - N*vr the Kobold
+ - Tllrv the Kobold of Tijwitigi
+ - Guga the Goblin of Zozezur
+## Civilizations ##
+ - The goblin civilization Zoquku
+   - Leader: Qaqike the Goblin of Zoquku
+   - They are a engaging in constant war.
+   - They have a revivalist style.
+   - They are at war with Kixutahoj
+   - They are at peace with Kiqu
+   - They are at war with Wego
+
+ - The goblin civilization Kixutahoj
+   - Leader: Tehaka the Goblin of Kixutahoj
+   - They are a peaceful civilization.
+   - They have a monolithic style.
+   - They are at peace with Zoquku
+   - They are at peace with Kiqu
+   - They are at peace with Wego
+
+ - The goblin civilization Kiqu
+   - Leader: Xixazo the Goblin of Kiqu
+   - They are a engaging in constant war.
+   - They have a deep hatred for the kobold race.
+   - They have a monolithic style.
+   - They are at war with Zoquku
+   - They are at war with Kixutahoj
+   - They are at war with Wego
+
+ - The goblin civilization Wego
+   - Leader: Teqotir the Goblin of Wego
+   - They are a engaging in constant war.
+   - They have a deep hatred for the kobold race.
+   - They have an oppresive style.
+   - They are at peace with Zoquku
+   - They are at war with Kixutahoj
+   - They are at war with Kiqu
+
+## History ##
+On Month 1 Day 1,  died.
+
+##  ## 
+You died pennyless.
+You were helpless against the weakest enemies.
+You lived a minimal life.
+You were of neutral health.
+
+## Enemies Slain ## 
+## Civilizations ##
+ - The goblin civilization Qetor
+   - Leader: Tozuto the Goblin of Qetor
+   - They are a peaceful civilization.
+   - They have a deep hatred for the kobold race.
+   - They are exceptionally advanced.
+   - They have an oppresive style.
+   - They are at peace with Qiwe
+   - They are at peace with Gikuwa
+   - They are at peace with Kewogu
+
+ - The goblin civilization Qiwe
+   - Leader: Harkuwa the Goblin of Qiwe
+   - They are a engaging in constant war.
+   - They have a deep hatred for the kobold race.
+   - They have an oppresive style.
+   - They are at peace with Qetor
+   - They are at war with Gikuwa
+   - They are at peace with Kewogu
+
+ - The goblin civilization Gikuwa
+   - Leader: Kagijho the Goblin of Gikuwa
+   - They are a engaging in constant war.
+   - They have a deep hatred for the kobold race.
+   - They have an oppresive style.
+   - They are at war with Qetor
+   - They are at war with Qiwe
+   - They are at peace with Kewogu
+
+ - The goblin civilization Kewogu
+   - Leader: Zojhewe the Goblin of Kewogu
+   - They are a peaceful civilization.
+   - They have a monolithic style.
+   - They are at peace with Qetor
+   - They are at peace with Qiwe
+   - They are at peace with Gikuwa
+
+## History ##
+On Month 1 Day 1,  died.
+
+##  ## 
+You died pennyless.
+You were helpless against the weakest enemies.
+You lived a minimal life.
+You were of neutral health.
+
+## Enemies Slain ## 
+## Civilizations ##
+ - The goblin civilization Wakojgeter
+   - Leader: Zigojxa the Goblin of Wakojgeter
+   - They are a engaging in constant war.
+   - They have a deep hatred for the kobold race.
+   - They have a revivalist style.
+   - They are at war with Tokokoj
+   - They are at peace with Kekurhuki
+   - They are at war with Qorhexogir
+
+ - The goblin civilization Tokokoj
+   - Leader: Qihijhi the Goblin of Tokokoj
+   - They are a peaceful civilization.
+   - They have a deep hatred for the kobold race.
+   - They have a revivalist style.
+   - They are at peace with Wakojgeter
+   - They are at peace with Kekurhuki
+   - They are at peace with Qorhexogir
+
+ - The goblin civilization Kekurhuki
+   - Leader: Xewujwej the Goblin of Kekurhuki
+   - They are a engaging in constant war.
+   - They are exceptionally advanced.
+   - They have an eclectic style.
+   - They are at war with Wakojgeter
+   - They are at war with Tokokoj
+   - They are at war with Qorhexogir
+
+ - The goblin civilization Qorhexogir
+   - Leader: Kahihu the Goblin of Qorhexogir
+   - They are a engaging in constant war.
+   - They have a deep hatred for the kobold race.
+   - They are exceptionally advanced.
+   - They have a gaudy style.
+   - They are at peace with Wakojgeter
+   - They are at war with Tokokoj
+   - They are at war with Kekurhuki
+
+## History ##
+On Month 1 Day 1,  died.
+
+##  ## 
+You died pennyless.
+You were helpless against the weakest enemies.
+You lived a minimal life.
+You were of neutral health.
+
+## Enemies Slain ## 
+## Civilizations ##
+ - The goblin civilization Wiwerter
+   - Leader: Zuzixor the Goblin of Wiwerter
+   - They are a peaceful civilization.
+   - They have a deep hatred for the kobold race.
+   - They have a gaudy style.
+   - They are at peace with Qortur
+   - They are at peace with Hajwewu
+   - They are at peace with Qihorxu
+
+ - The goblin civilization Qortur
+   - Leader: Zituwi the Goblin of Qortur
+   - They are a engaging in constant war.
+   - They have a revivalist style.
+   - They are at war with Wiwerter
+   - They are at peace with Hajwewu
+   - They are at war with Qihorxu
+
+ - The goblin civilization Hajwewu
+   - Leader: Hiqeza the Goblin of Hajwewu
+   - They are a engaging in constant war.
+   - They have a deep hatred for the kobold race.
+   - They have a revivalist style.
+   - They are at war with Wiwerter
+   - They are at war with Qortur
+   - They are at war with Qihorxu
+
+ - The goblin civilization Qihorxu
+   - Leader: Zozuxu the Goblin of Qihorxu
+   - They are a peaceful civilization.
+   - They are exceptionally advanced.
+   - They have an eclectic style.
+   - They are at peace with Wiwerter
+   - They are at peace with Qortur
+   - They are at peace with Hajwewu
+
+## History ##
+On Month 1 Day 1,  died.
+
+##  ## 
+You died pennyless.
+You were helpless against the weakest enemies.
+You lived a minimal life.
+You were of neutral health.
+
+## Enemies Slain ## 
+## Civilizations ##
+ - The goblin civilization Gaqoj
+   - Leader: Hezoxaj the Goblin of Gaqoj
+   - They are a peaceful civilization.
+   - They have a deep hatred for the kobold race.
+   - They have a monolithic style.
+   - They are at peace with Haqogoze
+   - They are at peace with Xezijxo
+   - They are at peace with Qukiku
+
+ - The goblin civilization Haqogoze
+   - Leader: Zokijxo the Goblin of Haqogoze
+   - They are a engaging in constant war.
+   - They have a deep hatred for the kobold race.
+   - They have an eclectic style.
+   - They are at peace with Gaqoj
+   - They are at war with Xezijxo
+   - They are at war with Qukiku
+
+ - The goblin civilization Xezijxo
+   - Leader: Kowerki the Goblin of Xezijxo
+   - They are a engaging in constant war.
+   - They have a deep hatred for the kobold race.
+   - They have a monolithic style.
+   - They are at peace with Gaqoj
+   - They are at peace with Haqogoze
+   - They are at peace with Qukiku
+
+ - The goblin civilization Qukiku
+   - Leader: Turgiwu the Goblin of Qukiku
+   - They are a engaging in constant war.
+   - They have a monolithic style.
+   - They are at war with Gaqoj
+   - They are at peace with Haqogoze
+   - They are at war with Xezijxo
+
+## History ##
+On Month 1 Day 1,  struck down L`rdtydr the Kobold of Qukiku
+On Month 1 Day 1,  struck down Lhydtlvn the Kobold of Qukiku
+On Month 1 Day 1,  struck down Xekohuqi the Goblin of Gaqoj
+On Month 1 Day 1,  struck down L*rn the Kobold of Qukiku
+On Month 1 Day 1,  struck down Hamkaga the Goblin of Qukiku
+On Month 1 Day 1,  struck down Go the Goblin of Xezijxo
+On Month 1 Day 1,  struck down Hyns the Kobold of Qukiku
+On Month 1 Day 1,  struck down Hhenrtlevs the Kobold of Qukiku
+On Month 1 Day 1,  struck down Zaxen the Goblin of Xezijxo
+On Month 1 Day 1,  struck down Gagika the Goblin of Haqogoze
+On Month 1 Day 1,  died.
+
+##  ## 
+You died pennyless.
+You were helpless against the weakest enemies.
+You lived a minimal life.
+You were of neutral health.
+
+## Enemies Slain ## 
+ - L`rdtydr the Kobold of Qukiku
+ - Lhydtlvn the Kobold of Qukiku
+ - Xekohuqi the Goblin of Gaqoj
+ - L*rn the Kobold of Qukiku
+ - Hamkaga the Goblin of Qukiku
+ - Go the Goblin of Xezijxo
+ - Hyns the Kobold of Qukiku
+ - Hhenrtlevs the Kobold of Qukiku
+ - Zaxen the Goblin of Xezijxo
+ - Gagika the Goblin of Haqogoze
+## Civilizations ##
+ - The goblin civilization Kuxoj
+   - Leader: Hurxojxa the Goblin of Kuxoj
+   - They are a engaging in constant war.
+   - They have a deep hatred for the kobold race.
+   - They have a monolithic style.
+   - They are at war with Taza
+   - They are at war with Zarhirxe
+   - They are at war with Qozurkaqu
+
+ - The goblin civilization Taza
+   - Leader: Texuwi the Goblin of Taza
+   - They are a peaceful civilization.
+   - They have a revivalist style.
+   - They are at peace with Kuxoj
+   - They are at peace with Zarhirxe
+   - They are at peace with Qozurkaqu
+
+ - The goblin civilization Zarhirxe
+   - Leader: Wojwiha the Goblin of Zarhirxe
+   - They are a engaging in constant war.
+   - They have a deep hatred for the kobold race.
+   - They have a revivalist style.
+   - They are at war with Kuxoj
+   - They are at peace with Taza
+   - They are at war with Qozurkaqu
+
+ - The goblin civilization Qozurkaqu
+   - Leader: Woxurzaj the Goblin of Qozurkaqu
+   - They are a engaging in constant war.
+   - They have a deep hatred for the kobold race.
+   - They have a classical style.
+   - They are at war with Kuxoj
+   - They are at war with Taza
+   - They are at war with Zarhirxe
+
+## History ##
+On Month 1 Day 1,  struck down Zoqe the Goblin of Kuxoj
+On Month 1 Day 1,  struck down Hles the Kobold of Taza
+On Month 1 Day 1,  struck down Xuzuhezom the Goblin of Zarhirxe
+On Month 1 Day 1,  struck down Xungagize the Goblin of Qozurkaqu
+On Month 1 Day 1,  struck down J*ddhned the Kobold of Taza
+On Month 1 Day 1,  struck down Jysv the Kobold of Taza
+On Month 1 Day 1,  struck down Ljlrhh`d the Kobold of Taza
+On Month 1 Day 1,  died.
+
+##  ## 
+You died pennyless.
+You were helpless against the weakest enemies.
+You lived a minimal life.
+You were quite unhealthy.
+
+## Enemies Slain ## 
+ - Zoqe the Goblin of Kuxoj
+ - Hles the Kobold of Taza
+ - Xuzuhezom the Goblin of Zarhirxe
+ - Xungagize the Goblin of Qozurkaqu
+ - J*ddhned the Kobold of Taza
+ - Jysv the Kobold of Taza
+ - Ljlrhh`d the Kobold of Taza
+## Civilizations ##
+ - The goblin civilization Karqu
+   - Leader: Xuxoqu the Goblin of Karqu
+   - They are a peaceful civilization.
+   - They have an oppresive style.
+   - They are at peace with Hozazi
+   - They are at peace with Weqa
+   - They are at peace with Huku
+
+ - The goblin civilization Hozazi
+   - Leader: Hizuwo the Goblin of Hozazi
+   - They are a engaging in constant war.
+   - They have a gaudy style.
+   - They are at war with Karqu
+   - They are at war with Weqa
+   - They are at war with Huku
+
+ - The goblin civilization Weqa
+   - Leader: Kargagoj the Goblin of Weqa
+   - They are a engaging in constant war.
+   - They have a monolithic style.
+   - They are at war with Karqu
+   - They are at peace with Hozazi
+   - They are at war with Huku
+
+ - The goblin civilization Huku
+   - Leader: Torwuqo the Goblin of Huku
+   - They are a engaging in constant war.
+   - They have a deep hatred for the kobold race.
+   - They have an eclectic style.
+   - They are at war with Karqu
+   - They are at war with Hozazi
+   - They are at war with Weqa
+
+## History ##
+On Month 1 Day 1,  struck down Nav the Kobold of Hozazi
+On Month 1 Day 1,  struck down Lusrhjes the Kobold of Hozazi
+On Month 1 Day 1,  struck down Hnuvrnan the Kobold of Hozazi
+On Month 1 Day 1,  struck down Lyvlnlrv the Kobold of Hozazi
+On Month 1 Day 1,  struck down J*rn the Kobold of Hozazi
+On Month 1 Day 1,  struck down Kewawatu the Goblin of Hozazi
+On Month 1 Day 1,  struck down Hnuddj`rs the Kobold of Hozazi
+On Month 1 Day 1,  struck down Xoqugonta the Goblin of Hozazi
+On Month 1 Day 1,  struck down Qegigo the Goblin of Karqu
+On Month 1 Day 1,  struck down Hadvj`vv the Kobold of Hozazi
+On Month 1 Day 1,  struck down N*sdnivn the Kobold of Hozazi
+On Month 1 Day 1,  struck down Havht`sn the Kobold of Hozazi
+On Month 1 Day 1,  struck down Lt*ss the Kobold of Hozazi
+On Month 1 Day 1,  struck down Qiguhamto the Goblin of Weqa
+On Month 1 Day 1,  struck down Thls the Kobold of Hozazi
+On Month 1 Day 1,  struck down Jinr the Kobold of Hozazi
+On Month 1 Day 1,  struck down Ht`srhliv the Kobold of Weqa
+On Month 1 Day 1,  struck down Nurr the Kobold of Hozazi
+On Month 1 Day 1,  struck down Xiwu the Goblin of Weqa
+On Month 1 Day 1,  struck down Gotaxo the Goblin of Huku
+On Month 1 Day 1,  struck down Tned the Kobold of Hozazi
+On Month 1 Day 1,  struck down Ljuv the Kobold of Hozazi
+On Month 1 Day 1,  struck down Kimhoki the Goblin of Karqu
+On Month 1 Day 1,  struck down Jjenhun the Kobold of Hozazi
+On Month 1 Day 1,  struck down Jnavnjhld the Kobold of Karqu
+On Month 1 Day 1,  struck down Nlsn the Kobold
+On Month 1 Day 1,  died.
+
+##  ## 
+You died pennyless.
+You killed a few enemies.
+You were famous for hoarding items.
+You were quite unhealthy.
+
+## Enemies Slain ## 
+ - Nav the Kobold of Hozazi
+ - Lusrhjes the Kobold of Hozazi
+ - Hnuvrnan the Kobold of Hozazi
+ - Lyvlnlrv the Kobold of Hozazi
+ - J*rn the Kobold of Hozazi
+ - Kewawatu the Goblin of Hozazi
+ - Hnuddj`rs the Kobold of Hozazi
+ - Xoqugonta the Goblin of Hozazi
+ - Qegigo the Goblin of Karqu
+ - Hadvj`vv the Kobold of Hozazi
+ - N*sdnivn the Kobold of Hozazi
+ - Havht`sn the Kobold of Hozazi
+ - Lt*ss the Kobold of Hozazi
+ - Qiguhamto the Goblin of Weqa
+ - Thls the Kobold of Hozazi
+ - Jinr the Kobold of Hozazi
+ - Ht`srhliv the Kobold of Weqa
+ - Nurr the Kobold of Hozazi
+ - Xiwu the Goblin of Weqa
+ - Gotaxo the Goblin of Huku
+ - Tned the Kobold of Hozazi
+ - Ljuv the Kobold of Hozazi
+ - Kimhoki the Goblin of Karqu
+ - Jjenhun the Kobold of Hozazi
+ - Jnavnjhld the Kobold of Karqu
+ - Nlsn the Kobold
+## Civilizations ##
+ - The goblin civilization Tigajxir
+   - Leader: Zijgajxir the Goblin of Tigajxir
+   - They are a engaging in constant war.
+   - They have a deep hatred for the kobold race.
+   - They have a classical style.
+   - They are at war with Gatiqi
+   - They are at war with Tegaj
+   - They are at war with Gakojgo
+
+ - The goblin civilization Gatiqi
+   - Leader: Ziqitu the Goblin of Gatiqi
+   - They are a engaging in constant war.
+   - They have a deep hatred for the kobold race.
+   - They are exceptionally advanced.
+   - They have a classical style.
+   - They are at peace with Tigajxir
+   - They are at war with Tegaj
+   - They are at peace with Gakojgo
+
+ - The goblin civilization Tegaj
+   - Leader: Kajgogo the Goblin of Tegaj
+   - They are a engaging in constant war.
+   - They have a deep hatred for the kobold race.
+   - They have a gaudy style.
+   - They are at war with Tigajxir
+   - They are at peace with Gatiqi
+   - They are at peace with Gakojgo
+
+ - The goblin civilization Gakojgo
+   - Leader: Gajxaka the Goblin of Gakojgo
+   - They are a engaging in constant war.
+   - They have a deep hatred for the kobold race.
+   - They have a revivalist style.
+   - They are at war with Tigajxir
+   - They are at war with Gatiqi
+   - They are at war with Tegaj
+
+## History ##
+On Month 1 Day 1,  struck down Tiqen the Goblin of Tegaj
+On Month 1 Day 1,  struck down Zahem the Goblin of Gakojgo
+On Month 1 Day 1,  struck down Nudn`nd the Kobold
+On Month 1 Day 1,  struck down Wunhetuqi the Goblin of Gakojgo
+On Month 1 Day 1,  struck down Xugom the Goblin of Gatiqi
+On Month 1 Day 1,  struck down Tyd the Kobold
+On Month 1 Day 1,  struck down Gahoxoqim the Goblin of Tigajxir
+On Month 1 Day 1,  died.
+
+##  ## 
+You died pennyless.
+You were helpless against the weakest enemies.
+You lived a minimal life.
+You were quite unhealthy.
+
+## Enemies Slain ## 
+ - Tiqen the Goblin of Tegaj
+ - Zahem the Goblin of Gakojgo
+ - Nudn`nd the Kobold
+ - Wunhetuqi the Goblin of Gakojgo
+ - Xugom the Goblin of Gatiqi
+ - Tyd the Kobold
+ - Gahoxoqim the Goblin of Tigajxir
+## Civilizations ##
+ - The goblin civilization Wirzaj
+   - Leader: Xijwutej the Goblin of Wirzaj
+   - They are a engaging in constant war.
+   - They have a deep hatred for the kobold race.
+   - They have a revivalist style.
+   - They are at war with Quzowu
+   - They are at war with Kiga
+   - They are at peace with Kuhuhi
+
+ - The goblin civilization Quzowu
+   - Leader: Gihawaj the Goblin of Quzowu
+   - They are a peaceful civilization.
+   - They have an oppresive style.
+   - They are at peace with Wirzaj
+   - They are at peace with Kiga
+   - They are at peace with Kuhuhi
+
+ - The goblin civilization Kiga
+   - Leader: Hejguki the Goblin of Kiga
+   - They are a peaceful civilization.
+   - They have a deep hatred for the kobold race.
+   - They have an eclectic style.
+   - They are at peace with Wirzaj
+   - They are at peace with Quzowu
+   - They are at peace with Kuhuhi
+
+ - The goblin civilization Kuhuhi
+   - Leader: Xewarter the Goblin of Kuhuhi
+   - They are a peaceful civilization.
+   - They have a deep hatred for the kobold race.
+   - They have an eclectic style.
+   - They are at peace with Wirzaj
+   - They are at peace with Quzowu
+   - They are at peace with Kiga
+
+## History ##
+On Month 1 Day 1,  died.
+
+##  ## 
+You died pennyless.
+You were helpless against the weakest enemies.
+You lived a minimal life.
+You were of neutral health.
+
+## Enemies Slain ## 
+## Civilizations ##
+ - The goblin civilization Qirgo
+   - Leader: Qajhahu the Goblin of Qirgo
+   - They are a engaging in constant war.
+   - They have a deep hatred for the kobold race.
+   - They have a revivalist style.
+   - They are at war with Hihaj
+   - They are at war with Qahahe
+   - They are at war with Kikegijgi
+
+ - The goblin civilization Hihaj
+   - Leader: Qazoker the Goblin of Hihaj
+   - They are a engaging in constant war.
+   - They have a deep hatred for the kobold race.
+   - They have a gaudy style.
+   - They are at war with Qirgo
+   - They are at war with Qahahe
+   - They are at war with Kikegijgi
+
+ - The goblin civilization Qahahe
+   - Leader: Gijhoha the Goblin of Qahahe
+   - They are a engaging in constant war.
+   - They have a deep hatred for the kobold race.
+   - They have a revivalist style.
+   - They are at war with Qirgo
+   - They are at war with Hihaj
+   - They are at peace with Kikegijgi
+
+ - The goblin civilization Kikegijgi
+   - Leader: Qijwuko the Goblin of Kikegijgi
+   - They are a engaging in constant war.
+   - They have a deep hatred for the kobold race.
+   - They have a revivalist style.
+   - They are at war with Qirgo
+   - They are at peace with Hihaj
+   - They are at peace with Qahahe
+
+## History ##
+On Month 1 Day 1,  struck down Totehim the Goblin of Hihaj
+On Month 1 Day 1,  struck down Lys the Kobold
+On Month 1 Day 1,  struck down Toze the Goblin of Hihaj
+On Month 1 Day 1,  struck down Wemhaxanzi the Goblin of Kikegijgi
+On Month 1 Day 1,  struck down Hakawe the Goblin of Qirgo
+On Month 1 Day 1,  died.
+
+##  ## 
+You died pennyless.
+You were helpless against the weakest enemies.
+You lived a minimal life.
+You were quite unhealthy.
+
+## Enemies Slain ## 
+ - Totehim the Goblin of Hihaj
+ - Lys the Kobold
+ - Toze the Goblin of Hihaj
+ - Wemhaxanzi the Goblin of Kikegijgi
+ - Hakawe the Goblin of Qirgo
+## Civilizations ##
+ - The goblin civilization Guxer
+   - Leader: Gewajzur the Goblin of Guxer
+   - They are a peaceful civilization.
+   - They have an oppresive style.
+   - They are at peace with Gotiqe
+   - They are at peace with Xurzogexi
+   - They are at peace with Weze
+
+ - The goblin civilization Gotiqe
+   - Leader: Qajwoqi the Goblin of Gotiqe
+   - They are a engaging in constant war.
+   - They are exceptionally advanced.
+   - They have an eclectic style.
+   - They are at war with Guxer
+   - They are at war with Xurzogexi
+   - They are at peace with Weze
+
+ - The goblin civilization Xurzogexi
+   - Leader: Qerhujxu the Goblin of Xurzogexi
+   - They are a peaceful civilization.
+   - They have a deep hatred for the kobold race.
+   - They have an oppresive style.
+   - They are at peace with Guxer
+   - They are at peace with Gotiqe
+   - They are at peace with Weze
+
+ - The goblin civilization Weze
+   - Leader: Qihehe the Goblin of Weze
+   - They are a peaceful civilization.
+   - They have a deep hatred for the kobold race.
+   - They are exceptionally advanced.
+   - They have a revivalist style.
+   - They are at peace with Guxer
+   - They are at peace with Gotiqe
+   - They are at peace with Xurzogexi
+
+## History ##
+On Month 1 Day 1,  struck down Hinzoha the Goblin of Xurzogexi
+On Month 1 Day 1,  struck down Taxin the Goblin of Xurzogexi
+On Month 1 Day 1,  struck down Xeten the Goblin of Weze
+On Month 1 Day 1,  struck down Zom the Goblin of Gotiqe
+On Month 1 Day 1,  struck down Tukuqanta the Goblin of Xurzogexi
+On Month 1 Day 1,  struck down Kuzaqige the Goblin of Weze
+On Month 1 Day 1,  struck down Hohiwom the Goblin of Gotiqe
+On Month 1 Day 1,  died.
+
+##  ## 
+You died pennyless.
+You were helpless against the weakest enemies.
+You lived a minimal life.
+You were of neutral health.
+
+## Enemies Slain ## 
+ - Hinzoha the Goblin of Xurzogexi
+ - Taxin the Goblin of Xurzogexi
+ - Xeten the Goblin of Weze
+ - Zom the Goblin of Gotiqe
+ - Tukuqanta the Goblin of Xurzogexi
+ - Kuzaqige the Goblin of Weze
+ - Hohiwom the Goblin of Gotiqe
+## Civilizations ##
+ - The goblin civilization Xuqete
+   - Leader: Tajqete the Goblin of Xuqete
+   - They are a engaging in constant war.
+   - They have a deep hatred for the kobold race.
+   - They have a gaudy style.
+   - They are at peace with Qoka
+   - They are at peace with Qizurxeqej
+   - They are at war with Zehi
+
+ - The goblin civilization Qoka
+   - Leader: Gokejhe the Goblin of Qoka
+   - They are a engaging in constant war.
+   - They have a deep hatred for the kobold race.
+   - They have a monolithic style.
+   - They are at war with Xuqete
+   - They are at peace with Qizurxeqej
+   - They are at peace with Zehi
+
+ - The goblin civilization Qizurxeqej
+   - Leader: Wojxuza the Goblin of Qizurxeqej
+   - They are a peaceful civilization.
+   - They have a deep hatred for the kobold race.
+   - They have a revivalist style.
+   - They are at peace with Xuqete
+   - They are at peace with Qoka
+   - They are at peace with Zehi
+
+ - The goblin civilization Zehi
+   - Leader: Zirtojtu the Goblin of Zehi
+   - They are a engaging in constant war.
+   - They have a deep hatred for the kobold race.
+   - They have a monolithic style.
+   - They are at war with Xuqete
+   - They are at war with Qoka
+   - They are at peace with Qizurxeqej
+
+## History ##
+On Month 1 Day 1,  struck down Herhesr the Kobold
+On Month 1 Day 1,  struck down Wo the Goblin of Xuqete
+On Month 1 Day 1,  died.
+
+##  ## 
+You died pennyless.
+You were helpless against the weakest enemies.
+You lived a minimal life.
+You were quite unhealthy.
+
+## Enemies Slain ## 
+ - Herhesr the Kobold
+ - Wo the Goblin of Xuqete

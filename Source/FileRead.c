@@ -190,7 +190,9 @@ void savePlayerData(){
 	sprintf(tempString, "Agility: %d\n", playerEnt.currentStats.agility);
 	fputs(tempString, ptr);
 	sprintf(tempString, "Intelligence: %d\n", playerEnt.currentStats.intelligence);
-	fputs(tempString,ptr);
+	fputs(tempString, ptr);
+	sprintf(tempString, "Handedness: %s\n", playerHandedness.c_str());
+	fputs(tempString, ptr);
 
 	//save gold count
 	sprintf(tempString, "Gold: %d\n",goldScore);

@@ -13,7 +13,8 @@ extern int enemyHealthMap[][80];	//contains the health of every creature in a du
 extern int enemyFleeingMap[][80]; 	//contains whether or not an enemy should be fleeing
 extern std::string enemyNamesMap[][80];	//contains the names of every enemy
 extern int targetingPlayerMap[][80];	//contains whether or not a specific enemy is attacking the player
-extern int enemyCivlizationMap[][80];	//contains the civilization that an enemy is from
+extern int enemyCivilizationMap[][80];	//contains the civilization that an enemy is from
+extern char enemyHandednessMap[][80];	//contains whether an enemy is left or right handed
 
 extern int spawnRate, baseEnemyHealth, baseEnemyDamage, diseaseRate, diseaseSpreadRate;
 

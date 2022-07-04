@@ -70,14 +70,26 @@ void updateCauterize(int x, int y){
 
 void engageInCombat(int x, int y){
 	int damage;
+	int handBonus;
+	if (playerHandedness == "Left handed"){
+		handBonus = -3;
+	} else if (playerHandedness == "Left handed (Other)" || playerHandedness == "Right handed (Other)"){
+		handBonus = -5;
+	}
 	switch(enemyMap[y][x]){
 		case '&':
-			damage = ((rand() % currentWeapon)*2)+1;
+			damage = ((rand() % currentWeapon)*2)+1+handBonus;
+			if (damage < 0){
+				damage = 0;
+			}
 			enemyHealthMap[y][x] -= damage;
 			msgLog = "You hit the goblin!";
 			break;
 		case 'k':
-			damage = ((rand() % currentWeapon)*2)+1;
+			damage = ((rand() % currentWeapon)*2)+1+handBonus;
+			if (damage < 0){
+				damage = 0;
+			}
 			enemyHealthMap[y][x] -= damage;
 			msgLog = "You hit the kobold!";
 			break;
@@ -697,9 +709,16 @@ void getMovement(){
 					break;
 			}
 			break;
-		case 'C':
-			isSneaking = !isSneaking;
-			msgLog = "You are now sneaking";
+		case 'x':
+			if (playerHandedness == "Left handed"){
+				playerHandedness = "Left handed (Other)";
+			} else if (playerHandedness == "Right handed"){
+				playerHandedness = "Right handed (Other)";
+			} else if (playerHandedness == "Left handed (Other)"){
+				playerHandedness = "Left handed";
+			} else if (playerHandedness == "Right handed (Other)"){
+				playerHandedness = "Right handed";
+			}
 			break;
 		case 27:
 			killPlayer("Thank you for playing!");
