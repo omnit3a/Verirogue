@@ -68,7 +68,7 @@ std::string generateGoblinName(int xPos, int yPos){
 
 std::string generateKoboldName(){
 	std::string tempString = "";
-	int pairs = (rand() % 4)+1;
+	int pairs = (rand() % 2)+1;
 	int onsetValue;
 	int onsetAmount;
 	int nucleasValue;
@@ -116,6 +116,7 @@ void placeEnemies(){
 	if (biome == 'd'){
 		int currentCiv;
 		int tempSeed = 0;
+		int tempCiv;
 		for (int i = 0 ; i < 80 ; i++){
 			for (int j = 0 ; j < 24 ; j++){
 				enemyMap[j][i] = ' ';
@@ -132,15 +133,25 @@ void placeEnemies(){
 					if (rand() % diseaseRate == 0){
 						enemyDiseaseMap[j][i] = 1;
 					}
+					if (whichEnemy(enemyMap[j][i]) == "Kobold"){
+						enemyNamesMap[j][i] = generateKoboldName();
+					}
 					if (whichEnemy(enemyMap[j][i]) == "Goblin"){
 						enemyCivilizationMap[j][i] = rand() % 4;
-					} else {
-						enemyCivilizationMap[j][i] = -1;
+					} else if (whichEnemy(enemyMap[j][i]) == "Kobold"){
+						//places some kobolds in a non-racist civilization
+						for (int r = 0 ; r < 2 ; r++){
+							srand(time(0)+tempSeed+r);
+							tempCiv = rand() % 4;
+							if (!civilizationRacist[tempCiv]){
+								enemyCivilizationMap[j][i] = tempCiv;
+								enemyNamesMap[j][i] = enemyNamesMap[j][i]+" of "+civilizations[tempCiv];
+								break;
+							}
+						}
 					}
 					if (whichEnemy(enemyMap[j][i]) == "Goblin"){
 						enemyNamesMap[j][i] = generateGoblinName(i,j);
-					} else if (whichEnemy(enemyMap[j][i]) == "Kobold"){
-						enemyNamesMap[j][i] = generateKoboldName();
 					}
 					targetingPlayerMap[j][i] = 1;
 					tempSeed++;

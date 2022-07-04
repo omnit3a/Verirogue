@@ -49,7 +49,7 @@ void generateCivilizations(){
 		civilizations[i] = returnGoblinName((rand() % 3)+2);
 		civilizationStyle[i] = rand() % 6;
 		civilizationPeaceful[i] = rand() % 4 == 0;
-		civilizationRacist[i] = rand() % 2 == 0;
+		civilizationRacist[i] = rand() % 3 != 0;
 		civilizationSmart[i] = rand() % 4 == 0;
 		srand(seedMain+(i*2));
 		leaders[i] = returnGoblinName(3)+" the Goblin of "+civilizations[i];

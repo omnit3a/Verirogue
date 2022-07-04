@@ -207,6 +207,7 @@ void drawFOV(int radius){
 			mvaddch(j,i,seenMap[j][i]);
 		}
 	}
+	attroff(A_REVERSE);
 	if (playerEnt.currentPos.xPos < radius){
 		distX0 = playerEnt.currentPos.xPos;
 	} else if (WIDTH-playerEnt.currentPos.xPos < radius){
