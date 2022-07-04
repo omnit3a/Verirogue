@@ -335,11 +335,11 @@ void getMovement(){
 			}
 			break;
 		case '>':
-			entryX = checkX;
-			entryY = checkY;
 			srand(time(0));
 			dungeonType = rand() % 2;	
 			if (biome == 'o' && underPlayer == '>' && canWalk()){
+				entryX = checkX;
+				entryY = checkY;
 				biome = 'd';
 				surroundingTemperature = 15;
 				generateDungeon(7,7);
@@ -348,6 +348,8 @@ void getMovement(){
 				updateScreen();
 				msgLog = "You enter the dungeon";
 			} else if (biome == 'o' && canWalk() && underPlayer != '>'){
+				entryX = checkX;
+				entryY = checkY;
 				generateCloseUp();
 				playerEnt.currentPos.xPos = 40;
 				playerEnt.currentPos.yPos = 12;

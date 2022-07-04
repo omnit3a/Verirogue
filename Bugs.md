@@ -1,3 +1,2 @@
 # Bugs
-- The overworld will sometimes change when exiting a dungeon (Unknown cause)
-
+- Game crashes upon trying to eat with a full inventory (Unknown cause)

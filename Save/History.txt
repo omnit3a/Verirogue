@@ -1,0 +1,51 @@
+## Civilizations ##
+ - The goblin civilization Xogij
+   - Leader: Xojgijger the Goblin of Xogij
+   - They are a engaging in constant war.
+   - They have a deep hatred for the kobold race.
+   - They have a gaudy style.
+   - They are at war with Tarkuxojxej
+   - They are at war with Gojtukezo
+   - They are at war with Gujke
+
+ - The goblin civilization Tarkuxojxej
+   - Leader: Tuxajwo the Goblin of Tarkuxojxej
+   - They are a peaceful civilization.
+   - They have a classical style.
+   - They are at peace with Xogij
+   - They are at peace with Gojtukezo
+   - They are at peace with Gujke
+
+ - The goblin civilization Gojtukezo
+   - Leader: Zirhuqu the Goblin of Gojtukezo
+   - They are a engaging in constant war.
+   - They are exceptionally advanced.
+   - They have a revivalist style.
+   - They are at peace with Xogij
+   - They are at peace with Tarkuxojxej
+   - They are at peace with Gujke
+
+ - The goblin civilization Gujke
+   - Leader: Kekawi the Goblin of Gujke
+   - They are a engaging in constant war.
+   - They have a gaudy style.
+   - They are at war with Xogij
+   - They are at peace with Tarkuxojxej
+   - They are at peace with Gojtukezo
+
+## History ##
+On Month 1 Day 1,  struck down Gem the Goblin of Xogij
+On Month 1 Day 1,  struck down Nartads the Kobold
+On Month 1 Day 1,  struck down Hnantur the Kobold
+On Month 1 Day 1,  died.
+
+##  ## 
+You died pennyless.
+You were helpless against the weakest enemies.
+You lived a minimal life.
+You were of neutral health.
+
+## Enemies Slain ## 
+ - Gem the Goblin of Xogij
+ - Nartads the Kobold
+ - Hnantur the Kobold
