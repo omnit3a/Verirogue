@@ -572,7 +572,7 @@ void getMovement(){
 			if (biome == 'd' && returnDungeonmapAt(checkX, checkY) == '$'){
 				map[checkY][checkX] = '.';
 				srand(time(0));
-				int randVal = rand() % 25;
+				int randVal = (rand() % 24)+1;
 				goldScore += randVal;
 				goldFound += randVal;
 				msgLog = "You found some gold!";

@@ -13,9 +13,9 @@ char itemMap[24][80];
 
 int itemCount = 0;
 
-std::string inventory[16];
+std::string inventory[17];
 
-int itemTurn[16];
+int itemTurn[17];
 
 std::string convertToString(char * text){
 	int length = sizeof(text) / sizeof(char);

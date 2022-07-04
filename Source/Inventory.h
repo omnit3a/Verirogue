@@ -16,9 +16,9 @@ extern char itemMap[][80];
 
 extern int itemCount;
 
-extern std::string inventory[16];
+extern std::string inventory[17];
 
-extern int itemTurn[16];
+extern int itemTurn[17];
 
 std::string convertToString(char * text);
 
