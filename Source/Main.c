@@ -14,6 +14,7 @@
 #include "Inventory.h"
 #include "Gas.h"
 #include "History.h"
+#include "NPC.h"
 
 int seedMain = time(0);
 
@@ -65,8 +66,10 @@ int main(){
 			drawTown();
 			updateTemperature();
 			updateHunger();
+			setDayNight();
 			drawUserInterface();
 			drawPlayer();
+			pathfindNPCS();
 			getMovement();
 			updateScreen();
 		}

@@ -12,6 +12,7 @@
 #include "Inventory.h"
 #include "Gas.h"
 #include "DrawUI.h"
+#include "NPC.h"
 
 FastNoiseLite noise;
 
@@ -44,6 +45,7 @@ int returnCoastmapAt(int x, int y){
 }
 
 char map[24][80];
+char prevMap[24][80];
 
 char surroundingChar[4];
 
@@ -455,6 +457,7 @@ int townNPCS[9][4];
  */
 void generateTown(int maxWidth, int maxHeight, int amountOfBuildings){
 	biome = 't';
+	srand(seedFromPosition(entryX, entryY));
 	msgLog = "You enter the village";
 	for (int i = 0 ; i < 80 ; i++){
 		for (int j = 0 ; j < 24 ; j++){
@@ -599,6 +602,7 @@ void generateTown(int maxWidth, int maxHeight, int amountOfBuildings){
 			}
 		}
 	}
+	placeNPCS(4);
 }
 
 char returnTownmapAt(int x, int y){

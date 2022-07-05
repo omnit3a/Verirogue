@@ -68,5 +68,6 @@
 	- [X] Difference in combat depending what handedness the player is vs what handedness enemy is
 	- [X] Specifying which hand the enemy is attacking with
 - [X] Town generation
-	- [ ] NPC generation
+	- [X] NPC generation
+	- [ ] NPC interaction
 	- [ ] NPC civilizations

@@ -1,2 +1,2 @@
 # Bugs
-- No known bugs at the moment
+- Time doesn't pass while in towns

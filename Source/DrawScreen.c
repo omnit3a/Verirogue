@@ -11,6 +11,7 @@
 #include "Inventory.h"
 #include "DrawUI.h"
 #include "Gas.h"
+#include "NPC.h"
 
 #define WIDTH 80
 #define HEIGHT 24
@@ -51,8 +52,8 @@ void drawMap(){
 	int flowerColor;
 	for (int i = 0 ; i < WIDTH ; i++){
 		for (int j = 0 ; j < HEIGHT ; j++){
-			mvaddch(j,i,' ');
 			currentChar = returnHeightmapAt(i,j);
+
 			if (currentChar == '^' || currentChar == '.'){
 				attron(COLOR_PAIR(2));
 			} else if (currentChar == 'A' || currentChar == '>' || currentChar == '#' || currentChar == 'H'){
@@ -93,11 +94,15 @@ void drawMap(){
 			if (biome == 'h' && currentChar == '^'){
 				attron(A_BOLD);
 			}
-			mvaddch(j,i,returnHeightmapAt(i,j));
+			if (map[j][i] != prevMap[j][i]){
+				mvaddch(j,i,returnHeightmapAt(i,j));
+				prevMap[j][i] = currentChar;
+			} else {
+				mvaddch(j,i,prevMap[j][i]);
+			}
 			attroff(A_BOLD);
 		}
 	}
-	updateScreen();
 	
 }
 
@@ -110,7 +115,6 @@ void drawCountries(){
 			mvaddch(j,i,returnCountryAt(i,j));
 		}
 	}
-	updateScreen;
 }
 
 char seenMap[24][80];
@@ -138,7 +142,7 @@ void drawWithoutFOV(){
 				attroff(A_BOLD);
 				attron(COLOR_PAIR(1) | A_REVERSE);
 			}
-			mvaddch(j,i,map[j][i]);
+			mvaddch(j,i,currentChar);
 			attroff(A_REVERSE);
 			if (grossStuff){
 					if (bloodMap[j][i] == 1){
@@ -235,7 +239,7 @@ void drawFOV(int radius){
 					attroff(A_BOLD);
 					attron(COLOR_PAIR(1) | A_REVERSE);
 				}
-				mvaddch(j,i,map[j][i]);
+				mvaddch(j,i,currentChar);
 				attroff(A_REVERSE);
 				// it's important that the grossStuff is drawn first, otherwise enemies wont be visible under blood/vomit
 				if (grossStuff){
@@ -295,7 +299,20 @@ void drawDungeon(){
 	} else {
 		drawWithoutFOV();
 	}
-	updateScreen();
+}
+
+void drawNPCS(){
+	init_pair(30, COLOR_CYAN, COLOR_BLACK);
+	attron(COLOR_PAIR(30) | A_BOLD);
+	attroff(A_REVERSE);
+	for (int i = 0 ; i < 80 ; i++){
+		for (int j = 0 ; j < 24 ; j++){
+			if (npcMap[j][i] != ' '){
+				mvaddch(j,i,npcMap[j][i]);
+			}
+		}
+	}
+	attroff(A_BOLD);
 }
 
 void drawTown(){
@@ -306,6 +323,7 @@ void drawTown(){
 	for (int i = 0 ; i < 80 ; i++){
 		for (int j = 0 ; j < 24 ; j++){
 			mvaddch(j,i,' ');
+			prevMap[j][i] = map[j][i];
 			attroff(A_REVERSE);
 			if (returnTownmapAt(i,j) == '.' || returnTownmapAt(i,j) == '"'){
 				attron(COLOR_PAIR(1));
@@ -317,6 +335,7 @@ void drawTown(){
 			mvaddch(j,i,returnTownmapAt(i,j));
 		}
 	}
+	drawNPCS();
 	attroff(A_REVERSE);
 	updateScreen();
 }

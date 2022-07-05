@@ -18,6 +18,7 @@
 #include "FileRead.h"
 #include "Legacy.h"
 #include "PlayerCreator.h"
+#include "NPC.h"
 
 char biome;
 
@@ -95,7 +96,6 @@ void engageInCombat(int x, int y){
 			break;
 	}
 	targetPlayer(x, y);
-	updateEnemyHealth();
 }
 
 void drawPlayer(){
@@ -127,7 +127,29 @@ void drawPlayer(){
 
 int townWalkable(int x, int y){
 	if (returnTownmapAt(x, y) != ' ' && returnTownmapAt(x, y) != '#'){
-		return 1;
+		switch (dir){							//prevent player from walking into npcs
+			case 'u':
+				if (npcMap[y-1][x] == ' '){
+					return 1;
+				}
+				break;
+			case 'd':
+				if (npcMap[y+1][x] == ' '){
+					return 1;
+				}
+				break;
+			case 'l':
+				if (npcMap[y][x-1] == ' '){
+					return 1;
+				}
+				break;
+			case 'r':
+				if (npcMap[y][x+1] == ' '){
+					return 1;
+				}
+				break;
+		}
+		return 0;
 	} else {
 		return 0;
 	}

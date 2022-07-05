@@ -14,6 +14,12 @@ int returnCoastmapAt(int x, int y);
 
 extern char map[][80];
 
+/**
+ *	prevMap[][] keeps a copy of the previous map state, so that `DrawScreen` only needs to redraw what has changed, rather than every tile
+ *
+ */
+extern char prevMap[][80];
+
 extern char surroundingChar[4];
 
 extern char underPlayer;

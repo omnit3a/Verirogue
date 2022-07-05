@@ -20,7 +20,7 @@ int isDay = 1;
 int isNoon = 0;
 
 void updateTimeTemperature(){
-	if (biome == 'o'){
+	if (biome != 'd'){
 		if (hour == 12) {
 			surroundingTemperature = 39;
 		} else if (hour < 6 || hour > 20){

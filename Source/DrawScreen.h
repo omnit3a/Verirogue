@@ -23,6 +23,8 @@ void drawFOV(int radius);
 
 void drawDungeon();
 
+void drawNPCS();
+
 void drawTown();
 
 void drawStarmap();

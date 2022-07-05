@@ -1,0 +1,88 @@
+Global seed: 1657037533
+
+## Player Data ##
+xPos: -46
+yPos -47
+Inventory
+ - 
+ - 
+ - 
+ - 
+ - 
+ - 
+ - 
+ - 
+ - 
+ - 
+ - 
+ - 
+ - 
+ - 
+ - 
+ - 
+Sex: F
+Name: 
+Race: Human
+Star sign: A
+Strength: 104
+Agility: 29
+Intelligence: 25
+Handedness: Right handed
+Gold: 0
+Head: 100
+Torso: 100
+Left Arm: 100
+Right Arm: 100
+Left Leg: 100
+Right Leg: 100
+Skin: 100
+Blood Level: 511
+Blood Loss Rate: 0
+Weight(LBS): 278
+Nourishment: 100
+Hydration: 60
+Temperature(C): 37
+
+## Disease/Infection Data ##
+isInfected: 0
+isDiseased: 0
+isCrying: 0
+isCongested: 0
+hasRash: 0
+hasDiarrhea: 0
+
+## World Data ##
+Biome: o
+End Screen:
+   * * *    *       *      *     *         *     *         *     *      *       
+                                       * * *     * * *                          
+         *    *  *            * *  *                     *  * *            *  * 
+          *        *                 **  *         *  **                 *      
+   *              *  *            *      *         *      *            *  *     
+           *                *        * *             * *        *               
+       *    *    *             *     **               **     *             *    
+        *                      *         *         *         *                  
+     *         *      **         *                         *         **      *  
+      *     *                       ***               ***                       
+ *        *   *      *                                                 *      * 
+^A>AAAAAA^^...........H..............^^AAAA^^AAAA~~~~^^^^AAA^^^^^^^...H^^.......
+^^^^^^^^^^^..........................^^AAAA^^AAA~~~~....^AAAA^^^A^^.....^^......
+^^^^^^^^^^^..........................^^AAAAAAAAA^~~~H....^AAAAAAA^^.....^^......
+^^^^^..^^^^......^^^^................^^AAAAAAA^^^^~......^^AAAAAA^^.....^^^.....
+^^^^...~.......^^^^^^^^..............^^>AAAAAA^^^^........^^^AAAA^^....^^^^^^...
+.^^^...~^....^^^^>A^^^^...............^^AA^^^^^^^^........^^^^^^^^^^...^^.^^^^..
+....^^~^....^^^AA>AA^^^^^^^...........^^^^^^^^^^^^...........^^^^^^^..^^^^^^^^..
+.....~.....^^AA>>AAAA^^^^^^...........^^^^^^^^^^^..................^^^^^^^^^^^..
+.....~.^^^^^AAAAAAAAA^^^^^^.......^^^^^^^^^^^^^^^^.................^^^^^^^^^^^^.
+^...~^^^^^^AAAAAAAAAAAA^^^^^^....^^^^^^^AAAAA^^^^^^^^.............^^^AAA^^A^^^^^
+^^~~~^^AAAAAA>AA^^^A>AAA^^^^^^^^^^^^^^^AAAAAAAAAAAAA^^^^^^^^....^^^^^AAA>AA^^^^^
+^~~~~AAAA>AAAAAA^^^AAAAA^^^^^^^^^^^^^^^AAAAAAAAAAAAAAAA^^^^^^^^^^^^^^AAAAAA^^^^^
+~~~~AAAAAAAA^^^^^^^AAAAA^^^^^^^^^^^^^^^^^^^^AAAAAAAAAAA^^^^^^^^^^^^^AAAAAAAA^^^^
+
+## Legacy ##
+You died pennyless.
+You were helpless against the weakest enemies.
+You lived a minimal life.
+You were of neutral health.
+
+## Enemies Slain ## 

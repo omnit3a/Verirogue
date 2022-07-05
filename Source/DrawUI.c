@@ -50,24 +50,18 @@ void drawLog(){
 	init_pair(22, COLOR_BLACK, COLOR_YELLOW);
 	init_pair(21, COLOR_BLACK, COLOR_BLUE);
 	attron(COLOR_PAIR(9) | A_BOLD);
-	for (int i = 80 ; i < 120 ; i++){
+	for (int i = 0 ; i < 120 ; i++){
 		for (int j = 0 ; j < 24 ; j++){
-			if ((i == 80 || i == 119) || (j == 0 || j == 23)){
+			if (( i == 0 ||i == 80 || i == 119) || (j == 0 || j == 23)){
 				attron(A_BOLD);		//draw border of log
 				attroff(A_REVERSE);
-			} else {
-				attroff(A_BOLD);	//draw inside of log
-				attron(A_REVERSE);
-			}
-			mvaddch(j,i,' ');
-		}
-	}
-	for (int i = 0 ; i < 81 ; i++){
-		for (int j = 0 ; j < 24 ; j++){
-			if ((i == 0 || i == 80) || (j == 0 || j == 23)){
 				mvaddch(j,i,' ');
 			} else {
-				continue;
+				if (i > 80){
+					attroff(A_BOLD);	//draw inside of log
+					attron(A_REVERSE);
+					mvaddch(j,i,' ');
+				}
 			}
 		}
 	}
@@ -86,7 +80,6 @@ void drawLog(){
 	mvprintw(10,81,"                               ");
 	mvprintw(10,81,"Month %d, Day %d, Hour %d",month,day,hour);
 	attroff(A_REVERSE | A_BOLD);
-	refresh();
 }
 
 void drawHealth(){
@@ -117,7 +110,6 @@ void drawHealth(){
 	if (rLegHP < 25) { attron(A_BLINK); }
 	mvprintw(8,81,"Right Leg: %d",rLegHP);
 	attroff(A_BLINK);
-	refresh();
 }	
 
 void drawHydration(){
@@ -147,7 +139,6 @@ void drawHunger(){
 	mvprintw(28,0,"                          ");
 	mvprintw(28,0,"Nourishment: %d", foodScore);
 	attroff(A_BLINK | A_BOLD);
-	refresh();
 }
 
 void drawGold(){
@@ -159,7 +150,6 @@ void drawGold(){
 	attron(COLOR_PAIR(17));
 	mvprintw(29,6,"%d",goldScore);
 	attroff(A_BOLD);
-	refresh();
 }
 
 void drawSheet(){
@@ -267,7 +257,6 @@ void drawBlood(){
 	}
 	mvprintw(30,0,"Blood: %d",bloodCount);
 	attroff(A_BOLD | A_BLINK);
-	refresh();
 
 }
 
@@ -288,7 +277,6 @@ void drawIsInfected(){
 		mvprintw(11,81,"You are healthy  ");
 	}
 	attroff(A_BOLD);
-	refresh();
 
 }
 
