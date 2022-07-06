@@ -67,6 +67,7 @@
 	- [X] Allow the user to specify which hand the player is attacking with
 	- [X] Difference in combat depending what handedness the player is vs what handedness enemy is
 	- [X] Specifying which hand the enemy is attacking with
+- [ ] Optimize dungeon drawing code
 - [X] Town generation
 	- [X] NPC generation
 	- [ ] NPC interaction

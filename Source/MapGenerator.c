@@ -136,7 +136,7 @@ void generateWall(){
 	char tempMap[24][80];
 	for (int i = 0 ; i < 80 ; i++){
 		for (int j = 0 ; j < 24 ; j++){
-			if (((map[j-1][i] != ' ' || map[j+1][i] != ' ' || map[j][i-1] != ' ' || map[j][i+1] != ' ' || map[j-1][i-1] != ' ' || map[j-1][i+1] != ' ' || map[j+1][i-1] != ' ' || map[j+1][i+1] != ' ') && map[j][i] == ' ')||(j==0 || i==0 || j==23 || i==79)){
+			if (((map[j-1][i] != ' ' || map[j+1][i] != ' ' || map[j][i-1] != ' ' || map[j][i+1] != ' ' || map[j-1][i-1] != ' ' || map[j-1][i+1] != ' ' || map[j+1][i-1] != ' ' || map[j+1][i+1] != ' ') && map[j][i] == ' ')||(j==0 || i==0 || j==23 )){
 				tempMap[j][i] = '#';
 			} else {
 				tempMap[j][i] = map[j][i];
@@ -262,7 +262,6 @@ void generateDungeon(int maxWidth, int maxHeight){
 		}
 		placeEnemies();
 		placeItems();
-		
 }
 
 char returnDungeonmapAt(int x, int y){

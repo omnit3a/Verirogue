@@ -76,6 +76,8 @@ void engageInCombat(int x, int y){
 		handBonus = -3;
 	} else if (playerHandedness == "Left handed (Other)" || playerHandedness == "Right handed (Other)"){
 		handBonus = -5;
+	} else {
+		handBonus = 0;
 	}
 	switch(enemyMap[y][x]){
 		case '&':
@@ -96,6 +98,7 @@ void engageInCombat(int x, int y){
 			break;
 	}
 	targetPlayer(x, y);
+	updateScreen();
 }
 
 void drawPlayer(){
@@ -126,30 +129,8 @@ void drawPlayer(){
 }
 
 int townWalkable(int x, int y){
-	if (returnTownmapAt(x, y) != ' ' && returnTownmapAt(x, y) != '#'){
-		switch (dir){							//prevent player from walking into npcs
-			case 'u':
-				if (npcMap[y-1][x] == ' '){
-					return 1;
-				}
-				break;
-			case 'd':
-				if (npcMap[y+1][x] == ' '){
-					return 1;
-				}
-				break;
-			case 'l':
-				if (npcMap[y][x-1] == ' '){
-					return 1;
-				}
-				break;
-			case 'r':
-				if (npcMap[y][x+1] == ' '){
-					return 1;
-				}
-				break;
-		}
-		return 0;
+	if (returnTownmapAt(x, y) != ' ' && returnTownmapAt(x, y) != '#' && npcMap[y][x] == ' '){
+		return 1;
 	} else {
 		return 0;
 	}
@@ -246,7 +227,7 @@ int canHit(){
 }
 
 int inOverworld(){
-	return (biome == 'o' || biome == 'f' || biome == 'h' || biome == 'm');
+	return (biome == 'o' || biome == 'f' || biome == 'h' || biome == 'm' || biome == 't');
 }
 
 void getMovement(){
@@ -265,7 +246,7 @@ void getMovement(){
 			}
 			if (biome == 'd' && playerEnt.currentPos.yPos > 0 && dungeonWalkable(checkX, checkY-1) && canWalk()){
 				playerEnt.currentPos.yPos--;
-			} else if (inOverworld() && playerEnt.currentPos.yPos > -48 && canWalk()){
+			} else if (inOverworld() && playerEnt.currentPos.yPos > -48 && canWalk() && biome != 't'){
 				if (isSwimming && !mapWalkable()){
 					playerEnt.currentPos.yPos--;
 				} else if (!isSwimming && mapWalkable()){
@@ -286,7 +267,7 @@ void getMovement(){
 			}
 			if (biome == 'd' && playerEnt.currentPos.yPos < 23 && dungeonWalkable(checkX, checkY+1) && canWalk()){
 				playerEnt.currentPos.yPos++;
-			} else if (inOverworld() && playerEnt.currentPos.yPos < 48 && canWalk()){
+			} else if (inOverworld() && playerEnt.currentPos.yPos < 48 && canWalk() && biome != 't'){
 				if (isSwimming && !mapWalkable()){
 					playerEnt.currentPos.yPos++;
 				} else if (!isSwimming && mapWalkable()){
@@ -306,7 +287,7 @@ void getMovement(){
 			}
 			if (biome == 'd' && playerEnt.currentPos.xPos > 0 && dungeonWalkable(checkX-1, checkY) && canWalk()){
 				playerEnt.currentPos.xPos--;
-			} else if (inOverworld() && playerEnt.currentPos.xPos > -96 && canWalk()){
+			} else if (inOverworld() && playerEnt.currentPos.xPos > -96 && canWalk() && biome != 't'){
 				if (isSwimming && !mapWalkable()){
 					playerEnt.currentPos.xPos--;
 				} else if (!isSwimming && mapWalkable()){
@@ -326,7 +307,7 @@ void getMovement(){
 			}
 			if (biome == 'd' && playerEnt.currentPos.xPos < 79 && dungeonWalkable(checkX+1, checkY) && canWalk()){
 				playerEnt.currentPos.xPos++;
-			} else if (inOverworld() && playerEnt.currentPos.xPos < 96 && canWalk()){
+			} else if (inOverworld() && playerEnt.currentPos.xPos < 96 && canWalk() && biome != 't'){
 				if (isSwimming && !mapWalkable()){
 					playerEnt.currentPos.xPos++;
 				} else if (!isSwimming && mapWalkable()){
@@ -348,7 +329,7 @@ void getMovement(){
 				msgLog = "You left the dungeon";
 				fires = 0;
 				dungeonHasFire = 0;
-			} else if (biome != 'o' && inOverworld() && canWalk){
+			} else if (biome != 'o' && inOverworld() && canWalk()){
 				surroundingTemperature = 37;
 				biome = 'o';
 				generateMap();
@@ -618,6 +599,7 @@ void getMovement(){
 				map[checkY][checkX] = '.';
 				srand(time(0));
 				int randVal = (rand() % 24)+1;
+				previousGold = goldScore;
 				goldScore += randVal;
 				goldFound += randVal;
 				msgLog = "You found some gold!";
@@ -759,15 +741,15 @@ void getMovement(){
 	}
 	turn++;
 	drawTurn();
-	if (checkY == -48 || checkY == 48 || checkX == -96 || checkX == 96 && biome == 'o'){
+	if ((checkY == -48 || checkY == 48 || checkX == -96 || checkX == 96) && biome == 'o'){
 		msgLog = "You stare into the abyss...";
 	}
 
-	/*the star position changes every 100 turns
+	/*the star position changes every 33 turns
 	 *the time of day will be effected by the star position
 	 *	
 	 */
-	if (turn % 33 == 0 && biome == 'o'){
+	if (turn % 33 == 0 && inOverworld()){
 		scrollStars();
 		setDayNight();
 	}
@@ -795,6 +777,7 @@ void updateTemperature(){
 		surroundingTemperature = 8;
 	}
 	if (turn % 25 == 0){
+		previousTemperature = playerEnt.currentTemperature.celsius;
 		if (surroundingTemperature < playerEnt.currentTemperature.celsius){
 			playerEnt.currentTemperature.celsius--;
 		} else if (surroundingTemperature > playerEnt.currentTemperature.celsius){
@@ -821,6 +804,7 @@ void updateTemperature(){
 		killPlayer("You froze to death! Be more careful next time.");
 	}
 	if (turn % 150 == 0){
+		previousWater = playerEnt.currentHydration.hydration;
 		playerEnt.currentHydration.hydration -= 5;
 	}
 	if (playerEnt.currentHydration.hydration < 25){
@@ -839,6 +823,7 @@ void updateTemperature(){
 
 void updateHunger(){
 	if (turn % 200 == 0){
+		previousNourishment = foodScore;
 		foodScore-=5;
 		if (foodScore < 10){
 			killPlayer("You died of Hunger! Be more careful next time.");

@@ -11,24 +11,31 @@
 #include "Inventory.h"
 
 std::string msgLog = "Welcome to Verirogue";
+int previousTemperature;
+int previousNourishment;
+int previousGold;
+int previousBlood;
+int previousWater;
 
 void drawTemperature(){
-	init_pair(13, COLOR_CYAN, COLOR_BLACK);
-	init_pair(8, COLOR_WHITE, COLOR_BLACK);
-	init_pair(14, COLOR_RED, COLOR_BLACK);
-	attron(A_BOLD);
-	if (playerEnt.currentTemperature.celsius < 35){
-		attron(COLOR_PAIR(13));
-	} else if (playerEnt.currentTemperature.celsius > 39){
-		attron(COLOR_PAIR(14));
-	} else {
-		attron(COLOR_PAIR(8));
+	if (playerEnt.currentTemperature.celsius != previousTemperature){
+		init_pair(13, COLOR_CYAN, COLOR_BLACK);
+		init_pair(8, COLOR_WHITE, COLOR_BLACK);
+		init_pair(14, COLOR_RED, COLOR_BLACK);
+		attron(A_BOLD);
+		if (playerEnt.currentTemperature.celsius < 35){
+			attron(COLOR_PAIR(13));
+		} else if (playerEnt.currentTemperature.celsius > 39){
+			attron(COLOR_PAIR(14));
+		} else {
+			attron(COLOR_PAIR(8));
+		}
+		mvprintw(25,0,"                    ");
+		mvprintw(26,0,"                    ");
+		mvprintw(25,0,"Temperature: %d^C",playerEnt.currentTemperature.celsius);
+		mvprintw(26,0,"           : %d^F",playerEnt.currentTemperature.fahrenheit);
+		attroff(A_BOLD);
 	}
-	mvprintw(25,0,"                    ");
-	mvprintw(26,0,"                    ");
-	mvprintw(25,0,"Temperature: %d^C",playerEnt.currentTemperature.celsius);
-	mvprintw(26,0,"           : %d^F",playerEnt.currentTemperature.fahrenheit);
-	attroff(A_BOLD);
 }
 
 void drawTurn(){
@@ -113,43 +120,48 @@ void drawHealth(){
 }	
 
 void drawHydration(){
-	init_pair(11, COLOR_WHITE, COLOR_BLACK);
-	init_pair(12, COLOR_RED, COLOR_BLACK);
-	attron(A_BOLD);
-	if (playerEnt.currentHydration.hydration <= 40){
-		attron(COLOR_PAIR(12) | A_BLINK);
-	} else if (playerEnt.currentHydration.hydration > 40){
-		attron(COLOR_PAIR(11));
+	if (playerEnt.currentHydration.hydration != previousWater){
+		init_pair(11, COLOR_WHITE, COLOR_BLACK);
+		init_pair(12, COLOR_RED, COLOR_BLACK);
+		attron(A_BOLD);
+		if (playerEnt.currentHydration.hydration <= 40){
+			attron(COLOR_PAIR(12) | A_BLINK);
+		} else if (playerEnt.currentHydration.hydration > 40){
+			attron(COLOR_PAIR(11));
+		}
+		mvprintw(27,0,"                                                   ");
+		mvprintw(27,0,"Hydration: %d", playerEnt.currentHydration.hydration);
+		attroff(A_BLINK | A_BOLD);
 	}
-	mvprintw(27,0,"                                                   ");
-	mvprintw(27,0,"Hydration: %d", playerEnt.currentHydration.hydration);
-	attroff(A_BLINK | A_BOLD);
-	refresh();
 }
 
 void drawHunger(){
-	init_pair(11, COLOR_WHITE, COLOR_BLACK);
-	init_pair(12, COLOR_RED, COLOR_BLACK);
-	attron(A_BOLD);
-	if (foodScore < 50){
-		attron(COLOR_PAIR(12) | A_BLINK);
-	} else {
-		attron(COLOR_PAIR(11));
+	if (foodScore != previousNourishment){
+		init_pair(11, COLOR_WHITE, COLOR_BLACK);
+		init_pair(12, COLOR_RED, COLOR_BLACK);
+		attron(A_BOLD);
+		if (foodScore < 50){
+			attron(COLOR_PAIR(12) | A_BLINK);
+		} else {
+			attron(COLOR_PAIR(11));
+		}
+		mvprintw(28,0,"                          ");
+		mvprintw(28,0,"Nourishment: %d", foodScore);
+		attroff(A_BLINK | A_BOLD);
 	}
-	mvprintw(28,0,"                          ");
-	mvprintw(28,0,"Nourishment: %d", foodScore);
-	attroff(A_BLINK | A_BOLD);
 }
 
 void drawGold(){
-	init_pair(11, COLOR_WHITE, COLOR_BLACK);
-	init_pair(17, COLOR_YELLOW, COLOR_BLACK);
-	attron(COLOR_PAIR(11) | A_BOLD);
-	mvprintw(29,0,"                     ");
-	mvprintw(29,0,"Gold: ");
-	attron(COLOR_PAIR(17));
-	mvprintw(29,6,"%d",goldScore);
-	attroff(A_BOLD);
+	if (goldScore != previousGold){
+		init_pair(11, COLOR_WHITE, COLOR_BLACK);
+		init_pair(17, COLOR_YELLOW, COLOR_BLACK);
+		attron(COLOR_PAIR(11) | A_BOLD);
+		mvprintw(29,0,"                     ");
+		mvprintw(29,0,"Gold: ");
+		attron(COLOR_PAIR(17));
+		mvprintw(29,6,"%d",goldScore);
+		attroff(A_BOLD);
+	}
 }
 
 void drawSheet(){
@@ -247,17 +259,18 @@ void drawDropScreen(){
 }
 
 void drawBlood(){
-	init_pair(11,COLOR_WHITE,COLOR_BLACK);
-	init_pair(28,COLOR_RED,COLOR_BLACK);
-	attroff(A_BLINK);
-	if (bloodCount < 384){
-		attron(COLOR_PAIR(28) | A_BOLD | A_BLINK);
-	} else {
-		attron(COLOR_PAIR(11) | A_BOLD);
+	if (bloodCount != previousBlood){
+		init_pair(11,COLOR_WHITE,COLOR_BLACK);
+		init_pair(28,COLOR_RED,COLOR_BLACK);
+		attroff(A_BLINK);
+		if (bloodCount < 384){
+			attron(COLOR_PAIR(28) | A_BOLD | A_BLINK);
+		} else {
+			attron(COLOR_PAIR(11) | A_BOLD);
+		}
+		mvprintw(30,0,"Blood: %d",bloodCount);
+		attroff(A_BOLD | A_BLINK);
 	}
-	mvprintw(30,0,"Blood: %d",bloodCount);
-	attroff(A_BOLD | A_BLINK);
-
 }
 
 void drawIsInfected(){

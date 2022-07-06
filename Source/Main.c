@@ -37,7 +37,6 @@ int main(){
 			drawMap();
 			updateTemperature();
 			updateHunger();
-			setDayNight();
 			drawUserInterface();
 			drawPlayer();
 			getMovement();
@@ -46,7 +45,6 @@ int main(){
 			drawMap();
 			updateTemperature();
 			updateHunger();	
-			setDayNight();
 			drawUserInterface();
 			drawPlayer();
 			getMovement();
@@ -60,13 +58,13 @@ int main(){
 			drawPlayer();
 			fireSpread();
 			getMovement();
+			updateEnemyHealth();
 			updateScreen();
 		} else if (biome == 't'){
 			resetEnemies(0);
 			drawTown();
 			updateTemperature();
 			updateHunger();
-			setDayNight();
 			drawUserInterface();
 			drawPlayer();
 			pathfindNPCS();

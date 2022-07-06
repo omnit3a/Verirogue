@@ -224,114 +224,116 @@ int shouldFlee(int checkX, int checkY){
 }
 
 void targetPlayer(int xPos, int yPos){
-	srand(time(0));
-	int enemyStrength = 0;
-	int enemyIntelligence = 0;
-	int enemyCoward = 0;
-	int currentCiv = enemyCivilizationMap[yPos][xPos];
-	for (int i = 0 ; i < 4 ; i++){
-		if (i == currentCiv && whichEnemy(enemyMap[yPos][xPos]) == "Goblin"){
-			enemyCoward = civilizationPeaceful[currentCiv];
-			if ((playerRace == "Kobold") && civilizationRacist[currentCiv]){
-				enemyStrength = 5;
+	if (whichEnemy(enemyMap[yPos][xPos]) != "Nothing"){
+		srand(time(0));
+		int enemyStrength = 0;
+		int enemyIntelligence = 0;
+		int enemyCoward = 0;
+		int currentCiv = enemyCivilizationMap[yPos][xPos];
+		int target = rand() % 6;
+		int damage;
+		enemyCoward = civilizationPeaceful[currentCiv];
+		if (!enemyCoward){
+			for (int i = 0 ; i < 4 ; i++){
+				if (i == currentCiv && whichEnemy(enemyMap[yPos][xPos]) == "Goblin"){
+					if ((playerRace == "Kobold") && civilizationRacist[currentCiv]){
+						enemyStrength = 5;
+					}
+					enemyIntelligence = civilizationSmart[currentCiv];
+				}	
 			}
-			enemyIntelligence = civilizationSmart[currentCiv];
-		}	
-	}
-	if (enemyHandednessMap[yPos][xPos] == 'R' && playerHandedness == "Left handed"){
-		enemyStrength += 3;
-	}
-	int target = rand() % 6;
-	int damage = (rand() % 7)+baseEnemyDamage+enemyStrength;
-	if (!enemyCoward){
-		if (rand() % 3 < 2){
-			switch (target){
-				case 0:
-					playerEnt.head.bpHP.currentHealth -= damage;
-					if (playerEnt.head.bpHP.currentHealth <=0){
-						playerEnt.head.bpHP.currentHealth = 0;
-					}
-					msgLog = "You were hit in the head!";
-					break;
-				case 1:
-					playerEnt.torso.bpHP.currentHealth -= damage;
-					if (playerEnt.torso.bpHP.currentHealth <= 0){
-						playerEnt.torso.bpHP.currentHealth = 0;
-					}
-					msgLog = "You were hit in the torso!";
-					break;
-				case 2:
-					playerEnt.leftArm.bpHP.currentHealth -= damage;
-					if (playerEnt.leftArm.bpHP.currentHealth <= 0){
-						playerEnt.leftArm.bpHP.currentHealth = 0;
-					}
-					msgLog = "Your left arm was hit!";
-					break;
-				case 3:
-					playerEnt.rightArm.bpHP.currentHealth -= damage;
-					if (playerEnt.rightArm.bpHP.currentHealth <= 0){
-						playerEnt.rightArm.bpHP.currentHealth = 0;
-					}
-					msgLog = "Your right arm was hit!";
-					break;
-				case 4:
-					playerEnt.leftLeg.bpHP.currentHealth -= damage;
-					if (playerEnt.leftLeg.bpHP.currentHealth <= 0){
-						playerEnt.leftLeg.bpHP.currentHealth = 0;
-					}
-					msgLog = "Your left leg was hit!";
-					break;
-				case 5:
-					playerEnt.rightLeg.bpHP.currentHealth -= damage;
-					if (playerEnt.rightLeg.bpHP.currentHealth <= 0){
-						playerEnt.rightLeg.bpHP.currentHealth = 0;
-					}
-					msgLog = "Your right leg was hit!";
-					break;
+			if (enemyHandednessMap[yPos][xPos] == 'R' && playerHandedness == "Left handed"){
+				enemyStrength += 3;
 			}
-			playerEnt.skin.bpHP.currentHealth--;
-			srand(time(0)+playerEnt.skin.bpHP.currentHealth);
-			if (rand() % diseaseSpreadRate == 0){
-				msgLog = "You contract a disease!";
-				isDiseased = 1;
-				diseaseStart = 0;
-				medicalFailures++;
+			damage = (rand() % 7)+baseEnemyDamage+enemyStrength;
+			if (rand() % 3 < 2){
+				switch (target){
+					case 0:
+						playerEnt.head.bpHP.currentHealth -= damage;
+						if (playerEnt.head.bpHP.currentHealth <=0){
+							playerEnt.head.bpHP.currentHealth = 0;
+						}
+						msgLog = "You were hit in the head!";
+						break;
+					case 1:
+						playerEnt.torso.bpHP.currentHealth -= damage;
+						if (playerEnt.torso.bpHP.currentHealth <= 0){
+							playerEnt.torso.bpHP.currentHealth = 0;
+						}
+						msgLog = "You were hit in the torso!";
+						break;
+					case 2:
+						playerEnt.leftArm.bpHP.currentHealth -= damage;
+						if (playerEnt.leftArm.bpHP.currentHealth <= 0){
+							playerEnt.leftArm.bpHP.currentHealth = 0;
+						}
+						msgLog = "Your left arm was hit!";
+						break;
+					case 3:
+						playerEnt.rightArm.bpHP.currentHealth -= damage;
+						if (playerEnt.rightArm.bpHP.currentHealth <= 0){
+							playerEnt.rightArm.bpHP.currentHealth = 0;
+						}
+						msgLog = "Your right arm was hit!";
+						break;
+					case 4:
+						playerEnt.leftLeg.bpHP.currentHealth -= damage;
+						if (playerEnt.leftLeg.bpHP.currentHealth <= 0){
+							playerEnt.leftLeg.bpHP.currentHealth = 0;
+						}
+						msgLog = "Your left leg was hit!";
+						break;
+					case 5:
+						playerEnt.rightLeg.bpHP.currentHealth -= damage;
+						if (playerEnt.rightLeg.bpHP.currentHealth <= 0){
+							playerEnt.rightLeg.bpHP.currentHealth = 0;
+						}
+						msgLog = "Your right leg was hit!";
+						break;
+				}
+				playerEnt.skin.bpHP.currentHealth--;
+				srand(time(0)+playerEnt.skin.bpHP.currentHealth);
+				if (rand() % diseaseSpreadRate == 0){
+					msgLog = "You contract a disease!";
+					isDiseased = 1;
+					diseaseStart = 0;
+					medicalFailures++;
+				}
 			}
+		} else {
+			msgLog = "The enemy is a coward";
 		}
-	} else {
-		msgLog = "The enemy is a coward";
 	}
 	
 }
 
 void pseudoPathfind(){
 	if (!isSneaking){
-		int checkX = playerEnt.currentPos.xPos;
-		int checkY = playerEnt.currentPos.yPos;
+		int checkX;
+		int checkY;
 		char tempMap[24][80];
 		int tempHealth[24][80];
 		int tempDisease[24][80];
-		int tempFlee[24][80];
 		int tempTarget[24][80];
 		std::string tempNames[24][80];
 		int tempCiv[24][80];
 		char tempHand[24][80];
-		int randCornerX, randCornerY;
 		for (int i = 0 ; i < 80 ; i++){
 			for (int j = 0 ; j < 24 ; j++){
 				tempMap[j][i] = enemyMap[j][i];
 				tempHealth[j][i] = enemyHealthMap[j][i];
 				tempDisease[j][i] = enemyDiseaseMap[j][i];
-				tempFlee[j][i] = enemyFleeingMap[j][i];
 				tempNames[j][i] = enemyNamesMap[j][i];
 				tempTarget[j][i] = targetingPlayerMap[j][i];
 				tempCiv[j][i] = enemyCivilizationMap[j][i];
 				tempHand[j][i] = enemyHandednessMap[j][i];
 			}
 		}
+		checkX = playerEnt.currentPos.xPos;
+		checkY = playerEnt.currentPos.yPos;
 		for (int i = 0 ; i < 80 ; i++){
 			for (int j = 0 ; j < 24 ; j++){
-				if (enemyMap[j][i] == GOBLINCHAR || enemyMap[j][i] == KOBOLDCHAR){
+				if (whichEnemy(enemyMap[j][i]) != "Nothing"){
 					if (dungeonWalkable(i,j+1) && j < checkY-1 && whichEnemy(enemyMap[j+1][i]) == "Nothing"){
 						tempMap[j][i] = ' ';
 						tempMap[j+1][i] = enemyMap[j][i];
@@ -339,12 +341,8 @@ void pseudoPathfind(){
 						tempHealth[j][i] = 0;
 						tempDisease[j+1][i] = tempDisease[j][i];
 						tempDisease[j][i] = 0;
-						tempFlee[j+1][i] = tempFlee[j][i];
-						tempFlee[j][i] = 0;
 						tempNames[j+1][i] = tempNames[j][i];
 						tempNames[j][i] = "";
-						tempTarget[j+1][i] = tempTarget[j+1][i];
-						tempTarget[j][i] = 0;
 						tempCiv[j+1][i] = tempCiv[j][i];
 						tempCiv[j][i] = -1;
 						tempHand[j+1][i] = tempHand[j][i];
@@ -356,12 +354,8 @@ void pseudoPathfind(){
 						tempHealth[j][i] = 0;
 						tempDisease[j-1][i] = tempDisease[j][i];
 						tempDisease[j][i] = 0;
-						tempFlee[j-1][i] = tempFlee[j][i];
-						tempFlee[j][i] = 0;
 						tempNames[j-1][i] = tempNames[j][i];
 						tempNames[j][i] = "";
-						tempTarget[j-1][i] = tempTarget[j][i];
-						tempTarget[j][i] = 0;
 						tempCiv[j-1][j] = tempCiv[j][i];
 						tempCiv[j][i] = -1;
 						tempHand[j-1][i] = tempHand[j][i];
@@ -373,12 +367,8 @@ void pseudoPathfind(){
 						tempHealth[j][i] = 0;
 						tempDisease[j][i+1] = tempDisease[j][i];
 						tempDisease[j][i] = 0;
-						tempFlee[j][i+1] = tempFlee[j][i];
-						tempFlee[j][i] = 0;
 						tempNames[j][i+1] = tempNames[j][i];
 						tempNames[j][i] = "";
-						tempTarget[j][i+1] = tempTarget[j][i];
-						tempTarget[j][i] = 0;
 						tempCiv[j][i+1] = tempCiv[j][i];
 						tempCiv[j][i] = -1;
 						tempHand[j][i+1] = tempHand[j][i];
@@ -390,12 +380,8 @@ void pseudoPathfind(){
 						tempHealth[j][i] = 0;
 						tempDisease[j][i-1] = tempDisease[j][i];
 						tempDisease[j][i] = 0;
-						tempFlee[j][i-1] = tempFlee[j][i];
-						tempFlee[j][i] = 0;
 						tempNames[j][i-1] = tempNames[j][i];
 						tempNames[j][i] = "";
-						tempTarget[j][i-1] = tempTarget[j][i];
-						tempTarget[j][i] = 0;
 						tempCiv[j][i-1] = tempCiv[j][i];
 						tempCiv[j][i] = -1;
 						tempHand[j][i-1] = tempHand[j][i];
@@ -409,9 +395,7 @@ void pseudoPathfind(){
 				enemyMap[j][i] = tempMap[j][i];
 				enemyHealthMap[j][i] = tempHealth[j][i];
 				enemyDiseaseMap[j][i] = tempDisease[j][i];
-				enemyFleeingMap[j][i] = tempFlee[j][i];
 				enemyNamesMap[j][i] = tempNames[j][i];
-				targetingPlayerMap[j][i] = tempTarget[j][i];
 				enemyCivilizationMap[j][i] = tempCiv[j][i];
 				enemyHandednessMap[j][i] = tempHand[j][i];
 			}
@@ -423,10 +407,10 @@ void updateEnemyHealth(){
 	srand(time(0));
 	int currentCiv;
 	char tempTime[80];
-	sprintf(tempTime, "Month %d Day %d",month, day);
 	for (int i = 0 ; i < 80 ; i++){
 		for (int j = 0 ; j < 24 ; j++){
 			if (enemyHealthMap[j][i] <= 0 && enemyMap[j][i] != ' '){
+				sprintf(tempTime, "Month %d Day %d", month, day);
 				enemyMap[j][i] = ' ';
 				goldScore += (rand() % 10) + 1;
 				enemyNamesList[enemiesSlain] = enemyNamesMap[j][i];
@@ -446,10 +430,6 @@ void updateEnemyHealth(){
 				enemyNamesMap[j][i] = "";
 				targetingPlayerMap[j][i] = 0;
 				enemyCivilizationMap[j][i] = -1;
-			}
-			if (enemyHealthMap[j][i] > 0 && enemyMap[j][i] != ' '){
-				enemyFleeingMap[j][i] = shouldFlee(i,j);
-				targetingPlayerMap[j][i] = !shouldFlee(i,j);
 			}
 		}
 	}

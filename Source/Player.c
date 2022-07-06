@@ -28,10 +28,10 @@ int isInfected, hasDiarrhea, isCongested, hasRash, infectionStart, isDiseased, i
 
 int diseaseStart = 0;
 /**
- *	10 = Fists
- *	15 = Sword
- *	20 = Axe
- */
+*	10 = Fists
+*	15 = Sword
+*	20 = Axe
+*/
 int currentWeapon = 10;
 
 Humanoid playerEnt;
@@ -220,6 +220,7 @@ void bleedCheck(){
 	if (playerEnt.skin.bpHP.currentHealth < 20){
 		bloodLossRate += 20;
 	}
+	previousBlood = bloodCount;
 	bloodCount -= bloodLossRate/10;
 	bloodLost += bloodLossRate/10;
 	bloodTrail();
@@ -271,6 +272,7 @@ void infectionCheck(){
 		msgLog = "Your nose is running";
 	}
 	if (isDiseased == 1 && turn % (75+diseaseStart) == 0){
+		previousNourishment = foodScore;
 		foodScore -= 5;
 		msgLog = "You throw up";
 		bloodMap[playerEnt.currentPos.yPos][playerEnt.currentPos.xPos] = 2;
@@ -287,6 +289,7 @@ void infectionCheck(){
 
 void cauterizeWound(){
 	for (int i = 0 ; i < 64 ; i++){
+		previousBlood = bloodCount;
 		if (bloodCount+1 <= 511){
 			bloodCount++;
 		} else {

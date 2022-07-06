@@ -172,18 +172,6 @@ void drawWithoutFOV(){
 					mvaddch(j,i,'$');
 				}
 			}
-			if (gasMap[j][i] != ' '){
-				switch (gasMap[j][i]){
-					case SMOKESYM:
-						attroff(A_BOLD);
-						attron(COLOR_PAIR(1));
-						break;
-					case STEAMSYM:
-						attron(COLOR_PAIR(1) | A_BOLD);
-						break;
-				}
-				mvaddch(j,i,gasMap[j][i]);
-			}
 			attroff(A_BOLD | A_BLINK);
 		}
 	}
@@ -271,18 +259,6 @@ void drawFOV(int radius){
 						mvaddch(j,i,'$');
 					}
 				}
-				if (gasMap[j][i] != ' '){
-					switch (gasMap[j][i]){
-						case SMOKESYM:
-							attroff(A_BOLD);
-							attron(COLOR_PAIR(1));
-							break;
-						case STEAMSYM:
-							attron(COLOR_PAIR(1) | A_BOLD);
-							break;
-					}
-					mvaddch(j,i,gasMap[j][i]);
-				}
 				attroff(A_BOLD | A_BLINK | A_REVERSE);
 				seenMap[j][i] = map[j][i];
 			}
@@ -299,6 +275,7 @@ void drawDungeon(){
 	} else {
 		drawWithoutFOV();
 	}
+	updateScreen();
 }
 
 void drawNPCS(){
