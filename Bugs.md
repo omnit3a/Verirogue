@@ -1,2 +1,2 @@
 # Bugs
-- Time doesn't pass while in towns
+- UI Elements will disappear seemingly at random

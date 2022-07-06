@@ -68,22 +68,21 @@ void drawMap(){
 			} else if (currentChar == '*' && (biome == 'f' || biome == 'h')){
 				srand(seedFromPosition(i,j));
 				flowerColor = rand() % 5;
-				attron(A_BOLD);
 				switch (flowerColor){
 					case 0:
-						attron(COLOR_PAIR(2));
+						attron(COLOR_PAIR(2) | A_BOLD);
 						break;
 					case 1:
-						attron(COLOR_PAIR(3));
+						attron(COLOR_PAIR(3) | A_BOLD);
 						break;
 					case 2:
-						attron(COLOR_PAIR(6));
+						attron(COLOR_PAIR(6) | A_BOLD);
 						break;
 					case 3:
-						attron(COLOR_PAIR(33));
+						attron(COLOR_PAIR(33) | A_BOLD);
 						break;
 					case 4:
-						attron(COLOR_PAIR(34));
+						attron(COLOR_PAIR(34) | A_BOLD);
 						break;
 				}	
 			} else if (currentChar == '*' && !(biome == 'f' || biome == 'h')){
@@ -167,9 +166,10 @@ void drawWithoutFOV(){
 			if (itemMap[j][i] != ' ' || returnDungeonmapAt(i,j) == '$'){
 				attroff(A_BLINK);
 				attron(COLOR_PAIR(1) | A_BOLD);
-				mvaddch(j,i,itemMap[j][i]);
 				if (returnDungeonmapAt(i,j) == '$'){
 					mvaddch(j,i,'$');
+				} else {
+					mvaddch(j,i,itemMap[j][i]);
 				}
 			}
 			attroff(A_BOLD | A_BLINK);
@@ -254,9 +254,10 @@ void drawFOV(int radius){
 				if (itemMap[j][i] != ' ' || returnDungeonmapAt(i,j) == '$'){
 					attroff(A_BLINK);
 					attron(COLOR_PAIR(1) | A_BOLD);
-					mvaddch(j,i,itemMap[j][i]);
 					if (returnDungeonmapAt(i,j) == '$'){
 						mvaddch(j,i,'$');
+					} else {
+						mvaddch(j,i,itemMap[j][i]);
 					}
 				}
 				attroff(A_BOLD | A_BLINK | A_REVERSE);
@@ -299,7 +300,6 @@ void drawTown(){
 	attroff(A_BOLD);
 	for (int i = 0 ; i < 80 ; i++){
 		for (int j = 0 ; j < 24 ; j++){
-			mvaddch(j,i,' ');
 			prevMap[j][i] = map[j][i];
 			attroff(A_REVERSE);
 			if (returnTownmapAt(i,j) == '.' || returnTownmapAt(i,j) == '"'){

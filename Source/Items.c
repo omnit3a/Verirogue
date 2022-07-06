@@ -12,6 +12,7 @@ void quaffPotion(){
 		consumePotion();
 		msgLog = "You drank a potion";
 		srand(time(0)+itemCount);
+		previousWater = playerEnt.currentHydration.hydration;
 		playerEnt.currentHydration.hydration += 5;
 		int effect = rand() % 1000;
 		if (effect <= 250){

@@ -115,18 +115,11 @@ std::string whichEnemy(char enemy){
 
 void placeEnemies(){
 	if (biome == 'd'){
-		int currentCiv;
 		int tempSeed = 0;
 		int tempCiv;
 		int handedness;
 		for (int i = 0 ; i < 80 ; i++){
 			for (int j = 0 ; j < 24 ; j++){
-				handedness = rand() % 100;
-				if (handedness > 10){
-					enemyHandednessMap[j][i] = 'L';
-				} else {
-					enemyHandednessMap[j][i] = 'R';
-				}
 				enemyMap[j][i] = ' ';
 				enemyHealthMap[j][i] = 0;
 				enemyFleeingMap[j][i] = 0;
@@ -136,6 +129,12 @@ void placeEnemies(){
 						enemyMap[j][i] = GOBLINCHAR;
 					} else {
 						enemyMap[j][i] = KOBOLDCHAR;
+					}
+					handedness = rand() % 100;
+					if (handedness > 10){
+						enemyHandednessMap[j][i] = 'L';
+					} else {
+						enemyHandednessMap[j][i] = 'R';
 					}
 					enemyHealthMap[j][i] = (rand() % 10)+baseEnemyHealth;
 					if (rand() % diseaseRate == 0){

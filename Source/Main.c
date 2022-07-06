@@ -58,6 +58,7 @@ int main(){
 			drawPlayer();
 			fireSpread();
 			getMovement();
+			pseudoPathfind();
 			updateEnemyHealth();
 			updateScreen();
 		} else if (biome == 't'){

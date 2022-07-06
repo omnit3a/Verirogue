@@ -753,7 +753,6 @@ void getMovement(){
 		scrollStars();
 		setDayNight();
 	}
-	pseudoPathfind();
 	bleedCheck();
 	updateScreen();
 }
